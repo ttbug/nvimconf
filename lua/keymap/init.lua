@@ -18,8 +18,8 @@ local plug_map = {
     ["s|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
     -- Bufferline
     ["n|gb"] = map_cr("BufferLinePick"):with_noremap():with_silent(),
-    ["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
-    ["n|<A-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent(),
+    ["n|<C-l>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
+    ["n|<C-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent(),
     ["n|<A-S-j>"] = map_cr("BufferLineMoveNext"):with_noremap():with_silent(),
     ["n|<A-S-k>"] = map_cr("BufferLineMovePrev"):with_noremap():with_silent(),
     ["n|<leader>be"] = map_cr("BufferLineSortByExtension"):with_noremap(),
@@ -73,6 +73,7 @@ local plug_map = {
         :with_silent(),
     -- Plugin nvim-tree
     ["n|<C-n>"] = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
+    ["n|<F4>"] = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
     ["n|<Leader>nf"] = map_cr('NvimTreeFindFile'):with_noremap():with_silent(),
     ["n|<Leader>nr"] = map_cr('NvimTreeRefresh'):with_noremap():with_silent(),
     -- Plugin Telescope
