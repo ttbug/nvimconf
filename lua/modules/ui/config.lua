@@ -95,7 +95,7 @@ function config.nvim_bufferline()
 end
 
 function config.nvim_tree()
-    vim.g.nvim_tree_width = 35
+    vim.g.nvim_tree_width = 25
     vim.g.nvim_tree_follow = 1
     vim.g.nvim_tree_gitignore = 1
     vim.g.nvim_tree_auto_open = 1
