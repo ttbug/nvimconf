@@ -80,6 +80,10 @@ paru goneovim
 
 - For [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall#usage), you
   need to install corresponding language server use it.
+  ```
+  例如打开一个go项目，执行
+  LspInstall go
+  ```
 
 - For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), you need to install corresponding parser manually.
 
