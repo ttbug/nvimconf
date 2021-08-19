@@ -44,4 +44,10 @@ tools['gelguy/wilder.nvim'] = {
     run = ":UpdateRemotePlugins",
     config = conf.wilder
 }
+
+tools['voldikss/vim-floaterm'] = {
+    opt = true,
+    cmd = {"FloatermNew", "FloatermToggle"}
+}
+
 return tools

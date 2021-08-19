@@ -76,6 +76,9 @@ local plug_map = {
     ["n|<F4>"] = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
     ["n|<Leader>nf"] = map_cr('NvimTreeFindFile'):with_noremap():with_silent(),
     ["n|<Leader>nr"] = map_cr('NvimTreeRefresh'):with_noremap():with_silent(),
+
+    -- Plugin floaterm
+    ["n|<F10>"] = map_cr('FloatermToggle'):with_noremap():with_silent(),
     -- Plugin Telescope
     ["n|<Leader>fp"] = map_cu('Telescope project'):with_noremap():with_silent(),
     ["n|<Leader>fe"] = map_cu('DashboardFindHistory'):with_noremap()
