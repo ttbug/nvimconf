@@ -169,7 +169,7 @@ end
 
 function config.floaterm()
     vim.cmd [[
-    hi FloatermBorder cterm=NONE guibg=none guifg=cyan
+    hi FloatermBorder guibg=none guifg=cyan
     ]]
 end
 
