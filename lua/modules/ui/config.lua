@@ -70,7 +70,7 @@ function config.nvim_bufferline()
             number_style = "superscript",
             modified_icon = '✥',
             buffer_close_icon = "",
-            mappings = true,
+            -- mappings = true,
             left_trunc_marker = "",
             right_trunc_marker = "",
             max_name_length = 14,
