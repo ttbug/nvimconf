@@ -79,7 +79,7 @@ function config.nvim_bufferline()
             show_buffer_close_icons = false,
             show_buffer_icons = true,
             show_tab_indicators = false,
-            separator_style = "thin",
+            separator_style = "slant",
             diagnostics = "nvim_lsp",
             always_show_bufferline = true,
             offsets = {
