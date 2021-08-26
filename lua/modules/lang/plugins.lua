@@ -18,9 +18,9 @@ lang['kristijanhusak/orgmode.nvim'] = {
     ft = "org",
     config = conf.lang_org
 }
-lang['iamcco/markdown-preview.nvim'] = {
-    opt = true,
-    ft = "markdown",
-    run = 'cd app && yarn install'
-}
+-- lang['iamcco/markdown-preview.nvim'] = {
+--     opt = true,
+--     ft = "markdown",
+--     run = 'cd app && yarn install'
+-- }
 return lang
