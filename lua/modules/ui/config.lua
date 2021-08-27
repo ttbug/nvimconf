@@ -66,8 +66,10 @@ end
 function config.nvim_bufferline()
     require('bufferline').setup {
         options = {
-            number = "both",
-            number_style = "superscript",
+            --number = "both",
+            -- numbers = function(opts)
+            --     return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
+            -- end,
             modified_icon = '✥',
             buffer_close_icon = "",
             -- mappings = true,
