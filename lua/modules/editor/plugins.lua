@@ -16,7 +16,7 @@ editor['simrat39/symbols-outline.nvim'] = {
     cmd = {'SymbolsOutline', 'SymbolsOulineOpen'},
     config = conf.symbols_outline
 }
-editor['ttbug/nvim-treesitter'] = {
+editor['nvim-treesitter/nvim-treesitter'] = {
     opt = true,
     run = ':TSUpdate',
     event = 'BufRead',
