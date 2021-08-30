@@ -5,17 +5,8 @@ local map_cmd = bind.map_cmd
 require('keymap.config')
 
 local plug_map = {
-    -- Complete
-    ["i|<C-e>"] = map_cmd([[compe#close('<C-e>')]]):with_expr():with_silent(),
-    ["i|<C-f>"] = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr()
-        :with_silent(),
-    ["i|<C-d>"] = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr()
-        :with_silent(),
-    ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
-    ["i|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
-    ["s|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
-    ["i|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
-    ["s|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
+    -- Neoformat
+    ["n|<C-A-l>"] = map_cr("Neoformat"):with_noremap():with_silent(),
     -- Bufferline
     ["n|gb"] = map_cr("BufferLinePick"):with_noremap():with_silent(),
     ["n|<C-l>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
@@ -25,6 +16,15 @@ local plug_map = {
     ["n|<A-S-k>"] = map_cr("BufferLineMovePrev"):with_noremap():with_silent(),
     ["n|<leader>be"] = map_cr("BufferLineSortByExtension"):with_noremap(),
     ["n|<leader>bd"] = map_cr("BufferLineSortByDirectory"):with_noremap(),
+    ["n|<A-1>"] = map_cr("BufferLineGoToBuffer 1"):with_noremap():with_silent(),
+    ["n|<A-2>"] = map_cr("BufferLineGoToBuffer 2"):with_noremap():with_silent(),
+    ["n|<A-3>"] = map_cr("BufferLineGoToBuffer 3"):with_noremap():with_silent(),
+    ["n|<A-4>"] = map_cr("BufferLineGoToBuffer 4"):with_noremap():with_silent(),
+    ["n|<A-5>"] = map_cr("BufferLineGoToBuffer 5"):with_noremap():with_silent(),
+    ["n|<A-6>"] = map_cr("BufferLineGoToBuffer 6"):with_noremap():with_silent(),
+    ["n|<A-7>"] = map_cr("BufferLineGoToBuffer 7"):with_noremap():with_silent(),
+    ["n|<A-8>"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent(),
+    ["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent(),
     -- Packer
     ["n|<leader>ps"] = map_cr("PackerSync"):with_silent():with_noremap()
         :with_nowait(),
@@ -32,7 +32,7 @@ local plug_map = {
         :with_nowait(),
     ["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap()
         :with_nowait(),
-    ["n|<leader>pc"] = map_cr("PackerCompile"):with_silent():with_noremap()
+    ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap()
         :with_nowait(),
     -- Lsp mapp work when insertenter and lsp start
     ["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent()
@@ -92,7 +92,7 @@ local plug_map = {
     ["n|<Leader>fn"] = map_cu('DashboardNewFile'):with_noremap():with_silent(),
     ["n|<Leader>fb"] = map_cu('Telescope file_browser'):with_noremap()
         :with_silent(),
-    ["n|<Leader>fg"] = map_cu('Telescope live_grep'):with_noremap()
+    ["n|<Leader>fg"] = map_cu('Telescope git_files'):with_noremap()
         :with_silent(),
     -- Plugin accelerate-jk
     ["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),

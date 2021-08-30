@@ -25,6 +25,8 @@ function config.lualine()
         return icon .. msg
     end
 
+    local gps = require("nvim-gps")
+
     require('lualine').setup {
         options = {
             icons_enabled = true,
@@ -36,7 +38,10 @@ function config.lualine()
             lualine_a = {'mode'},
             lualine_b = {{'branch'}, {'diff'}},
             lualine_c = {
-                {'filename'}, {
+                {'filename'}, {gps.get_location, condition = gps.is_available}
+            },
+            lualine_x = {
+                {
                     'diagnostics',
                     sources = {'nvim_lsp'},
                     color_error = "#BF616A",
@@ -44,9 +49,8 @@ function config.lualine()
                     color_info = "#81A1AC",
                     color_hint = "#88C0D0",
                     symbols = {error = ' ', warn = ' ', info = ' '}
-                }
+                }, {lsp}, {'encoding'}, {'fileformat'}
             },
-            lualine_x = {{lsp}, {'encoding'}, {'fileformat'}},
             lualine_y = {'progress'},
             lualine_z = {'location'}
         },
