@@ -205,7 +205,17 @@ function config.toggleterm()
         persist_size = true,
         direction = 'float',
         close_on_exit = true, -- close the terminal window when the process exits
-        shell = vim.o.shell -- change the default shell
+        shell = vim.o.shell, -- change the default shell
+        float_opts = {
+            -- border =  'single' | 'double' | 'shadow' | 'curved'
+            --width = <value>,
+            --height = <value>,
+            border = 'curved', -- 设置圆角
+            --winblend = 3,
+            highlights = {
+              border = "cyan",
+            }
+        }
     }
 end
 
