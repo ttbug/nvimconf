@@ -47,10 +47,10 @@ tools['gelguy/wilder.nvim'] = {
     config = conf.wilder
 }
 
-tools['voldikss/vim-floaterm'] = {
-    opt = true,
-    cmd = {"FloatermNew", "FloatermToggle"},
-    config = conf.floaterm
-}
+-- tools['voldikss/vim-floaterm'] = {
+--     opt = true,
+--     cmd = {"FloatermNew", "FloatermToggle"},
+--     config = conf.floaterm
+-- }
 
 return tools

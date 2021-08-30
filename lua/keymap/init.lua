@@ -78,8 +78,10 @@ local plug_map = {
     ["n|<Leader>nf"] = map_cr('NvimTreeFindFile'):with_noremap():with_silent(),
     ["n|<Leader>nr"] = map_cr('NvimTreeRefresh'):with_noremap():with_silent(),
     -- Plugin floaterm 
-    ["n|<F8>"] = map_cr('FloatermToggle'):with_noremap():with_silent(),
-    ["t|<F8>"] = map_cu([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap():with_silent(), 
+    -- ["n|<F8>"] = map_cr('FloatermToggle'):with_noremap():with_silent(),
+    -- ["t|<F8>"] = map_cu([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap():with_silent(), 
+    ["n|<F12>"] = map_cr('ToggleTerm'):with_noremap():with_silent(),
+    ["t|<F12>"] = map_cu([[<C-\><C-n>:ToggleTerm<CR>]]):with_noremap():with_silent(),
     -- Plugin Telescope
     ["n|<Leader>fp"] = map_cu('Telescope project'):with_noremap():with_silent(),
     ["n|<Leader>fe"] = map_cu('DashboardFindHistory'):with_noremap()
@@ -124,7 +126,7 @@ local plug_map = {
     ["n|<C-w>t"] = map_cr('Term'):with_noremap():with_silent(),
     ["n|<C-w>T"] = map_cr('VTerm'):with_noremap():with_silent(),
     -- Plugin MarkdownPreview
-    ["n|<F12>"] = map_cr('MarkdownPreviewToggle'):with_noremap():with_silent(),
+    --["n|<F12>"] = map_cr('MarkdownPreviewToggle'):with_noremap():with_silent(),
     -- Plugin auto_session
     ["n|<leader>ss"] = map_cu('SaveSession'):with_noremap():with_silent(),
     ["n|<leader>sr"] = map_cu('RestoreSession'):with_noremap():with_silent(),

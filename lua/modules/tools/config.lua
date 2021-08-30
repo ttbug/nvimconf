@@ -161,10 +161,10 @@ call wilder#setup({'modes': [':', '/', '?']})
     ]]
 end
 
-function config.floaterm()
-    vim.cmd [[
-    hi FloatermBorder guibg=none guifg=cyan
-    ]]
-end
+-- function config.floaterm()
+--     vim.cmd [[
+--     hi FloatermBorder guibg=none guifg=cyan
+--     ]]
+-- end
 
 return config
