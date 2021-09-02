@@ -157,20 +157,17 @@ end
 
 function config.wilder()
     vim.cmd [[
-call wilder#enable_cmdline_enter()
-set wildcharm=<Tab>
-cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
-cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
-
-" only / and ? are enabled by default
-call wilder#set_option('modes', ['/', '?', ':'])
+    call wilder#setup({'modes': [':', '/', '?']})
+    call wilder#set_option('use_python_remote_plugin', 0)
+    call wilder#set_option('pipeline', [wilder#branch(wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1, 'fuzzy_filter': wilder#lua_fzy_filter()}),wilder#vim_search_pipeline(), [wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({'draw': [{_, x -> ' ' . x}]})])])
+    call wilder#set_option('renderer', wilder#renderer_mux({':': wilder#popupmenu_renderer({'highlighter': wilder#lua_fzy_highlighter(), 'left': [wilder#popupmenu_devicons()], 'right': [' ', wilder#popupmenu_scrollbar()]}), '/': wilder#wildmenu_renderer({'highlighter': wilder#lua_fzy_highlighter()})}))
     ]]
 end
 
-function config.floaterm()
-    vim.cmd [[
-    hi FloatermBorder guibg=none guifg=cyan
-    ]]
-end
+-- function config.floaterm()
+--     vim.cmd [[
+--     hi FloatermBorder guibg=none guifg=cyan
+--     ]]
+-- end
 
 return config

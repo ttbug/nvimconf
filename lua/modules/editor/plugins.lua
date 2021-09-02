@@ -16,11 +16,10 @@ editor['simrat39/symbols-outline.nvim'] = {
     cmd = {'SymbolsOutline', 'SymbolsOulineOpen'},
     config = conf.symbols_outline
 }
-editor['ttbug/nvim-treesitter'] = {
+editor['nvim-treesitter/nvim-treesitter'] = {
     opt = true,
     run = ':TSUpdate',
     event = 'BufRead',
-    after = 'telescope.nvim',
     config = conf.nvim_treesitter
 }
 editor['nvim-treesitter/nvim-treesitter-textobjects'] = {
@@ -40,11 +39,21 @@ editor['JoosepAlviste/nvim-ts-context-commentstring'] = {
     opt = true,
     after = 'nvim-treesitter'
 }
+editor['SmiteshP/nvim-gps'] = {
+    opt = true,
+    after = 'nvim-treesitter',
+    config = conf.nvim_gps
+}
 editor['sbdchd/neoformat'] = {opt = true, cmd = 'Neoformat'}
 editor['windwp/nvim-ts-autotag'] = {
     opt = true,
     ft = {'html', 'xml'},
     config = conf.autotag
+}
+editor['andymass/vim-matchup'] = {
+    opt = true,
+    after = 'nvim-treesitter',
+    config = conf.matchup
 }
 editor['rhysd/accelerated-jk'] = {opt = true}
 editor['hrsh7th/vim-eft'] = {opt = true}
@@ -58,7 +67,12 @@ editor['karb94/neoscroll.nvim'] = {
     event = "WinScrolled",
     config = conf.neoscroll
 }
-editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
+-- editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
+editor['akinsho/nvim-toggleterm.lua'] = {
+    opt = true,
+    event = 'BufRead',
+    config = conf.toggleterm
+}
 editor['norcalli/nvim-colorizer.lua'] = {
     opt = true,
     event = 'BufRead',
@@ -68,6 +82,10 @@ editor['rmagatti/auto-session'] = {
     opt = true,
     cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
     config = conf.auto_session
+}
+editor['jdhao/better-escape.vim'] = {
+    opt = true,
+    event = 'InsertEnter'
 }
 editor['rcarriga/nvim-dap-ui'] = {
     opt = false,
