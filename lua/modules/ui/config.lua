@@ -239,6 +239,7 @@ function config.indent_blankline()
         buftype_exclude = {"terminal", "nofile"},
         show_trailing_blankline_indent = false,
         show_current_context = true,
+        space_char_blankline = " ",
         context_patterns = {
             "class", "function", "method", "block", "list_literal", "selector",
             "^if", "^table", "if_statement", "while", "for", "type", "var",
