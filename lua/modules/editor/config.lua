@@ -240,7 +240,7 @@ function config.dapui()
                 }, {id = "breakpoints", size = 0.25},
                 {id = "stacks", size = 0.25}, {id = "watches", size = 00.25}
             },
-            width = 40,
+            size = 40,
             position = "left"
         },
         tray = {
