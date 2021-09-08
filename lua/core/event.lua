@@ -77,6 +77,9 @@ function autocmd.load_autocmds()
             }, {
                 "FileType", "*",
                 [[setlocal formatoptions-=c formatoptions-=r formatoptions-=o]]
+            }, {
+                "FileType", "c,cpp",
+                "nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>"
             }
         },
 
