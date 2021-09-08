@@ -246,7 +246,7 @@ function config.dapui()
         tray = {
             open_on_start = true,
             elements = {"repl"},
-            height = 10,
+            size = 10,
             position = "bottom"
         },
         floating = {
