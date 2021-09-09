@@ -69,6 +69,7 @@ function config.nvim_treesitter()
 
     require'nvim-treesitter.configs'.setup {
         ensure_installed = 'maintained',
+        ignore_install = { "javascript","beancount", "bibtex", "c_sharp","clojure","commonlisp", "cuda", "dart", "devicetree", "dot","elixir","erlang","fennel","fish","Godot","Glimmer and Ember", "graphql","hcl","heex","julia","ledger","nix","ocaml","ocaml_interface","php","pioasm","ql","r","ruby","sparql","supercollider","surface","svelte","teal", "tlaplus","tsx","turtle","verilog","yang","zig"},
         highlight = {enable = true, disable = {'vim'}},
         textobjects = {
             select = {
@@ -107,7 +108,8 @@ function config.nvim_treesitter()
             max_file_lines = 1000 -- Do not enable for files with more than 1000 lines, int
         },
         context_commentstring = {enable = true, enable_autocmd = false},
-        matchup = {enable = true}
+        matchup = {enable = true},
+        context = {enable = true, throttle = true}
     }
 end
 
