@@ -101,8 +101,6 @@ function config.nvim_bufferline()
 end
 
 function config.nvim_tree()
-    require('nvim-tree').setup{}
-    
     vim.g.nvim_tree_width = 25
     -- vim.g.nvim_tree_follow = 1
     vim.g.nvim_tree_gitignore = 1
