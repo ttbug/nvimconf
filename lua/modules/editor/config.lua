@@ -243,7 +243,7 @@ function config.dapui()
             repl = "r"
         },
         sidebar = {
-            open_on_start = true,
+            -- open_on_start = true,
             elements = {
                 -- Provide as ID strings or tables with "id" and "size" keys
                 {
@@ -256,7 +256,7 @@ function config.dapui()
             position = "left"
         },
         tray = {
-            open_on_start = true,
+            -- open_on_start = true,
             elements = {"repl"},
             size = 10,
             position = "bottom"
