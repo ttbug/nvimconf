@@ -112,6 +112,7 @@ function config.nvim_tree()
     --         untracked = "★"
     --     }
     -- }
+    local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
         gitignore = true,
         ignore = {'.git', 'node_modules', '.cache'},
