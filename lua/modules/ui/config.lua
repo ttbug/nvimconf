@@ -101,17 +101,17 @@ function config.nvim_bufferline()
 end
 
 function config.nvim_tree()
-   vim.g.nvim_tree_icons = {
-       default = '',
-       symlink = '',
-       git = {
-           unstaged = "✚",
-           staged = "✚",
-           unmerged = "≠",
-           renamed = "≫",
-           untracked = "★"
-       }
-   }
+    vim.g.nvim_tree_icons = {
+        default = '',
+        symlink = '',
+        git = {
+            unstaged = "✚",
+            staged = "✚",
+            unmerged = "≠",
+            renamed = "≫",
+            untracked = "★"
+        }
+    }
     vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
