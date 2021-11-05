@@ -7,7 +7,7 @@ completion['neovim/nvim-lspconfig'] = {
     config = conf.nvim_lsp
 }
 completion['kabouzeid/nvim-lspinstall'] = {opt = true, after = 'nvim-lspconfig'}
-completion['glepnir/lspsaga.nvim'] = {
+completion['tami5/lspsaga.nvim'] = {
     opt = true,
     after = 'nvim-lspconfig',
     -- config = conf.saga
