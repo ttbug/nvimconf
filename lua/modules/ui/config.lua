@@ -49,10 +49,10 @@ function config.lualine()
                     color_info = "#81A1AC",
                     color_hint = "#88C0D0",
                     symbols = {error = ' ', warn = ' ', info = ' '}
-                }, {lsp}, {'encoding'}, {'fileformat'}
+                },
             },
-            lualine_y = {'progress'},
-            lualine_z = {'location'}
+            lualine_y = {'filetype', 'encoding', 'fileformat'},
+            lualine_z = {'progress', 'location'}
         },
         inactive_sections = {
             lualine_a = {},
