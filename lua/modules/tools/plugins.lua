@@ -53,5 +53,5 @@ tools['gelguy/wilder.nvim'] = {
 --     cmd = {"FloatermNew", "FloatermToggle"},
 --     config = conf.floaterm
 -- }
-
+tools['nathom/filetype.nvim'] = {opt = false}
 return tools
