@@ -120,6 +120,7 @@ function config.nvim_bufferline()
             -- numbers = function(opts)
             --     return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
             -- end,
+            number = "none",
             modified_icon = '✥',
             buffer_close_icon = "",
             -- mappings = true,
