@@ -54,4 +54,5 @@ tools['gelguy/wilder.nvim'] = {
 --     config = conf.floaterm
 -- }
 tools['nathom/filetype.nvim'] = {opt = false}
+tools['mg979/vim-visual-multi'] = {opt = false}
 return tools
