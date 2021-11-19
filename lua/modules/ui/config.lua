@@ -120,6 +120,10 @@ function config.nvim_tree()
             update_cwd = true,
             ignore_list = {}
         },
+        filters = {
+            dotfiles = true,
+            custom = {}
+        },
         view = {
             width = 25,
             side = 'left',
