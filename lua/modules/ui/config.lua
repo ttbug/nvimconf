@@ -9,63 +9,6 @@ function config.edge()
     vim.g.edge_better_performance = 1
 end
 
--- function config.lualine()
---     local function lsp()
---         local icon = [[  LSP: ]]
---         local msg = 'No Active LSP'
---         local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
---         local clients = vim.lsp.get_active_clients()
---         if next(clients) == nil then return icon .. msg end
---         for _, client in ipairs(clients) do
---             local filetypes = client.config.filetypes
---             if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
---                 return icon .. client.name
---             end
---         end
---         return icon .. msg
---     end
-
---     local gps = require("nvim-gps")
-
---     require('lualine').setup {
---         options = {
---             icons_enabled = true,
---             theme = 'gruvbox',
---             disabled_filetypes = {}
---         },
-
---         sections = {
---             lualine_a = {'mode'},
---             lualine_b = {{'branch'}, {'diff'}},
---             lualine_c = {
---                 {'filename'}, {gps.get_location, condition = gps.is_available}
---             },
---             lualine_x = {
---                 {
---                     'diagnostics',
---                     sources = {'nvim_lsp'},
---                     color_error = "#BF616A",
---                     color_warn = "#EBCB8B",
---                     color_info = "#81A1AC",
---                     color_hint = "#88C0D0",
---                     symbols = {error = ' ', warn = ' ', info = ' '}
---                 },
---             },
---             lualine_y = {'filetype', 'encoding', 'fileformat'},
---             lualine_z = {'progress', 'location'}
---         },
---         inactive_sections = {
---             lualine_a = {},
---             lualine_b = {},
---             lualine_c = {'filename'},
---             lualine_x = {'location'},
---             lualine_y = {},
---             lualine_z = {}
---         },
---         tabline = {},
---         extensions = {}
---     }
--- end
 
 function config.lualine()
     local gps = require("nvim-gps")
@@ -277,16 +220,6 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-    -- vim.cmd [[highlight IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
-    -- vim.g.indent_blankline_char_highlight_list = {
-    --     "IndentTwo", "IndentThree", "IndentFour", "IndentFive", "IndentSix",
-    --     "IndentSeven"
-    -- }
     require("indent_blankline").setup {
         char = "│",
         show_first_indent_level = true,
@@ -310,8 +243,8 @@ function config.indent_blankline()
     vim.cmd('autocmd CursorMoved * IndentBlanklineRefresh')
 end
 
-function config.zen_mode() require('zen-mode').setup {} end
-
-function config.twilight() require('twilight').setup {} end
+--function config.zen_mode() require('zen-mode').setup {} end
+--
+--function config.twilight() require('twilight').setup {} end
 
 return config
