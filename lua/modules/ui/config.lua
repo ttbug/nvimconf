@@ -20,6 +20,18 @@ function config.lualine()
         end
     end
 
+    local symbols_outline = {
+        sections = {
+            lualine_a = {'mode'},
+            lualine_b = {'filetype'},
+            lualine_c = {},
+            lualine_x = {},
+            lualine_y = {},
+            lualine_z = {'location'}
+        },
+        filetypes = {'Outline'}
+    }
+
     require('lualine').setup {
         options = {
             icons_enabled = true,
@@ -59,7 +71,9 @@ function config.lualine()
             lualine_z = {}
         },
         tabline = {},
-        extensions = {}
+        extensions = {
+            "quickfix", "nvim-tree", "toggleterm", "fugitive", symbols_outline
+        }
     }
 end
 
