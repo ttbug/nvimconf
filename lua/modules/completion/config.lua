@@ -55,6 +55,8 @@ function config.cmp()
 
                 vim_item.menu = ({
                     -- cmp_tabnine = "[TN]",
+                    rg = "[RG]",
+                    orgmode = "[ORG]",
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[LUA]",
                     buffer = "[BUF]",
