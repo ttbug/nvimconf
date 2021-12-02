@@ -147,7 +147,7 @@ end
 -- end
 
 function config.autopairs()
-    require('nvim-autopairs').setup {fast_wrap = {}}
+    require('nvim-autopairs').setup {}
     -- require("nvim-autopairs.completion.cmp").setup({
     --     map_cr = true,
     --     map_complete = true,
@@ -158,6 +158,7 @@ function config.autopairs()
     local cmp = require('cmp')
     cmp.event:on('confirm_done',
                     cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
+    cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 end
 
 return config
