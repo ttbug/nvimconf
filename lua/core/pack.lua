@@ -44,6 +44,11 @@ function Packer:load_packer()
             open_fn = function()
                 return require('packer.util').float({border = 'single'})
             end
+        },
+        -- 加快github插件下载速度
+        git = {
+           clone_timeout = 120,
+           default_url_format = 'https://hub.fastgit.org/%s'
         }
     })
     packer.reset()
