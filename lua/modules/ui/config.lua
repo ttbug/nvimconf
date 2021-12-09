@@ -16,7 +16,7 @@ function config.catppuccin()
         styles = {
             comments = "italic",
             functions = "italic",
-            keywords = "italic",
+            keywords = "italic,bold",
             strings = "NONE",
             variables = "NONE"
         },
@@ -176,7 +176,8 @@ function config.nvim_tree()
     vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
-        gitignore = true,
+        --gitignore = true,
+        git = {enable = true, ignore = false, timeout = 500},
         ignore = {'.git', 'node_modules', '.cache', '.vscode'},
         hide_dotfiles = true,
         open_on_tab = false,
@@ -249,11 +250,41 @@ function config.gitsigns()
     end
     require('gitsigns').setup {
         signs = {
-            add = {hl = 'GitGutterAdd', text = '▋'},
-            change = {hl = 'GitGutterChange', text = '▋'},
-            delete = {hl = 'GitGutterDelete', text = '▋'},
-            topdelete = {hl = 'GitGutterDeleteChange', text = '▔'},
-            changedelete = {hl = 'GitGutterChange', text = '▎'}
+           -- add = {hl = 'GitGutterAdd', text = '▋'},
+           -- change = {hl = 'GitGutterChange', text = '▋'},
+           -- delete = {hl = 'GitGutterDelete', text = '▋'},
+           -- topdelete = {hl = 'GitGutterDeleteChange', text = '▔'},
+           -- changedelete = {hl = 'GitGutterChange', text = '▎'}
+            add = {
+                hl = 'GitSignsAdd',
+                text = '│',
+                numhl = 'GitSignsAddNr',
+                linehl = 'GitSignsAddLn'
+            },
+            change = {
+                hl = 'GitSignsChange',
+                text = '│',
+                numhl = 'GitSignsChangeNr',
+                linehl = 'GitSignsChangeLn'
+            },
+            delete = {
+                hl = 'GitSignsDelete',
+                text = '_',
+                numhl = 'GitSignsDeleteNr',
+                linehl = 'GitSignsDeleteLn'
+            },
+            topdelete = {
+                hl = 'GitSignsDelete',
+                text = '‾',
+                numhl = 'GitSignsDeleteNr',
+                linehl = 'GitSignsDeleteLn'
+            },
+            changedelete = {
+                hl = 'GitSignsChange',
+                text = '~',
+                numhl = 'GitSignsChangeNr',
+                linehl = 'GitSignsChangeLn'
+            }
         },
         keymaps = {
             -- Default keymap options
@@ -297,7 +328,7 @@ end
 function config.indent_blankline()
     vim.opt.termguicolors = true
     vim.opt.list = true
-    vim.opt.listchars:append("space:⋅")
+    -- vim.opt.listchars:append("space:⋅")
     require("indent_blankline").setup {
         char = "│",
         show_first_indent_level = true,
