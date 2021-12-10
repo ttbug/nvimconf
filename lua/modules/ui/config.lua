@@ -101,11 +101,12 @@ function config.lualine()
             lualine_x = {
                 {
                     'diagnostics',
-                    sources = {'nvim_lsp'},
-                    color_error = "#BF616A",
-                    color_warn = "#EBCB8B",
-                    color_info = "#81A1AC",
-                    color_hint = "#88C0D0",
+                    sources = {'nvim_diagnostic'},
+                    -- sources = {'nvim_lsp'},
+                   -- color_error = "#BF616A",
+                   -- color_warn = "#EBCB8B",
+                   -- color_info = "#81A1AC",
+                   -- color_hint = "#88C0D0",
                     symbols = {error = ' ', warn = ' ', info = ' '}
                 },
             },
