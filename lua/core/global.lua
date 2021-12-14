@@ -5,7 +5,7 @@ local os_name = vim.loop.os_uname().sysname
 function global:load_variables()
     self.is_mac = os_name == 'Darwin'
     self.is_linux = os_name == 'Linux'
-    self.is_windows = os_name == 'Windows'
+    self.is_windows = os_name == 'Windows_NT'
     self.vim_path = vim.fn.stdpath('config')
     path_sep = self.is_windows and '\\' or '/'
     self.cache_dir = home .. path_sep .. '.cache' .. path_sep .. 'nvim' ..

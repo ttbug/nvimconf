@@ -56,4 +56,5 @@ tools['gelguy/wilder.nvim'] = {
 -- }
 -- tools['nathom/filetype.nvim'] = {opt = false}
 tools['mg979/vim-visual-multi'] = {opt = false}
+tools["famiu/bufdelete.nvim"] = {opt = true, cmd = {"Bdelete", "Bwipeout"}}
 return tools
