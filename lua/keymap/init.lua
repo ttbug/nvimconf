@@ -76,9 +76,9 @@ local plug_map = {
         :with_silent(),
     ["n|<A-e>"] = map_cr('TroubleToggle lsp_references'):with_noremap()
         :with_silent(),
-    ["n|<leader>cd"] = map_cr('TroubleToggle lsp_document_diagnostics'):with_noremap()
+    ["n|<leader>cd"] = map_cr('TroubleToggle document_diagnostics'):with_noremap()
         :with_silent(),
-    ["n|<leader>cw"] = map_cr('TroubleToggle lsp_workspace_diagnostics'):with_noremap()
+    ["n|<leader>cw"] = map_cr('TroubleToggle workspace_diagnostics'):with_noremap()
         :with_silent(),
     ["n|<leader>cq"] = map_cr('TroubleToggle quickfix'):with_noremap()
         :with_silent(),

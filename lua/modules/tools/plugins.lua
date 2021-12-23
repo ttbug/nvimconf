@@ -18,12 +18,14 @@ tools['nvim-telescope/telescope-fzf-native.nvim'] = {
 
 tools['nvim-telescope/telescope-project.nvim'] = {
     opt = true,
-    after = 'telescope.nvim'
+    after = 'telescope.nvim',
+    config = function() require("telescope").load_extension("project") end
 }
 tools['nvim-telescope/telescope-frecency.nvim'] = {
     opt = true,
     after = 'telescope.nvim',
-    requires = {{'tami5/sql.nvim', opt = true}}
+    requires = {{'tami5/sqlite.lua', opt = true}},
+    config = function() require("telescope").load_extension("frecency") end
 }
 tools['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
 tools['michaelb/sniprun'] = {

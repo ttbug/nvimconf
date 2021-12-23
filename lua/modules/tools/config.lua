@@ -11,21 +11,21 @@ function config.telescope()
         vim.cmd [[packadd popup.nvim]]
     end
 
-    if not packer_plugins['telescope-fzf-native.nvim'].loaded then
-        vim.cmd [[packadd telescope-fzf-native.nvim]]
+--    if not packer_plugins['telescope-fzf-native.nvim'].loaded then
+--        vim.cmd [[packadd telescope-fzf-native.nvim]]
+--    end
+--
+--    if not packer_plugins['telescope-project.nvim'].loaded then
+--        vim.cmd [[packadd telescope-project.nvim]]
+--    end
+
+    if not packer_plugins['sqlite.lua'].loaded then
+        vim.cmd [[packadd sqlite.lua]]
     end
 
-    if not packer_plugins['telescope-project.nvim'].loaded then
-        vim.cmd [[packadd telescope-project.nvim]]
-    end
-
-    if not packer_plugins['sql.nvim'].loaded then
-        vim.cmd [[packadd sql.nvim]]
-    end
-
-    if not packer_plugins['telescope-frecency.nvim'].loaded then
-        vim.cmd [[packadd telescope-frecency.nvim]]
-    end
+   -- if not packer_plugins['telescope-frecency.nvim'].loaded then
+   --     vim.cmd [[packadd telescope-frecency.nvim]]
+   -- end
 
     require('telescope').setup {
         defaults = {
@@ -77,9 +77,9 @@ function config.telescope()
             }
         }
     }
-    require('telescope').load_extension('fzf')
-    require('telescope').load_extension('project')
-    require('telescope').load_extension('frecency')
+   -- require('telescope').load_extension('fzf')
+    --require('telescope').load_extension('project')
+   -- require('telescope').load_extension('frecency')
 end
 
 function config.trouble()
