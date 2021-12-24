@@ -7,9 +7,9 @@ function config.telescope()
 --        vim.cmd [[packadd plenary.nvim]]
 --    end
 
-    if not packer_plugins['popup.nvim'].loaded then
-        vim.cmd [[packadd popup.nvim]]
-    end
+--    if not packer_plugins['popup.nvim'].loaded then
+--        vim.cmd [[packadd popup.nvim]]
+--    end
 
 --    if not packer_plugins['telescope-fzf-native.nvim'].loaded then
 --        vim.cmd [[packadd telescope-fzf-native.nvim]]
@@ -35,10 +35,10 @@ function config.telescope()
                 horizontal = {prompt_position = "bottom", results_width = 0.6},
                 vertical = {mirror = false}
             },
-            file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-            grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep
+            file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+            grep_previewer = require('telescope.previewers').vim_buffer_vimgrep
                 .new,
-            qflist_previewer = require'telescope.previewers'.vim_buffer_qflist
+            qflist_previewer = require('telescope.previewers').vim_buffer_qflist
                 .new,
             file_sorter = require("telescope.sorters").get_fuzzy_file,
             file_ignore_patterns = {},
@@ -77,9 +77,9 @@ function config.telescope()
             }
         }
     }
-   -- require('telescope').load_extension('fzf')
-    --require('telescope').load_extension('project')
-   -- require('telescope').load_extension('frecency')
+   require('telescope').load_extension('fzf')
+   require('telescope').load_extension('project')
+   require('telescope').load_extension('frecency')
 end
 
 function config.trouble()

@@ -19,7 +19,6 @@ tools['nvim-telescope/telescope-fzf-native.nvim'] = {
 tools['nvim-telescope/telescope-project.nvim'] = {
     opt = true,
     after = 'telescope.nvim',
-    config = function() require("telescope").load_extension("project") end
 }
 tools['nvim-telescope/telescope-frecency.nvim'] = {
     opt = true,
