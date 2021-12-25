@@ -103,11 +103,6 @@ editor['rcarriga/nvim-dap-ui'] = {
         }
     }
 }
-editor["edluffy/specs.nvim"] = {
-    opt = true,
-    event = "CursorMoved",
-    config = conf.specs
-}
 
 --editor["VonHeikemen/fine-cmdline.nvim"] = {
 --    opt = true,
