@@ -95,10 +95,16 @@ local plug_map = {
     ["n|<F12>"] = map_cr('ToggleTerm'):with_noremap():with_silent(),
     ["t|<F12>"] = map_cu([[<C-\><C-n>:ToggleTerm<CR>]]):with_noremap():with_silent(),
     -- Plugin Telescope
-    ["n|<Leader>fp"] = map_cu('Telescope project'):with_noremap():with_silent(),
+    -- ["n|<Leader>fp"] = map_cu('Telescope project'):with_noremap():with_silent(),
+    ["n|<Leader>fp"] = map_cu(
+        "lua require('telescope').extensions.project.project{}"):with_noremap()
+        :with_silent(),
+    ["n|<Leader>fr"] = map_cu(
+        "lua require('telescope').extensions.frecency.frecency{}"):with_noremap()
+        :with_silent(),
     ["n|<Leader>fe"] = map_cu('DashboardFindHistory'):with_noremap()
         :with_silent(),
-    ["n|<Leader>fr"] = map_cu('Telescope frecency'):with_noremap():with_silent(),
+    -- ["n|<Leader>fr"] = map_cu('Telescope frecency'):with_noremap():with_silent(),
     ["n|<Leader>ff"] = map_cu('DashboardFindFile'):with_noremap():with_silent(),
     ["n|<Leader>sc"] = map_cu('DashboardChangeColorscheme'):with_noremap()
         :with_silent(),

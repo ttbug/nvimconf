@@ -1,31 +1,23 @@
 local config = {}
 
 function config.telescope()
-    local home = os.getenv("HOME")
-
---    if not packer_plugins['plenary.nvim'].loaded then
---        vim.cmd [[packadd plenary.nvim]]
---    end
-
---    if not packer_plugins['popup.nvim'].loaded then
---        vim.cmd [[packadd popup.nvim]]
---    end
-
---    if not packer_plugins['telescope-fzf-native.nvim'].loaded then
---        vim.cmd [[packadd telescope-fzf-native.nvim]]
---    end
---
---    if not packer_plugins['telescope-project.nvim'].loaded then
---        vim.cmd [[packadd telescope-project.nvim]]
---    end
+--    local home = os.getenv("HOME")
 
     if not packer_plugins['sqlite.lua'].loaded then
         vim.cmd [[packadd sqlite.lua]]
     end
 
-   -- if not packer_plugins['telescope-frecency.nvim'].loaded then
-   --     vim.cmd [[packadd telescope-frecency.nvim]]
-   -- end
+    if not packer_plugins["telescope-fzf-native.nvim"].loaded then
+        vim.cmd [[packadd telescope-fzf-native.nvim]]
+    end
+
+    if not packer_plugins["telescope-project.nvim"].loaded then
+        vim.cmd [[packadd telescope-project.nvim]]
+    end
+
+    if not packer_plugins["telescope-frecency.nvim"].loaded then
+        vim.cmd [[packadd telescope-frecency.nvim]]
+    end
 
     require('telescope').setup {
         defaults = {
@@ -63,17 +55,17 @@ function config.telescope()
             frecency = {
                 show_scores = true,
                 show_unindexed = true,
-                ignore_patterns = {"*.git/*", "*/tmp/*"},
-                workspaces = {
-                    ["conf"] = home .. "/.config",
-                    ["data"] = home .. "/.local/share",
-                    ["nvim"] = home .. "/.config/nvim",
-                    ["code"] = home .. "/code",
-                    ["c"] = home .. "/code/c",
-                    ["cpp"] = home .. "/code/cpp",
-                    ["go"] = home .. "/go/src",
-                    ["rust"] = home .. "/code/rs"
-                }
+                ignore_patterns = {"*.git/*", "*/tmp/*"}
+--                workspaces = {
+--                    ["conf"] = home .. "/.config",
+--                    ["data"] = home .. "/.local/share",
+--                    ["nvim"] = home .. "/.config/nvim",
+--                    ["code"] = home .. "/code",
+--                    ["c"] = home .. "/code/c",
+--                    ["cpp"] = home .. "/code/cpp",
+--                    ["go"] = home .. "/go/src",
+--                    ["rust"] = home .. "/code/rs"
+--                }
             }
         }
     }

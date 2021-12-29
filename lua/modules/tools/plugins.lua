@@ -23,8 +23,8 @@ tools['nvim-telescope/telescope-project.nvim'] = {
 tools['nvim-telescope/telescope-frecency.nvim'] = {
     opt = true,
     after = 'telescope.nvim',
-    requires = {{'tami5/sqlite.lua', opt = true}},
-    config = function() require("telescope").load_extension("frecency") end
+    requires = {{'tami5/sqlite.lua', opt = true}}
+    --config = function() require("telescope").load_extension("frecency") end
 }
 tools['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
 tools['michaelb/sniprun'] = {
