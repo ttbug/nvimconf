@@ -7,6 +7,13 @@ completion['neovim/nvim-lspconfig'] = {
     config = conf.nvim_lsp
 }
 completion['williamboman/nvim-lsp-installer'] = {opt = true, after = 'nvim-lspconfig'}
+
+
+completion["RishabhRD/nvim-lsputils"] = {
+    opt = true,
+    after = "nvim-lspconfig",
+    config = conf.nvim_lsputils
+}
 completion['tami5/lspsaga.nvim'] = {
     opt = true,
     after = 'nvim-lspconfig',
