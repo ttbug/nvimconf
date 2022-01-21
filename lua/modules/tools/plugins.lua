@@ -1,6 +1,7 @@
 local tools = {}
 local conf = require('modules.tools.config')
 
+tools["RishabhRD/popfix"] = {opt = false}
 tools['nvim-telescope/telescope.nvim'] = {
     opt = true,
     cmd = 'Telescope',
@@ -10,19 +11,21 @@ tools['nvim-telescope/telescope.nvim'] = {
         {'nvim-lua/plenary.nvim', opt = true}
     }
 }
-tools['nvim-telescope/telescope-fzy-native.nvim'] = {
+tools['nvim-telescope/telescope-fzf-native.nvim'] = {
     opt = true,
+    run = "make",
     after = 'telescope.nvim'
 }
 
 tools['nvim-telescope/telescope-project.nvim'] = {
     opt = true,
-    after = 'telescope.nvim'
+    after = 'telescope.nvim',
 }
 tools['nvim-telescope/telescope-frecency.nvim'] = {
     opt = true,
     after = 'telescope.nvim',
-    requires = {{'tami5/sql.nvim', opt = true}}
+    requires = {{'tami5/sqlite.lua', opt = true}}
+    --config = function() require("telescope").load_extension("frecency") end
 }
 tools['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
 tools['michaelb/sniprun'] = {
@@ -53,5 +56,7 @@ tools['gelguy/wilder.nvim'] = {
 --     cmd = {"FloatermNew", "FloatermToggle"},
 --     config = conf.floaterm
 -- }
-tools['nathom/filetype.nvim'] = {opt = false}
+-- tools['nathom/filetype.nvim'] = {opt = false}
+tools['mg979/vim-visual-multi'] = {opt = false}
+tools["famiu/bufdelete.nvim"] = {opt = true, cmd = {"Bdelete", "Bwipeout"}}
 return tools

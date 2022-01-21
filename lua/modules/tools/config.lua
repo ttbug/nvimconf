@@ -1,29 +1,21 @@
 local config = {}
 
 function config.telescope()
-    local home = os.getenv("HOME")
+--    local home = os.getenv("HOME")
 
-    if not packer_plugins['plenary.nvim'].loaded then
-        vim.cmd [[packadd plenary.nvim]]
+    if not packer_plugins['sqlite.lua'].loaded then
+        vim.cmd [[packadd sqlite.lua]]
     end
 
-    if not packer_plugins['popup.nvim'].loaded then
-        vim.cmd [[packadd popup.nvim]]
+    if not packer_plugins["telescope-fzf-native.nvim"].loaded then
+        vim.cmd [[packadd telescope-fzf-native.nvim]]
     end
 
-    if not packer_plugins['telescope-fzy-native.nvim'].loaded then
-        vim.cmd [[packadd telescope-fzy-native.nvim]]
-    end
-
-    if not packer_plugins['telescope-project.nvim'].loaded then
+    if not packer_plugins["telescope-project.nvim"].loaded then
         vim.cmd [[packadd telescope-project.nvim]]
     end
 
-    if not packer_plugins['sql.nvim'].loaded then
-        vim.cmd [[packadd sql.nvim]]
-    end
-
-    if not packer_plugins['telescope-frecency.nvim'].loaded then
+    if not packer_plugins["telescope-frecency.nvim"].loaded then
         vim.cmd [[packadd telescope-frecency.nvim]]
     end
 
@@ -35,10 +27,10 @@ function config.telescope()
                 horizontal = {prompt_position = "bottom", results_width = 0.6},
                 vertical = {mirror = false}
             },
-            file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-            grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep
+            file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+            grep_previewer = require('telescope.previewers').vim_buffer_vimgrep
                 .new,
-            qflist_previewer = require'telescope.previewers'.vim_buffer_qflist
+            qflist_previewer = require('telescope.previewers').vim_buffer_qflist
                 .new,
             file_sorter = require("telescope.sorters").get_fuzzy_file,
             file_ignore_patterns = {},
@@ -54,30 +46,32 @@ function config.telescope()
             set_env = {["COLORTERM"] = "truecolor"}
         },
         extensions = {
-            fzy_native = {
-                override_generic_sorter = false,
-                override_file_sorter = true
+            fzf = {
+                fuzzy = false,
+                override_generic_sorter = true,
+                override_file_sorter = true,
+                case_mode = "smart_case"
             },
             frecency = {
                 show_scores = true,
                 show_unindexed = true,
-                ignore_patterns = {"*.git/*", "*/tmp/*"},
-                workspaces = {
-                    ["conf"] = home .. "/.config",
-                    ["data"] = home .. "/.local/share",
-                    ["nvim"] = home .. "/.config/nvim",
-                    ["code"] = home .. "/code",
-                    ["c"] = home .. "/code/c",
-                    ["cpp"] = home .. "/code/cpp",
-                    ["go"] = home .. "/go/src",
-                    ["rust"] = home .. "/code/rs"
-                }
+                ignore_patterns = {"*.git/*", "*/tmp/*"}
+--                workspaces = {
+--                    ["conf"] = home .. "/.config",
+--                    ["data"] = home .. "/.local/share",
+--                    ["nvim"] = home .. "/.config/nvim",
+--                    ["code"] = home .. "/code",
+--                    ["c"] = home .. "/code/c",
+--                    ["cpp"] = home .. "/code/cpp",
+--                    ["go"] = home .. "/go/src",
+--                    ["rust"] = home .. "/code/rs"
+--                }
             }
         }
     }
-    require('telescope').load_extension('fzy_native')
-    require('telescope').load_extension('project')
-    require('telescope').load_extension('frecency')
+   require('telescope').load_extension('fzf')
+   require('telescope').load_extension('project')
+   require('telescope').load_extension('frecency')
 end
 
 function config.trouble()
@@ -86,7 +80,8 @@ function config.trouble()
         height = 10, -- height of the trouble list when position is top or bottom
         width = 50, -- width of the list when position is left or right
         icons = true, -- use devicons for filenames
-        mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+        -- mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+        mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
         fold_open = "", -- icon used for open folds
         fold_closed = "", -- icon used for closed folds
         action_keys = { -- key mappings for actions in the trouble list

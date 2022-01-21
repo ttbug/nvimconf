@@ -3,6 +3,11 @@ local conf = require('modules.ui.config')
 
 ui['kyazdani42/nvim-web-devicons'] = {opt = false}
 ui['sainnhe/edge'] = {opt = false, config = conf.edge}
+ui["catppuccin/nvim"] = {
+    opt = false,
+    as = "catppuccin",
+    config = conf.catppuccin
+}
 ui['hoob3rt/lualine.nvim'] = {
     opt = true,
     after = 'lualine-lsp-progress',
@@ -34,15 +39,15 @@ ui['akinsho/nvim-bufferline.lua'] = {
     event = 'BufRead',
     config = conf.nvim_bufferline
 }
-ui['folke/zen-mode.nvim'] = {
-    opt = true,
-    cmd = 'ZenMode',
-    config = conf.zen_mode
-}
-ui['folke/twilight.nvim'] = {
-    opt = true,
-    cmd = {'Twilight', 'TwilightEnable'},
-    config = conf.twilight
-}
+--ui['folke/zen-mode.nvim'] = {
+--    opt = true,
+--    cmd = 'ZenMode',
+--    config = conf.zen_mode
+--}
+--ui['folke/twilight.nvim'] = {
+--    opt = true,
+--    cmd = {'Twilight', 'TwilightEnable'},
+--    config = conf.twilight
+--}
 
 return ui

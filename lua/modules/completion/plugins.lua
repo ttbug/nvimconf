@@ -7,6 +7,13 @@ completion['neovim/nvim-lspconfig'] = {
     config = conf.nvim_lsp
 }
 completion['williamboman/nvim-lsp-installer'] = {opt = true, after = 'nvim-lspconfig'}
+
+
+completion["RishabhRD/nvim-lsputils"] = {
+    opt = true,
+    after = "nvim-lspconfig",
+    config = conf.nvim_lsputils
+}
 completion['tami5/lspsaga.nvim'] = {
     opt = true,
     after = 'nvim-lspconfig',
@@ -18,12 +25,13 @@ completion['hrsh7th/nvim-cmp'] = {
     event = 'InsertEnter',
     requires = {
         {'saadparwaiz1/cmp_luasnip', after = 'LuaSnip'},
-        {'hrsh7th/cmp-buffer', after = 'cmp_luasnip'},
-        {'hrsh7th/cmp-nvim-lsp', after = 'cmp-buffer'},
+        {"hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip"},
         {'hrsh7th/cmp-nvim-lua', after = 'cmp-nvim-lsp'},
-        {'andersevenrud/compe-tmux', branch = 'cmp', after = 'cmp-nvim-lua'},
-        {'hrsh7th/cmp-path', after = 'compe-tmux'},
-        {'f3fora/cmp-spell', after = 'cmp-path'}
+        {'andersevenrud/cmp-tmux', after = 'cmp-nvim-lua'},
+        {'hrsh7th/cmp-path', after = 'cmp-tmux'},
+        {'f3fora/cmp-spell', after = 'cmp-path'},
+        {"hrsh7th/cmp-buffer", after = "cmp-spell"}
+        -- {"lukas-reineke/cmp-rg", after = "cmp-spell"}
         -- {
         --     'tzachar/cmp-tabnine',
         --     run = './install.sh',
