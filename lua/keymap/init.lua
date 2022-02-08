@@ -159,7 +159,7 @@ local plug_map = {
         :with_silent(),
     ["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap()
         :with_silent(),
-    ["n|<leader>dd"] = map_cr("lua require('dap').disconnect()"):with_noremap()
+    ["n|<leader>dd"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap()
         :with_silent(),
     ["n|<leader>db"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap()
         :with_silent(),
@@ -190,6 +190,7 @@ local plug_map = {
     --["n|:"] = map_cr("lua require('fine-cmdline').open()"):with_noremap():with_nowait(
 
     --):with_silent()
+    ["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
 };
 
 bind.nvim_load_mapping(plug_map)

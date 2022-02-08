@@ -69,17 +69,40 @@ function config.lualine()
         end
     end
 
+    local simple_sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
+
     local symbols_outline = {
-        sections = {
-            lualine_a = {'mode'},
-            lualine_b = {'filetype'},
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = {'location'}
-        },
+        sections = simple_sections,
         filetypes = {'Outline'}
     }
+
+    local dapui_scopes = {
+        sections = simple_sections,
+		filetypes = { "dapui_scopes" },
+	}
+
+	local dapui_breakpoints = {
+        sections = simple_sections,
+		filetypes = { "dapui_breakpoints" },
+	}
+
+	local dapui_stacks = {
+        sections = simple_sections,
+		filetypes = { "dapui_stacks" },
+	}
+
+	local dapui_watches = {
+        sections = simple_sections,
+		filetypes = { "dapui_watches" },
+	}
+
 
     require('lualine').setup {
         options = {
@@ -123,7 +146,10 @@ function config.lualine()
         },
         tabline = {},
         extensions = {
-            "quickfix", "nvim-tree", "toggleterm", "fugitive", symbols_outline
+            "quickfix", "nvim-tree", "toggleterm", "fugitive", symbols_outline, dapui_scopes,
+			dapui_breakpoints,
+			dapui_stacks,
+			dapui_watches,
         }
     }
 end
