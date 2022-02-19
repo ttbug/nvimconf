@@ -108,7 +108,8 @@ function config.lualine()
         options = {
             icons_enabled = true,
             -- theme = 'onedark',
-            theme = "catppuccin",
+            -- theme = "catppuccin",
+            theme = "kanagawa",
             disabled_filetypes = {},
             component_separators = '|',
             section_separators = {left = '', right = ''}
@@ -203,7 +204,6 @@ function config.nvim_tree()
     vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
-        --gitignore = true,
         git = {enable = true, ignore = false, timeout = 500},
         ignore = {'.git', 'node_modules', '.cache', '.vscode'},
         hide_dotfiles = true,
@@ -383,5 +383,23 @@ end
 --function config.zen_mode() require('zen-mode').setup {} end
 --
 --function config.twilight() require('twilight').setup {} end
+
+function config.kanagawa()
+    require('kanagawa').setup({
+        undercurl = true, -- enable undercurls
+        commentStyle = "italic",
+        functionStyle = "bold,italic",
+        keywordStyle = "italic",
+        statementStyle = "bold",
+        typeStyle = "NONE",
+        variablebuiltinStyle = "italic",
+        specialReturn = true, -- special highlight for the return keyword
+        specialException = true, -- special highlight for exception handling keywords 
+        transparent = false, -- do not set background color
+        dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+        colors = {},
+        overrides = {}
+    })
+end
 
 return config

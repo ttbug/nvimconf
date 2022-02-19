@@ -3,6 +3,7 @@ local conf = require('modules.ui.config')
 
 ui['kyazdani42/nvim-web-devicons'] = {opt = false}
 ui['sainnhe/edge'] = {opt = false, config = conf.edge}
+ui["rebelot/kanagawa.nvim"] = {opt = false, config = conf.kanagawa}
 ui["catppuccin/nvim"] = {
     opt = false,
     as = "catppuccin",
@@ -38,6 +39,14 @@ ui['akinsho/nvim-bufferline.lua'] = {
     opt = true,
     event = 'BufRead',
     config = conf.nvim_bufferline
+}
+
+ui["petertriho/nvim-scrollbar"] = {
+	opt = true,
+	event = "BufRead",
+	config = function()
+		require("scrollbar").setup()
+	end,
 }
 --ui['folke/zen-mode.nvim'] = {
 --    opt = true,
