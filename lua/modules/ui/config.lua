@@ -201,7 +201,7 @@ function config.nvim_tree()
             untracked = "★"
         }
     }
-    vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
+    -- vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
         git = {enable = true, ignore = false, timeout = 500},
