@@ -106,6 +106,12 @@ editor['rcarriga/nvim-dap-ui'] = {
     }
 }
 
+editor["sindrets/diffview.nvim"] = {
+	opt = true,
+	cmd = { "DiffviewOpen" },
+    require = {'nvim-lua/plenary.nvim'}
+}
+
 --editor["VonHeikemen/fine-cmdline.nvim"] = {
 --    opt = true,
 --    event = "BufWinEnter",
