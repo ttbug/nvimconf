@@ -191,6 +191,9 @@ local plug_map = {
 
     --):with_silent()
     ["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
+    	-- Plugin Diffview
+	["n|<leader>d"] = map_cr("DiffviewOpen"):with_silent():with_noremap(),
+	["n|<leader><leader>d"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
 };
 
 bind.nvim_load_mapping(plug_map)

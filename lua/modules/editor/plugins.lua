@@ -74,7 +74,7 @@ editor['karb94/neoscroll.nvim'] = {
     config = conf.neoscroll
 }
 -- editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
-editor['akinsho/nvim-toggleterm.lua'] = {
+editor['akinsho/toggleterm.nvim'] = {
     opt = true,
     event = 'BufRead',
     config = conf.toggleterm
@@ -104,6 +104,12 @@ editor['rcarriga/nvim-dap-ui'] = {
             config = conf.dapinstall
         }
     }
+}
+
+editor["sindrets/diffview.nvim"] = {
+	opt = true,
+	cmd = { "DiffviewOpen" },
+    require = {'nvim-lua/plenary.nvim'}
 }
 
 --editor["VonHeikemen/fine-cmdline.nvim"] = {
