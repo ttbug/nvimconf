@@ -56,6 +56,9 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 # nerd-fonts-ibm-plex-mono for devicons
 sudo pacman -S git neovim gitui ripgrep fd yarn nerd-fonts-ibm-plex-mono
 
+# mac 
+brew install git gitui ripgrep fd bat fzf sqlite3
+
 # for neovim python module
 pip install neovim --user
 ```
