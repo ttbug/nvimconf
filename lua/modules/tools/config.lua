@@ -157,4 +157,10 @@ function config.filetype()
 	})
 end
 
+function config.todo()
+    require("todo-comments").setup{
+
+    }
+end
+
 return config
