@@ -201,7 +201,6 @@ function config.nvim_tree()
             untracked = "★"
         }
     }
-    vim.g.nvim_tree_respect_buf_cwd = 1
     -- vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
@@ -211,13 +210,12 @@ function config.nvim_tree()
         open_on_tab = false,
         disable_netrw = true,
         hijack_netrw = true,
-        auto_close = true,
         update_cwd = false,
         highlight_opened_files = true,
         auto_ignore_ft = {'startify', 'dashboard'},
         update_focused_file = {
             enable = true,
-            update_cwd = true,
+            update_cwd = false,
             ignore_list = {}
         },
         filters = {
