@@ -42,7 +42,12 @@ function autocmd.load_autocmds()
             {
                 "BufReadPost", "*",
                 [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]]
-            } -- Auto toggle fcitx5
+            }, -- Auto toggle fcitx5
+            {
+				"BufEnter",
+				"*",
+				[[++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
+			}
             -- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
             -- {"BufCreate", "*", ":silent !fcitx5-remote -c"},
             -- {"BufEnter", "*", ":silent !fcitx5-remote -c "},
