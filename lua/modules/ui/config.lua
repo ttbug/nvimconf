@@ -109,7 +109,8 @@ function config.lualine()
             icons_enabled = true,
             -- theme = 'onedark',
             -- theme = "catppuccin",
-            theme = "kanagawa",
+            -- theme = "kanagawa",
+            theme = 'tokyonight',
             disabled_filetypes = {},
             component_separators = '|',
             section_separators = {left = '', right = ''}
@@ -400,6 +401,12 @@ function config.kanagawa()
         colors = {},
         overrides = {}
     })
+end
+
+function config.tokyonight()
+    vim.g.tokyonight_style = "storm"
+    vim.g.tokyonight_italic_functions = true
+    vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 end
 
 return config
