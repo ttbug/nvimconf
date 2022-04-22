@@ -21,6 +21,11 @@ tools['nvim-telescope/telescope-fzf-native.nvim'] = {
     after = 'telescope.nvim'
 }
 
+tools["nvim-telescope/telescope-file-browser.nvim"] = {
+    opt = true,
+    after = 'telescope.nvim'
+}
+
 tools['nvim-telescope/telescope-project.nvim'] = {
     opt = true,
     after = "telescope-fzf-native.nvim",
