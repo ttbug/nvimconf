@@ -30,10 +30,10 @@ editor['nvim-treesitter/nvim-treesitter-textobjects'] = {
     opt = true,
     after = 'nvim-treesitter'
 }
-editor['romgrk/nvim-treesitter-context'] = {
-    opt = true,
-    after = 'nvim-treesitter'
-}
+--editor['romgrk/nvim-treesitter-context'] = {
+--    opt = true,
+--    after = 'nvim-treesitter'
+--}
 editor['p00f/nvim-ts-rainbow'] = {
     opt = true,
     after = 'nvim-treesitter',
@@ -59,8 +59,10 @@ editor['andymass/vim-matchup'] = {
     after = 'nvim-treesitter',
     config = conf.matchup
 }
-editor['rhysd/accelerated-jk'] = {opt = true}
-editor['hrsh7th/vim-eft'] = {opt = true}
+-- editor['rhysd/accelerated-jk'] = {opt = true}
+-- editor['hrsh7th/vim-eft'] = {opt = true}
+editor["rhysd/accelerated-jk"] = { opt = true, event = "BufReadPost" }
+editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
 editor['romainl/vim-cool'] = {
     opt = true,
     event = {'CursorMoved', 'InsertEnter'}
@@ -72,7 +74,7 @@ editor['karb94/neoscroll.nvim'] = {
     config = conf.neoscroll
 }
 -- editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
-editor['akinsho/nvim-toggleterm.lua'] = {
+editor['akinsho/toggleterm.nvim'] = {
     opt = true,
     event = 'BufRead',
     config = conf.toggleterm
@@ -102,6 +104,12 @@ editor['rcarriga/nvim-dap-ui'] = {
             config = conf.dapinstall
         }
     }
+}
+
+editor["sindrets/diffview.nvim"] = {
+	opt = true,
+	cmd = { "DiffviewOpen" },
+    require = {'nvim-lua/plenary.nvim'}
 }
 
 --editor["VonHeikemen/fine-cmdline.nvim"] = {

@@ -14,7 +14,7 @@ local plug_map = {
     ["n|gb"] = map_cr("BufferLinePick"):with_noremap():with_silent(),
     ["n|<C-l>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
     ["n|<C-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent(),
-    ["n|<C-^>"] = map_cr(":Bwipeout"):with_noremap():with_silent(),
+    ["n|<C-^>"] = map_cr(":bd"):with_noremap():with_silent(),
     ["n|<A-S-j>"] = map_cr("BufferLineMoveNext"):with_noremap():with_silent(),
     ["n|<A-S-k>"] = map_cr("BufferLineMovePrev"):with_noremap():with_silent(),
     ["n|<leader>be"] = map_cr("BufferLineSortByExtension"):with_noremap(),
@@ -71,8 +71,7 @@ local plug_map = {
     ["n|<A-d>"] = map_cu('Lspsaga open_floaterm'):with_noremap():with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap()
         :with_silent(),
-    ["n|<Leader>g"] = map_cu("Lspsaga open_floaterm gitui"):with_noremap()
-        :with_silent(),
+    ["n|<Leader>g"] = map_cu("Gitui"):with_noremap():with_silent(),
     -- Plugin trouble
     ["n|gt"] = map_cr('TroubleToggle'):with_noremap():with_silent(),
     ["n|gR"] = map_cr('TroubleToggle lsp_references'):with_noremap()
@@ -98,13 +97,14 @@ local plug_map = {
     ["n|<F12>"] = map_cr('ToggleTerm'):with_noremap():with_silent(),
     ["t|<F12>"] = map_cu([[<C-\><C-n>:ToggleTerm<CR>]]):with_noremap():with_silent(),
     -- Plugin Telescope
-    -- ["n|<Leader>fp"] = map_cu('Telescope project'):with_noremap():with_silent(),
-    ["n|<Leader>fp"] = map_cu(
-        "lua require('telescope').extensions.project.project{}"):with_noremap()
-        :with_silent(),
-    ["n|<Leader>fr"] = map_cu(
-        "lua require('telescope').extensions.frecency.frecency{}"):with_noremap()
-        :with_silent(),
+    ["n|<Leader>fp"] = map_cu('Telescope project'):with_noremap():with_silent(),
+    ["n|<Leader>fr"] = map_cu('Telescope frecency'):with_noremap():with_silent(),
+    --["n|<Leader>fp"] = map_cu(
+    --    "lua require('telescope').extensions.project.project{}"):with_noremap()
+    --    :with_silent(),
+    --["n|<Leader>fr"] = map_cu(
+    --    "lua require('telescope').extensions.frecency.frecency{}"):with_noremap()
+    --    :with_silent(),
     ["n|<Leader>fe"] = map_cu('DashboardFindHistory'):with_noremap()
         :with_silent(),
     -- ["n|<Leader>fr"] = map_cu('Telescope frecency'):with_noremap():with_silent(),
@@ -159,7 +159,7 @@ local plug_map = {
         :with_silent(),
     ["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap()
         :with_silent(),
-    ["n|<leader>dd"] = map_cr("lua require('dap').disconnect()"):with_noremap()
+    ["n|<leader>dd"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap()
         :with_silent(),
     ["n|<leader>db"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap()
         :with_silent(),
@@ -190,6 +190,10 @@ local plug_map = {
     --["n|:"] = map_cr("lua require('fine-cmdline').open()"):with_noremap():with_nowait(
 
     --):with_silent()
+    ["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
+    	-- Plugin Diffview
+	["n|<leader>d"] = map_cr("DiffviewOpen"):with_silent():with_noremap(),
+	["n|<leader><leader>d"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
 };
 
 bind.nvim_load_mapping(plug_map)

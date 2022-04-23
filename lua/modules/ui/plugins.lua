@@ -2,12 +2,14 @@ local ui = {}
 local conf = require('modules.ui.config')
 
 ui['kyazdani42/nvim-web-devicons'] = {opt = false}
-ui['sainnhe/edge'] = {opt = false, config = conf.edge}
-ui["catppuccin/nvim"] = {
-    opt = false,
-    as = "catppuccin",
-    config = conf.catppuccin
-}
+--ui['sainnhe/edge'] = {opt = false, config = conf.edge}
+--ui["rebelot/kanagawa.nvim"] = {opt = false, config = conf.kanagawa}
+ui['folke/tokyonight.nvim'] = {opt = false, config = conf.tokyonight}
+--ui["catppuccin/nvim"] = {
+--    opt = false,
+--    as = "catppuccin",
+--    config = conf.catppuccin
+--}
 ui['hoob3rt/lualine.nvim'] = {
     opt = true,
     after = 'lualine-lsp-progress',
@@ -34,10 +36,18 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     event = 'BufRead',
     config = conf.indent_blankline
 }
-ui['akinsho/nvim-bufferline.lua'] = {
+ui['akinsho/bufferline.nvim'] = {
     opt = true,
     event = 'BufRead',
     config = conf.nvim_bufferline
+}
+
+ui["petertriho/nvim-scrollbar"] = {
+	opt = true,
+	event = "BufRead",
+	config = function()
+		require("scrollbar").setup()
+	end,
 }
 --ui['folke/zen-mode.nvim'] = {
 --    opt = true,

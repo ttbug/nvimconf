@@ -3,21 +3,12 @@ local config = {}
 function config.telescope()
 --    local home = os.getenv("HOME")
 
-    if not packer_plugins['sqlite.lua'].loaded then
-        vim.cmd [[packadd sqlite.lua]]
-    end
-
-    if not packer_plugins["telescope-fzf-native.nvim"].loaded then
-        vim.cmd [[packadd telescope-fzf-native.nvim]]
-    end
-
-    if not packer_plugins["telescope-project.nvim"].loaded then
-        vim.cmd [[packadd telescope-project.nvim]]
-    end
-
-    if not packer_plugins["telescope-frecency.nvim"].loaded then
-        vim.cmd [[packadd telescope-frecency.nvim]]
-    end
+    vim.cmd [[packadd sqlite.lua]]
+    vim.cmd [[packadd telescope-fzf-native.nvim]]
+    vim.cmd [[packadd telescope-project.nvim]]
+    vim.cmd [[packadd telescope-frecency.nvim]]
+    vim.cmd [[packadd telescope-file-browser.nvim]]
+    vim.cmd([[packadd telescope-zoxide]])
 
     require('telescope').setup {
         defaults = {
@@ -56,22 +47,14 @@ function config.telescope()
                 show_scores = true,
                 show_unindexed = true,
                 ignore_patterns = {"*.git/*", "*/tmp/*"}
---                workspaces = {
---                    ["conf"] = home .. "/.config",
---                    ["data"] = home .. "/.local/share",
---                    ["nvim"] = home .. "/.config/nvim",
---                    ["code"] = home .. "/code",
---                    ["c"] = home .. "/code/c",
---                    ["cpp"] = home .. "/code/cpp",
---                    ["go"] = home .. "/go/src",
---                    ["rust"] = home .. "/code/rs"
---                }
             }
         }
     }
    require('telescope').load_extension('fzf')
    require('telescope').load_extension('project')
+   require("telescope").load_extension("zoxide")
    require('telescope').load_extension('frecency')
+   require('telescope').load_extension('file_browser')
 end
 
 function config.trouble()
@@ -164,5 +147,22 @@ end
 --     hi FloatermBorder guibg=none guifg=cyan
 --     ]]
 -- end
+function config.filetype()
+	-- In init.lua or filetype.nvim's config file
+	require("filetype").setup({
+		overrides = {
+			shebang = {
+				-- Set the filetype of files with a dash shebang to sh
+				dash = "sh",
+			},
+		},
+	})
+end
+
+function config.todo()
+    require("todo-comments").setup{
+
+    }
+end
 
 return config

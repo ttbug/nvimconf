@@ -2,6 +2,10 @@ local tools = {}
 local conf = require('modules.tools.config')
 
 tools["RishabhRD/popfix"] = {opt = false}
+tools["aspeddro/gitui.nvim"] = {
+    opt = false,
+    config = function() require("gitui").setup {} end
+}
 tools['nvim-telescope/telescope.nvim'] = {
     opt = true,
     cmd = 'Telescope',
@@ -17,17 +21,23 @@ tools['nvim-telescope/telescope-fzf-native.nvim'] = {
     after = 'telescope.nvim'
 }
 
+tools["nvim-telescope/telescope-file-browser.nvim"] = {
+    opt = true,
+    after = 'telescope.nvim'
+}
+
 tools['nvim-telescope/telescope-project.nvim'] = {
     opt = true,
-    after = 'telescope.nvim',
+    after = "telescope-fzf-native.nvim",
 }
 tools['nvim-telescope/telescope-frecency.nvim'] = {
     opt = true,
-    after = 'telescope.nvim',
+    after = 'telescope-project.nvim',
     requires = {{'tami5/sqlite.lua', opt = true}}
     --config = function() require("telescope").load_extension("frecency") end
 }
-tools['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
+--tools['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
+tools["jvgrootveld/telescope-zoxide"] = { opt = true, after = "telescope-frecency.nvim" }
 tools['michaelb/sniprun'] = {
     opt = true,
     run = 'bash ./install.sh',
@@ -59,4 +69,13 @@ tools['gelguy/wilder.nvim'] = {
 -- tools['nathom/filetype.nvim'] = {opt = false}
 tools['mg979/vim-visual-multi'] = {opt = false}
 tools["famiu/bufdelete.nvim"] = {opt = true, cmd = {"Bdelete", "Bwipeout"}}
+tools["nathom/filetype.nvim"] = {
+	opt = false,
+	config = conf.filetype,
+}
+tools['folke/todo-comments.nvim'] = {
+    opt = true,
+    requires = {{'nvim-lua/plenary.nvim', opt = true}},
+    config = conf.todo,
+}
 return tools

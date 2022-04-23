@@ -69,23 +69,48 @@ function config.lualine()
         end
     end
 
+    local simple_sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
+
     local symbols_outline = {
-        sections = {
-            lualine_a = {'mode'},
-            lualine_b = {'filetype'},
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = {'location'}
-        },
+        sections = simple_sections,
         filetypes = {'Outline'}
     }
+
+    local dapui_scopes = {
+        sections = simple_sections,
+		filetypes = { "dapui_scopes" },
+	}
+
+	local dapui_breakpoints = {
+        sections = simple_sections,
+		filetypes = { "dapui_breakpoints" },
+	}
+
+	local dapui_stacks = {
+        sections = simple_sections,
+		filetypes = { "dapui_stacks" },
+	}
+
+	local dapui_watches = {
+        sections = simple_sections,
+		filetypes = { "dapui_watches" },
+	}
+
 
     require('lualine').setup {
         options = {
             icons_enabled = true,
             -- theme = 'onedark',
-            theme = "catppuccin",
+            -- theme = "catppuccin",
+            -- theme = "kanagawa",
+            theme = 'tokyonight',
             disabled_filetypes = {},
             component_separators = '|',
             section_separators = {left = '', right = ''}
@@ -123,7 +148,10 @@ function config.lualine()
         },
         tabline = {},
         extensions = {
-            "quickfix", "nvim-tree", "toggleterm", "fugitive", symbols_outline
+            "quickfix", "nvim-tree", "toggleterm", "fugitive", symbols_outline, dapui_scopes,
+			dapui_breakpoints,
+			dapui_stacks,
+			dapui_watches,
         }
     }
 end
@@ -174,23 +202,21 @@ function config.nvim_tree()
             untracked = "★"
         }
     }
-    vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
+    -- vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
-        --gitignore = true,
         git = {enable = true, ignore = false, timeout = 500},
         ignore = {'.git', 'node_modules', '.cache', '.vscode'},
         hide_dotfiles = true,
         open_on_tab = false,
         disable_netrw = true,
         hijack_netrw = true,
-        auto_close = true,
         update_cwd = false,
         highlight_opened_files = true,
         auto_ignore_ft = {'startify', 'dashboard'},
         update_focused_file = {
             enable = true,
-            update_cwd = true,
+            update_cwd = false,
             ignore_list = {}
         },
         filters = {
@@ -201,6 +227,7 @@ function config.nvim_tree()
             width = 25,
             side = 'left',
             auto_resize = false,
+            hide_root_folder = true,
             mappings = {
                 custom_only = true,
                 -- list of mappings to set on the tree manually
@@ -357,5 +384,29 @@ end
 --function config.zen_mode() require('zen-mode').setup {} end
 --
 --function config.twilight() require('twilight').setup {} end
+
+function config.kanagawa()
+    require('kanagawa').setup({
+        undercurl = true, -- enable undercurls
+        commentStyle = "italic",
+        functionStyle = "bold,italic",
+        keywordStyle = "italic",
+        statementStyle = "bold",
+        typeStyle = "NONE",
+        variablebuiltinStyle = "italic",
+        specialReturn = true, -- special highlight for the return keyword
+        specialException = true, -- special highlight for exception handling keywords 
+        transparent = false, -- do not set background color
+        dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+        colors = {},
+        overrides = {}
+    })
+end
+
+function config.tokyonight()
+    vim.g.tokyonight_style = "storm"
+    vim.g.tokyonight_italic_functions = true
+    vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+end
 
 return config
