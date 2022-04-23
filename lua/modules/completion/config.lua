@@ -18,7 +18,7 @@ function config.cmp()
     end
 
     local cmp = require('cmp')
-    cmp.setup {
+    cmp.setup ({
         formatting = {
             format = function(entry, vim_item)
                 local lspkind_icons = {
@@ -129,7 +129,24 @@ function config.cmp()
             {name = 'tmux'}, {name = "orgmode"}
             -- {name = 'cmp_tabnine'},
         }
-    }
+    })
+
+    
+    cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = "buffer" } }
+    })
+    cmp.setup.cmdline("?", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = "buffer" } }
+    })
+    cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources(
+            { { name = "path" } },
+            { { name = "cmdline" } }
+        )
+    })
 end
 
 function config.luasnip()

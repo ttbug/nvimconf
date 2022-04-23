@@ -2,11 +2,11 @@ local editor = {}
 local conf = require('modules.editor.config')
 
 editor['junegunn/vim-easy-align'] = {opt = true, cmd = 'EasyAlign'}
-editor['itchyny/vim-cursorword'] = {
-    opt = true,
-    event = {'BufReadPre', 'BufNewFile'},
-    config = conf.vim_cursorwod
-}
+--editor['itchyny/vim-cursorword'] = {
+--    opt = true,
+--    event = {'BufReadPre', 'BufNewFile'},
+--    config = conf.vim_cursorwod
+--}
 editor['terrortylor/nvim-comment'] = {
     opt = false,
     config = function() require('nvim_comment').setup({
@@ -98,7 +98,7 @@ editor['rcarriga/nvim-dap-ui'] = {
     config = conf.dapui,
     requires = {
         {'mfussenegger/nvim-dap', config = conf.dap}, {
-            'Pocco81/DAPInstall.nvim',
+            'Pocco81/dap-buddy.nvim',
             opt = true,
             cmd = {'DIInstall', 'DIUninstall', 'DIList'},
             config = conf.dapinstall
@@ -110,6 +110,17 @@ editor["sindrets/diffview.nvim"] = {
 	opt = true,
 	cmd = { "DiffviewOpen" },
     require = {'nvim-lua/plenary.nvim'}
+}
+
+editor["RRethy/vim-illuminate"] = {
+    event = "BufRead",
+    config = function()
+        vim.g.Illuminate_highlightUnderCursor = 0
+        vim.g.Illuminate_ftblacklist = {
+            "help", "dashboard", "alpha", "packer", "norg", "DoomInfo",
+            "NvimTree", "Outline", "toggleterm",
+        }
+    end
 }
 
 --editor["VonHeikemen/fine-cmdline.nvim"] = {

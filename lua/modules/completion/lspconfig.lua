@@ -2,17 +2,10 @@
 --    vim.cmd [[packadd nvim-lspconfig]]
 --end
 
-if not packer_plugins['lspsaga.nvim'].loaded then
-    vim.cmd [[packadd lspsaga.nvim]]
-end
-
-if not packer_plugins['nvim-lsp-installer'].loaded then
-    vim.cmd [[packadd nvim-lsp-installer]]
-end
-
-if not packer_plugins['lsp_signature.nvim'].loaded then
-    vim.cmd [[packadd lsp_signature.nvim]]
-end
+vim.cmd [[packadd lspsaga.nvim]]
+vim.cmd [[packadd nvim-lsp-installer]]
+vim.cmd [[packadd lsp_signature.nvim]]
+vim.cmd([[packadd vim-illuminate]])
 
 local nvim_lsp = require('lspconfig')
 -- local lsp_install = require('lspinstall')
@@ -120,7 +113,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 -- setup_servers()
 
-local function custom_attach()
+local function custom_attach(client)
     require('lsp_signature').on_attach({
         bind = true,
         use_lspsaga = false,
@@ -130,6 +123,8 @@ local function custom_attach()
         hi_parameter = "Search",
         handler_opts = {"double"}
     })
+
+    require("illuminate").on_attach(client)
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
