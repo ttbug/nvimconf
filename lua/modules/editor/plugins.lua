@@ -123,6 +123,12 @@ editor["RRethy/vim-illuminate"] = {
     end
 }
 
+editor['theHamsta/nvim-dap-virtual-text'] = {
+    opt = true,
+    cmd = {'DapVirtualTextEnable', 'DapVirtualTextDisable'},
+    config = conf.dap_virtual_text
+}
+
 --editor["VonHeikemen/fine-cmdline.nvim"] = {
 --    opt = true,
 --    event = "BufWinEnter",

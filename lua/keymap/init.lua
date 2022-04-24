@@ -159,7 +159,7 @@ local plug_map = {
         :with_silent(),
     ["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap()
         :with_silent(),
-    ["n|<leader>dd"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap()
+    ["n|<leader>dt"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap()
         :with_silent(),
     ["n|<leader>db"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap()
         :with_silent(),
@@ -192,7 +192,7 @@ local plug_map = {
     --):with_silent()
     ["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
     	-- Plugin Diffview
-	["n|<leader>d"] = map_cr("DiffviewOpen"):with_silent():with_noremap(),
+	["n|<leader>df"] = map_cr("DiffviewOpen"):with_silent():with_noremap(),
 	["n|<leader><leader>d"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
 };
 
