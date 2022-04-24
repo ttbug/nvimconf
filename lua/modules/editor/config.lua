@@ -246,25 +246,6 @@ function config.dapui()
    --     dapui.close()
    -- end
         -- dapui config
-    local dap, dapui = require "dap", require "dapui"
-     dap.listeners.after.event_initialized["dapui_config"] = function()
-       dapui.open()
-       vim.api.nvim_command("DapVirtualTextEnable")
-       -- dapui.close("tray")
-     end
-     dap.listeners.before.event_terminated["dapui_config"] = function()
-       vim.api.nvim_command("DapVirtualTextDisable")
-       dapui.close()
-     end
-     dap.listeners.before.event_exited["dapui_config"] = function()
-       vim.api.nvim_command("DapVirtualTextDisable")
-       dapui.close()
-     end
-     -- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
-     dap.listeners.before.disconnect["dapui_config"] = function()
-       vim.api.nvim_command("DapVirtualTextDisable")
-       dapui.close()
-    end
     require("dapui").setup({
         icons = {expanded = "▾", collapsed = "▸"},
         mappings = {
@@ -304,19 +285,38 @@ function config.dapui()
 end
 
 function config.dap()
-    local dap = require("dap")
+    local dap, dapui = require "dap", require "dapui"
+     dap.listeners.after.event_initialized["dapui_config"] = function()
+       dapui.open()
+       vim.api.nvim_command("DapVirtualTextEnable")
+       -- dapui.close("tray")
+     end
+     dap.listeners.before.event_terminated["dapui_config"] = function()
+       vim.api.nvim_command("DapVirtualTextDisable")
+       dapui.close()
+     end
+     dap.listeners.before.event_exited["dapui_config"] = function()
+       vim.api.nvim_command("DapVirtualTextDisable")
+       dapui.close()
+     end
+     -- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
+     dap.listeners.before.disconnect["dapui_config"] = function()
+       vim.api.nvim_command("DapVirtualTextDisable")
+       dapui.close()
+    end
+    --local dap = require("dap")
 
-    local dapui = require("dapui")
+    --local dapui = require("dapui")
 
-	dap.listeners.after.event_initialized["dapui_config"] = function()
-		dapui.open()
-	end
-	dap.listeners.after.event_terminated["dapui_config"] = function()
-		dapui.close()
-	end
-	dap.listeners.after.event_exited["dapui_config"] = function()
-		dapui.close()
-	end
+	--dap.listeners.after.event_initialized["dapui_config"] = function()
+	--	dapui.open()
+	--end
+	--dap.listeners.after.event_terminated["dapui_config"] = function()
+	--	dapui.close()
+	--end
+	--dap.listeners.after.event_exited["dapui_config"] = function()
+	--	dapui.close()
+	--end
 
 	vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 
@@ -390,14 +390,14 @@ function config.dap()
             type = "go",
             name = "Debug test", -- configuration for debugging test files
             request = "launch",
-            mode = "test",
+            mode = "auto",
             program = "${file}"
         }, -- works with go.mod packages and sub packages 
         {
             type = "go",
             name = "Debug test (go.mod)",
             request = "launch",
-            mode = "test",
+            mode = "auto",
             program = "./${relativeFileDirname}"
         }
     }
