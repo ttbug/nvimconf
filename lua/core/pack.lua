@@ -45,7 +45,7 @@ function Packer:load_packer()
 			disable_commands = true,
 			display = {
 				open_fn = function()
-					return require("packer.util").float({ border = "single" })
+					return require("packer.util").float({ border = "none" })
 				end,
 			},
 		})
@@ -57,7 +57,7 @@ function Packer:load_packer()
 			max_jobs = 20,
 			display = {
 				open_fn = function()
-					return require("packer.util").float({ border = "single" })
+					return require("packer.util").float({ border = "none" })
 				end,
 			},
 		})
