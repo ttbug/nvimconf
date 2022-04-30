@@ -206,14 +206,14 @@ function config.nvim_tree()
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     require('nvim-tree').setup {
         git = {enable = true, ignore = false, timeout = 500},
-        ignore = {'.git', 'node_modules', '.cache', '.vscode'},
-        hide_dotfiles = true,
+        --ignore = {'.git', 'node_modules', '.cache', '.vscode'},
+        --hide_dotfiles = true,
         open_on_tab = false,
         disable_netrw = true,
         hijack_netrw = true,
         update_cwd = false,
         highlight_opened_files = true,
-        auto_ignore_ft = {'startify', 'dashboard'},
+        --auto_ignore_ft = {'startify', 'dashboard'},
         update_focused_file = {
             enable = true,
             update_cwd = false,
@@ -226,7 +226,7 @@ function config.nvim_tree()
         view = {
             width = 25,
             side = 'left',
-            auto_resize = false,
+            --auto_resize = false,
             hide_root_folder = true,
             mappings = {
                 custom_only = true,
