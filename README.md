@@ -54,7 +54,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 # fd for telescope file search engine
 # yarn for markdown preview
 # nerd-fonts-ibm-plex-mono for devicons
-sudo pacman -S git neovim gitui ripgrep fd yarn nerd-fonts-ibm-plex-mono
+sudo pacman -S git neovim gitui ripgrep fd
 
 # mac 
 brew install git gitui ripgrep fd bat fzf sqlite3
@@ -63,15 +63,7 @@ brew install git gitui ripgrep fd bat fzf sqlite3
 pip install neovim --user
 ```
 
-2. Recommended Terminals:
-
-   [alacritty](https://github.com/alacritty/alacritty), [kitty](https://sw.kovidgoyal.net/kitty), [wezterm](https://wezfurlong.org/wezterm/)
-
-```shell
-sudo pacman -S alacritty kitty wezterm
-```
-
-3. Recommended GUI applications:
+2. Recommended GUI applications:
 
    [neovide](https://github.com/Kethku/neovide), [goneovim](https://github.com/akiyosi/goneovim)
 
@@ -80,7 +72,7 @@ paru neovide
 paru goneovim
 ```
 
-4. Tools for plugins
+3. Tools for plugins
 
 - For [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall#usage), you
   need to install corresponding language server use it.
@@ -438,11 +430,3 @@ You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 # Credit
 
 - [glepnir/nvim](https://github.com/glepnir/nvim) as my config organization template.
-
-<a id="todo"></a>
-
-# TODO
-
-- [x] More documentation for how to customize.
-- [x] Backup old compiled configuration when error occurs.
-- [ ] Install script for different distros.
