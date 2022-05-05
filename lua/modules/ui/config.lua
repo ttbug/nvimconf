@@ -194,7 +194,7 @@ function config.nvim_tree()
     vim.g.nvim_tree_root_folder_modifier = ":e"
 	vim.g.nvim_tree_icon_padding = " "
 	vim.g.nvim_tree_symlink_arror = "  "
-	vim.g.nvim_tree_respect_buf_cwd = 1
+	--vim.g.nvim_tree_respect_buf_cwd = 1
 
 	vim.g.nvim_tree_icons = {
 		["default"] = "", --
@@ -232,7 +232,8 @@ function config.nvim_tree()
         disable_netrw = true,
         hijack_netrw = true,
         hijack_cursor = true,
-        update_cwd = true,
+        -- 不自动更新当前buffer
+        update_cwd = false,
         hijack_unnamed_buffer_when_opening = false,
         ignore_buffer_on_setup = false,
         sort_by = "name",
@@ -279,7 +280,8 @@ function config.nvim_tree()
 				global = false,
 			},
 			open_file = {
-				quit_on_open = false,
+                -- 打开文件后自动关闭侧边栏
+				quit_on_open = true,
 				resize_window = false,
 				window_picker = {
 					enable = true,
