@@ -191,7 +191,7 @@ function config.nvim_bufferline()
 end
 
 function config.nvim_tree()
-    vim.g.nvim_tree_root_folder_modifier = ":e"
+    --vim.g.nvim_tree_root_folder_modifier = ":e"
 	vim.g.nvim_tree_icon_padding = " "
 	vim.g.nvim_tree_symlink_arror = "  "
 	--vim.g.nvim_tree_respect_buf_cwd = 1
