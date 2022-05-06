@@ -46,7 +46,7 @@ tools['michaelb/sniprun'] = {
 tools['folke/which-key.nvim'] = {
     opt = true,
     keys = ",",
-    config = function() require("which-key").setup {} end
+    config = conf.which_key
 }
 tools['folke/trouble.nvim'] = {
     opt = true,

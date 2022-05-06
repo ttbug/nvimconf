@@ -38,6 +38,7 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
 }
 ui['akinsho/bufferline.nvim'] = {
     opt = true,
+    tag = "*",
     event = 'BufRead',
     config = conf.nvim_bufferline
 }
