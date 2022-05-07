@@ -72,6 +72,7 @@ local plug_map = {
     ["t|<A-d>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap()
         :with_silent(),
     ["n|<Leader>g"] = map_cu("Gitui"):with_noremap():with_silent(),
+    ["n|<Leader>t"] = map_cu("Tigui"):with_noremap():with_silent(),
     -- Plugin trouble
     ["n|gt"] = map_cr('TroubleToggle'):with_noremap():with_silent(),
     ["n|gR"] = map_cr('TroubleToggle lsp_references'):with_noremap()
