@@ -6,6 +6,12 @@ tools["aspeddro/gitui.nvim"] = {
     opt = false,
     config = function() require("gitui").setup {} end
 }
+
+tools["ttbug/tig.nvim"] = {
+    opt = false,
+    config = function() require("tig").setup{} end
+}
+
 tools['nvim-telescope/telescope.nvim'] = {
     opt = true,
     cmd = 'Telescope',
