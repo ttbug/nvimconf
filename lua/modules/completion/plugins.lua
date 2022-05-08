@@ -9,10 +9,11 @@ completion['neovim/nvim-lspconfig'] = {
 completion['williamboman/nvim-lsp-installer'] = {opt = true, after = 'nvim-lspconfig'}
 
 
-completion["RishabhRD/nvim-lsputils"] = {
+completion["kevinhwang91/nvim-bqf"] = {
     opt = true,
-    after = "nvim-lspconfig",
-    config = conf.nvim_lsputils
+    --after = "nvim-lspconfig",
+    ft = "qf",
+    config = conf.bqf,
 }
 completion['tami5/lspsaga.nvim'] = {
     opt = true,
