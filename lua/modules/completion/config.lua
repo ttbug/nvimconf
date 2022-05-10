@@ -287,7 +287,7 @@ function config.bqf()
 		},
 		-- make `drop` and `tab drop` to become preferred
 		func_map = {
-			drop = "o",
+			drop = "q",
 			openc = "O",
 			split = "<C-s>",
 			tabdrop = "<C-t>",
