@@ -17,8 +17,47 @@ function config.cmp()
                        col, col):match("%s") == nil
     end
 
+    local border = function(hl)
+		return {
+			{ "╭", hl },
+			{ "─", hl },
+			{ "╮", hl },
+			{ "│", hl },
+			{ "╯", hl },
+			{ "─", hl },
+			{ "╰", hl },
+			{ "│", hl },
+		}
+	end
+
+	local cmp_window = require("cmp.utils.window")
+
+	function cmp_window:has_scrollbar()
+		return false
+	end
+
     local cmp = require('cmp')
     cmp.setup ({
+        window = {
+			completion = {
+				border = border("CmpBorder"),
+			},
+			documentation = {
+				border = border("CmpDocBorder"),
+			},
+		},
+        sorting = {
+			comparators = {
+				cmp.config.compare.offset,
+				cmp.config.compare.exact,
+				cmp.config.compare.score,
+				require("cmp-under-comparator").under,
+				cmp.config.compare.kind,
+				cmp.config.compare.sort_text,
+				cmp.config.compare.length,
+				cmp.config.compare.order,
+			},
+		},
         formatting = {
             format = function(entry, vim_item)
                 local lspkind_icons = {
