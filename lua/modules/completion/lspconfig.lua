@@ -147,24 +147,24 @@ end
 
 
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
-	if server.name == "gopls" then
-		nvim_lsp.gopls.setup({
-			on_attach = custom_attach,
-			flags = { debounce_text_changes = 500 },
-			capabilities = capabilities,
-			settings = {
-				gopls = {
-					usePlaceholders = true,
-					analyses = {
-						nilness = true,
-						shadow = true,
-						unusedparams = true,
-						unusewrites = true,
-					},
-				},
-			},
-		})
-	elseif server.name == "sumneko_lua" then
+	--if server.name == "gopls" then
+	--	nvim_lsp.gopls.setup({
+	--		on_attach = custom_attach,
+	--		flags = { debounce_text_changes = 500 },
+	--		capabilities = capabilities,
+	--		settings = {
+	--			gopls = {
+	--				usePlaceholders = true,
+	--				analyses = {
+	--					nilness = true,
+	--					shadow = true,
+	--					unusedparams = true,
+	--					unusewrites = true,
+	--				},
+	--			},
+	--		},
+	--	})
+	if server.name == "sumneko_lua" then
 		nvim_lsp.sumneko_lua.setup({
 			capabilities = capabilities,
 			on_attach = function(client)

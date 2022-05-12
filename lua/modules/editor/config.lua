@@ -81,8 +81,9 @@ function config.nvim_treesitter()
 			"python",
 			"rust",
 			"html",
+            "javascript",
 		},
-        ignore_install = { "javascript","beancount", "bibtex", "c_sharp","clojure","commonlisp", "cuda", "dart", "devicetree", "dot","elixir","erlang","fennel","fish","Godot","Glimmer and Ember", "graphql","hcl","heex","julia","ledger","nix","ocaml","ocaml_interface","php","pioasm","ql","r","ruby","sparql","supercollider","surface","svelte","teal", "tlaplus","tsx","turtle","verilog","yang","zig"},
+        ignore_install = { "beancount", "bibtex", "c_sharp","clojure","commonlisp", "cuda", "dart", "devicetree", "dot","elixir","erlang","fennel","fish","Godot","Glimmer and Ember", "graphql","hcl","heex","julia","ledger","nix","ocaml","ocaml_interface","php","pioasm","ql","r","ruby","sparql","supercollider","surface","svelte","teal", "tlaplus","tsx","turtle","verilog","yang","zig"},
         highlight = {enable = true, disable = {'vim'}},
         textobjects = {
             select = {
