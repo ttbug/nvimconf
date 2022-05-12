@@ -77,6 +77,7 @@ function autocmd.load_autocmds()
             {"BufNewFile,BufRead", "*.toml", " setf toml"},
             {"FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0"},
             {"FileType", "c,cpp,go,rust", "setlocal tabstop=4"}, 
+            { "FileType", "alpha", "set showtabline=0" },
            -- {
            --     "FileType", "dashboard",
            --     "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"
