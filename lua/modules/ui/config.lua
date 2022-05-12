@@ -434,4 +434,56 @@ function config.tokyonight()
     vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 end
 
+function config.alpha()
+	local alpha = require("alpha")
+	local dashboard = require("alpha.themes.dashboard")
+
+	dashboard.section.header.val = {
+        [[             \                  /               ]],
+        [[    _________))                ((__________     ]],
+        [[   /.-------./\\    \    /    //\.--------.\    ]],
+        [[  //#######//##\\   ))  ((   //##\\########\\   ]],
+        [[ //#######//###((  ((    ))  ))###\\########\\  ]],
+        [[((#######((#####\\  \\  //  //#####))########)) ]],
+        [[ \##' `###\######\\  \)(/  //######/####' `##/  ]],
+        [[  )'    ``#)'  `##\`->oo<-'/##'  `(#''     `(   ]],
+        [[          (       ``\`..'/''       )            ]],
+        [[                     \""(                       ]],
+        [[                      `- )                      ]],
+        [[                      / /                       ]],
+        [[                     ( /\                       ]],
+        [[                     /\| \                      ]],
+        [[                    (  \                        ]],
+        [[                        )                       ]],
+        [[                       /                        ]],
+        [[                      (                         ]],
+        [[                      `                         ]]
+	}
+	dashboard.section.buttons.val = {
+		dashboard.button("comma s c", " Scheme change"),
+		dashboard.button("comma f r", " File frecency"),
+		dashboard.button("comma f e", " File history"),
+		dashboard.button("comma f e", " Project find"),
+		dashboard.button("comma f f", " File find"),
+		dashboard.button("comma f n", " File new"),
+		dashboard.button("comma f w", " Word find"),
+	}
+	local function footer()
+		local total_plugins = #vim.tbl_keys(packer_plugins)
+		return "   Have Fun with neovim"
+			.. "   v"
+			.. vim.version().major
+			.. "."
+			.. vim.version().minor
+			.. "."
+			.. vim.version().patch
+			.. "   "
+			.. total_plugins
+			.. " plugins"
+	end
+	dashboard.section.footer.val = footer()
+
+	alpha.setup(dashboard.opts)
+end
+
 return config
