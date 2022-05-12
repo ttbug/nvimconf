@@ -61,7 +61,7 @@ editor['andymass/vim-matchup'] = {
 }
 -- editor['rhysd/accelerated-jk'] = {opt = true}
 -- editor['hrsh7th/vim-eft'] = {opt = true}
-editor["rhysd/accelerated-jk"] = { opt = true, event = "BufReadPost" }
+editor["rhysd/accelerated-jk"] = { opt = true, event = "BufWinEnter" }
 editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
 editor['romainl/vim-cool'] = {
     opt = true,
