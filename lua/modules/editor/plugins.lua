@@ -2,11 +2,6 @@ local editor = {}
 local conf = require('modules.editor.config')
 
 editor['junegunn/vim-easy-align'] = {opt = true, cmd = 'EasyAlign'}
---editor['itchyny/vim-cursorword'] = {
---    opt = true,
---    event = {'BufReadPre', 'BufNewFile'},
---    config = conf.vim_cursorwod
---}
 editor['terrortylor/nvim-comment'] = {
     opt = false,
     config = function() require('nvim_comment').setup({
@@ -30,10 +25,6 @@ editor['nvim-treesitter/nvim-treesitter-textobjects'] = {
     opt = true,
     after = 'nvim-treesitter'
 }
---editor['romgrk/nvim-treesitter-context'] = {
---    opt = true,
---    after = 'nvim-treesitter'
---}
 editor['p00f/nvim-ts-rainbow'] = {
     opt = true,
     after = 'nvim-treesitter',
@@ -59,8 +50,6 @@ editor['andymass/vim-matchup'] = {
     after = 'nvim-treesitter',
     config = conf.matchup
 }
--- editor['rhysd/accelerated-jk'] = {opt = true}
--- editor['hrsh7th/vim-eft'] = {opt = true}
 editor["rhysd/accelerated-jk"] = { opt = true, event = "BufWinEnter" }
 editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
 editor['romainl/vim-cool'] = {
@@ -73,7 +62,6 @@ editor['karb94/neoscroll.nvim'] = {
     event = "WinScrolled",
     config = conf.neoscroll
 }
--- editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
 editor['akinsho/toggleterm.nvim'] = {
     opt = true,
     event = 'BufRead',
@@ -128,12 +116,5 @@ editor['theHamsta/nvim-dap-virtual-text'] = {
     cmd = {'DapVirtualTextEnable', 'DapVirtualTextDisable'},
     config = conf.dap_virtual_text
 }
-
---editor["VonHeikemen/fine-cmdline.nvim"] = {
---    opt = true,
---    event = "BufWinEnter",
---    config = conf.cmdline,
---    requires = {"MunifTanjim/nui.nvim", opt = true}
---}
 
 return editor

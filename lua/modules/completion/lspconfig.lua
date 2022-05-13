@@ -285,7 +285,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 		nvim_lsp[server.name].setup({
 			capabilities = capabilities,
 			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
+				client.server_capabilities.document_formatting = false
 				custom_attach(client)
 			end,
 		})
