@@ -48,11 +48,6 @@ function autocmd.load_autocmds()
 				"*",
 				[[++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
 			},
-            {
-				"BufReadPost",
-				"*.*",
-				[[:e]],
-			},
             -- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
             -- {"BufCreate", "*", ":silent !fcitx5-remote -c"},
             -- {"BufEnter", "*", ":silent !fcitx5-remote -c "},
