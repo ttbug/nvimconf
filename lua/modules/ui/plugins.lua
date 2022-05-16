@@ -48,13 +48,13 @@ ui['akinsho/bufferline.nvim'] = {
     config = conf.nvim_bufferline
 }
 
-ui["petertriho/nvim-scrollbar"] = {
-	opt = true,
-	event = "BufRead",
-	config = function()
-		require("scrollbar").setup()
-	end,
-}
+--ui["petertriho/nvim-scrollbar"] = {
+--	opt = true,
+--	event = "BufRead",
+--	config = function()
+--		require("scrollbar").setup()
+--	end,
+--}
 --ui['folke/zen-mode.nvim'] = {
 --    opt = true,
 --    cmd = 'ZenMode',
@@ -65,5 +65,13 @@ ui["petertriho/nvim-scrollbar"] = {
 --    cmd = {'Twilight', 'TwilightEnable'},
 --    config = conf.twilight
 --}
+
+ui["dstein64/nvim-scrollview"] = {
+    opt=true,
+    event = { "BufRead" },
+    config = function()
+        require("scrollview").setup({})
+    end,
+}
 
 return ui
