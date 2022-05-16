@@ -2,18 +2,32 @@ local editor = {}
 local conf = require('modules.editor.config')
 
 editor['junegunn/vim-easy-align'] = {opt = true, cmd = 'EasyAlign'}
-editor['terrortylor/nvim-comment'] = {
-    opt = false,
-    config = function() require('nvim_comment').setup({
-        hook = function()
-            require("ts_context_commentstring.internal").update_commentstring()
-        end,
-    }) end
+editor["RRethy/vim-illuminate"] = {
+	event = "BufRead",
+	config = function()
+		vim.g.Illuminate_highlightUnderCursor = 0
+		vim.g.Illuminate_ftblacklist = {
+			"help",
+			"dashboard",
+			"alpha",
+			"packer",
+			"norg",
+			"DoomInfo",
+			"NvimTree",
+			"Outline",
+			"toggleterm",
+		}
+	end,
 }
-editor['simrat39/symbols-outline.nvim'] = {
-    opt = true,
-    cmd = {'SymbolsOutline', 'SymbolsOulineOpen'},
-    config = conf.symbols_outline
+editor["terrortylor/nvim-comment"] = {
+	opt = false,
+	config = function()
+		require("nvim_comment").setup({
+			hook = function()
+				require("ts_context_commentstring.internal").update_commentstring()
+			end,
+		})
+	end,
 }
 editor['nvim-treesitter/nvim-treesitter'] = {
     opt = true,
@@ -34,12 +48,10 @@ editor['JoosepAlviste/nvim-ts-context-commentstring'] = {
     opt = true,
     after = 'nvim-treesitter'
 }
-editor['SmiteshP/nvim-gps'] = {
-    opt = true,
-    after = 'nvim-treesitter',
-    config = conf.nvim_gps
+editor["mfussenegger/nvim-ts-hint-textobject"] = {
+	opt = true,
+	after = "nvim-treesitter",
 }
-editor['sbdchd/neoformat'] = {opt = true, cmd = 'Neoformat'}
 editor['windwp/nvim-ts-autotag'] = {
     opt = true,
     ft = {'html', 'xml'},
@@ -56,6 +68,15 @@ editor['romainl/vim-cool'] = {
     opt = true,
     event = {'CursorMoved', 'InsertEnter'}
 }
+
+editor["phaazon/hop.nvim"] = {
+	opt = true,
+	branch = "v1",
+	event = "BufReadPost",
+	config = function()
+		require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+	end,
+}
 editor['easymotion/vim-easymotion'] = {opt = true, config = conf.easymotion}
 editor['karb94/neoscroll.nvim'] = {
     opt = true,
@@ -67,11 +88,13 @@ editor['akinsho/toggleterm.nvim'] = {
     event = 'BufRead',
     config = conf.toggleterm
 }
+editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
 editor['norcalli/nvim-colorizer.lua'] = {
     opt = true,
     event = 'BufRead',
     config = conf.nvim_colorizer
 }
+editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufRead" }
 editor['rmagatti/auto-session'] = {
     opt = true,
     cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
@@ -93,28 +116,33 @@ editor['rcarriga/nvim-dap-ui'] = {
         }
     }
 }
-
-editor["sindrets/diffview.nvim"] = {
+editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
+editor["famiu/bufdelete.nvim"] = {
 	opt = true,
-	cmd = { "DiffviewOpen" },
-    require = {'nvim-lua/plenary.nvim'}
+	cmd = { "Bdelete", "Bwipeout", "Bdelete!", "Bwipeout!" },
 }
 
-editor["RRethy/vim-illuminate"] = {
-    event = "BufRead",
-    config = function()
-        vim.g.Illuminate_highlightUnderCursor = 0
-        vim.g.Illuminate_ftblacklist = {
-            "help", "dashboard", "alpha", "packer", "norg", "DoomInfo",
-            "NvimTree", "Outline", "toggleterm",
-        }
-    end
+editor["edluffy/specs.nvim"] = {
+	opt = true,
+	event = "CursorMoved",
+	config = conf.specs,
+}
+editor["abecodes/tabout.nvim"] = {
+	opt = true,
+	event = "InsertEnter",
+	wants = "nvim-treesitter",
+	after = "nvim-cmp",
+	config = conf.tabout,
 }
 
 editor['theHamsta/nvim-dap-virtual-text'] = {
     opt = true,
     cmd = {'DapVirtualTextEnable', 'DapVirtualTextDisable'},
     config = conf.dap_virtual_text
+}
+editor["sindrets/diffview.nvim"] = {
+	opt = true,
+	cmd = { "DiffviewOpen" },
 }
 
 return editor

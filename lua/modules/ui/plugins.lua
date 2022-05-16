@@ -1,19 +1,29 @@
 local ui = {}
-local conf = require('modules.ui.config')
+local conf = require("modules.ui.config")
 
 ui['kyazdani42/nvim-web-devicons'] = {opt = false}
---ui['sainnhe/edge'] = {opt = false, config = conf.edge}
---ui["rebelot/kanagawa.nvim"] = {opt = false, config = conf.kanagawa}
+ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
+ui["sainnhe/edge"] = { opt = false, config = conf.edge }
 ui['folke/tokyonight.nvim'] = {opt = false, config = conf.tokyonight}
 --ui["catppuccin/nvim"] = {
 --    opt = false,
 --    as = "catppuccin",
 --    config = conf.catppuccin
 --}
+ui["rcarriga/nvim-notify"] = {
+	opt = false,
+	config = conf.notify,
+}
 ui['hoob3rt/lualine.nvim'] = {
     opt = true,
     after = 'lualine-lsp-progress',
     config = conf.lualine
+}
+
+ui["SmiteshP/nvim-gps"] = {
+	opt = true,
+	after = "nvim-treesitter",
+	config = conf.nvim_gps,
 }
 ui['arkav/lualine-lsp-progress'] = {
     opt = true,
@@ -25,10 +35,10 @@ ui["goolord/alpha-nvim"] = {
 	event = "BufWinEnter",
 	config = conf.alpha,
 }
-ui['kyazdani42/nvim-tree.lua'] = {
-    opt = true,
-    cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
-    config = conf.nvim_tree
+ui["kyazdani42/nvim-tree.lua"] = {
+	opt = true,
+	cmd = { "NvimTreeToggle" },
+	config = conf.nvim_tree,
 }
 ui['lewis6991/gitsigns.nvim'] = {
     opt = true,
@@ -47,31 +57,16 @@ ui['akinsho/bufferline.nvim'] = {
     event = 'BufRead',
     config = conf.nvim_bufferline
 }
-
---ui["petertriho/nvim-scrollbar"] = {
---	opt = true,
---	event = "BufRead",
---	config = function()
---		require("scrollbar").setup()
---	end,
---}
---ui['folke/zen-mode.nvim'] = {
---    opt = true,
---    cmd = 'ZenMode',
---    config = conf.zen_mode
---}
---ui['folke/twilight.nvim'] = {
---    opt = true,
---    cmd = {'Twilight', 'TwilightEnable'},
---    config = conf.twilight
---}
-
 ui["dstein64/nvim-scrollview"] = {
     opt=true,
     event = { "BufRead" },
     config = function()
         require("scrollview").setup({})
     end,
+}
+ui["mbbill/undotree"] = {
+	opt = true,
+	cmd = "UndotreeToggle",
 }
 
 return ui

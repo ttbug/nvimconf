@@ -1,25 +1,23 @@
---if not packer_plugins['nvim-lspconfig'].loaded then
---    vim.cmd [[packadd nvim-lspconfig]]
---end
 local formatting = require("modules.completion.formatting")
 
-vim.cmd [[packadd lspsaga.nvim]]
-vim.cmd [[packadd nvim-lsp-installer]]
-vim.cmd [[packadd lsp_signature.nvim]]
+vim.cmd([[packadd nvim-lsp-installer]])
+vim.cmd([[packadd lsp_signature.nvim]])
+vim.cmd([[packadd lspsaga.nvim]])
 vim.cmd([[packadd cmp-nvim-lsp]])
+vim.cmd([[packadd aerial.nvim]])
 vim.cmd([[packadd vim-illuminate]])
 
-local nvim_lsp = require('lspconfig')
--- local lsp_install = require('lspinstall')
+local nvim_lsp = require("lspconfig")
 local saga = require("lspsaga")
-local lsp_installer = require('nvim-lsp-installer')
+local lsp_installer = require("nvim-lsp-installer")
 
-saga.init_lsp_saga {
-    error_sign = '',
-    warn_sign = '',
-    hint_sign = '',
-    infor_sign = ''
-}
+-- Override diagnostics symbol
+saga.init_lsp_saga({
+	error_sign = "",
+	warn_sign = "",
+	hint_sign = "",
+	infor_sign = "",
+})
 
 lsp_installer.settings {
     ui = {
@@ -32,56 +30,43 @@ lsp_installer.settings {
 }
 
 lsp_installer.setup({})
--- local saga = require('lspsaga')
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
--- saga.init_lsp_saga({code_action_icon = '💡'})
-
---capabilities.textDocument.completion.completionItem.documentationFormat = {
---    'markdown', 'plaintext'
---}
---capabilities.textDocument.completion.completionItem.snippetSupport = true
---capabilities.textDocument.completion.completionItem.preselectSupport = true
---capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
---capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
---capabilities.textDocument.completion.completionItem.deprecatedSupport = true
---capabilities.textDocument.completion.completionItem.commitCharactersSupport =
---    true
---capabilities.textDocument.completion.completionItem.tagSupport = {
---    valueSet = {1}
---}
---capabilities.textDocument.completion.completionItem.resolveSupport = {
---    properties = {'documentation', 'detail', 'additionalTextEdits'}
---}
-
 
 local function custom_attach(client)
-    require('lsp_signature').on_attach({
-        bind = true,
-        use_lspsaga = false,
-        floating_window = true,
-        fix_pos = true,
-        hint_enable = true,
-        hi_parameter = "Search",
-        handler_opts = {"double"}
-    })
-
-    require("illuminate").on_attach(client)
+	require("lsp_signature").on_attach({
+		bind = true,
+		use_lspsaga = false,
+		floating_window = true,
+		fix_pos = true,
+		hint_enable = true,
+		hi_parameter = "Search",
+		handler_opts = { "double" },
+	})
+	require("aerial").on_attach(client)
+	require("illuminate").on_attach(client)
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
-    bufnr = nvim_lsp.util.validate_bufnr(bufnr)
-    local params = {uri = vim.uri_from_bufnr(bufnr)}
-    vim.lsp.buf_request(bufnr, 'textDocument/switchSourceHeader', params,
-                        function(err, result)
-        if err then error(tostring(err)) end
-        if not result then
-            print("Corresponding file can’t be determined")
-            return
-        end
-        vim.api.nvim_command(splitcmd .. ' ' .. vim.uri_to_fname(result))
-    end)
+	bufnr = nvim_lsp.util.validate_bufnr(bufnr)
+	local clangd_client = nvim_lsp.util.get_active_client_by_name(bufnr, "clangd")
+	local params = { uri = vim.uri_from_bufnr(bufnr) }
+	if clangd_client then
+		clangd_client.request("textDocument/switchSourceHeader", params, function(err, result)
+			if err then
+				error(tostring(err))
+			end
+			if not result then
+				print("Corresponding file can’t be determined")
+				return
+			end
+			vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
+		end)
+	else
+		print("method textDocument/switchSourceHeader is not supported by any servers active on the current buffer")
+	end
 end
 
 -- Override server settings here
@@ -93,6 +78,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 			on_attach = custom_attach,
 			flags = { debounce_text_changes = 500 },
 			capabilities = capabilities,
+			--cmd = { "gopls", "-remote=auto" },
 			settings = {
 				gopls = {
 					usePlaceholders = true,
@@ -108,13 +94,10 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
     elseif server.name == "sumneko_lua" then
 		nvim_lsp.sumneko_lua.setup({
 			capabilities = capabilities,
-			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				custom_attach(client)
-			end,
+			on_attach = custom_attach,
 			settings = {
 				Lua = {
-					diagnostics = { globals = { "vim" } },
+					diagnostics = { globals = { "vim", "packer_plugins" } },
 					workspace = {
 						library = {
 							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -128,15 +111,12 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 			},
 		})
 	elseif server.name == "clangd" then
-        local copy_capabilities = capabilities
+		local copy_capabilities = capabilities
 		copy_capabilities.offsetEncoding = { "utf-16" }
 		nvim_lsp.clangd.setup({
 			capabilities = copy_capabilities,
 			single_file_support = true,
-			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				custom_attach(client)
-			end,
+			on_attach = custom_attach,
 			args = {
 				"--background-index",
 				"-std=c++20",
@@ -166,7 +146,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 			},
 		})
 	elseif server.name == "jsonls" then
-        nvim_lsp.jsonls.setup({
+		nvim_lsp.jsonls.setup({
 			flags = { debounce_text_changes = 500 },
 			capabilities = capabilities,
 			on_attach = custom_attach,
@@ -225,10 +205,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 	else
 		nvim_lsp[server.name].setup({
 			capabilities = capabilities,
-			on_attach = function(client)
-				client.server_capabilities.document_formatting = false
-				custom_attach(client)
-			end,
+			on_attach = custom_attach,
 		})
 	end
 end

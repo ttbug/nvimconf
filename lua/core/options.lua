@@ -1,15 +1,15 @@
-local global = require('core.global')
+local global = require("core.global")
 
 local function bind_option(options)
-    for k, v in pairs(options) do
-        if v == true then
-            vim.cmd('set ' .. k)
-        elseif v == false then
-            vim.cmd('set no' .. k)
-        else
-            vim.cmd('set ' .. k .. '=' .. v)
-        end
-    end
+	for k, v in pairs(options) do
+		if v == true then
+			vim.cmd("set " .. k)
+		elseif v == false then
+			vim.cmd("set no" .. k)
+		else
+			vim.cmd("set " .. k .. "=" .. v)
+		end
+	end
 end
 
 local function load_options()
@@ -31,11 +31,10 @@ local function load_options()
         backup = false,
         writebackup = false,
         swapfile = false,
-        directory = global.cache_dir .. "swag/",
         undodir = global.cache_dir .. "undo/",
-        backupdir = global.cache_dir .. "backup/",
-        viewdir = global.cache_dir .. "view/",
-        spellfile = global.cache_dir .. "spell/en.uft-8.add",
+		-- backupdir = global.cache_dir .. "backup/",
+		-- viewdir = global.cache_dir .. "view/",
+		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
         history = 2000,
         shada = "!,'300,<50,@100,s10,h",
         backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
@@ -100,7 +99,7 @@ local function load_options()
         synmaxcol = 2500,
         formatoptions = "1jcroql",
         textwidth = 80,
-        expandtab = true,
+		expandtab = false,
         autoindent = true,
         tabstop = 4,
         shiftwidth = 4,
