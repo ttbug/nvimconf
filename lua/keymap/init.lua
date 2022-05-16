@@ -143,7 +143,7 @@ local plug_map = {
     ["n|<leader><leader>t"] = map_cr('Twilight'):with_noremap():with_silent(),
     -- Plugin SymbolOutline
     --["n|<A-t>"] = map_cr('SymbolsOutline'):with_noremap():with_silent(),
-    ["n|<A-t>"] = map_cr("AerialToggle"):with_noremap():with_silent(),
+    ["n|<C-t>"] = map_cr("AerialToggle"):with_noremap():with_silent(),
     -- Plugin split-term
     ["n|<F5>"] = map_cr('Term'):with_noremap():with_silent(),
     ["n|<C-w>t"] = map_cr('Term'):with_noremap():with_silent(),
