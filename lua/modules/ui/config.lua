@@ -1,12 +1,16 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=dark]]
+    --vim.cmd [[set background=dark]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
     vim.g.edge_show_eob = 1
     vim.g.edge_better_performance = 1
+    vim.g.nord_italic = true
+    vim.g.nord_cursorline_transparent = true
+	vim.g.nord_disable_background = false
+	vim.g.nord_enable_sidebar_background = true
 end
 
 function config.catppuccin()
@@ -379,8 +383,8 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-    vim.opt.termguicolors = true
-    vim.opt.list = true
+    --vim.opt.termguicolors = true
+    --vim.opt.list = true
     -- vim.opt.listchars:append("space:⋅")
     require("indent_blankline").setup {
         char = "│",
