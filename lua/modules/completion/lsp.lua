@@ -1,10 +1,13 @@
 --if not packer_plugins['nvim-lspconfig'].loaded then
 --    vim.cmd [[packadd nvim-lspconfig]]
 --end
+local formatting = require("modules.completion.formatting")
 
 vim.cmd [[packadd lspsaga.nvim]]
 vim.cmd [[packadd nvim-lsp-installer]]
 vim.cmd [[packadd lsp_signature.nvim]]
+vim.cmd([[packadd cmp-nvim-lsp]])
+vim.cmd([[packadd aerial.nvim]])
 vim.cmd([[packadd vim-illuminate]])
 
 local nvim_lsp = require('lspconfig')
@@ -32,88 +35,27 @@ lsp_installer.settings {
 lsp_installer.setup({})
 -- local saga = require('lspsaga')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- saga.init_lsp_saga({code_action_icon = '💡'})
 
-capabilities.textDocument.completion.completionItem.documentationFormat = {
-    'markdown', 'plaintext'
-}
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport =
-    true
-capabilities.textDocument.completion.completionItem.tagSupport = {
-    valueSet = {1}
-}
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {'documentation', 'detail', 'additionalTextEdits'}
-}
+--capabilities.textDocument.completion.completionItem.documentationFormat = {
+--    'markdown', 'plaintext'
+--}
+--capabilities.textDocument.completion.completionItem.snippetSupport = true
+--capabilities.textDocument.completion.completionItem.preselectSupport = true
+--capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+--capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+--capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+--capabilities.textDocument.completion.completionItem.commitCharactersSupport =
+--    true
+--capabilities.textDocument.completion.completionItem.tagSupport = {
+--    valueSet = {1}
+--}
+--capabilities.textDocument.completion.completionItem.resolveSupport = {
+--    properties = {'documentation', 'detail', 'additionalTextEdits'}
+--}
 
--- local function setup_servers()
---     lsp_install.setup()
---     local servers = lsp_install.installed_servers()
---     for _, lsp in pairs(servers) do
---         if lsp == "lua" then
---             nvim_lsp[lsp].setup {
---                 capabilities = capabilities,
---                 flags = {debounce_text_changes = 500},
---                 settings = {
---                     Lua = {
---                         diagnostics = {globals = {"vim", "packer_plugins"}},
---                         workspace = {
---                             library = {
---                                 [vim.fn.expand "$VIMRUNTIME/lua"] = true,
---                                 [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
---                             },
---                             maxPreload = 100000,
---                             preloadFileSize = 10000
---                         },
---                         telemetry = {enable = false}
---                     }
---                 },
---                 on_attach = function()
---                     require('lsp_signature').on_attach({
---                         bind = true,
---                         use_lspsaga = false,
---                         floating_window = true,
---                         fix_pos = true,
---                         hint_enable = true,
---                         hi_parameter = "Search",
---                         handler_opts = {"double"},
---                         zindex = 50,
---                         transpancy = 20
---                     })
---                 end
---             }
---         else
---             nvim_lsp[lsp].setup {
---                 capabilities = capabilities,
---                 flags = {debounce_text_changes = 500},
---                 on_attach = function()
---                     require('lsp_signature').on_attach({
---                         bind = true,
---                         use_lspsaga = false,
---                         floating_window = true,
---                         fix_pos = true,
---                         hint_enable = true,
---                         hi_parameter = "Search",
---                         handler_opts = {"double"}
---                     })
---                 end
---             }
---         end
---     end
--- end
-
--- lsp_install.post_install_hook = function()
---     setup_servers() -- reload installed servers
---     vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
--- end
-
--- setup_servers()
 
 local function custom_attach(client)
     require('lsp_signature').on_attach({
@@ -126,6 +68,7 @@ local function custom_attach(client)
         handler_opts = {"double"}
     })
 
+    require("aerial").on_attach(client)
     require("illuminate").on_attach(client)
 end
 
@@ -152,6 +95,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 			on_attach = custom_attach,
 			flags = { debounce_text_changes = 500 },
 			capabilities = capabilities,
+            cmd = { "gopls", "-remote=auto" },
 			settings = {
 				gopls = {
 					usePlaceholders = true,
@@ -293,50 +237,80 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 end
 
 
+-- https://github.com/vscode-langservers/vscode-html-languageserver-bin
 
---lsp_installer.on_server_ready(function(server)
---    local opts = {}
---
---    if (server.name == "sumneko_lua") then
---        opts.settings = {
---            Lua = {
---                diagnostics = {globals = {"vim", "packer_plugins"}},
---                workspace = {
---                    library = {
---                        [vim.fn.expand "$VIMRUNTIME/lua"] = true,
---                        [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
---                    },
---                    maxPreload = 100000,
---                    preloadFileSize = 10000
---                },
---                telemetry = {enable = false}
---            }
---        }
---    elseif (server.name == "clangd") then
---        opts.commands = {
---            ClangdSwitchSourceHeader = {
---                function()
---                    switch_source_header_splitcmd(0, "edit")
---                end,
---                description = "Open source/header in current buffer"
---            },
---            ClangdSwitchSourceHeaderVSplit = {
---                function()
---                    switch_source_header_splitcmd(0, "vsplit")
---                end,
---                description = "Open source/header in a new vsplit"
---            },
---            ClangdSwitchSourceHeaderSplit = {
---                function()
---                    switch_source_header_splitcmd(0, "split")
---                end,
---                description = "Open source/header in a new split"
---            }
---        }
---    end
---    opts.capabilities = capabilities
---    opts.flags = {debounce_text_changes = 500}
---    opts.on_attach = custom_attach
---
---    server:setup(opts)
---end)
+nvim_lsp.html.setup({
+	cmd = { "html-languageserver", "--stdio" },
+	filetypes = { "html" },
+	init_options = {
+		configurationSection = { "html", "css", "javascript" },
+		embeddedLanguages = { css = true, javascript = true },
+	},
+	settings = {},
+	single_file_support = true,
+	flags = { debounce_text_changes = 500 },
+	capabilities = capabilities,
+	on_attach = custom_attach,
+})
+
+local efmls = require("efmls-configs")
+
+-- Init `efm-langserver` here.
+
+efmls.init({
+	on_attach = custom_attach,
+	capabilities = capabilities,
+	init_options = { documentFormatting = true, codeAction = true },
+})
+
+-- Require `efmls-configs-nvim`'s config here
+
+local vint = require("efmls-configs.linters.vint")
+local clangtidy = require("efmls-configs.linters.clang_tidy")
+local eslint = require("efmls-configs.linters.eslint")
+local flake8 = require("efmls-configs.linters.flake8")
+local shellcheck = require("efmls-configs.linters.shellcheck")
+
+local black = require("efmls-configs.formatters.black")
+local luafmt = require("efmls-configs.formatters.stylua")
+local clangfmt = require("efmls-configs.formatters.clang_format")
+local prettier = require("efmls-configs.formatters.prettier")
+local shfmt = require("efmls-configs.formatters.shfmt")
+
+-- Add your own config for formatter and linter here
+
+-- local rustfmt = require("modules.completion.efm.formatters.rustfmt")
+
+-- Override default config here
+
+flake8 = vim.tbl_extend("force", flake8, {
+	prefix = "flake8: max-line-length=160, ignore F403 and F405",
+	lintStdin = true,
+	lintIgnoreExitCode = true,
+	lintFormats = { "%f:%l:%c: %t%n%n%n %m" },
+	lintCommand = "flake8 --max-line-length 160 --extend-ignore F403,F405 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
+})
+
+-- Setup formatter and linter for efmls here
+
+efmls.setup({
+	vim = { formatter = vint },
+	lua = { formatter = luafmt },
+	c = { formatter = clangfmt, linter = clangtidy },
+	cpp = { formatter = clangfmt, linter = clangtidy },
+	python = { formatter = black },
+	vue = { formatter = prettier },
+	typescript = { formatter = prettier, linter = eslint },
+	javascript = { formatter = prettier, linter = eslint },
+	typescriptreact = { formatter = prettier, linter = eslint },
+	javascriptreact = { formatter = prettier, linter = eslint },
+	yaml = { formatter = prettier },
+	html = { formatter = prettier },
+	css = { formatter = prettier },
+	scss = { formatter = prettier },
+	sh = { formatter = shfmt, linter = shellcheck },
+	markdown = { formatter = prettier },
+	-- rust = {formatter = rustfmt},
+})
+
+formatting.configure_format_on_save()

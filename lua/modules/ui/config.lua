@@ -1,12 +1,16 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=dark]]
+    --vim.cmd [[set background=dark]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
     vim.g.edge_show_eob = 1
     vim.g.edge_better_performance = 1
+    vim.g.nord_italic = true
+    vim.g.nord_cursorline_transparent = true
+	vim.g.nord_disable_background = false
+	vim.g.nord_enable_sidebar_background = true
 end
 
 function config.catppuccin()
@@ -69,6 +73,15 @@ function config.lualine()
         end
     end
 
+    local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
+
     local simple_sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "filetype" },
@@ -102,6 +115,10 @@ function config.lualine()
         sections = simple_sections,
 		filetypes = { "dapui_watches" },
 	}
+    local aerial = {
+    	sections = mini_sections,
+    	filetypes = { "aerial" },
+    }
 
 
     require('lualine').setup {
@@ -152,6 +169,7 @@ function config.lualine()
 			dapui_breakpoints,
 			dapui_stacks,
 			dapui_watches,
+            aerial,
         }
     }
 end
@@ -379,8 +397,8 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-    vim.opt.termguicolors = true
-    vim.opt.list = true
+    --vim.opt.termguicolors = true
+    --vim.opt.list = true
     -- vim.opt.listchars:append("space:⋅")
     require("indent_blankline").setup {
         char = "│",
@@ -532,5 +550,37 @@ function config.alpha()
 	}
 	alpha.setup(dashboard.opts)
 end
+
+
+function config.notify()
+	local notify = require("notify")
+	notify.setup({
+		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
+		stages = "slide",
+		---@usage Function called when a new window is opened, use for changing win settings/config
+		on_open = nil,
+		---@usage Function called when a window is closed
+		on_close = nil,
+		---@usage timeout for notifications in ms, default 5000
+		timeout = 2000,
+		-- Render function for notifications. See notify-render()
+		render = "default",
+		---@usage highlight behind the window for stages that change opacity
+		background_colour = "Normal",
+		---@usage minimum width for notification windows
+		minimum_width = 50,
+		---@usage Icons for the different levels
+		icons = {
+			ERROR = "",
+			WARN = "",
+			INFO = "",
+			DEBUG = "",
+			TRACE = "✎",
+		},
+	})
+
+	vim.notify = notify
+end
+
 
 return config
