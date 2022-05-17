@@ -74,9 +74,4 @@ ui["dstein64/nvim-scrollview"] = {
     end,
 }
 
-ui["rcarriga/nvim-notify"] = {
-	opt = false,
-	config = conf.notify,
-}
-
 return ui

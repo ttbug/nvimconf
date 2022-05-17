@@ -95,7 +95,6 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 			on_attach = custom_attach,
 			flags = { debounce_text_changes = 500 },
 			capabilities = capabilities,
-            cmd = { "gopls", "-remote=auto" },
 			settings = {
 				gopls = {
 					usePlaceholders = true,
