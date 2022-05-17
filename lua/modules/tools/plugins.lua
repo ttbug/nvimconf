@@ -1,7 +1,7 @@
 local tools = {}
 local conf = require('modules.tools.config')
 
-tools["RishabhRD/popfix"] = {opt = false}
+--tools["RishabhRD/popfix"] = {opt = false}
 tools["aspeddro/gitui.nvim"] = {
     opt = false,
     config = function() require("gitui").setup {} end
