@@ -84,11 +84,4 @@ tools['folke/todo-comments.nvim'] = {
     requires = {{'nvim-lua/plenary.nvim', opt = true}},
     config = conf.todo,
 }
-
-tools['stevearc/aerial.nvim'] = {
-    opt = true,
-    after = "nvim-lspconfig",
-    config = conf.aerial,
-}
-
 return tools

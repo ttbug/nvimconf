@@ -7,7 +7,6 @@ vim.cmd [[packadd lspsaga.nvim]]
 vim.cmd [[packadd nvim-lsp-installer]]
 vim.cmd [[packadd lsp_signature.nvim]]
 vim.cmd([[packadd cmp-nvim-lsp]])
-vim.cmd([[packadd aerial.nvim]])
 vim.cmd([[packadd vim-illuminate]])
 
 local nvim_lsp = require('lspconfig')
@@ -68,7 +67,6 @@ local function custom_attach(client)
         handler_opts = {"double"}
     })
 
-    require("aerial").on_attach(client)
     require("illuminate").on_attach(client)
 end
 

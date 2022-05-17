@@ -73,15 +73,6 @@ function config.lualine()
         end
     end
 
-    local mini_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = { "location" },
-	}
-
     local simple_sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "filetype" },
@@ -115,10 +106,6 @@ function config.lualine()
         sections = simple_sections,
 		filetypes = { "dapui_watches" },
 	}
-    local aerial = {
-    	sections = mini_sections,
-    	filetypes = { "aerial" },
-    }
 
 
     require('lualine').setup {
@@ -169,7 +156,6 @@ function config.lualine()
 			dapui_breakpoints,
 			dapui_stacks,
 			dapui_watches,
-            aerial,
         }
     }
 end

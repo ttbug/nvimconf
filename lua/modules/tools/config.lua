@@ -230,8 +230,4 @@ function config.todo()
     }
 end
 
-function config.aerial()
-    require('aerial').setup({})
-end
-
 return config
