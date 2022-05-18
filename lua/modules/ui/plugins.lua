@@ -2,7 +2,7 @@ local ui = {}
 local conf = require("modules.ui.config")
 
 ui['kyazdani42/nvim-web-devicons'] = {opt = false}
-ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
+--ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
 ui["sainnhe/edge"] = { opt = false, config = conf.edge }
 ui['folke/tokyonight.nvim'] = {opt = false, config = conf.tokyonight}
 --ui["catppuccin/nvim"] = {
@@ -64,9 +64,9 @@ ui["dstein64/nvim-scrollview"] = {
         require("scrollview").setup({})
     end,
 }
-ui["mbbill/undotree"] = {
-	opt = true,
-	cmd = "UndotreeToggle",
-}
+--ui["mbbill/undotree"] = {
+--	opt = true,
+--	cmd = "UndotreeToggle",
+--}
 
 return ui

@@ -88,13 +88,13 @@ editor['akinsho/toggleterm.nvim'] = {
     event = 'BufRead',
     config = conf.toggleterm
 }
-editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
+--editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
 editor['norcalli/nvim-colorizer.lua'] = {
     opt = true,
     event = 'BufRead',
     config = conf.nvim_colorizer
 }
-editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufRead" }
+--editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufRead" }
 editor['rmagatti/auto-session'] = {
     opt = true,
     cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
