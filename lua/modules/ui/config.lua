@@ -280,7 +280,7 @@ function config.lualine()
 			theme = "tokyonight",
 			disabled_filetypes = {},
 			component_separators = "|",
-			section_separators = { left = "", right = "" },
+			section_separators = {left = '', right = ''},
 		},
 		sections = {
 			lualine_a = { "mode" },
@@ -390,6 +390,7 @@ function config.nvim_tree()
 	}
 
 	require("nvim-tree").setup({
+		git = {enable = true, ignore = false, timeout = 500},
 		auto_reload_on_write = true,
 		disable_netrw = false,
 		hijack_cursor = true,
@@ -427,19 +428,19 @@ function config.nvim_tree()
 		},
 		update_focused_file = {
 			enable = true,
-			update_cwd = true,
+			update_cwd = false,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},
 		filters = {
-			dotfiles = false,
+			dotfiles = true,
 			custom = { ".DS_Store" },
 			exclude = {},
 		},
 		actions = {
 			use_system_clipboard = true,
 			change_dir = {
-				enable = true,
+				enable = false,
 				global = false,
 			},
 			open_file = {
@@ -469,7 +470,7 @@ function config.nvim_bufferline()
 			max_name_length = 14,
 			max_prefix_length = 13,
 			tab_size = 15,
-			show_buffer_close_icons = true,
+			show_buffer_close_icons = false,
 			show_buffer_icons = true,
 			show_tab_indicators = false,
 			diagnostics = "nvim_lsp",

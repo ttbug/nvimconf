@@ -116,7 +116,7 @@ editor['rcarriga/nvim-dap-ui'] = {
         }
     }
 }
-editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
+--editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
 editor["famiu/bufdelete.nvim"] = {
 	opt = true,
 	cmd = { "Bdelete", "Bwipeout", "Bdelete!", "Bwipeout!" },
