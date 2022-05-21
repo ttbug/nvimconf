@@ -475,7 +475,7 @@ function config.nvim_bufferline()
 			show_tab_indicators = false,
 			diagnostics = "nvim_lsp",
 			always_show_bufferline = true,
-			separator_style = "slant",
+			separator_style = "thin",
 			offsets = {
 				{
 					filetype = "NvimTree",
