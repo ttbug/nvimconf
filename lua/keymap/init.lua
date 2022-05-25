@@ -198,6 +198,8 @@ local plug_map = {
 	["n|<leader><leader>d"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
     -- json 格式化快捷键
     ["n|<leader>j"] = map_cr("%!python -m json.tool"):with_noremap():with_silent(),
+    -- todo Telescope
+    ["n|td"] = map_cr('TodoTelescope'):with_noremap():with_silent(),
 };
 
 bind.nvim_load_mapping(plug_map)

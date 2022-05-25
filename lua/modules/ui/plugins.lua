@@ -16,7 +16,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui['hoob3rt/lualine.nvim'] = {
     opt = true,
-    after = 'lualine-lsp-progress',
+    after = 'nvim-gps',
     config = conf.lualine
 }
 
@@ -25,10 +25,10 @@ ui["SmiteshP/nvim-gps"] = {
 	after = "nvim-treesitter",
 	config = conf.nvim_gps,
 }
-ui['arkav/lualine-lsp-progress'] = {
-    opt = true,
-    after = 'nvim-gps',
-}
+--ui['arkav/lualine-lsp-progress'] = {
+--    opt = true,
+--    after = 'nvim-gps',
+--}
 --ui['glepnir/dashboard-nvim'] = {opt = true, event = "BufWinEnter"}
 ui["goolord/alpha-nvim"] = {
 	opt = true,
@@ -68,5 +68,13 @@ ui["dstein64/nvim-scrollview"] = {
 --	opt = true,
 --	cmd = "UndotreeToggle",
 --}
+
+ui["j-hui/fidget.nvim"] = {
+	opt = true,
+	event = "BufRead",
+	config = function()
+		require("fidget").setup({})
+	end,
+}
 
 return ui
