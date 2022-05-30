@@ -249,7 +249,7 @@ local black = require("efmls-configs.formatters.black")
 local luafmt = require("efmls-configs.formatters.stylua")
 
 local clangfmt = {
-	formatCommand = "clang-format -style='{BasedOnStyle: LLVM}'",
+	formatCommand = "clang-format -style='{BasedOnStyle: LLVM,IndentWidth: 4}'",
 	formatStdin = true,
 }
 --local clangfmt = require("efmls-configs.formatters.clang_format")
