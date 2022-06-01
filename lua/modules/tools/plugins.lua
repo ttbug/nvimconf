@@ -72,4 +72,10 @@ tools['folke/todo-comments.nvim'] = {
     requires = {{'nvim-lua/plenary.nvim', opt = false}},
     config = conf.todo,
 }
+
+tools['antoinemadec/FixCursorHold.nvim'] = {
+    opt = false,
+    config = conf.perf,
+}
+
 return tools

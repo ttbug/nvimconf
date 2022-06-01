@@ -269,4 +269,8 @@ function config.todo()
     }
 end
 
+function config.perf()
+    vim.g.cursorhold_updatetime = 100
+end
+
 return config
