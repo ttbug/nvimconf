@@ -196,7 +196,7 @@ local plug_map = {
     ["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
     	-- Plugin Diffview
 	["n|<leader>df"] = map_cr("DiffviewOpen"):with_silent():with_noremap(),
-	["n|<leader><leader>d"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
+	["n|<leader>dc"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
     -- json 格式化快捷键
     ["n|<leader>j"] = map_cr("%!python -m json.tool --no-ensure-ascii"):with_noremap():with_silent(),
     -- todo Telescope
