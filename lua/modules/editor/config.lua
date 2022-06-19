@@ -208,9 +208,9 @@ function config.dapui()
 			    		id = "scopes",
 			    		size = 0.25, -- Can be float or integer > 1
 			    	},
-			    	"breakpoints",
-			    	"stacks",
-			    	"watches",
+			    	{id="breakpoints", size=0.25},
+			    	{id="stacks",size=0.25},
+			    	{id="watches",size=0.25},
 			    },
 			    size = 40,
 			    position = "left",
