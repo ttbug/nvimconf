@@ -76,7 +76,9 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 	if server.name == "gopls" then
 		nvim_lsp.gopls.setup({
 			on_attach = custom_attach,
-			flags = { debounce_text_changes = 500 },
+            filetypes = { "go", "gomod" },
+            root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
+			flags = {allow_incremental_sync = true, debounce_text_changes = 150 },
 			capabilities = capabilities,
 			--cmd = { "gopls", "-remote=auto" },
 			settings = {
@@ -86,8 +88,23 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 						nilness = true,
 						shadow = true,
 						unusedparams = true,
-						unusewrites = true,
+						unusedwrite = true,
 					},
+                    codelenses = {
+                        gc_details = true, -- Toggle the calculation of gc annotations
+                        generate = true, -- Runs go generate for a given directory
+                        regenerate_cgo = true, -- Regenerates cgo definitions
+                        tidy = true, -- Runs go mod tidy for a module
+                        upgrade_dependency = true, -- Upgrades a dependency in the go.mod file for a module
+                        vendor = true, -- Runs go mod vendor for a module
+                    },
+                          semanticTokens = true,
+                    completeUnimported = true,
+                    staticcheck = true,
+                    experimentalWatchedFileDelay = "100ms",
+                    gofumpt = true,
+                    experimentalPostfixCompletions = true,
+                    experimentalUseInvalidMetadata = true,
 				},
 			},
 		})
