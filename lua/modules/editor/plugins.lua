@@ -145,4 +145,9 @@ editor["sindrets/diffview.nvim"] = {
 	cmd = { "DiffviewOpen" },
 }
 
+editor["luukvbaal/stabilize.nvim"] = {
+	opt = true,
+	event = "BufRead",
+}
+
 return editor
