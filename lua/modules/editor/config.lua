@@ -435,4 +435,31 @@ function config.better_escape()
 	})
 end
 
+function config.illuminate()
+	vim.g.Illuminate_highlightUnderCursor = 0
+	vim.g.Illuminate_ftblacklist = {
+		"help",
+		"dashboard",
+		"alpha",
+		"packer",
+		"norg",
+		"DoomInfo",
+		"NvimTree",
+		"Outline",
+		"toggleterm",
+	}
+end
+
+function config.nvim_comment()
+	require("nvim_comment").setup({
+		hook = function()
+			require("ts_context_commentstring.internal").update_commentstring()
+		end,
+	})
+end
+
+function config.hop()
+	require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+end
+
 return config
