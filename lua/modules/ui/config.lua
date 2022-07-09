@@ -200,6 +200,11 @@ end
 
 function config.lualine()
 	local gps = require("nvim-gps")
+    
+    local function escape_status()
+		local ok, m = pcall(require, "better_escape")
+		return ok and m.waiting and "✺ " or ""
+	end
 
 	local function gps_content()
 		if gps.is_available() then
@@ -220,30 +225,32 @@ function config.lualine()
 	local simple_sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "filetype" },
+         
 		lualine_c = {},
 		lualine_x = {},
+         
 		lualine_y = {},
 		lualine_z = { "location" },
-	}
+	} 
 	local aerial = {
 		sections = mini_sections,
 		filetypes = { "aerial" },
-	}
+	} 
 	local dapui_scopes = {
 		sections = simple_sections,
 		filetypes = { "dapui_scopes" },
 	}
-
+   
 	local dapui_breakpoints = {
 		sections = simple_sections,
 		filetypes = { "dapui_breakpoints" },
-	}
-
+	}  
+   
 	local dapui_stacks = {
 		sections = simple_sections,
 		filetypes = { "dapui_stacks" },
 	}
-
+ 
 	local dapui_watches = {
 		sections = simple_sections,
 		filetypes = { "dapui_watches" },
@@ -290,6 +297,7 @@ function config.lualine()
 				{ gps_content, cond = gps.is_available },
 			},
 			lualine_x = {
+                { escape_status },
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },

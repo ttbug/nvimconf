@@ -100,10 +100,17 @@ editor['rmagatti/auto-session'] = {
     cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
     config = conf.auto_session
 }
-editor['jdhao/better-escape.vim'] = {
-    opt = true,
-    event = 'InsertEnter'
+--editor['jdhao/better-escape.vim'] = {
+--    opt = true,
+--    event = 'InsertEnter'
+--}
+
+editor["max397574/better-escape.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	config = conf.better_escape,
 }
+
 editor['rcarriga/nvim-dap-ui'] = {
     opt = false,
     config = conf.dapui,
