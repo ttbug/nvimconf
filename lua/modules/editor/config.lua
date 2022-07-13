@@ -462,4 +462,14 @@ function config.hop()
 	require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 end
 
+function config.fterm()
+    require'FTerm'.setup({
+        border = 'double',
+        dimensions  = {
+            height = 0.9,
+            width = 0.9,
+        },
+    })
+end
+
 return config

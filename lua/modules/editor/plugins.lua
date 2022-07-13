@@ -62,11 +62,11 @@ editor['karb94/neoscroll.nvim'] = {
     event = "WinScrolled",
     config = conf.neoscroll
 }
-editor['akinsho/toggleterm.nvim'] = {
-    opt = true,
-    event = 'BufReadPost',
-    config = conf.toggleterm
-}
+--editor['akinsho/toggleterm.nvim'] = {
+--    opt = true,
+--    event = 'BufReadPost',
+--    config = conf.toggleterm
+--}
 --editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
 editor['norcalli/nvim-colorizer.lua'] = {
     opt = true,
@@ -92,7 +92,7 @@ editor["max397574/better-escape.nvim"] = {
 
 editor['rcarriga/nvim-dap-ui'] = {
     opt = false,
-    config = conf.dapui,
+    --config = conf.dapui,
     requires = {
         {'mfussenegger/nvim-dap', config = conf.dap}, {
             'Pocco81/dap-buddy.nvim',
@@ -134,6 +134,12 @@ editor["sindrets/diffview.nvim"] = {
 editor["luukvbaal/stabilize.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
+}
+
+editor["numtostr/FTerm.nvim"] = { 
+    opt = true, 
+    event = "BufReadPost",
+    config = conf.fterm,
 }
 
 return editor
