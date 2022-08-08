@@ -269,15 +269,14 @@ function config.mason_install()
 			-- you can turn off/on auto_update per tool
 			"editorconfig-checker",
 
-			"lua-language-server",
-			"stylua",
+			--"stylua",
 
 			"black",
 
-			"prettier",
-			"eslint",
+			--"prettier",
+			--"eslint-lsp",
 
-			"bash-language-server",
+			--"bash-language-server",
 			"shellcheck",
 			"shfmt",
 
@@ -293,7 +292,7 @@ function config.mason_install()
 		-- will happen on startup. You can use `:MasonToolsUpdate` to install
 		-- tools and check for updates.
 		-- Default: true
-		run_on_start = true,
+		run_on_start = false,
 	})
 end
 
