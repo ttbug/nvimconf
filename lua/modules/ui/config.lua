@@ -5,27 +5,27 @@ function config.alpha()
 	local dashboard = require("alpha.themes.dashboard")
 
 	dashboard.section.header.val = {
-        [[             \                  /               ]],
-        [[    _________))                ((__________     ]],
-        [[   /.-------./\\    \    /    //\.--------.\    ]],
-        [[  //#######//##\\   ))  ((   //##\\########\\   ]],
-        [[ //#######//###((  ((    ))  ))###\\########\\  ]],
-        [[((#######((#####\\  \\  //  //#####))########)) ]],
-        [[ \##' `###\######\\  \)(/  //######/####' `##/  ]],
-        [[  )'    ``#)'  `##\`->oo<-'/##'  `(#''     `(   ]],
-        [[          (       ``\`..'/''       )            ]],
-        [[                     \""(                       ]],
-        [[                      `- )                      ]],
-        [[                      / /                       ]],
-        [[                     ( /\                       ]],
-        [[                     /\| \                      ]],
-        [[                    (  \                        ]],
-        [[                        )                       ]],
-        [[                       /                        ]],
-        [[                      (                         ]],
-        [[                      `                         ]]
+		[[             \                  /               ]],
+		[[    _________))                ((__________     ]],
+		[[   /.-------./\\    \    /    //\.--------.\    ]],
+		[[  //#######//##\\   ))  ((   //##\\########\\   ]],
+		[[ //#######//###((  ((    ))  ))###\\########\\  ]],
+		[[((#######((#####\\  \\  //  //#####))########)) ]],
+		[[ \##' `###\######\\  \)(/  //######/####' `##/  ]],
+		[[  )'    ``#)'  `##\`->oo<-'/##'  `(#''     `(   ]],
+		[[          (       ``\`..'/''       )            ]],
+		[[                     \""(                       ]],
+		[[                      `- )                      ]],
+		[[                      / /                       ]],
+		[[                     ( /\                       ]],
+		[[                     /\| \                      ]],
+		[[                    (  \                        ]],
+		[[                        )                       ]],
+		[[                       /                        ]],
+		[[                      (                         ]],
+		[[                      `                         ]],
 	}
-    local function button(sc, txt, leader_txt, keybind, keybind_opts)
+	local function button(sc, txt, leader_txt, keybind, keybind_opts)
 		local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
 
 		local opts = {
@@ -58,7 +58,7 @@ function config.alpha()
 	end
 	local leader = "comma"
 	dashboard.section.buttons.val = {
-        button("comma s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
+		button("comma s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
 		button("comma f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
 		button("comma f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
 		button("comma f p", " Project find", leader, "<cmd>Telescope project<cr>"),
@@ -66,7 +66,7 @@ function config.alpha()
 		button("comma f n", " File new", leader, "<cmd>enew<cr>"),
 		button("comma f w", " Word find", leader, "<cmd>Telescope live_grep<cr>"),
 	}
-    dashboard.section.buttons.opts.hl = "String"
+	dashboard.section.buttons.opts.hl = "String"
 	local function footer()
 		local total_plugins = #vim.tbl_keys(packer_plugins)
 		return "   Have Fun with neovim"
@@ -81,7 +81,7 @@ function config.alpha()
 			.. " plugins"
 	end
 	dashboard.section.footer.val = footer()
-    dashboard.section.footer.opts.hl = "Function"
+	dashboard.section.footer.opts.hl = "Function"
 
 	local head_butt_padding = 2
 	local occu_height = #dashboard.section.header.val + 2 * #dashboard.section.buttons.val + head_butt_padding
@@ -200,8 +200,8 @@ end
 
 function config.lualine()
 	local gps = require("nvim-gps")
-    
-    local function escape_status()
+
+	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
 		return ok and m.waiting and "✺ " or ""
 	end
@@ -225,32 +225,32 @@ function config.lualine()
 	local simple_sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "filetype" },
-         
+
 		lualine_c = {},
 		lualine_x = {},
-         
+
 		lualine_y = {},
 		lualine_z = { "location" },
-	} 
-	local aerial = {
+	}
+	local outline = {
 		sections = mini_sections,
-		filetypes = { "aerial" },
-	} 
+		filetypes = { "lspsagaoutline" },
+	}
 	local dapui_scopes = {
 		sections = simple_sections,
 		filetypes = { "dapui_scopes" },
 	}
-   
+
 	local dapui_breakpoints = {
 		sections = simple_sections,
 		filetypes = { "dapui_breakpoints" },
-	}  
-   
+	}
+
 	local dapui_stacks = {
 		sections = simple_sections,
 		filetypes = { "dapui_stacks" },
 	}
- 
+
 	local dapui_watches = {
 		sections = simple_sections,
 		filetypes = { "dapui_watches" },
@@ -287,7 +287,7 @@ function config.lualine()
 			theme = "tokyonight",
 			disabled_filetypes = {},
 			component_separators = "|",
-			section_separators = {left = '', right = ''},
+			section_separators = { left = "", right = "" },
 		},
 		sections = {
 			lualine_a = { "mode" },
@@ -297,7 +297,7 @@ function config.lualine()
 				{ gps_content, cond = gps.is_available },
 			},
 			lualine_x = {
-                { escape_status },
+				{ escape_status },
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
@@ -334,7 +334,7 @@ function config.lualine()
 			"nvim-tree",
 			"toggleterm",
 			"fugitive",
-			aerial,
+			outline,
 			dapui_scopes,
 			dapui_breakpoints,
 			dapui_stacks,
@@ -371,10 +371,9 @@ function config.nvim_tree()
 	--vim.g.symlink_arror = "  "
 	--vim.g.respect_buf_cwd = 1
 
-
 	require("nvim-tree").setup({
-        respect_buf_cwd = false,
-		git = {enable = true, ignore = false, timeout = 500},
+		respect_buf_cwd = false,
+		git = { enable = true, ignore = false, timeout = 500 },
 		auto_reload_on_write = true,
 		disable_netrw = false,
 		hijack_cursor = true,
@@ -405,36 +404,36 @@ function config.nvim_tree()
 					none = "  ",
 				},
 			},
-            root_folder_modifier = ":e",
-	        icons = {
-	            padding = " ",
-	            symlink_arrow = "  ",
-                glyphs = {
-		            ["default"] = "", --
-		            ["symlink"] = "",
-		            ["git"] = {
-		            	["unstaged"] = "",
-		            	["staged"] = "", --
-		            	["unmerged"] = "שׂ",
-		            	["renamed"] = "", --
-		            	["untracked"] = "ﲉ",
-		            	["deleted"] = "",
-		            	["ignored"] = "", --◌
-		            },
-		            ["folder"] = {
-		            	-- ['arrow_open'] = "",
-		            	-- ['arrow_closed'] = "",
-		            	["arrow_open"] = "",
-		            	["arrow_closed"] = "",
-		            	["default"] = "",
-		            	["open"] = "",
-		            	["empty"] = "",
-		            	["empty_open"] = "",
-		            	["symlink"] = "",
-		            	["symlink_open"] = "",
-		            },
-	            },
-            },
+			root_folder_modifier = ":e",
+			icons = {
+				padding = " ",
+				symlink_arrow = "  ",
+				glyphs = {
+					["default"] = "", --
+					["symlink"] = "",
+					["git"] = {
+						["unstaged"] = "",
+						["staged"] = "", --
+						["unmerged"] = "שׂ",
+						["renamed"] = "", --
+						["untracked"] = "ﲉ",
+						["deleted"] = "",
+						["ignored"] = "", --◌
+					},
+					["folder"] = {
+						-- ['arrow_open'] = "",
+						-- ['arrow_closed'] = "",
+						["arrow_open"] = "",
+						["arrow_closed"] = "",
+						["default"] = "",
+						["open"] = "",
+						["empty"] = "",
+						["empty_open"] = "",
+						["symlink"] = "",
+						["symlink_open"] = "",
+					},
+				},
+			},
 		},
 		hijack_directories = {
 			enable = true,
@@ -498,7 +497,7 @@ function config.nvim_bufferline()
 					padding = 1,
 				},
 			},
-            diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			diagnostics_indicator = function(count, level, diagnostics_dict, context)
 				return "(" .. count .. ")"
 			end,
 		},

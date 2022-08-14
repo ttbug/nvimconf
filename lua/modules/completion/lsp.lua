@@ -4,7 +4,7 @@ local formatting = require("modules.completion.formatting")
 vim.cmd([[packadd lsp_signature.nvim]])
 vim.cmd([[packadd lspsaga.nvim]])
 vim.cmd([[packadd cmp-nvim-lsp]])
-vim.cmd([[packadd aerial.nvim]])
+--vim.cmd([[packadd aerial.nvim]])
 vim.cmd([[packadd vim-illuminate]])
 
 local nvim_lsp = require("lspconfig")
@@ -15,13 +15,13 @@ local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
 
 mason.setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
 })
 mason_lsp.setup({
 	ensure_installed = {
@@ -35,12 +35,12 @@ mason_lsp.setup({
 })
 
 -- Override diagnostics symbol
-saga.init_lsp_saga({
-	error_sign = "",
-	warn_sign = "",
-	hint_sign = "",
-	infor_sign = "",
-})
+--saga.init_lsp_saga({
+--	error_sign = "",
+--	warn_sign = "",
+--	hint_sign = "",
+--	infor_sign = "",
+--})
 
 --lsp_installer.settings {
 --    ui = {
@@ -57,7 +57,6 @@ saga.init_lsp_saga({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-
 local function custom_attach(client)
 	require("lsp_signature").on_attach({
 		bind = true,
@@ -68,7 +67,7 @@ local function custom_attach(client)
 		hi_parameter = "Search",
 		handler_opts = { "double" },
 	})
-	require("aerial").on_attach(client)
+	--require("aerial").on_attach(client)
 	require("illuminate").on_attach(client)
 end
 
@@ -94,14 +93,13 @@ end
 
 -- Override server settings here
 
-
 for _, server in ipairs(mason_lsp.get_installed_servers()) do
 	if server == "gopls" then
 		nvim_lsp.gopls.setup({
 			on_attach = custom_attach,
-            filetypes = { "go", "gomod" },
-            root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
-			flags = {allow_incremental_sync = true, debounce_text_changes = 150 },
+			filetypes = { "go", "gomod" },
+			root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
+			flags = { allow_incremental_sync = true, debounce_text_changes = 150 },
 			capabilities = capabilities,
 			--cmd = { "gopls", "-remote=auto" },
 			settings = {
@@ -113,25 +111,25 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 						unusedparams = true,
 						unusedwrite = true,
 					},
-                    codelenses = {
-                        gc_details = true, -- Toggle the calculation of gc annotations
-                        generate = true, -- Runs go generate for a given directory
-                        regenerate_cgo = true, -- Regenerates cgo definitions
-                        tidy = true, -- Runs go mod tidy for a module
-                        upgrade_dependency = true, -- Upgrades a dependency in the go.mod file for a module
-                        vendor = true, -- Runs go mod vendor for a module
-                    },
-                          semanticTokens = true,
-                    completeUnimported = true,
-                    staticcheck = true,
-                    experimentalWatchedFileDelay = "100ms",
-                    gofumpt = true,
-                    experimentalPostfixCompletions = true,
-                    experimentalUseInvalidMetadata = true,
+					codelenses = {
+						gc_details = true, -- Toggle the calculation of gc annotations
+						generate = true, -- Runs go generate for a given directory
+						regenerate_cgo = true, -- Regenerates cgo definitions
+						tidy = true, -- Runs go mod tidy for a module
+						upgrade_dependency = true, -- Upgrades a dependency in the go.mod file for a module
+						vendor = true, -- Runs go mod vendor for a module
+					},
+					semanticTokens = true,
+					completeUnimported = true,
+					staticcheck = true,
+					experimentalWatchedFileDelay = "100ms",
+					gofumpt = true,
+					experimentalPostfixCompletions = true,
+					experimentalUseInvalidMetadata = true,
 				},
 			},
 		})
-    elseif server == "sumneko_lua" then
+	elseif server == "sumneko_lua" then
 		nvim_lsp.sumneko_lua.setup({
 			capabilities = capabilities,
 			on_attach = custom_attach,
@@ -250,7 +248,6 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 	end
 end
 
-
 -- https://github.com/vscode-langservers/vscode-html-languageserver-bin
 
 nvim_lsp.html.setup({
@@ -315,7 +312,7 @@ flake8 = vim.tbl_extend("force", flake8, {
 efmls.setup({
 	vim = { formatter = vint },
 	lua = { formatter = luafmt },
-    c = { formatter = clangfmt, linter = clangtidy },
+	c = { formatter = clangfmt, linter = clangtidy },
 	cpp = { formatter = clangfmt, linter = clangtidy },
 	python = { formatter = black },
 	vue = { formatter = prettier },

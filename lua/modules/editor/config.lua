@@ -2,11 +2,11 @@ local config = {}
 local sessions_dir = vim.fn.stdpath("data") .. "/sessions/"
 
 function config.nvim_treesitter()
-    vim.api.nvim_command('set foldmethod=expr')
-    vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+	vim.api.nvim_set_option_value("foldmethod", "expr", {})
+	vim.api.nvim_set_option_value("foldexpr", "nvim_treesitter#foldexpr()", {})
 
 	require("nvim-treesitter.configs").setup({
-         ensure_installed = {
+		ensure_installed = {
 			"bash",
 			"c",
 			"cpp",
@@ -22,46 +22,86 @@ function config.nvim_treesitter()
 			"html",
 			"javascript",
 		},
-        ignore_install = { "beancount", "bibtex", "c_sharp","clojure","commonlisp", "cuda", "dart", "devicetree", "dot","elixir","erlang","fennel","fish","Godot","Glimmer and Ember", "graphql","hcl","heex","julia","ledger","nix","ocaml","ocaml_interface","php","pioasm","ql","r","ruby","sparql","supercollider","surface","svelte","teal", "tlaplus","tsx","turtle","verilog","yang","zig"},
-        highlight = {enable = true, disable = {'vim'}},
-        textobjects = {
-            select = {
-                enable = true,
-                keymaps = {
-                    ["af"] = "@function.outer",
-                    ["if"] = "@function.inner",
-                    ["ac"] = "@class.outer",
-                    ["ic"] = "@class.inner"
-                }
-            },
-            move = {
-                enable = true,
-                set_jumps = true, -- whether to set jumps in the jumplist
-                goto_next_start = {
-                    ["]["] = "@function.outer",
-                    ["]m"] = "@class.outer"
-                },
-                goto_next_end = {
-                    ["]]"] = "@function.outer",
-                    ["]M"] = "@class.outer"
-                },
-                goto_previous_start = {
-                    ["[["] = "@function.outer",
-                    ["[m"] = "@class.outer"
-                },
-                goto_previous_end = {
-                    ["[]"] = "@function.outer",
-                    ["[M"] = "@class.outer"
-                }
-            }
-        },
-        rainbow = {
-            enable = true,
-            extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-            max_file_lines = 1000 -- Do not enable for files with more than 1000 lines, int
-        },
-        context_commentstring = {enable = true, enable_autocmd = false},
-        matchup = {enable = true},
+		ignore_install = {
+			"beancount",
+			"bibtex",
+			"c_sharp",
+			"clojure",
+			"commonlisp",
+			"cuda",
+			"dart",
+			"devicetree",
+			"dot",
+			"elixir",
+			"erlang",
+			"fennel",
+			"fish",
+			"Godot",
+			"Glimmer and Ember",
+			"graphql",
+			"hcl",
+			"heex",
+			"julia",
+			"ledger",
+			"nix",
+			"ocaml",
+			"ocaml_interface",
+			"php",
+			"pioasm",
+			"ql",
+			"r",
+			"ruby",
+			"sparql",
+			"supercollider",
+			"surface",
+			"svelte",
+			"teal",
+			"tlaplus",
+			"tsx",
+			"turtle",
+			"verilog",
+			"yang",
+			"zig",
+		},
+		highlight = { enable = true, disable = { "vim" } },
+		textobjects = {
+			select = {
+				enable = true,
+				keymaps = {
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+					["ac"] = "@class.outer",
+					["ic"] = "@class.inner",
+				},
+			},
+			move = {
+				enable = true,
+				set_jumps = true, -- whether to set jumps in the jumplist
+				goto_next_start = {
+					["]["] = "@function.outer",
+					["]m"] = "@class.outer",
+				},
+				goto_next_end = {
+					["]]"] = "@function.outer",
+					["]M"] = "@class.outer",
+				},
+				goto_previous_start = {
+					["[["] = "@function.outer",
+					["[m"] = "@class.outer",
+				},
+				goto_previous_end = {
+					["[]"] = "@function.outer",
+					["[M"] = "@class.outer",
+				},
+			},
+		},
+		rainbow = {
+			enable = true,
+			extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+			max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+		},
+		context_commentstring = { enable = true, enable_autocmd = false },
+		matchup = { enable = true },
 	})
 	require("nvim-treesitter.install").prefer_git = true
 	local parsers = require("nvim-treesitter.parsers").get_parser_configs()
@@ -75,24 +115,24 @@ function config.matchup()
 end
 
 function config.nvim_gps()
-    require("nvim-gps").setup({
-        icons = {
-            ["class-name"] = ' ', -- Classes and class-like objects
-            ["function-name"] = ' ', -- Functions
-            ["method-name"] = ' ' -- Methods (functions inside class-like objects)
-        },
-        languages = { -- You can disable any language individually here
-            ["c"] = true,
-            ["cpp"] = true,
-            ["go"] = true,
-            ["java"] = true,
-            ["javascript"] = true,
-            ["lua"] = true,
-            ["python"] = true,
-            ["rust"] = true
-        },
-        separator = ' > '
-    })
+	require("nvim-gps").setup({
+		icons = {
+			["class-name"] = " ", -- Classes and class-like objects
+			["function-name"] = " ", -- Functions
+			["method-name"] = " ", -- Methods (functions inside class-like objects)
+		},
+		languages = { -- You can disable any language individually here
+			["c"] = true,
+			["cpp"] = true,
+			["go"] = true,
+			["java"] = true,
+			["javascript"] = true,
+			["lua"] = true,
+			["python"] = true,
+			["rust"] = true,
+		},
+		separator = " > ",
+	})
 end
 
 function config.autotag()
@@ -108,12 +148,14 @@ function config.autotag()
 	})
 end
 
-function config.nvim_colorizer() require('colorizer').setup() end
+function config.nvim_colorizer()
+	require("colorizer").setup()
+end
 
 function config.easymotion()
-    vim.g.EasyMotion_do_mapping = 0
-    vim.g.EasyMotion_smartcase = 1
-    vim.g.EasyMotion_use_smartsign_us = 1
+	vim.g.EasyMotion_do_mapping = 0
+	vim.g.EasyMotion_smartcase = 1
+	vim.g.EasyMotion_use_smartsign_us = 1
 end
 
 function config.neoscroll()
@@ -156,38 +198,42 @@ function config.auto_session()
 end
 
 function config.toggleterm()
-    require("toggleterm").setup {
-        -- size can be a number or function which is passed the current terminal
-        size = function(term)
-            if term.direction == "horizontal" then
-                return 20
-            elseif term.direction == "vertical" then
-                return vim.o.columns * 0.40
-            end
-        end,
-        --open_mapping = [[<c-\>]],
-        open_mapping = false,
-        hide_numbers = true, -- hide the number column in toggleterm buffers
-        shade_filetypes = {},
-        shade_terminals = false,
-        shading_factor = '1', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
-        start_in_insert = true,
-        insert_mappings = true, -- whether or not the open mapping applies in insert mode
-        persist_size = true,
-        direction = 'float',
-        close_on_exit = true, -- close the terminal window when the process exits
-        shell = vim.o.shell, -- change the default shell
-        float_opts = {
-            -- border =  'single' | 'double' | 'shadow' | 'curved'
-            --width = <value>,
-            --height = <value>,
-            border = 'curved', -- 设置圆角
-            --winblend = 3,
-            highlights = {
-              border = "cyan",
-            }
-        }
-    }
+	require("toggleterm").setup({
+		-- size can be a number or function which is passed the current terminal
+		size = function(term)
+			if term.direction == "horizontal" then
+				return 20
+			elseif term.direction == "vertical" then
+				return vim.o.columns * 0.40
+			end
+		end,
+		on_open = function()
+			vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local" })
+			vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
+		end,
+		--open_mapping = [[<c-\>]],
+		open_mapping = false,
+		hide_numbers = true, -- hide the number column in toggleterm buffers
+		shade_filetypes = {},
+		shade_terminals = false,
+		shading_factor = "1", -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+		start_in_insert = true,
+		insert_mappings = true, -- whether or not the open mapping applies in insert mode
+		persist_size = true,
+		direction = "float",
+		close_on_exit = true, -- close the terminal window when the process exits
+		shell = vim.o.shell, -- change the default shell
+		float_opts = {
+			-- border =  'single' | 'double' | 'shadow' | 'curved'
+			--width = <value>,
+			--height = <value>,
+			border = "curved", -- 设置圆角
+			--winblend = 3,
+			highlights = {
+				border = "cyan",
+			},
+		},
+	})
 end
 
 function config.dapui()
@@ -202,25 +248,25 @@ function config.dapui()
 			repl = "r",
 		},
 		layouts = {
-            {
-                elements = {
-			    	-- Provide as ID strings or tables with "id" and "size" keys
-			    	{
-			    		id = "scopes",
-			    		size = 0.25, -- Can be float or integer > 1
-			    	},
-			    	{id="breakpoints", size=0.25},
-			    	{id="stacks",size=0.25},
-			    	{id="watches",size=0.25},
-			    },
-			    size = 40,
-			    position = "left",
-            },
-		    { 
-                elements = { "repl", "console" }, 
-                size = 10, 
-                position = "bottom", 
-            },
+			{
+				elements = {
+					-- Provide as ID strings or tables with "id" and "size" keys
+					{
+						id = "scopes",
+						size = 0.25, -- Can be float or integer > 1
+					},
+					{ id = "breakpoints", size = 0.25 },
+					{ id = "stacks", size = 0.25 },
+					{ id = "watches", size = 0.25 },
+				},
+				size = 40,
+				position = "left",
+			},
+			{
+				elements = { "repl", "console" },
+				size = 10,
+				position = "bottom",
+			},
 		},
 		floating = {
 			max_height = nil,
@@ -232,7 +278,7 @@ function config.dapui()
 end
 
 function config.dap()
-    vim.cmd([[packadd nvim-dap-ui]])
+	vim.cmd([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
 
@@ -364,26 +410,25 @@ function config.dap()
 end
 
 function config.dapinstal()
-    require("dap-install").setup({
-        installation_path = dap_dir,
-        verbosely_call_debuggers = false
-    })
+	require("dap-install").setup({
+		installation_path = dap_dir,
+		verbosely_call_debuggers = false,
+	})
 end
 
 function config.dap_virtual_text()
-    require('nvim-dap-virtual-text').setup({
-        enabled = true,
-        enabled_commands = true,
-        highlight_changed_variables = true,
-        highlight_new_as_changed = true,
-        show_stop_reason = true,
-        commented = false,
-        virt_text_pos = 'eol',
-        all_frames = false,
-        virt_lines = false,
-        virt_text_win_col = nil
-    })
-
+	require("nvim-dap-virtual-text").setup({
+		enabled = true,
+		enabled_commands = true,
+		highlight_changed_variables = true,
+		highlight_new_as_changed = true,
+		show_stop_reason = true,
+		commented = false,
+		virt_text_pos = "eol",
+		all_frames = false,
+		virt_lines = false,
+		virt_text_win_col = nil,
+	})
 end
 
 function config.specs()
@@ -465,13 +510,25 @@ function config.hop()
 end
 
 function config.fterm()
-    require'FTerm'.setup({
-        border = 'double',
-        dimensions  = {
-            height = 0.9,
-            width = 0.9,
-        },
-    })
+	require("FTerm").setup({
+		border = "double",
+		dimensions = {
+			height = 0.9,
+			width = 0.9,
+		},
+	})
+end
+
+function config.accelerated_jk()
+	require("accelerated-jk").setup({
+		mode = "time_driven",
+		enable_deceleration = false,
+		acceleration_motions = {},
+		acceleration_limit = 150,
+		acceleration_table = { 7, 12, 17, 21, 24, 26, 28, 30 },
+		-- when 'enable_deceleration = true', 'deceleration_table = { {200, 3}, {300, 7}, {450, 11}, {600, 15}, {750, 21}, {900, 9999} }'
+		deceleration_table = { { 150, 9999 } },
+	})
 end
 
 return config

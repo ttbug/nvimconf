@@ -3,23 +3,27 @@ local config = {}
 function config.nvim_lsp()
 	require("modules.completion.lsp")
 end
-function config.lightbulb()
-	vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
-end
-
-function config.aerial()
-	require("aerial").setup({})
+--function config.lightbulb()
+--	vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+--end
+--
+--function config.aerial()
+--	require("aerial").setup({})
+--end
+function config.lspsaga()
+	local saga = require("lspsaga")
+	saga.init_lsp_saga()
 end
 function config.cmp()
-    local t = function(str)
-        return vim.api.nvim_replace_termcodes(str, true, true, true)
-    end
-    local has_words_before = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local t = function(str)
+		return vim.api.nvim_replace_termcodes(str, true, true, true)
+	end
+	local has_words_before = function()
+		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 	end
 
-    local border = function(hl)
+	local border = function(hl)
 		return {
 			{ "╭", hl },
 			{ "─", hl },
@@ -38,9 +42,9 @@ function config.cmp()
 		return false
 	end
 
-    local cmp = require('cmp')
-    cmp.setup ({
-        window = {
+	local cmp = require("cmp")
+	cmp.setup({
+		window = {
 			completion = {
 				border = border("CmpBorder"),
 			},
@@ -48,7 +52,7 @@ function config.cmp()
 				border = border("CmpDocBorder"),
 			},
 		},
-        sorting = {
+		sorting = {
 			comparators = {
 				cmp.config.compare.offset,
 				cmp.config.compare.exact,
@@ -191,7 +195,7 @@ function config.autopairs()
 	local cmp = require("cmp")
 	--cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 	--cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
-    local handlers = require("nvim-autopairs.completion.handlers")
+	local handlers = require("nvim-autopairs.completion.handlers")
 	cmp.event:on(
 		"confirm_done",
 		cmp_autopairs.on_confirm_done({
@@ -213,52 +217,51 @@ function config.autopairs()
 	)
 end
 
-
-function config.bqf()
-	vim.cmd([[
-    hi BqfPreviewBorder guifg=#F2CDCD ctermfg=71
-    hi link BqfPreviewRange Search
-]])
-
-	require("bqf").setup({
-		auto_enable = true,
-		auto_resize_height = true, -- highly recommended enable
-		preview = {
-			win_height = 12,
-			win_vheight = 12,
-			delay_syntax = 80,
-			border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
-			should_preview_cb = function(bufnr, qwinid)
-				local ret = true
-				local bufname = vim.api.nvim_buf_get_name(bufnr)
-				local fsize = vim.fn.getfsize(bufname)
-				if fsize > 100 * 1024 then
-					-- skip file size greater than 100k
-					ret = false
-				elseif bufname:match("^fugitive://") then
-					-- skip fugitive buffer
-					ret = false
-				end
-				return ret
-			end,
-		},
-		-- make `drop` and `tab drop` to become preferred
-		func_map = {
-			drop = "q",
-			openc = "O",
-			split = "<C-s>",
-			tabdrop = "<C-t>",
-			tabc = "",
-			ptogglemode = "z,",
-		},
-		filter = {
-			fzf = {
-				action_for = { ["ctrl-s"] = "split", ["ctrl-t"] = "tab drop" },
-				extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
-			},
-		},
-	})
-end
+--function config.bqf()
+--	vim.cmd([[
+--    hi BqfPreviewBorder guifg=#F2CDCD ctermfg=71
+--    hi link BqfPreviewRange Search
+--]])
+--
+--	require("bqf").setup({
+--		auto_enable = true,
+--		auto_resize_height = true, -- highly recommended enable
+--		preview = {
+--			win_height = 12,
+--			win_vheight = 12,
+--			delay_syntax = 80,
+--			border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+--			should_preview_cb = function(bufnr, qwinid)
+--				local ret = true
+--				local bufname = vim.api.nvim_buf_get_name(bufnr)
+--				local fsize = vim.fn.getfsize(bufname)
+--				if fsize > 100 * 1024 then
+--					-- skip file size greater than 100k
+--					ret = false
+--				elseif bufname:match("^fugitive://") then
+--					-- skip fugitive buffer
+--					ret = false
+--				end
+--				return ret
+--			end,
+--		},
+--		-- make `drop` and `tab drop` to become preferred
+--		func_map = {
+--			drop = "q",
+--			openc = "O",
+--			split = "<C-s>",
+--			tabdrop = "<C-t>",
+--			tabc = "",
+--			ptogglemode = "z,",
+--		},
+--		filter = {
+--			fzf = {
+--				action_for = { ["ctrl-s"] = "split", ["ctrl-t"] = "tab drop" },
+--				extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+--			},
+--		},
+--	})
+--end
 
 function config.mason_install()
 	require("mason-tool-installer").setup({
@@ -295,6 +298,5 @@ function config.mason_install()
 		run_on_start = false,
 	})
 end
-
 
 return config
