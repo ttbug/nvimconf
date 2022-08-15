@@ -14,7 +14,7 @@ function autocmd.nvim_create_augroups(definitions)
 end
 
 function autocmd.load_autocmds()
-    local definitions = {
+	local definitions = {
 		packer = {},
 		bufs = {
 			-- Reload vim config automatically
@@ -44,7 +44,7 @@ function autocmd.load_autocmds()
 			{
 				"BufEnter",
 				"*",
-				[[++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
+				[[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
 			},
 			-- Auto toggle fcitx5
 			-- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
