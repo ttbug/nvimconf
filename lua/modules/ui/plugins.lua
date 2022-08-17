@@ -16,8 +16,14 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui['hoob3rt/lualine.nvim'] = {
     opt = true,
-    after = 'nvim-gps',
+    after = { "nvim-gps", "nvim-navic" },
     config = conf.lualine
+}
+
+ui["SmiteshP/nvim-navic"] = {
+	opt = true,
+	after = "nvim-lspconfig",
+	config = conf.nvim_navic,
 }
 
 ui["SmiteshP/nvim-gps"] = {
