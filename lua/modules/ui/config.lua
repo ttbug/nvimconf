@@ -199,29 +199,29 @@ function config.notify()
 end
 
 function config.lualine()
-	local gps = require("nvim-gps")
-    local navic = require("nvim-navic")
+	--local gps = require("nvim-gps")
+	local navic = require("nvim-navic")
 
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
 		return ok and m.waiting and "✺ " or ""
 	end
 
-    local function code_context()
-		if navic.is_available() and navic.get_location() ~= "" then
-			return navic.get_location()
-		elseif gps.is_available() then
-			return gps.get_location()
-		else
-			return ""
-		end
-	end
+	--local function code_context()
+	--	if navic.is_available() and navic.get_location() ~= "" then
+	--		return navic.get_location()
+	--	elseif gps.is_available() then
+	--		return gps.get_location()
+	--	else
+	--		return ""
+	--	end
+	--end
 
-    local conditions = {
-		check_code_context = function()
-			return gps.is_available() or navic.is_available()
-		end,
-	}
+	--local conditions = {
+	--	check_code_context = function()
+	--		return gps.is_available() or navic.is_available()
+	--	end,
+	--}
 
 	local mini_sections = {
 		lualine_a = {},
@@ -302,9 +302,7 @@ function config.lualine()
 			lualine_a = { "mode" },
 			lualine_b = { { "branch" }, { "diff" } },
 			lualine_c = {
-				--{ "lsp_progress" },
-				--{ gps_content, cond = gps.is_available },
-                { code_context, cond = conditions.check_code_context },
+				{ navic.get_location, cond = navic.is_available },
 			},
 			lualine_x = {
 				{ escape_status },
@@ -744,7 +742,7 @@ function config.nvim_navic()
 			TypeParameter = " ",
 			Namespace = " ",
 			Object = " ",
-            Array = " ",
+			Array = " ",
 			Boolean = " ",
 			Number = " ",
 			Null = "ﳠ ",

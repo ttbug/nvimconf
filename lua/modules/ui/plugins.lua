@@ -1,10 +1,9 @@
 local ui = {}
 local conf = require("modules.ui.config")
 
-ui['kyazdani42/nvim-web-devicons'] = {opt = false}
---ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
+ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["sainnhe/edge"] = { opt = false, config = conf.edge }
-ui['folke/tokyonight.nvim'] = {opt = false, config = conf.tokyonight}
+ui["folke/tokyonight.nvim"] = { opt = false, config = conf.tokyonight }
 --ui["catppuccin/nvim"] = {
 --    opt = false,
 --    as = "catppuccin",
@@ -14,10 +13,10 @@ ui["rcarriga/nvim-notify"] = {
 	opt = false,
 	config = conf.notify,
 }
-ui['hoob3rt/lualine.nvim'] = {
-    opt = true,
-    after = { "nvim-gps", "nvim-navic" },
-    config = conf.lualine
+ui["hoob3rt/lualine.nvim"] = {
+	opt = true,
+	after = { "nvim-navic" },
+	config = conf.lualine,
 }
 
 ui["SmiteshP/nvim-navic"] = {
@@ -26,16 +25,6 @@ ui["SmiteshP/nvim-navic"] = {
 	config = conf.nvim_navic,
 }
 
-ui["SmiteshP/nvim-gps"] = {
-	opt = true,
-	after = "nvim-treesitter",
-	config = conf.nvim_gps,
-}
---ui['arkav/lualine-lsp-progress'] = {
---    opt = true,
---    after = 'nvim-gps',
---}
---ui['glepnir/dashboard-nvim'] = {opt = true, event = "BufWinEnter"}
 ui["goolord/alpha-nvim"] = {
 	opt = true,
 	event = "BufWinEnter",
@@ -46,27 +35,27 @@ ui["kyazdani42/nvim-tree.lua"] = {
 	cmd = { "NvimTreeToggle" },
 	config = conf.nvim_tree,
 }
-ui['lewis6991/gitsigns.nvim'] = {
-    opt = true,
-    event = {'BufReadPost', 'BufNewFile'},
-    config = conf.gitsigns,
-    requires = {'nvim-lua/plenary.nvim', opt = true}
+ui["lewis6991/gitsigns.nvim"] = {
+	opt = true,
+	event = { "BufReadPost", "BufNewFile" },
+	config = conf.gitsigns,
+	requires = { "nvim-lua/plenary.nvim", opt = true },
 }
-ui['lukas-reineke/indent-blankline.nvim'] = {
-    opt = true,
-    event = 'BufReadPost',
-    config = conf.indent_blankline
+ui["lukas-reineke/indent-blankline.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	config = conf.indent_blankline,
 }
-ui['akinsho/bufferline.nvim'] = {
-    opt = true,
-    tag = "*",
-    event = 'BufReadPost',
-    config = conf.nvim_bufferline
+ui["akinsho/bufferline.nvim"] = {
+	opt = true,
+	tag = "*",
+	event = "BufReadPost",
+	config = conf.nvim_bufferline,
 }
 ui["dstein64/nvim-scrollview"] = {
-    opt=true,
-    event = { "BufReadPost" },
-    config = conf.scrollview,
+	opt = true,
+	event = { "BufReadPost" },
+	config = conf.scrollview,
 }
 --ui["mbbill/undotree"] = {
 --	opt = true,
@@ -76,7 +65,7 @@ ui["dstein64/nvim-scrollview"] = {
 ui["j-hui/fidget.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
-    config = conf.fidget,
+	config = conf.fidget,
 }
 
 return ui

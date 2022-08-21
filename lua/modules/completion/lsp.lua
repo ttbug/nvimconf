@@ -5,11 +5,11 @@ vim.cmd([[packadd lsp_signature.nvim]])
 vim.cmd([[packadd lspsaga.nvim]])
 vim.cmd([[packadd cmp-nvim-lsp]])
 --vim.cmd([[packadd aerial.nvim]])
-vim.cmd([[packadd vim-illuminate]])
+--vim.cmd([[packadd vim-illuminate]])
 vim.cmd([[packadd nvim-navic]])
 
 local nvim_lsp = require("lspconfig")
-local saga = require("lspsaga")
+--local saga = require("lspsaga")
 --local lsp_installer = require("nvim-lsp-installer")
 
 local mason = require("mason")
@@ -69,7 +69,7 @@ local function custom_attach(client, bufnr)
 		handler_opts = { "double" },
 	})
 	--require("aerial").on_attach(client)
-	require("illuminate").on_attach(client)
+	--require("illuminate").on_attach(client)
 	require("nvim-navic").attach(client, bufnr)
 end
 
