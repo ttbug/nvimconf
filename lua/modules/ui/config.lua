@@ -185,6 +185,8 @@ function config.notify()
 		background_colour = "Normal",
 		---@usage minimum width for notification windows
 		minimum_width = 50,
+        ---@usage notifications with level lower than this would be ignored. [ERROR > WARN > INFO > DEBUG > TRACE]
+		level = "TRACE",
 		---@usage Icons for the different levels
 		icons = {
 			ERROR = "",
@@ -222,6 +224,16 @@ function config.lualine()
 	--		return gps.is_available() or navic.is_available()
 	--	end,
 	--}
+    local function diff_source()
+		local gitsigns = vim.b.gitsigns_status_dict
+		if gitsigns then
+			return {
+				added = gitsigns.added,
+				modified = gitsigns.changed,
+				removed = gitsigns.removed,
+			}
+		end
+	end
 
 	local mini_sections = {
 		lualine_a = {},
@@ -300,7 +312,7 @@ function config.lualine()
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { { "branch" }, { "diff" } },
+			lualine_b = { { "branch" }, { "diff", source = diff_source} },
 			lualine_c = {
 				{ navic.get_location, cond = navic.is_available },
 			},
@@ -582,7 +594,7 @@ function config.nvim_bufferline()
 					padding = 1,
 				},
 			},
-			diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
 			end,
 		},
