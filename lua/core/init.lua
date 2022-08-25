@@ -107,10 +107,10 @@ local load_core = function()
 	require("core.event")
 	pack.load_compile()
 
-    -- vim.cmd [[colorscheme edge]]
-    --vim.cmd [[colorscheme catppuccin]]
-    -- vim.cmd [[colorscheme kanagawa]]
-    vim.cmd[[colorscheme tokyonight]]
+	-- vim.cmd [[colorscheme edge]]
+	vim.cmd([[colorscheme catppuccin]])
+	-- vim.cmd [[colorscheme kanagawa]]
+	-- vim.cmd[[colorscheme tokyonight]]
 end
 
 load_core()

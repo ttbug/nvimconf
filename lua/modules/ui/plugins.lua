@@ -4,11 +4,11 @@ local conf = require("modules.ui.config")
 ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["sainnhe/edge"] = { opt = false, config = conf.edge }
 ui["folke/tokyonight.nvim"] = { opt = false, config = conf.tokyonight }
---ui["catppuccin/nvim"] = {
---    opt = false,
---    as = "catppuccin",
---    config = conf.catppuccin
---}
+ui["catppuccin/nvim"] = {
+	opt = false,
+	as = "catppuccin",
+	config = conf.catppuccin,
+}
 ui["rcarriga/nvim-notify"] = {
 	opt = false,
 	config = conf.notify,
