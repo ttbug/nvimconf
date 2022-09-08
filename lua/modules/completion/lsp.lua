@@ -107,7 +107,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 			root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
 			flags = { allow_incremental_sync = true, debounce_text_changes = 150 },
 			capabilities = capabilities,
-			--cmd = { "gopls", "-remote=auto" },
+			cmd = { "gopls", "-remote=auto" },
 			settings = {
 				gopls = {
 					usePlaceholders = true,
