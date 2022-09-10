@@ -47,8 +47,7 @@ function config.lspsaga()
 
 	local colors = get_palette()
 
-	local saga = require("lspsaga")
-	saga.init_lsp_saga({
+	require("lspsaga").init_lsp_saga({
 		diagnostic_header = { " ", " ", "  ", " " },
 		custom_kind = {
 			File = { " ", colors.rosewater },
@@ -109,21 +108,21 @@ function config.cmp()
 	end
 
 	local cmp_window = require("cmp.utils.window")
-    cmp_window.info_ = cmp_window.info
+	cmp_window.info_ = cmp_window.info
 	cmp_window.info = function(self)
 		local info = self:info_()
 		info.scrollable = false
 		return info
 	end
 
-    local compare = require("cmp.config.compare")
+	--local compare = require("cmp.config.compare")
 
 	local cmp = require("cmp")
 	cmp.setup({
 		window = {
 			completion = {
 				border = border("CmpBorder"),
-                winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+				winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
 			},
 			documentation = {
 				border = border("CmpDocBorder"),
@@ -253,7 +252,7 @@ function config.luasnip()
 	require("luasnip").config.set_config({
 		history = true,
 		updateevents = "TextChanged,TextChangedI",
-        delete_check_events = "TextChanged,InsertLeave",
+		delete_check_events = "TextChanged,InsertLeave",
 	})
 	require("luasnip.loaders.from_lua").lazy_load()
 	require("luasnip.loaders.from_vscode").lazy_load()
