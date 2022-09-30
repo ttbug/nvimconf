@@ -337,7 +337,7 @@ function config.mason_install()
 		-- start; they should be the names Mason uses for each tool
 		ensure_installed = {
 			-- you can turn off/on auto_update per tool
-			"editorconfig-checker",
+			--"editorconfig-checker",
 
 			--"stylua",
 
@@ -350,7 +350,7 @@ function config.mason_install()
 			"shellcheck",
 			"shfmt",
 
-			"vint",
+			--"vint",
 		},
 
 		-- if set to true this will check each tool for updates. If updates
