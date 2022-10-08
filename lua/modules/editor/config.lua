@@ -63,7 +63,12 @@ function config.nvim_treesitter()
 			"yang",
 			"zig",
 		},
-		highlight = { enable = true, disable = { "vim" } },
+		--highlight = { enable = true, disable = { "vim" } },
+        highlight = {
+			enable = true,
+			disable = { "vim", "help" },
+			additional_vim_regex_highlighting = false,
+		},
 		textobjects = {
 			select = {
 				enable = true,
@@ -110,9 +115,9 @@ function config.nvim_treesitter()
 	end
 end
 
-function config.matchup()
-	vim.cmd([[let g:matchup_matchparen_offscreen = {'method': 'popup'}]])
-end
+--function config.matchup()
+--	vim.cmd([[let g:matchup_matchparen_offscreen = {'method': 'popup'}]])
+--end
 
 function config.nvim_gps()
 	require("nvim-gps").setup({
@@ -268,6 +273,21 @@ function config.dapui()
 				position = "bottom",
 			},
 		},
+        controls = {
+			enabled = true,
+			-- Display controls in this session
+			element = "repl",
+			icons = {
+				pause = "",
+				play = "",
+				step_into = "",
+				step_over = "",
+				step_out = "",
+				step_back = "",
+				run_last = "↻",
+				terminate = "ﱢ",
+			},
+		},
 		floating = {
 			max_height = nil,
 			max_width = nil,
@@ -278,7 +298,8 @@ function config.dapui()
 end
 
 function config.dap()
-	vim.cmd([[packadd nvim-dap-ui]])
+	--vim.cmd([[packadd nvim-dap-ui]])
+    vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
 
@@ -384,7 +405,8 @@ function config.dap()
 
 	dap.adapters.python = {
 		type = "executable",
-		command = os.getenv("HOME") .. "/.local/share/nvim/dapinstall/python/bin/python",
+		-- command = os.getenv("HOME") .. "/.local/share/nvim/dapinstall/python/bin/python",
+        command = "/usr/bin/python",
 		args = { "-m", "debugpy.adapter" },
 	}
 	dap.configurations.python = {

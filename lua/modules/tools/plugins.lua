@@ -66,10 +66,10 @@ tools["gelguy/wilder.nvim"] = {
 
 -- tools['nathom/filetype.nvim'] = {opt = false}
 tools['mg979/vim-visual-multi'] = {opt = false}
-tools["nathom/filetype.nvim"] = {
-	opt = false,
-	config = conf.filetype,
-}
+--tools["nathom/filetype.nvim"] = {
+--	opt = false,
+--	config = conf.filetype,
+--}
 tools['folke/todo-comments.nvim'] = {
     opt = false,
     requires = {{'nvim-lua/plenary.nvim', opt = false}},

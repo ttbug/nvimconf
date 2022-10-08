@@ -82,13 +82,101 @@ function config.lspsaga()
 			StaticMethod = { "ﴂ ", colors.peach },
 			Macro = { " ", colors.red },
 		},
+		symbol_in_winbar = {
+			click_support = function(node, clicks, button, modifiers)
+				-- To see all avaiable details: vim.pretty_print(node)
+				local st = node.range.start
+				local en = node.range["end"]
+				if button == "l" then
+					if clicks == 2 then
+					-- double left click to do nothing
+					else -- jump to node's starting line+char
+						vim.fn.cursor(st.line + 1, st.character + 1)
+					end
+				elseif button == "r" then
+					if modifiers == "s" then
+						print("lspsaga") -- shift right click to print "lspsaga"
+					end -- jump to node's ending line+char
+					vim.fn.cursor(en.line + 1, en.character + 1)
+				elseif button == "m" then
+					-- middle click to visual select node
+					vim.fn.cursor(st.line + 1, st.character + 1)
+					--vim.cmd("normal v")
+                    vim.api.nvim_command([[normal v]])
+					vim.fn.cursor(en.line + 1, en.character + 1)
+				end
+			end,
+		},
+	})
+
+	-- Example:
+	local function get_file_name(include_path)
+		local file_name = require("lspsaga.symbolwinbar").get_file_name()
+		if vim.fn.bufname("%") == "" then
+			return ""
+		end
+		if include_path == false then
+			return file_name
+		end
+		-- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
+		local sep = vim.loop.os_uname().sysname == "Windows" and "\\" or "/"
+		local path_list = vim.split(string.gsub(vim.fn.expand("%:~:.:h"), "%%", ""), sep)
+		local file_path = ""
+		for _, cur in ipairs(path_list) do
+			file_path = (cur == "." or cur == "~") and ""
+				or file_path .. cur .. " " .. "%#LspSagaWinbarSep#>%*" .. " %*"
+		end
+		return file_path .. file_name
+	end
+
+	local function config_winbar_or_statusline()
+		local exclude = {
+			["terminal"] = true,
+			["toggleterm"] = true,
+			["prompt"] = true,
+			["NvimTree"] = true,
+			["help"] = true,
+		} -- Ignore float windows and exclude filetype
+		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+			vim.wo.winbar = ""
+		else
+			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
+			local sym
+			if ok then
+				sym = lspsaga.get_symbol_node()
+			end
+			local win_val = ""
+			win_val = get_file_name(true) -- set to true to include path
+			if sym ~= nil then
+				win_val = win_val .. sym
+			end
+			vim.wo.winbar = win_val
+		end
+	end
+
+	local events = { "BufEnter", "BufWinEnter", "CursorMoved" }
+
+	vim.api.nvim_create_autocmd(events, {
+		pattern = "*",
+		callback = function()
+			config_winbar_or_statusline()
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "LspsagaUpdateSymbol",
+		callback = function()
+			config_winbar_or_statusline()
+		end,
 	})
 end
 
 function config.cmp()
+	-- vim.cmd([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
 	end
+
 	local has_words_before = function()
 		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -108,6 +196,7 @@ function config.cmp()
 	end
 
 	local cmp_window = require("cmp.utils.window")
+
 	cmp_window.info_ = cmp_window.info
 	cmp_window.info = function(self)
 		local info = self:info_()
@@ -115,9 +204,10 @@ function config.cmp()
 		return info
 	end
 
-	--local compare = require("cmp.config.compare")
-
+	local compare = require("cmp.config.compare")
+	local lspkind = require("lspkind")
 	local cmp = require("cmp")
+
 	cmp.setup({
 		window = {
 			completion = {
@@ -129,63 +219,28 @@ function config.cmp()
 			},
 		},
 		sorting = {
+			priority_weight = 2,
 			comparators = {
-				cmp.config.compare.offset,
-				cmp.config.compare.exact,
-				cmp.config.compare.score,
+				require("copilot_cmp.comparators").prioritize,
+				require("copilot_cmp.comparators").score,
+				-- require("cmp_tabnine.compare"),
+				compare.offset,
+				compare.exact,
+				compare.score,
 				require("cmp-under-comparator").under,
-				cmp.config.compare.kind,
-				cmp.config.compare.sort_text,
-				cmp.config.compare.length,
-				cmp.config.compare.order,
+				compare.kind,
+				compare.sort_text,
+				compare.length,
+				compare.order,
 			},
 		},
 		formatting = {
-			format = function(entry, vim_item)
-				local lspkind_icons = {
-					Text = "",
-					Method = "",
-					Function = "",
-					Constructor = "",
-					Field = "",
-					Variable = "",
-					Class = "ﴯ",
-					Interface = "",
-					Module = "",
-					Property = "ﰠ",
-					Unit = "",
-					Value = "",
-					Enum = "",
-					Keyword = "",
-					Snippet = "",
-					Color = "",
-					File = "",
-					Reference = "",
-					Folder = "",
-					EnumMember = "",
-					Constant = "",
-					Struct = "",
-					Event = "",
-					Operator = "",
-					TypeParameter = "",
-				}
-				-- load lspkind icons
-				vim_item.kind = string.format("%s %s", lspkind_icons[vim_item.kind], vim_item.kind)
-
-				vim_item.menu = ({
-					-- cmp_tabnine = "[TN]",
-					buffer = "[BUF]",
-					orgmode = "[ORG]",
-					nvim_lsp = "[LSP]",
-					nvim_lua = "[LUA]",
-					path = "[PATH]",
-					tmux = "[TMUX]",
-					luasnip = "[SNIP]",
-					spell = "[SPELL]",
-				})[entry.source.name]
-
-				return vim_item
-			end,
+			format = lspkind.cmp_format({
+				mode = "symbol_text",
+				maxwidth = 50,
+				ellipsis_char = "...",
+				symbol_map = { Copilot = "" },
+			}),
 		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
@@ -198,7 +253,7 @@ function config.cmp()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-                elseif require("luasnip").expand_or_jumpable() then
+				elseif require("luasnip").expand_or_jumpable() then
 					vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
 				elseif has_words_before() then
 					cmp.complete()
@@ -209,12 +264,12 @@ function config.cmp()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-                elseif require("luasnip").jumpable(-1) then
+				elseif require("luasnip").jumpable(-1) then
 					vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
 				else
 					fallback()
 				end
-            end, { "i", "s" }),
+			end, { "i", "s" }),
 		}),
 		snippet = {
 			expand = function(args)
@@ -232,13 +287,18 @@ function config.cmp()
 			{ name = "orgmode" },
 			{ name = "buffer" },
 			{ name = "latex_symbols" },
-			-- {name = 'cmp_tabnine'}
+			{ name = "copilot" },
+			-- { name = "cmp_tabnine" },
 		},
 	})
 end
 
 function config.luasnip()
-	vim.o.runtimepath = vim.o.runtimepath .. "," .. os.getenv("HOME") .. "/.config/nvim/my-snippets/,"
+	--vim.o.runtimepath = vim.o.runtimepath .. "," .. os.getenv("HOME") .. "/.config/nvim/my-snippets/,"
+    local snippet_path = os.getenv("HOME") .. "/.config/nvim/my-snippets/"
+	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
+		vim.opt.rtp:append(snippet_path)
+	end
 	require("luasnip").config.set_config({
 		history = true,
 		updateevents = "TextChanged,TextChangedI",

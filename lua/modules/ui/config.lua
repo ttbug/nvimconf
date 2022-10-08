@@ -564,19 +564,19 @@ function config.nvim_bufferline()
 				custom = {
 					mocha = {
 						-- Warnings
-						warning = { fg = cp.yellow },
-						warning_visible = { fg = cp.yellow },
-						warning_selected = { fg = cp.yellow },
-						warning_diagnostic = { fg = cp.yellow },
-						warning_diagnostic_visible = { fg = cp.yellow },
-						warning_diagnostic_selected = { fg = cp.yellow },
-						-- Infos
-						info = { fg = cp.sky },
-						info_visible = { fg = cp.sky },
-						info_selected = { fg = cp.sky },
-						info_diagnostic = { fg = cp.sky },
-						info_diagnostic_visible = { fg = cp.sky },
-						info_diagnostic_selected = { fg = cp.sky },
+					--	warning = { fg = cp.yellow },
+					--	warning_visible = { fg = cp.yellow },
+					--	warning_selected = { fg = cp.yellow },
+					--	warning_diagnostic = { fg = cp.yellow },
+					--	warning_diagnostic_visible = { fg = cp.yellow },
+					--	warning_diagnostic_selected = { fg = cp.yellow },
+					--	-- Infos
+					--	info = { fg = cp.sky },
+					--	info_visible = { fg = cp.sky },
+					--	info_selected = { fg = cp.sky },
+					--	info_diagnostic = { fg = cp.sky },
+					--	info_diagnostic_visible = { fg = cp.sky },
+					--	info_diagnostic_selected = { fg = cp.sky },
 						-- Hint
 						hint = { fg = cp.rosewater },
 						hint_visible = { fg = cp.rosewater },
@@ -713,7 +713,11 @@ function config.indent_blankline()
 		space_char_blankline = " ",
 	})
 	-- because lazy load indent-blankline so need readd this autocmd
-	vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
+	--vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
+    --vim.api.nvim_create_autocmd("CursorMoved", {
+	--	pattern = "*",
+	--	command = "IndentBlanklineRefresh",
+	--})
 end
 
 function config.scrollview()
@@ -806,29 +810,29 @@ function config.catppuccin()
 		return cp
 	end
 
-	local function set_auto_compile(enable_compile)
-		-- Setting auto-compile for catppuccin.
-		if enable_compile then
-			vim.api.nvim_create_augroup("_catppuccin", { clear = true })
+	--local function set_auto_compile(enable_compile)
+	--	-- Setting auto-compile for catppuccin.
+	--	if enable_compile then
+	--		vim.api.nvim_create_augroup("_catppuccin", { clear = true })
 
-			vim.api.nvim_create_autocmd("User", {
-				group = "_catppuccin",
-				pattern = "PackerCompileDone",
-				callback = function()
-					require("catppuccin").compile()
-					vim.defer_fn(function()
-						vim.cmd([[colorscheme catppuccin]])
-					end, 0)
-				end,
-			})
-		end
-	end
+	--		vim.api.nvim_create_autocmd("User", {
+	--			group = "_catppuccin",
+	--			pattern = "PackerCompileDone",
+	--			callback = function()
+	--				require("catppuccin").compile()
+	--				vim.defer_fn(function()
+	--					vim.cmd([[colorscheme catppuccin]])
+	--				end, 0)
+	--			end,
+	--		})
+	--	end
+	--end
 
 	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
 	local cp = get_modified_palette()
 
-	local enable_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
-	set_auto_compile(enable_compile)
+	--local enable_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
+	--set_auto_compile(enable_compile)
 
 	require("catppuccin").setup({
 		dim_inactive = {
@@ -840,10 +844,11 @@ function config.catppuccin()
 		},
 		transparent_background = false,
 		term_colors = true,
-		compile = {
-			enabled = enable_compile,
-			path = vim.fn.stdpath("cache") .. "/catppuccin",
-		},
+		--compile = {
+		--	enabled = enable_compile,
+		--	path = vim.fn.stdpath("cache") .. "/catppuccin",
+		--},
+        compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
@@ -973,35 +978,35 @@ function config.catppuccin()
 				FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
 				-- For treesitter.
-				TSField = { fg = cp.rosewater },
-				TSProperty = { fg = cp.yellow },
+				--TSField = { fg = cp.rosewater },
+				--TSProperty = { fg = cp.yellow },
 
-				TSInclude = { fg = cp.teal },
-				TSOperator = { fg = cp.sky },
-				TSKeywordOperator = { fg = cp.sky },
-				TSPunctSpecial = { fg = cp.maroon },
+				--TSInclude = { fg = cp.teal },
+				--TSOperator = { fg = cp.sky },
+				--TSKeywordOperator = { fg = cp.sky },
+				--TSPunctSpecial = { fg = cp.maroon },
 
 				-- TSFloat = { fg = cp.peach },
 				-- TSNumber = { fg = cp.peach },
 				-- TSBoolean = { fg = cp.peach },
 
-				TSConstructor = { fg = cp.lavender },
+				--TSConstructor = { fg = cp.lavender },
 				-- TSConstant = { fg = cp.peach },
 				-- TSConditional = { fg = cp.mauve },
 				-- TSRepeat = { fg = cp.mauve },
-				TSException = { fg = cp.peach },
+				--TSException = { fg = cp.peach },
 
-				TSConstBuiltin = { fg = cp.lavender },
+				--TSConstBuiltin = { fg = cp.lavender },
 				-- TSFuncBuiltin = { fg = cp.peach, style = { "italic" } },
 				-- TSTypeBuiltin = { fg = cp.yellow, style = { "italic" } },
-				TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
+				--TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
 
 				-- TSFunction = { fg = cp.blue },
-				TSFuncMacro = { fg = cp.red, style = {} },
-				TSParameter = { fg = cp.rosewater },
-				TSKeywordFunction = { fg = cp.maroon },
-				TSKeyword = { fg = cp.red },
-				TSKeywordReturn = { fg = cp.pink, style = {} },
+				--TSFuncMacro = { fg = cp.red, style = {} },
+				--TSParameter = { fg = cp.rosewater },
+				--TSKeywordFunction = { fg = cp.maroon },
+				--TSKeyword = { fg = cp.red },
+				--TSKeywordReturn = { fg = cp.pink, style = {} },
 
 				-- TSNote = { fg = cp.base, bg = cp.blue },
 				-- TSWarning = { fg = cp.base, bg = cp.yellow },
@@ -1009,19 +1014,19 @@ function config.catppuccin()
 				-- TSConstMacro = { fg = cp.mauve },
 
 				-- TSLabel = { fg = cp.blue },
-				TSMethod = { style = { "italic" } },
-				TSNamespace = { fg = cp.rosewater },
+				--TSMethod = { style = { "italic" } },
+				--TSNamespace = { fg = cp.rosewater },
 
-				TSPunctDelimiter = { fg = cp.teal },
-				TSPunctBracket = { fg = cp.overlay2 },
-				-- TSString = { fg = cp.green },
-				-- TSStringRegex = { fg = cp.peach },
-				-- TSType = { fg = cp.yellow },
-				TSVariable = { fg = cp.text },
-				TSTagAttribute = { fg = cp.mauve, style = { "italic" } },
-				TSTag = { fg = cp.peach },
-				TSTagDelimiter = { fg = cp.maroon },
-				TSText = { fg = cp.text },
+				--TSPunctDelimiter = { fg = cp.teal },
+				--TSPunctBracket = { fg = cp.overlay2 },
+				---- TSString = { fg = cp.green },
+				---- TSStringRegex = { fg = cp.peach },
+				---- TSType = { fg = cp.yellow },
+				--TSVariable = { fg = cp.text },
+				--TSTagAttribute = { fg = cp.mauve, style = { "italic" } },
+				--TSTag = { fg = cp.peach },
+				--TSTagDelimiter = { fg = cp.maroon },
+				--TSText = { fg = cp.text },
 
 				-- TSURI = { fg = cp.rosewater, style = { "italic", "underline" } },
 				-- TSLiteral = { fg = cp.teal, style = { "italic" } },
@@ -1031,20 +1036,101 @@ function config.catppuccin()
 				-- TSStrong = { fg = cp.maroon, style = { "bold" } },
 				-- TSStringEscape = { fg = cp.pink },
 
-				bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
-				bashTSParameter = { fg = cp.yellow, style = { "italic" } },
+				--bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
+				--bashTSParameter = { fg = cp.yellow, style = { "italic" } },
 
-				luaTSField = { fg = cp.lavender },
-				luaTSConstructor = { fg = cp.flamingo },
+				--luaTSField = { fg = cp.lavender },
+				--luaTSConstructor = { fg = cp.flamingo },
 
-				javaTSConstant = { fg = cp.teal },
+				--javaTSConstant = { fg = cp.teal },
 
-				typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
+				--typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
 
-				cssTSType = { fg = cp.lavender },
-				cssTSProperty = { fg = cp.yellow, style = { "italic" } },
+				--cssTSType = { fg = cp.lavender },
+				--cssTSProperty = { fg = cp.yellow, style = { "italic" } },
 
-				cppTSProperty = { fg = cp.text },
+				--cppTSProperty = { fg = cp.text },
+                ["@field"] = { fg = cp.rosewater },
+				["@property"] = { fg = cp.yellow },
+
+				["@include"] = { fg = cp.teal },
+				["@operator"] = { fg = cp.sky },
+				["@keyword.operator"] = { fg = cp.sky },
+				["@punctuation.special"] = { fg = cp.maroon },
+
+				-- ["@float"] = { fg = cp.peach },
+				-- ["@number"] = { fg = cp.peach },
+				-- ["@boolean"] = { fg = cp.peach },
+
+				["@constructor"] = { fg = cp.lavender },
+				-- ["@constant"] = { fg = cp.peach },
+				-- ["@conditional"] = { fg = cp.mauve },
+				-- ["@repeat"] = { fg = cp.mauve },
+				["@exception"] = { fg = cp.peach },
+
+				["@constant.builtin"] = { fg = cp.lavender },
+				-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
+				-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
+				["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
+
+				-- ["@function"] = { fg = cp.blue },
+				["@function.macro"] = { fg = cp.red, style = {} },
+				["@parameter"] = { fg = cp.rosewater },
+				["@keyword.function"] = { fg = cp.maroon },
+				["@keyword"] = { fg = cp.red },
+				["@keyword.return"] = { fg = cp.pink, style = {} },
+
+				-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
+				-- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
+				-- ["@text.danger"] = { fg = cp.base, bg = cp.red },
+				-- ["@constant.macro"] = { fg = cp.mauve },
+
+				-- ["@label"] = { fg = cp.blue },
+				["@method"] = { style = { "italic" } },
+				["@namespace"] = { fg = cp.rosewater, style = {} },
+
+				["@punctuation.delimiter"] = { fg = cp.teal },
+				["@punctuation.bracket"] = { fg = cp.overlay2 },
+				-- ["@string"] = { fg = cp.green },
+				-- ["@string.regex"] = { fg = cp.peach },
+				-- ["@type"] = { fg = cp.yellow },
+				["@variable"] = { fg = cp.text },
+				["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
+				["@tag"] = { fg = cp.peach },
+				["@tag.delimiter"] = { fg = cp.maroon },
+				["@text"] = { fg = cp.text },
+
+				-- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
+				-- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
+				-- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
+				-- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
+				-- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
+				-- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
+				-- ["@string.escape"] = { fg = cp.pink },
+
+				-- ["@property.toml"] = { fg = cp.blue },
+				-- ["@field.yaml"] = { fg = cp.blue },
+
+				-- ["@label.json"] = { fg = cp.blue },
+
+				["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
+				["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
+
+				["@field.lua"] = { fg = cp.lavender },
+				["@constructor.lua"] = { fg = cp.flamingo },
+
+				["@constant.java"] = { fg = cp.teal },
+
+				["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
+				-- ["@constructor.typescript"] = { fg = cp.lavender },
+
+				-- ["@constructor.tsx"] = { fg = cp.lavender },
+				-- ["@tag.attribute.tsx"] = { fg = cp.mauve },
+
+				["@type.css"] = { fg = cp.lavender },
+				["@property.css"] = { fg = cp.yellow, style = { "italic" } },
+
+				["@property.cpp"] = { fg = cp.text },
 			},
 		},
 	})

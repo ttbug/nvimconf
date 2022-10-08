@@ -1,12 +1,15 @@
 local formatting = require("modules.completion.formatting")
 
 --vim.cmd([[packadd nvim-lsp-installer]])
-vim.cmd([[packadd lsp_signature.nvim]])
-vim.cmd([[packadd lspsaga.nvim]])
-vim.cmd([[packadd cmp-nvim-lsp]])
+--vim.cmd([[packadd lsp_signature.nvim]])
+--vim.cmd([[packadd lspsaga.nvim]])
+--vim.cmd([[packadd cmp-nvim-lsp]])
+vim.api.nvim_command([[packadd lsp_signature.nvim]])
+vim.api.nvim_command([[packadd lspsaga.nvim]])
+vim.api.nvim_command([[packadd cmp-nvim-lsp]])
 --vim.cmd([[packadd aerial.nvim]])
 --vim.cmd([[packadd vim-illuminate]])
-vim.cmd([[packadd nvim-navic]])
+--vim.cmd([[packadd nvim-navic]])
 
 local nvim_lsp = require("lspconfig")
 --local saga = require("lspsaga")
@@ -31,7 +34,7 @@ mason_lsp.setup({
 		"lua-language-server",
 		"clangd",
 		"gopls",
-		"pyright",
+		--"pyright",
 	},
 })
 
@@ -251,7 +254,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 				},
 			},
 		})
-	else
+    elseif server ~= "efm" then
 		nvim_lsp[server].setup({
 			capabilities = capabilities,
 			on_attach = custom_attach,

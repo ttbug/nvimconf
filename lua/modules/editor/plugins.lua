@@ -42,7 +42,7 @@ editor["windwp/nvim-ts-autotag"] = {
 editor["andymass/vim-matchup"] = {
 	opt = true,
 	after = "nvim-treesitter",
-	config = conf.matchup,
+	--config = conf.matchup,
 }
 --editor["rhysd/accelerated-jk"] = { opt = true, event = "BufWinEnter" }
 editor["rainbowhxch/accelerated-jk.nvim"] = { opt = true, event = "BufWinEnter", config = conf.accelerated_jk }

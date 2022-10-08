@@ -23,7 +23,7 @@ local createdir = function()
 end
 
 local disable_distribution_plugins = function()
-	vim.g.did_load_filetypes = 1
+	-- vim.g.did_load_filetypes = 1
 	vim.g.did_load_fzf = 1
 	vim.g.did_load_gtags = 1
 	vim.g.did_load_gzip = 1
@@ -53,7 +53,8 @@ local leader_map = function()
 end
 
 local neovide_config = function()
-	vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font:h15]])
+	--vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font:h15]])
+    vim.api.nvim_set_option_value("guifont", "JetBrainsMono Nerd Font:h15", {})
 	vim.g.neovide_refresh_rate = 120
 	vim.g.neovide_cursor_vfx_mode = "railgun"
 	vim.g.neovide_no_idle = true
@@ -66,28 +67,36 @@ local neovide_config = function()
 	vim.g.neovide_cursor_vfx_particle_density = 5.0
 end
 
-local function check_conda()
-	local venv = os.getenv("CONDA_PREFIX")
-	if venv then
-		vim.g.python3_host_prog = venv .. "/bin/python"
-	end
-end
+--local function check_conda()
+--	local venv = os.getenv("CONDA_PREFIX")
+--	if venv then
+--		vim.g.python3_host_prog = venv .. "/bin/python"
+--	end
+--end
 
 local clipboard_config = function()
-	vim.cmd([[
-    let g:clipboard = {
-          \   'name': 'win32yank-wsl',
-          \   'copy': {
-          \      '+': 'win32yank.exe -i --crlf',
-          \      '*': 'win32yank.exe -i --crlf',
-          \    },
-          \   'paste': {
-          \      '+': 'win32yank.exe -o --lf',
-          \      '*': 'win32yank.exe -o --lf',
-          \   },
-          \   'cache_enabled': 0,
-          \ }
-    ]])
+
+    if global.is_mac then
+		vim.g.clipboard = {
+			name = "macOS-clipboard",
+			copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
+			paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
+			cache_enabled = 0,
+		}
+	elseif global.is_wsl then
+		vim.g.clipboard = {
+			name = "win32yank-wsl",
+			copy = {
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
+			},
+			paste = {
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
+			},
+			cache_enabled = 0,
+		}
+	end
 end
 
 local load_core = function()
@@ -108,7 +117,8 @@ local load_core = function()
 	pack.load_compile()
 
 	-- vim.cmd [[colorscheme edge]]
-	vim.cmd([[colorscheme catppuccin]])
+	--vim.cmd([[colorscheme catppuccin]])
+    vim.api.nvim_command([[colorscheme catppuccin]])
 	-- vim.cmd [[colorscheme kanagawa]]
 	-- vim.cmd[[colorscheme tokyonight]]
 end
