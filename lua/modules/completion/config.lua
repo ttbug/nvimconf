@@ -83,6 +83,15 @@ function config.lspsaga()
 			Macro = { " ", colors.red },
 		},
 		symbol_in_winbar = {
+            enable = true,
+			in_custom = false,
+			separator = "  ",
+			show_file = false,
+			-- define how to customize filename, eg: %:., %
+			-- if not set, use default value `%:t`
+			-- more information see `vim.fn.expand` or `expand`
+			-- ## only valid after set `show_file = true`
+			file_formatter = "",
 			click_support = function(node, clicks, button, modifiers)
 				-- To see all avaiable details: vim.pretty_print(node)
 				local st = node.range.start

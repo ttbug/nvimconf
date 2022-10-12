@@ -151,29 +151,12 @@ function config.notify()
 end
 
 function config.lualine()
-	--local gps = require("nvim-gps")
-	local navic = require("nvim-navic")
 
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
 		return ok and m.waiting and "✺ " or ""
 	end
 
-	--local function code_context()
-	--	if navic.is_available() and navic.get_location() ~= "" then
-	--		return navic.get_location()
-	--	elseif gps.is_available() then
-	--		return gps.get_location()
-	--	else
-	--		return ""
-	--	end
-	--end
-
-	--local conditions = {
-	--	check_code_context = function()
-	--		return gps.is_available() or navic.is_available()
-	--	end,
-	--}
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
 		if gitsigns then
@@ -264,9 +247,7 @@ function config.lualine()
 		sections = {
 			lualine_a = { "mode" },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = {
-				{ navic.get_location, cond = navic.is_available },
-			},
+			lualine_c = {},
 			lualine_x = {
 				{ escape_status },
 				{
@@ -337,10 +318,6 @@ function config.nvim_gps()
 end
 
 function config.nvim_tree()
-	--vim.g.root_folder_modifier = ":e"
-	--vim.g.icon_padding = " "
-	--vim.g.symlink_arror = "  "
-	--vim.g.respect_buf_cwd = 1
 
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
@@ -712,12 +689,6 @@ function config.indent_blankline()
 		},
 		space_char_blankline = " ",
 	})
-	-- because lazy load indent-blankline so need readd this autocmd
-	--vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
-    --vim.api.nvim_create_autocmd("CursorMoved", {
-	--	pattern = "*",
-	--	command = "IndentBlanklineRefresh",
-	--})
 end
 
 function config.scrollview()
@@ -730,44 +701,6 @@ function config.fidget()
 	})
 end
 
-function config.nvim_navic()
-	vim.g.navic_silence = true
-
-	require("nvim-navic").setup({
-		icons = {
-			Method = " ",
-			Function = " ",
-			Constructor = " ",
-			Field = " ",
-			Variable = " ",
-			Class = "ﴯ ",
-			Interface = " ",
-			Module = " ",
-			Property = "ﰠ ",
-			Enum = " ",
-			File = " ",
-			EnumMember = " ",
-			Constant = " ",
-			Struct = " ",
-			Event = " ",
-			Operator = " ",
-			TypeParameter = " ",
-			Namespace = " ",
-			Object = " ",
-			Array = " ",
-			Boolean = " ",
-			Number = " ",
-			Null = "ﳠ ",
-			Key = " ",
-			String = " ",
-			Package = " ",
-		},
-		highlight = false,
-		separator = " > ",
-		depth_limit = 0,
-		depth_limit_indicator = "..",
-	})
-end
 
 function config.catppuccin()
 	local function get_modified_palette()
@@ -810,29 +743,8 @@ function config.catppuccin()
 		return cp
 	end
 
-	--local function set_auto_compile(enable_compile)
-	--	-- Setting auto-compile for catppuccin.
-	--	if enable_compile then
-	--		vim.api.nvim_create_augroup("_catppuccin", { clear = true })
-
-	--		vim.api.nvim_create_autocmd("User", {
-	--			group = "_catppuccin",
-	--			pattern = "PackerCompileDone",
-	--			callback = function()
-	--				require("catppuccin").compile()
-	--				vim.defer_fn(function()
-	--					vim.cmd([[colorscheme catppuccin]])
-	--				end, 0)
-	--			end,
-	--		})
-	--	end
-	--end
-
 	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
 	local cp = get_modified_palette()
-
-	--local enable_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
-	--set_auto_compile(enable_compile)
 
 	require("catppuccin").setup({
 		dim_inactive = {
@@ -844,10 +756,6 @@ function config.catppuccin()
 		},
 		transparent_background = false,
 		term_colors = true,
-		--compile = {
-		--	enabled = enable_compile,
-		--	path = vim.fn.stdpath("cache") .. "/catppuccin",
-		--},
         compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
 			comments = { "italic" },
@@ -910,7 +818,7 @@ function config.catppuccin()
 			aerial = false,
 			vimwiki = true,
 			beacon = false,
-			navic = { enabled = true, custom_bg = "NONE" },
+			navic = { enabled = false },
 			overseer = false,
 			fidget = true,
 		},
@@ -977,79 +885,6 @@ function config.catppuccin()
 				FidgetTask = { bg = cp.none, fg = cp.surface2 },
 				FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
-				-- For treesitter.
-				--TSField = { fg = cp.rosewater },
-				--TSProperty = { fg = cp.yellow },
-
-				--TSInclude = { fg = cp.teal },
-				--TSOperator = { fg = cp.sky },
-				--TSKeywordOperator = { fg = cp.sky },
-				--TSPunctSpecial = { fg = cp.maroon },
-
-				-- TSFloat = { fg = cp.peach },
-				-- TSNumber = { fg = cp.peach },
-				-- TSBoolean = { fg = cp.peach },
-
-				--TSConstructor = { fg = cp.lavender },
-				-- TSConstant = { fg = cp.peach },
-				-- TSConditional = { fg = cp.mauve },
-				-- TSRepeat = { fg = cp.mauve },
-				--TSException = { fg = cp.peach },
-
-				--TSConstBuiltin = { fg = cp.lavender },
-				-- TSFuncBuiltin = { fg = cp.peach, style = { "italic" } },
-				-- TSTypeBuiltin = { fg = cp.yellow, style = { "italic" } },
-				--TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
-
-				-- TSFunction = { fg = cp.blue },
-				--TSFuncMacro = { fg = cp.red, style = {} },
-				--TSParameter = { fg = cp.rosewater },
-				--TSKeywordFunction = { fg = cp.maroon },
-				--TSKeyword = { fg = cp.red },
-				--TSKeywordReturn = { fg = cp.pink, style = {} },
-
-				-- TSNote = { fg = cp.base, bg = cp.blue },
-				-- TSWarning = { fg = cp.base, bg = cp.yellow },
-				-- TSDanger = { fg = cp.base, bg = cp.red },
-				-- TSConstMacro = { fg = cp.mauve },
-
-				-- TSLabel = { fg = cp.blue },
-				--TSMethod = { style = { "italic" } },
-				--TSNamespace = { fg = cp.rosewater },
-
-				--TSPunctDelimiter = { fg = cp.teal },
-				--TSPunctBracket = { fg = cp.overlay2 },
-				---- TSString = { fg = cp.green },
-				---- TSStringRegex = { fg = cp.peach },
-				---- TSType = { fg = cp.yellow },
-				--TSVariable = { fg = cp.text },
-				--TSTagAttribute = { fg = cp.mauve, style = { "italic" } },
-				--TSTag = { fg = cp.peach },
-				--TSTagDelimiter = { fg = cp.maroon },
-				--TSText = { fg = cp.text },
-
-				-- TSURI = { fg = cp.rosewater, style = { "italic", "underline" } },
-				-- TSLiteral = { fg = cp.teal, style = { "italic" } },
-				-- TSTextReference = { fg = cp.lavender, style = { "bold" } },
-				-- TSTitle = { fg = cp.blue, style = { "bold" } },
-				-- TSEmphasis = { fg = cp.maroon, style = { "italic" } },
-				-- TSStrong = { fg = cp.maroon, style = { "bold" } },
-				-- TSStringEscape = { fg = cp.pink },
-
-				--bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
-				--bashTSParameter = { fg = cp.yellow, style = { "italic" } },
-
-				--luaTSField = { fg = cp.lavender },
-				--luaTSConstructor = { fg = cp.flamingo },
-
-				--javaTSConstant = { fg = cp.teal },
-
-				--typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
-
-				--cssTSType = { fg = cp.lavender },
-				--cssTSProperty = { fg = cp.yellow, style = { "italic" } },
-
-				--cppTSProperty = { fg = cp.text },
                 ["@field"] = { fg = cp.rosewater },
 				["@property"] = { fg = cp.yellow },
 

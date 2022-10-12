@@ -15,14 +15,8 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
-	after = { "nvim-navic" },
-	config = conf.lualine,
-}
-
-ui["SmiteshP/nvim-navic"] = {
-	opt = true,
 	after = "nvim-lspconfig",
-	config = conf.nvim_navic,
+	config = conf.lualine,
 }
 
 ui["goolord/alpha-nvim"] = {
@@ -52,15 +46,6 @@ ui["akinsho/bufferline.nvim"] = {
 	event = "BufReadPost",
 	config = conf.nvim_bufferline,
 }
---ui["dstein64/nvim-scrollview"] = {
---	opt = true,
---	event = { "BufReadPost" },
---	config = conf.scrollview,
---}
---ui["mbbill/undotree"] = {
---	opt = true,
---	cmd = "UndotreeToggle",
---}
 
 ui["j-hui/fidget.nvim"] = {
 	opt = true,

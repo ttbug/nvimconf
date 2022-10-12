@@ -121,17 +121,8 @@ function plugins.load_compile()
     if vim.fn.filereadable(packer_compiled) == 1 then
         require('_compiled')
     else
-        require("core.pack").back_compile()
-        assert(nil, "Missing packer compiled file! Run `PackerCompile` or `PackerInstall` to fix this.")
+        plugins.back_compile()
     end
-    --vim.cmd [[command! PackerCompile lua require('core.pack').back_compile()]]
-    --vim.cmd [[command! PackerInstall lua require('core.pack').install()]]
-    --vim.cmd [[command! PackerUpdate lua require('core.pack').update()]]
-    --vim.cmd [[command! PackerSync lua require('core.pack').sync()]]
-    --vim.cmd [[command! PackerClean lua require('core.pack').clean()]]
-    --vim.cmd [[autocmd User PackerComplete lua require('core.pack').back_compile()]]
-    -- vim.cmd [[command! PackerStatus  lua require('packer').status()]]
-    --vim.cmd [[command! PackerStatus lua require('core.pack').compile() require('packer').status()]]
     local cmds = { "Compile", "Install", "Update", "Sync", "Clean", "Status" }
 	for _, cmd in ipairs(cmds) do
 		api.nvim_create_user_command("Packer" .. cmd, function()
