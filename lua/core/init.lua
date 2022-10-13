@@ -125,6 +125,7 @@ local load_core = function()
 	pack.ensure_plugins()
 	neovide_config()
 	--check_conda()
+    -- 共享系统粘贴板功能
 	--clipboard_config()
 
 	require("core.options")
