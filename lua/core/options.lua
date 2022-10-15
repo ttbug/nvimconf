@@ -1,16 +1,5 @@
-local global = require('core.global')
+local global = require("core.global")
 
-local function bind_option(options)
-    for k, v in pairs(options) do
-        if v == true then
-            vim.cmd('set ' .. k)
-        elseif v == false then
-            vim.cmd('set no' .. k)
-        else
-            vim.cmd('set ' .. k .. '=' .. v)
-        end
-    end
-end
 
 local function load_options()
     local global_local = {
@@ -31,11 +20,10 @@ local function load_options()
         backup = false,
         writebackup = false,
         swapfile = false,
-        directory = global.cache_dir .. "swag/",
         undodir = global.cache_dir .. "undo/",
-        backupdir = global.cache_dir .. "backup/",
-        viewdir = global.cache_dir .. "view/",
-        spellfile = global.cache_dir .. "spell/en.uft-8.add",
+		-- backupdir = global.cache_dir .. "backup/",
+		-- viewdir = global.cache_dir .. "view/",
+		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
         history = 2000,
         shada = "!,'300,<50,@100,s10,h",
         backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
@@ -82,29 +70,29 @@ local function load_options()
         helpheight = 12,
         previewheight = 12,
         showcmd = false,
-        -- cmdheight = 2,
+        cmdheight = 1, -- 0,1,2
         -- cmdwinheight = 3,
         -- equalalways = false,
         laststatus = 2,
         display = "lastline",
         showbreak = "↳  ",
         listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
-        pumblend = 10,
-        winblend = 10,
+        --pumblend = 10,
+        --winblend = 10,
         autoread = true,
-        autowrite = true
-    }
+        autowrite = true,
+--    }
 
-    local bw_local = {
+--  local bw_local = {
         undofile = true,
         synmaxcol = 2500,
         formatoptions = "1jcroql",
-        textwidth = 80,
-        expandtab = true,
+        --textwidth = 80,
+		expandtab = true,
         autoindent = true,
         tabstop = 4,
         shiftwidth = 4,
-        softtabstop = -1,
+        softtabstop = 4,
         breakindentopt = "shift:2,min:20",
         wrap = false,
         linebreak = true,
@@ -116,18 +104,20 @@ local function load_options()
         concealcursor = "niv"
     }
 
-    if global.is_mac then
-        vim.g.clipboard = {
-            name = "macOS-clipboard",
-            copy = {["+"] = "pbcopy", ["*"] = "pbcopy"},
-            paste = {["+"] = "pbpaste", ["*"] = "pbpaste"},
-            cache_enabled = 0
-        }
-        vim.g.python_host_prog = '/usr/bin/python'
-        vim.g.python3_host_prog = '/usr/local/bin/python3'
+    local function isempty(s)
+		return s == nil or s == ""
+	end
+
+	if not isempty(vim.env.CONDA_PREFIX) then
+		vim.g.python3_host_prog = vim.env.CONDA_PREFIX .. "/bin/python"
+	elseif global.is_mac then
+		vim.g.python_host_prog = "/usr/bin/python"
+		vim.g.python3_host_prog = "/usr/local/bin/python3"
+    else 
+		vim.g.python_host_prog = "/usr/bin/python"
+		vim.g.python3_host_prog = "/usr/bin/python3"
     end
     for name, value in pairs(global_local) do vim.o[name] = value end
-    bind_option(bw_local)
 end
 
 load_options()

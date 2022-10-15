@@ -422,6 +422,10 @@ The leader key is `,`.
 |                      Debug step into                      |         `<leader>di`/`F10`         |
 |                      Debug step out                       |         `<leader>do`/`F11`         |
 |                     Debug disconnect                      |            `<leader>dd`            |
+|                     json序列化                            |            `<leader>j`             |
+|                     退出引用查看窗口                      |            `q`                     |
+|                     gitui窗口                             |            `<leader>g`             |
+|                     tig窗口                               |            `<leader>t`             |
 
 You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 

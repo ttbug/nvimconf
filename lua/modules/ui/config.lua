@@ -1,286 +1,441 @@
 local config = {}
 
-function config.edge()
-    vim.cmd [[set background=dark]]
-    vim.g.edge_style = "aura"
-    vim.g.edge_enable_italic = 1
-    vim.g.edge_disable_italic_comment = 1
-    vim.g.edge_show_eob = 1
-    vim.g.edge_better_performance = 1
+function config.alpha()
+	local alpha = require("alpha")
+	local dashboard = require("alpha.themes.dashboard")
+
+	dashboard.section.header.val = {
+		[[             \                  /               ]],
+		[[    _________))                ((__________     ]],
+		[[   /.-------./\\    \    /    //\.--------.\    ]],
+		[[  //#######//##\\   ))  ((   //##\\########\\   ]],
+		[[ //#######//###((  ((    ))  ))###\\########\\  ]],
+		[[((#######((#####\\  \\  //  //#####))########)) ]],
+		[[ \##' `###\######\\  \)(/  //######/####' `##/  ]],
+		[[  )'    ``#)'  `##\`->oo<-'/##'  `(#''     `(   ]],
+		[[          (       ``\`..'/''       )            ]],
+		[[                     \""(                       ]],
+		[[                      `- )                      ]],
+		[[                      / /                       ]],
+		[[                     ( /\                       ]],
+		[[                     /\| \                      ]],
+		[[                    (  \                        ]],
+		[[                        )                       ]],
+		[[                       /                        ]],
+		[[                      (                         ]],
+		[[                      `                         ]],
+	}
+	local function button(sc, txt, leader_txt, keybind, keybind_opts)
+		local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
+
+		local opts = {
+			position = "center",
+			shortcut = sc,
+			cursor = 5,
+			width = 50,
+			align_shortcut = "right",
+			hl_shortcut = "Keyword",
+		}
+
+		if nil == keybind then
+			keybind = sc_after
+		end
+		keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+		opts.keymap = { "n", sc_after, keybind, keybind_opts }
+
+		local function on_press()
+			-- local key = vim.api.nvim_replace_termcodes(keybind .. '<Ignore>', true, false, true)
+			local key = vim.api.nvim_replace_termcodes(sc_after .. "<Ignore>", true, false, true)
+			vim.api.nvim_feedkeys(key, "t", false)
+		end
+
+		return {
+			type = "button",
+			val = txt,
+			on_press = on_press,
+			opts = opts,
+		}
+	end
+	local leader = "comma"
+	dashboard.section.buttons.val = {
+		button("comma s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
+		button("comma f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
+		button("comma f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
+		button("comma f p", " Project find", leader, "<cmd>Telescope project<cr>"),
+		button("comma f f", " File find", leader, "<cmd>Telescope find_files<cr>"),
+		button("comma f n", " File new", leader, "<cmd>enew<cr>"),
+		button("comma f w", " Word find", leader, "<cmd>Telescope live_grep<cr>"),
+	}
+	dashboard.section.buttons.opts.hl = "String"
+	local function footer()
+		local total_plugins = #vim.tbl_keys(packer_plugins)
+		return "   Have Fun with neovim"
+			.. "   v"
+			.. vim.version().major
+			.. "."
+			.. vim.version().minor
+			.. "."
+			.. vim.version().patch
+			.. "   "
+			.. total_plugins
+			.. " plugins"
+	end
+	dashboard.section.footer.val = footer()
+	dashboard.section.footer.opts.hl = "Function"
+
+	local head_butt_padding = 2
+	local occu_height = #dashboard.section.header.val + 2 * #dashboard.section.buttons.val + head_butt_padding
+	local header_padding = math.max(0, math.ceil((vim.fn.winheight("$") - occu_height) * 0.25))
+	local foot_butt_padding = 1
+
+	dashboard.config.layout = {
+		{ type = "padding", val = header_padding },
+		dashboard.section.header,
+		{ type = "padding", val = head_butt_padding },
+		dashboard.section.buttons,
+		{ type = "padding", val = foot_butt_padding },
+		dashboard.section.footer,
+	}
+
+	alpha.setup(dashboard.opts)
 end
 
-function config.catppuccin()
-    require('catppuccin').setup({
-        transparent_background = false,
-        term_colors = true,
-        styles = {
-            comments = "italic",
-            functions = "italic",
-            keywords = "italic,bold",
-            strings = "NONE",
-            variables = "NONE"
-        },
-        integrations = {
-            treesitter = true,
-            native_lsp = {
-                enabled = true,
-                virtual_text = {
-                    errors = "italic",
-                    hints = "italic",
-                    warnings = "italic",
-                    information = "italic"
-                },
-                underlines = {
-                    errors = "underline",
-                    hints = "underline",
-                    warnings = "underline",
-                    information = "underline"
-                }
-            },
-            lsp_trouble = true,
-            lsp_saga = true,
-            gitgutter = false,
-            gitsigns = true,
-            telescope = true,
-            nvimtree = {enabled = true, show_root = true},
-            which_key = true,
-            indent_blankline = {enabled = true, colored_indent_levels = false},
-            dashboard = true,
-            neogit = false,
-            vim_sneak = false,
-            fern = false,
-            barbar = false,
-            bufferline = true,
-            markdown = true,
-            lightspeed = false,
-            ts_rainbow = true,
-            hop = true
-        }
-    })
+function config.edge()
+	vim.g.edge_style = "aura"
+	vim.g.edge_enable_italic = 1
+	vim.g.edge_disable_italic_comment = 1
+	vim.g.edge_show_eob = 1
+	vim.g.edge_better_performance = 1
+	vim.g.edge_transparent_background = 1
+end
+
+--function config.nord()
+--	vim.g.nord_contrast = true
+--	vim.g.nord_borders = false
+--	vim.g.nord_cursorline_transparent = true
+--	vim.g.nord_disable_background = false
+--	vim.g.nord_enable_sidebar_background = true
+--	vim.g.nord_italic = true
+--end
+
+function config.notify()
+	local notify = require("notify")
+	notify.setup({
+		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
+		stages = "slide",
+		---@usage Function called when a new window is opened, use for changing win settings/config
+		on_open = nil,
+		---@usage Function called when a window is closed
+		on_close = nil,
+		---@usage timeout for notifications in ms, default 5000
+		timeout = 2000,
+		-- Render function for notifications. See notify-render()
+		render = "default",
+		---@usage highlight behind the window for stages that change opacity
+		background_colour = "Normal",
+		---@usage minimum width for notification windows
+		minimum_width = 50,
+		---@usage notifications with level lower than this would be ignored. [ERROR > WARN > INFO > DEBUG > TRACE]
+		level = "TRACE",
+		---@usage Icons for the different levels
+		icons = {
+			ERROR = "",
+			WARN = "",
+			INFO = "",
+			DEBUG = "",
+			TRACE = "✎",
+		},
+	})
+
+	vim.notify = notify
 end
 
 function config.lualine()
-    local gps = require("nvim-gps")
-    local function gps_content()
-        if gps.is_available() then
-            return gps.get_location()
-        else
-            return ""
-        end
-    end
 
-    local simple_sections = {
-		lualine_a = { "mode" },
-		lualine_b = { "filetype" },
+	local function escape_status()
+		local ok, m = pcall(require, "better_escape")
+		return ok and m.waiting and "✺ " or ""
+	end
+
+	local function diff_source()
+		local gitsigns = vim.b.gitsigns_status_dict
+		if gitsigns then
+			return {
+				added = gitsigns.added,
+				modified = gitsigns.changed,
+				removed = gitsigns.removed,
+			}
+		end
+	end
+
+	local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = { "location" },
 	}
+	local simple_sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
 
-    local symbols_outline = {
-        sections = simple_sections,
-        filetypes = {'Outline'}
-    }
+		lualine_c = {},
+		lualine_x = {},
 
-    local dapui_scopes = {
-        sections = simple_sections,
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
+	local outline = {
+		sections = mini_sections,
+		filetypes = { "lspsagaoutline" },
+	}
+	local dapui_scopes = {
+		sections = simple_sections,
 		filetypes = { "dapui_scopes" },
 	}
 
 	local dapui_breakpoints = {
-        sections = simple_sections,
+		sections = simple_sections,
 		filetypes = { "dapui_breakpoints" },
 	}
 
 	local dapui_stacks = {
-        sections = simple_sections,
+		sections = simple_sections,
 		filetypes = { "dapui_stacks" },
 	}
 
 	local dapui_watches = {
-        sections = simple_sections,
+		sections = simple_sections,
 		filetypes = { "dapui_watches" },
 	}
 
+	local function python_venv()
+		local function env_cleanup(venv)
+			if string.find(venv, "/") then
+				local final_venv = venv
+				for w in venv:gmatch("([^/]+)") do
+					final_venv = w
+				end
+				venv = final_venv
+			end
+			return venv
+		end
 
-    require('lualine').setup {
-        options = {
-            icons_enabled = true,
-            -- theme = 'onedark',
-            -- theme = "catppuccin",
-            -- theme = "kanagawa",
-            theme = 'tokyonight',
-            disabled_filetypes = {},
-            component_separators = '|',
-            section_separators = {left = '', right = ''}
-        },
+		if vim.bo.filetype == "python" then
+			local venv = os.getenv("CONDA_DEFAULT_ENV")
+			if venv then
+				return string.format("%s", env_cleanup(venv))
+			end
+			venv = os.getenv("VIRTUAL_ENV")
+			if venv then
+				return string.format("%s", env_cleanup(venv))
+			end
+		end
+		return ""
+	end
 
-        sections = {
-            lualine_a = {'mode'},
-            lualine_b = {{'branch'}, {'diff'}},
-            lualine_c = {
-                {"lsp_progress"},
-                {gps_content, cond = gps.is_available}
-            },
-            lualine_x = {
-                {
-                    'diagnostics',
-                    sources = {'nvim_diagnostic'},
-                    -- sources = {'nvim_lsp'},
-                   -- color_error = "#BF616A",
-                   -- color_warn = "#EBCB8B",
-                   -- color_info = "#81A1AC",
-                   -- color_hint = "#88C0D0",
-                    symbols = {error = ' ', warn = ' ', info = ' '}
-                },
-            },
-            lualine_y = {'filetype', 'encoding', 'fileformat'},
-            lualine_z = {'progress', 'location'}
-        },
-        inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = {'filename'},
-            lualine_x = {'location'},
-            lualine_y = {},
-            lualine_z = {}
-        },
-        tabline = {},
-        extensions = {
-            "quickfix", "nvim-tree", "toggleterm", "fugitive", symbols_outline, dapui_scopes,
+	require("lualine").setup({
+		options = {
+			icons_enabled = true,
+			--theme = "tokyonight",
+			theme = "catppuccin",
+			disabled_filetypes = {},
+			component_separators = "|",
+			section_separators = { left = "", right = "" },
+		},
+		sections = {
+			lualine_a = { "mode" },
+			lualine_b = { { "branch" }, { "diff", source = diff_source } },
+			lualine_c = {},
+			lualine_x = {
+				{ escape_status },
+				{
+					"diagnostics",
+					sources = { "nvim_diagnostic" },
+					symbols = { error = " ", warn = " ", info = " " },
+				},
+			},
+			lualine_y = {
+				{ "filetype", colored = true, icon_only = true },
+				{ python_venv },
+				{ "encoding" },
+				{
+					"fileformat",
+					icons_enabled = true,
+					symbols = {
+						unix = "LF",
+						dos = "CRLF",
+						mac = "CR",
+					},
+				},
+			},
+			lualine_z = { "progress", "location" },
+		},
+		inactive_sections = {
+			lualine_a = {},
+			lualine_b = {},
+			lualine_c = { "filename" },
+			lualine_x = { "location" },
+			lualine_y = {},
+			lualine_z = {},
+		},
+		tabline = {},
+		extensions = {
+			"quickfix",
+			"nvim-tree",
+			"toggleterm",
+			"fugitive",
+			outline,
+			dapui_scopes,
 			dapui_breakpoints,
 			dapui_stacks,
 			dapui_watches,
-        }
-    }
+		},
+	})
 end
 
-function config.nvim_bufferline()
-    require('bufferline').setup {
-        options = {
-            --number = "both",
-            -- numbers = function(opts)
-            --     return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
-            -- end,
-            number = "none",
-            modified_icon = '✥',
-            buffer_close_icon = "",
-            -- mappings = true,
-            left_trunc_marker = "",
-            right_trunc_marker = "",
-            max_name_length = 14,
-            max_prefix_length = 13,
-            tab_size = 15,
-            show_buffer_close_icons = false,
-            show_buffer_icons = true,
-            show_tab_indicators = false,
-            separator_style = "slant",
-            diagnostics = "nvim_lsp",
-            always_show_bufferline = true,
-            offsets = {
-                {
-                    filetype = "NvimTree",
-                    text = "File Explorer",
-                    text_align = "center",
-                    padding = 1
-                }
-            }
-        }
-    }
+function config.nvim_gps()
+	require("nvim-gps").setup({
+		icons = {
+			["class-name"] = " ", -- Classes and class-like objects
+			["function-name"] = " ", -- Functions
+			["method-name"] = " ", -- Methods (functions inside class-like objects)
+		},
+		languages = {
+			-- You can disable any language individually here
+			["c"] = true,
+			["cpp"] = true,
+			["go"] = true,
+			["java"] = true,
+			["javascript"] = true,
+			["lua"] = true,
+			["python"] = true,
+			["rust"] = true,
+		},
+		separator = " > ",
+	})
 end
 
 function config.nvim_tree()
-    --vim.g.nvim_tree_root_folder_modifier = ":e"
-	vim.g.nvim_tree_icon_padding = " "
-	vim.g.nvim_tree_symlink_arror = "  "
-	--vim.g.nvim_tree_respect_buf_cwd = 1
 
-	vim.g.nvim_tree_icons = {
-		["default"] = "", --
-		["symlink"] = "",
-		["git"] = {
-			["unstaged"] = "",
-			["staged"] = "", --
-			["unmerged"] = "שׂ",
-			["renamed"] = "", --
-			["untracked"] = "ﲉ",
-			["deleted"] = "",
-			["ignored"] = "", --◌
+	require("nvim-tree").setup({
+		create_in_closed_folder = false,
+		respect_buf_cwd = false,
+		--git = { enable = true, ignore = false, timeout = 500 },
+		auto_reload_on_write = true,
+		disable_netrw = false,
+		hijack_cursor = true,
+		hijack_netrw = true,
+		hijack_unnamed_buffer_when_opening = false,
+		ignore_buffer_on_setup = false,
+		open_on_setup = false,
+		open_on_setup_file = false,
+		open_on_tab = false,
+		sort_by = "name",
+		update_cwd = false,
+		view = {
+			adaptive_size = false,
+			centralize_selection = false,
+			width = 30,
+			--height = 30,
+			side = "left",
+			preserve_window_proportions = false,
+			number = false,
+			relativenumber = false,
+			signcolumn = "yes",
+			hide_root_folder = false,
+			float = {
+				enable = false,
+				open_win_config = {
+					relative = "editor",
+					border = "rounded",
+					width = 30,
+					height = 30,
+					row = 1,
+					col = 1,
+				},
+			},
 		},
-		["folder"] = {
-			-- ['arrow_open'] = "",
-			-- ['arrow_closed'] = "",
-			["arrow_open"] = "",
-			["arrow_closed"] = "",
-			["default"] = "",
-			["open"] = "",
-			["empty"] = "",
-			["empty_open"] = "",
-			["symlink"] = "",
-			["symlink_open"] = "",
-		},
-	}
-    -- vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', '.vscode'}
-    local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-    require('nvim-tree').setup({
-        git = {enable = true, ignore = false, timeout = 500},
-        --ignore = {'.git', 'node_modules', '.cache', '.vscode'},
-        --hide_dotfiles = true,
-        auto_reload_on_write = true,
-        open_on_tab = false,
-        disable_netrw = true,
-        hijack_netrw = true,
-        hijack_cursor = true,
-        -- 不自动更新当前buffer
-        update_cwd = false,
-        hijack_unnamed_buffer_when_opening = false,
-        ignore_buffer_on_setup = false,
-        sort_by = "name",
-        --highlight_opened_files = true,
-        --auto_ignore_ft = {'startify', 'dashboard'},
-        update_focused_file = {
-            enable = true,
-            update_cwd = false,
-            ignore_list = {}
-        },
-        hijack_directories = {
-			enable = true,
-			auto_open = true,
-		},
-        filters = {
-            dotfiles = true,
-            custom = { ".DS_Store" },
-            exclude = {}
-        },
-        renderer = {
+		renderer = {
+			add_trailing = false,
+			group_empty = true,
+			highlight_git = false,
+			full_name = false,
+			highlight_opened_files = "none",
+			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt" },
+			symlink_destination = true,
 			indent_markers = {
 				enable = true,
 				icons = {
 					corner = "└ ",
 					edge = "│ ",
+					item = "│ ",
 					none = "  ",
 				},
 			},
+			root_folder_modifier = ":e",
+			icons = {
+				webdev_colors = true,
+				git_placement = "before",
+				show = {
+					file = true,
+					folder = true,
+					folder_arrow = false,
+					git = true,
+				},
+				padding = " ",
+				symlink_arrow = "  ",
+				glyphs = {
+					default = "", --
+					symlink = "",
+					bookmark = "",
+					git = {
+						unstaged = "",
+						staged = "", --
+						unmerged = "שׂ",
+						renamed = "", --
+						untracked = "ﲉ",
+						deleted = "",
+						ignored = "", --◌
+					},
+					folder = {
+						-- arrow_open = "",
+						-- arrow_closed = "",
+						arrow_open = "",
+						arrow_closed = "",
+						default = "",
+						open = "",
+						empty = "",
+						empty_open = "",
+						symlink = "",
+						symlink_open = "",
+					},
+				},
+			},
 		},
-        view = {
-            width = 25,
-            side = 'left',
-            --auto_resize = false,
-            hide_root_folder = false,
-            preserve_window_proportions = false,
-            number = false,
-			relativenumber = false,
-			signcolumn = "yes",
-        },
-        actions = {
+		hijack_directories = {
+			enable = true,
+			auto_open = true,
+		},
+		update_focused_file = {
+			enable = true,
+			update_cwd = false,
+			ignore_list = {},
+		},
+		ignore_ft_on_setup = {},
+		filters = {
+			dotfiles = true,
+			custom = { ".DS_Store" },
+			exclude = {},
+		},
+		actions = {
 			use_system_clipboard = true,
 			change_dir = {
-				enable = true,
+				enable = false,
 				global = false,
 			},
 			open_file = {
-                -- 打开文件后自动关闭侧边栏
 				quit_on_open = true,
 				resize_window = false,
 				window_picker = {
@@ -292,146 +447,528 @@ function config.nvim_tree()
 					},
 				},
 			},
+			remove_file = {
+				close_window = true,
+			},
 		},
-        ignore_ft_on_setup = {},
-    })
+		diagnostics = {
+			enable = false,
+			show_on_dirs = false,
+			debounce_delay = 50,
+			icons = {
+				hint = "",
+				info = "",
+				warning = "",
+				error = "",
+			},
+		},
+		filesystem_watchers = {
+			enable = true,
+			debounce_delay = 50,
+		},
+		git = {
+			enable = true,
+			ignore = true,
+			show_on_dirs = true,
+			timeout = 400,
+		},
+		trash = {
+			cmd = "gio trash",
+			require_confirm = true,
+		},
+		live_filter = {
+			prefix = "[FILTER]: ",
+			always_show_folders = true,
+		},
+		log = {
+			enable = false,
+			truncate = false,
+			types = {
+				all = false,
+				config = false,
+				copy_paste = false,
+				dev = false,
+				diagnostics = false,
+				git = false,
+				profile = false,
+				watcher = false,
+			},
+		},
+	})
+end
+
+function config.nvim_bufferline()
+	local opts = {
+		options = {
+			number = nil,
+			modified_icon = "✥",
+			--buffer_close_icon = "",
+			left_trunc_marker = "",
+			right_trunc_marker = "",
+			max_name_length = 14,
+			max_prefix_length = 13,
+			tab_size = 15,
+			show_buffer_close_icons = false,
+			show_buffer_icons = true,
+			show_tab_indicators = true,
+			diagnostics = "nvim_lsp",
+			always_show_bufferline = true,
+			separator_style = "thin",
+			offsets = {
+				{
+					filetype = "NvimTree",
+					text = "File Explorer",
+					text_align = "center",
+					padding = 1,
+				},
+			},
+			diagnostics_indicator = function(count)
+				return "(" .. count .. ")"
+			end,
+		},
+		-- Change bufferline's highlights here! See `:h bufferline-highlights` for detailed explanation.
+		-- Note: If you use catppuccin then modify the colors below!
+		highlights = {},
+	}
+
+	if vim.g.colors_name == "catppuccin" then
+		local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
+		cp.none = "NONE" -- Special setting for complete transparent fg/bg.
+
+		local catppuccin_hl_overwrite = {
+			highlights = require("catppuccin.groups.integrations.bufferline").get({
+				styles = { "italic", "bold" },
+				custom = {
+					mocha = {
+						-- Warnings
+					--	warning = { fg = cp.yellow },
+					--	warning_visible = { fg = cp.yellow },
+					--	warning_selected = { fg = cp.yellow },
+					--	warning_diagnostic = { fg = cp.yellow },
+					--	warning_diagnostic_visible = { fg = cp.yellow },
+					--	warning_diagnostic_selected = { fg = cp.yellow },
+					--	-- Infos
+					--	info = { fg = cp.sky },
+					--	info_visible = { fg = cp.sky },
+					--	info_selected = { fg = cp.sky },
+					--	info_diagnostic = { fg = cp.sky },
+					--	info_diagnostic_visible = { fg = cp.sky },
+					--	info_diagnostic_selected = { fg = cp.sky },
+						-- Hint
+						hint = { fg = cp.rosewater },
+						hint_visible = { fg = cp.rosewater },
+						hint_selected = { fg = cp.rosewater },
+						hint_diagnostic = { fg = cp.rosewater },
+						hint_diagnostic_visible = { fg = cp.rosewater },
+						hint_diagnostic_selected = { fg = cp.rosewater },
+					},
+				},
+			}),
+		}
+
+		opts = vim.tbl_deep_extend("force", opts, catppuccin_hl_overwrite)
+	end
+
+	require("bufferline").setup(opts)
 end
 
 function config.gitsigns()
-    if not packer_plugins['plenary.nvim'].loaded then
-        vim.cmd [[packadd plenary.nvim]]
-    end
-    require('gitsigns').setup {
-        signs = {
-           -- add = {hl = 'GitGutterAdd', text = '▋'},
-           -- change = {hl = 'GitGutterChange', text = '▋'},
-           -- delete = {hl = 'GitGutterDelete', text = '▋'},
-           -- topdelete = {hl = 'GitGutterDeleteChange', text = '▔'},
-           -- changedelete = {hl = 'GitGutterChange', text = '▎'}
-            add = {
-                hl = 'GitSignsAdd',
-                text = '│',
-                numhl = 'GitSignsAddNr',
-                linehl = 'GitSignsAddLn'
-            },
-            change = {
-                hl = 'GitSignsChange',
-                text = '│',
-                numhl = 'GitSignsChangeNr',
-                linehl = 'GitSignsChangeLn'
-            },
-            delete = {
-                hl = 'GitSignsDelete',
-                text = '_',
-                numhl = 'GitSignsDeleteNr',
-                linehl = 'GitSignsDeleteLn'
-            },
-            topdelete = {
-                hl = 'GitSignsDelete',
-                text = '‾',
-                numhl = 'GitSignsDeleteNr',
-                linehl = 'GitSignsDeleteLn'
-            },
-            changedelete = {
-                hl = 'GitSignsChange',
-                text = '~',
-                numhl = 'GitSignsChangeNr',
-                linehl = 'GitSignsChangeLn'
-            }
-        },
-        keymaps = {
-            -- Default keymap options
-            noremap = true,
-            buffer = true,
-
-            ['n ]g'] = {
-                expr = true,
-                "&diff ? ']g' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"
-            },
-            ['n [g'] = {
-                expr = true,
-                "&diff ? '[g' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"
-            },
-
-            ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-            ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-            ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-            ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-            ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-            ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-            ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-            ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-
-            -- Text objects
-            ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-            ['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>'
-        },
-        watch_gitdir = {interval = 1000, follow_files = true},
-        current_line_blame = true,
-        current_line_blame_opts = {delay = 1000, virtual_text_pos = 'eol'},
-        sign_priority = 6,
-        update_debounce = 100,
-        status_formatter = nil, -- Use default
-        word_diff = false,
-        --use_internal_diff = true -- If luajit is present
-        diff_opts = {internal = true}
-    }
+	require("gitsigns").setup({
+		signs = {
+			add = {
+				hl = "GitSignsAdd",
+				text = "│",
+				numhl = "GitSignsAddNr",
+				linehl = "GitSignsAddLn",
+			},
+			change = {
+				hl = "GitSignsChange",
+				text = "│",
+				numhl = "GitSignsChangeNr",
+				linehl = "GitSignsChangeLn",
+			},
+			delete = {
+				hl = "GitSignsDelete",
+				text = "_",
+				numhl = "GitSignsDeleteNr",
+				linehl = "GitSignsDeleteLn",
+			},
+			topdelete = {
+				hl = "GitSignsDelete",
+				text = "‾",
+				numhl = "GitSignsDeleteNr",
+				linehl = "GitSignsDeleteLn",
+			},
+			changedelete = {
+				hl = "GitSignsChange",
+				text = "~",
+				numhl = "GitSignsChangeNr",
+				linehl = "GitSignsChangeLn",
+			},
+		},
+		keymaps = {
+			-- Default keymap options
+			noremap = true,
+			buffer = true,
+			["n ]g"] = {
+				expr = true,
+				"&diff ? ']g' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'",
+			},
+			["n [g"] = {
+				expr = true,
+				"&diff ? '[g' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'",
+			},
+			["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+			["v <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+			["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+			["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+			["v <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+			["n <leader>hR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+			["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+			["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+			-- Text objects
+			["o ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
+			["x ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
+		},
+		watch_gitdir = { interval = 1000, follow_files = true },
+		current_line_blame = true,
+		current_line_blame_opts = { delay = 1000, virtual_text_pos = "eol" },
+		sign_priority = 6,
+		update_debounce = 100,
+		status_formatter = nil, -- Use default
+		word_diff = false,
+		diff_opts = { internal = true },
+	})
 end
 
 function config.indent_blankline()
-    vim.opt.termguicolors = true
-    vim.opt.list = true
-    -- vim.opt.listchars:append("space:⋅")
-    require("indent_blankline").setup {
-        char = "│",
-        show_first_indent_level = true,
-        filetype_exclude = {
-            "startify", "dashboard", "dotooagenda", "log", "fugitive",
-            "gitcommit", "packer", "vimwiki", "markdown", "json", "txt",
-            "vista", "help", "todoist", "NvimTree", "peekaboo", "git",
-            "TelescopePrompt", "undotree", "flutterToolsOutline", "" -- for all buffers without a file type
-        },
-        buftype_exclude = {"terminal", "nofile"},
-        show_trailing_blankline_indent = false,
-        show_current_context = true,
-        space_char_blankline = " ",
-        context_patterns = {
-            "class", "function", "method", "block", "list_literal", "selector",
-            "^if", "^table", "if_statement", "while", "for", "type", "var",
-            "import"
-        },
-        space_char_blankline = " "
-    }
-    -- because lazy load indent-blankline so need readd this autocmd
-    vim.cmd('autocmd CursorMoved * IndentBlanklineRefresh')
+	require("indent_blankline").setup({
+		char = "│",
+		show_first_indent_level = true,
+		filetype_exclude = {
+			"startify",
+			"dashboard",
+			"dotooagenda",
+			"log",
+			"fugitive",
+			"gitcommit",
+			"packer",
+			"vimwiki",
+			"markdown",
+			"json",
+			"txt",
+			"vista",
+			"help",
+			"todoist",
+			"NvimTree",
+			"peekaboo",
+			"git",
+			"TelescopePrompt",
+			"undotree",
+			"flutterToolsOutline",
+			"", -- for all buffers without a file type
+		},
+		buftype_exclude = { "terminal", "nofile" },
+		show_trailing_blankline_indent = false,
+		show_current_context = true,
+		context_patterns = {
+			"class",
+			"function",
+			"method",
+			"block",
+			"list_literal",
+			"selector",
+			"^if",
+			"^table",
+			"if_statement",
+			"while",
+			"for",
+			"type",
+			"var",
+			"import",
+		},
+		space_char_blankline = " ",
+	})
 end
 
---function config.zen_mode() require('zen-mode').setup {} end
---
---function config.twilight() require('twilight').setup {} end
-
-function config.kanagawa()
-    require('kanagawa').setup({
-        undercurl = true, -- enable undercurls
-        commentStyle = "italic",
-        functionStyle = "bold,italic",
-        keywordStyle = "italic",
-        statementStyle = "bold",
-        typeStyle = "NONE",
-        variablebuiltinStyle = "italic",
-        specialReturn = true, -- special highlight for the return keyword
-        specialException = true, -- special highlight for exception handling keywords 
-        transparent = false, -- do not set background color
-        dimInactive = true, -- dim inactive window `:h hl-NormalNC`
-        colors = {},
-        overrides = {}
-    })
+function config.scrollview()
+	require("scrollview").setup({})
 end
 
-function config.tokyonight()
-    vim.g.tokyonight_style = "storm"
-    vim.g.tokyonight_italic_functions = true
-    vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+function config.fidget()
+	require("fidget").setup({
+		window = { blend = 0 },
+	})
+end
+
+
+function config.catppuccin()
+	local function get_modified_palette()
+		-- We need to explicitly declare our new color.
+		-- (Because colors haven't been set yet when we pass them to the setup function.)
+
+		local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
+		cp.none = "NONE" -- Special setting for complete transparent fg/bg.
+
+		if vim.g.catppuccin_flavour == "mocha" then -- We only modify the "mocha" palette.
+			cp.rosewater = "#F5E0DC"
+			cp.flamingo = "#F2CDCD"
+			cp.mauve = "#DDB6F2"
+			cp.pink = "#F5C2E7"
+			cp.red = "#F28FAD"
+			cp.maroon = "#E8A2AF"
+			cp.peach = "#F8BD96"
+			cp.yellow = "#FAE3B0"
+			cp.green = "#ABE9B3"
+			cp.blue = "#96CDFB"
+			cp.sky = "#89DCEB"
+			cp.teal = "#B5E8E0"
+			cp.lavender = "#C9CBFF"
+
+			cp.text = "#D9E0EE"
+			cp.subtext1 = "#BAC2DE"
+			cp.subtext0 = "#A6ADC8"
+			cp.overlay2 = "#C3BAC6"
+			cp.overlay1 = "#988BA2"
+			cp.overlay0 = "#6E6C7E"
+			cp.surface2 = "#6E6C7E"
+			cp.surface1 = "#575268"
+			cp.surface0 = "#302D41"
+
+			cp.base = "#1E1E2E"
+			cp.mantle = "#1A1826"
+			cp.crust = "#161320"
+		end
+
+		return cp
+	end
+
+	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
+	local cp = get_modified_palette()
+
+	require("catppuccin").setup({
+		dim_inactive = {
+			enabled = false,
+			-- Dim inactive splits/windows/buffers.
+			-- NOT recommended if you use old palette (a.k.a., mocha).
+			shade = "dark",
+			percentage = 0.15,
+		},
+		transparent_background = false,
+		term_colors = true,
+        compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+		styles = {
+			comments = { "italic" },
+			properties = { "italic" },
+			functions = { "italic", "bold" },
+			keywords = { "italic" },
+			operators = { "bold" },
+			conditionals = { "bold" },
+			loops = { "bold" },
+			booleans = { "bold", "italic" },
+			numbers = {},
+			types = {},
+			strings = {},
+			variables = {},
+		},
+		integrations = {
+			treesitter = true,
+			native_lsp = {
+				enabled = true,
+				virtual_text = {
+					errors = { "italic" },
+					hints = { "italic" },
+					warnings = { "italic" },
+					information = { "italic" },
+				},
+				underlines = {
+					errors = { "underline" },
+					hints = { "underline" },
+					warnings = { "underline" },
+					information = { "underline" },
+				},
+			},
+			lsp_trouble = true,
+			lsp_saga = true,
+			gitgutter = false,
+			gitsigns = true,
+			telescope = true,
+			nvimtree = true,
+			which_key = true,
+			indent_blankline = { enabled = true, colored_indent_levels = false },
+			dashboard = true,
+			neogit = false,
+			vim_sneak = false,
+			fern = false,
+			barbar = false,
+			markdown = true,
+			lightspeed = false,
+			ts_rainbow = true,
+			hop = true,
+            illuminate = true,
+			cmp = true,
+			dap = { enabled = true, enable_ui = true },
+			notify = true,
+			symbols_outline = false,
+			coc_nvim = false,
+			leap = false,
+			neotree = { enabled = false, show_root = true, transparent_panel = false },
+			telekasten = false,
+			mini = false,
+			aerial = false,
+			vimwiki = true,
+			beacon = false,
+			navic = { enabled = false },
+			overseer = false,
+			fidget = true,
+		},
+		color_overrides = {
+			mocha = {
+				rosewater = "#F5E0DC",
+				flamingo = "#F2CDCD",
+				mauve = "#DDB6F2",
+				pink = "#F5C2E7",
+				red = "#F28FAD",
+				maroon = "#E8A2AF",
+				peach = "#F8BD96",
+				yellow = "#FAE3B0",
+				green = "#ABE9B3",
+				blue = "#96CDFB",
+				sky = "#89DCEB",
+				teal = "#B5E8E0",
+				lavender = "#C9CBFF",
+
+				text = "#D9E0EE",
+				subtext1 = "#BAC2DE",
+				subtext0 = "#A6ADC8",
+				overlay2 = "#C3BAC6",
+				overlay1 = "#988BA2",
+				overlay0 = "#6E6C7E",
+				surface2 = "#6E6C7E",
+				surface1 = "#575268",
+				surface0 = "#302D41",
+
+				base = "#1E1E2E",
+				mantle = "#1A1826",
+				crust = "#161320",
+			},
+		},
+		highlight_overrides = {
+			mocha = {
+				-- For base configs.
+				CursorLineNr = { fg = cp.green },
+				Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
+				IncSearch = { bg = cp.pink, fg = cp.surface1 },
+
+				-- For native lsp configs.
+				DiagnosticVirtualTextError = { bg = cp.none },
+				DiagnosticVirtualTextWarn = { bg = cp.none },
+				DiagnosticVirtualTextInfo = { bg = cp.none },
+				DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
+
+				DiagnosticHint = { fg = cp.rosewater },
+				LspDiagnosticsDefaultHint = { fg = cp.rosewater },
+				LspDiagnosticsHint = { fg = cp.rosewater },
+				LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
+				LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
+
+				-- For Ts-Rainbow
+				--rainbowcol1 = { bg = cp.none },
+				--rainbowcol2 = { bg = cp.none },
+				--rainbowcol3 = { bg = cp.none },
+				--rainbowcol4 = { bg = cp.none },
+				--rainbowcol5 = { bg = cp.none },
+				--rainbowcol6 = { bg = cp.none },
+				--rainbowcol7 = { bg = cp.none },
+
+				-- For fidget.
+				FidgetTask = { bg = cp.none, fg = cp.surface2 },
+				FidgetTitle = { fg = cp.blue, style = { "bold" } },
+
+                ["@field"] = { fg = cp.rosewater },
+				["@property"] = { fg = cp.yellow },
+
+				["@include"] = { fg = cp.teal },
+				["@operator"] = { fg = cp.sky },
+				["@keyword.operator"] = { fg = cp.sky },
+				["@punctuation.special"] = { fg = cp.maroon },
+
+				-- ["@float"] = { fg = cp.peach },
+				-- ["@number"] = { fg = cp.peach },
+				-- ["@boolean"] = { fg = cp.peach },
+
+				["@constructor"] = { fg = cp.lavender },
+				-- ["@constant"] = { fg = cp.peach },
+				-- ["@conditional"] = { fg = cp.mauve },
+				-- ["@repeat"] = { fg = cp.mauve },
+				["@exception"] = { fg = cp.peach },
+
+				["@constant.builtin"] = { fg = cp.lavender },
+				-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
+				-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
+				["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
+
+				-- ["@function"] = { fg = cp.blue },
+				["@function.macro"] = { fg = cp.red, style = {} },
+				["@parameter"] = { fg = cp.rosewater },
+				["@keyword.function"] = { fg = cp.maroon },
+				["@keyword"] = { fg = cp.red },
+				["@keyword.return"] = { fg = cp.pink, style = {} },
+
+				-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
+				-- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
+				-- ["@text.danger"] = { fg = cp.base, bg = cp.red },
+				-- ["@constant.macro"] = { fg = cp.mauve },
+
+				-- ["@label"] = { fg = cp.blue },
+				["@method"] = { style = { "italic" } },
+				["@namespace"] = { fg = cp.rosewater, style = {} },
+
+				["@punctuation.delimiter"] = { fg = cp.teal },
+				["@punctuation.bracket"] = { fg = cp.overlay2 },
+				-- ["@string"] = { fg = cp.green },
+				-- ["@string.regex"] = { fg = cp.peach },
+				-- ["@type"] = { fg = cp.yellow },
+				["@variable"] = { fg = cp.text },
+				["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
+				["@tag"] = { fg = cp.peach },
+				["@tag.delimiter"] = { fg = cp.maroon },
+				["@text"] = { fg = cp.text },
+
+				-- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
+				-- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
+				-- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
+				-- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
+				-- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
+				-- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
+				-- ["@string.escape"] = { fg = cp.pink },
+
+				-- ["@property.toml"] = { fg = cp.blue },
+				-- ["@field.yaml"] = { fg = cp.blue },
+
+				-- ["@label.json"] = { fg = cp.blue },
+
+				["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
+				["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
+
+				["@field.lua"] = { fg = cp.lavender },
+				["@constructor.lua"] = { fg = cp.flamingo },
+
+				["@constant.java"] = { fg = cp.teal },
+
+				["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
+				-- ["@constructor.typescript"] = { fg = cp.lavender },
+
+				-- ["@constructor.tsx"] = { fg = cp.lavender },
+				-- ["@tag.attribute.tsx"] = { fg = cp.mauve },
+
+				["@type.css"] = { fg = cp.lavender },
+				["@property.css"] = { fg = cp.yellow, style = { "italic" } },
+
+				["@property.cpp"] = { fg = cp.text },
+			},
+		},
+	})
 end
 
 return config
