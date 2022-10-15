@@ -70,7 +70,7 @@ editor["akinsho/toggleterm.nvim"] = {
 	config = conf.toggleterm,
 }
 --editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
-editor["norcalli/nvim-colorizer.lua"] = {
+editor["NvChad/nvim-colorizer.lua"] = {
 	opt = true,
 	event = "BufRead",
 	config = conf.nvim_colorizer,

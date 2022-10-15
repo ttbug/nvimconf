@@ -119,6 +119,7 @@ end
 --end
 
 function config.notify()
+	local icon = require("modules.ui.icons")
 	local notify = require("notify")
 	notify.setup({
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
@@ -139,11 +140,16 @@ function config.notify()
 		level = "TRACE",
 		---@usage Icons for the different levels
 		icons = {
-			ERROR = "",
-			WARN = "",
-			INFO = "",
-			DEBUG = "",
-			TRACE = "✎",
+			--ERROR = "",
+			--WARN = "",
+			--INFO = "",
+			--DEBUG = "",
+			--TRACE = "✎",
+			ERROR = icon.diagnostics.Error,
+			WARN = icon.diagnostics.Warning,
+			INFO = icon.diagnostics.Information,
+			DEBUG = icon.ui.Bug,
+			TRACE = icon.ui.Pencil,
 		},
 	})
 
@@ -151,10 +157,11 @@ function config.notify()
 end
 
 function config.lualine()
-
+	local icon = require("modules.ui.icons")
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
-		return ok and m.waiting and "✺ " or ""
+		--return ok and m.waiting and "✺ " or ""
+		return ok and m.waiting and icon.misc.EscapeST or ""
 	end
 
 	local function diff_source()
@@ -253,7 +260,12 @@ function config.lualine()
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
-					symbols = { error = " ", warn = " ", info = " " },
+					--symbols = { error = " ", warn = " ", info = " " },
+					symbols = {
+						error = icon.diagnostics.Error .. " ",
+						warn = icon.diagnostics.Warning .. " ",
+						info = icon.diagnostics.Information .. " ",
+					},
 				},
 			},
 			lualine_y = {
@@ -295,30 +307,8 @@ function config.lualine()
 	})
 end
 
-function config.nvim_gps()
-	require("nvim-gps").setup({
-		icons = {
-			["class-name"] = " ", -- Classes and class-like objects
-			["function-name"] = " ", -- Functions
-			["method-name"] = " ", -- Methods (functions inside class-like objects)
-		},
-		languages = {
-			-- You can disable any language individually here
-			["c"] = true,
-			["cpp"] = true,
-			["go"] = true,
-			["java"] = true,
-			["javascript"] = true,
-			["lua"] = true,
-			["python"] = true,
-			["rust"] = true,
-		},
-		separator = " > ",
-	})
-end
-
 function config.nvim_tree()
-
+	local icon = require("modules.ui.icons")
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
 		respect_buf_cwd = false,
@@ -333,7 +323,8 @@ function config.nvim_tree()
 		open_on_setup_file = false,
 		open_on_tab = false,
 		sort_by = "name",
-		update_cwd = false,
+		--update_cwd = false,
+		sync_root_with_cwd = true,
 		view = {
 			adaptive_size = false,
 			centralize_selection = false,
@@ -387,29 +378,45 @@ function config.nvim_tree()
 				padding = " ",
 				symlink_arrow = "  ",
 				glyphs = {
-					default = "", --
-					symlink = "",
-					bookmark = "",
+					--default = "", --
+					--symlink = "",
+					--bookmark = "",
+					default = icon.documents.Default, --
+					symlink = icon.documents.Symlink, --
+					bookmark = icon.ui.Bookmark,
 					git = {
-						unstaged = "",
-						staged = "", --
-						unmerged = "שׂ",
-						renamed = "", --
-						untracked = "ﲉ",
-						deleted = "",
-						ignored = "", --◌
+						--unstaged = "",
+						--staged = "", --
+						--unmerged = "שׂ",
+						--renamed = "", --
+						--untracked = "ﲉ",
+						--deleted = "",
+						--ignored = "", --◌
+						unstaged = icon.git.Mod_alt,
+						staged = icon.git.Add, --
+						unmerged = icon.git.Unmerged,
+						renamed = icon.git.Rename, --
+						untracked = icon.git.Untracked, -- "ﲉ"
+						deleted = icon.git.Remove, --
+						ignored = icon.git.Ignore, --◌
 					},
 					folder = {
 						-- arrow_open = "",
 						-- arrow_closed = "",
 						arrow_open = "",
 						arrow_closed = "",
-						default = "",
-						open = "",
-						empty = "",
-						empty_open = "",
-						symlink = "",
-						symlink_open = "",
+						--default = "",
+						--open = "",
+						--empty = "",
+						--empty_open = "",
+						--symlink = "",
+						--symlink_open = "",
+						default = icon.ui.Folder,
+						open = icon.ui.FolderOpen,
+						empty = icon.ui.EmptyFolder,
+						empty_open = icon.ui.EmptyFolderOpen,
+						symlink = icon.ui.SymlinkFolder,
+						symlink_open = icon.ui.FolderOpen,
 					},
 				},
 			},
@@ -420,7 +427,8 @@ function config.nvim_tree()
 		},
 		update_focused_file = {
 			enable = true,
-			update_cwd = false,
+			--update_cwd = false,
+			update_root = false,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},
@@ -456,10 +464,10 @@ function config.nvim_tree()
 			show_on_dirs = false,
 			debounce_delay = 50,
 			icons = {
-				hint = "",
-				info = "",
-				warning = "",
-				error = "",
+				hint = icon.diagnostics.Hint_alt,
+				info = icon.diagnostics.Information_alt,
+				warning = icon.diagnostics.Warning_alt,
+				error = icon.diagnostics.Error_alt,
 			},
 		},
 		filesystem_watchers = {
@@ -498,13 +506,14 @@ function config.nvim_tree()
 end
 
 function config.nvim_bufferline()
+	local icon = require("modules.ui.icons")
 	local opts = {
 		options = {
 			number = nil,
-			modified_icon = "✥",
-			--buffer_close_icon = "",
-			left_trunc_marker = "",
-			right_trunc_marker = "",
+			modified_icon = icon.ui.Modified,
+			--buffer_close_icon = icon.ui.Close,
+			left_trunc_marker = icon.ui.Left,
+			right_trunc_marker = icon.ui.Right,
 			max_name_length = 14,
 			max_prefix_length = 13,
 			tab_size = 15,
@@ -520,6 +529,13 @@ function config.nvim_bufferline()
 					text = "File Explorer",
 					text_align = "center",
 					padding = 1,
+				},
+				{
+					filetype = "undotree",
+					text = "Undo Tree",
+					text_align = "center",
+					highlight = "Directory",
+					separator = true,
 				},
 			},
 			diagnostics_indicator = function(count)
@@ -541,19 +557,19 @@ function config.nvim_bufferline()
 				custom = {
 					mocha = {
 						-- Warnings
-					--	warning = { fg = cp.yellow },
-					--	warning_visible = { fg = cp.yellow },
-					--	warning_selected = { fg = cp.yellow },
-					--	warning_diagnostic = { fg = cp.yellow },
-					--	warning_diagnostic_visible = { fg = cp.yellow },
-					--	warning_diagnostic_selected = { fg = cp.yellow },
-					--	-- Infos
-					--	info = { fg = cp.sky },
-					--	info_visible = { fg = cp.sky },
-					--	info_selected = { fg = cp.sky },
-					--	info_diagnostic = { fg = cp.sky },
-					--	info_diagnostic_visible = { fg = cp.sky },
-					--	info_diagnostic_selected = { fg = cp.sky },
+						--	warning = { fg = cp.yellow },
+						--	warning_visible = { fg = cp.yellow },
+						--	warning_selected = { fg = cp.yellow },
+						--	warning_diagnostic = { fg = cp.yellow },
+						--	warning_diagnostic_visible = { fg = cp.yellow },
+						--	warning_diagnostic_selected = { fg = cp.yellow },
+						--	-- Infos
+						--	info = { fg = cp.sky },
+						--	info_visible = { fg = cp.sky },
+						--	info_selected = { fg = cp.sky },
+						--	info_diagnostic = { fg = cp.sky },
+						--	info_diagnostic_visible = { fg = cp.sky },
+						--	info_diagnostic_selected = { fg = cp.sky },
 						-- Hint
 						hint = { fg = cp.rosewater },
 						hint_visible = { fg = cp.rosewater },
@@ -701,7 +717,6 @@ function config.fidget()
 	})
 end
 
-
 function config.catppuccin()
 	local function get_modified_palette()
 		-- We need to explicitly declare our new color.
@@ -756,7 +771,7 @@ function config.catppuccin()
 		},
 		transparent_background = false,
 		term_colors = true,
-        compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
@@ -805,7 +820,7 @@ function config.catppuccin()
 			lightspeed = false,
 			ts_rainbow = true,
 			hop = true,
-            illuminate = true,
+			illuminate = true,
 			cmp = true,
 			dap = { enabled = true, enable_ui = true },
 			notify = true,
@@ -885,7 +900,7 @@ function config.catppuccin()
 				FidgetTask = { bg = cp.none, fg = cp.surface2 },
 				FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
-                ["@field"] = { fg = cp.rosewater },
+				["@field"] = { fg = cp.rosewater },
 				["@property"] = { fg = cp.yellow },
 
 				["@include"] = { fg = cp.teal },
