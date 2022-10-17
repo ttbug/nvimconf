@@ -108,7 +108,7 @@ if vim.g.use_nerd_icons then
 			-- Indicator = "",
 			Indicator = "",
 			Left = "",
-			Lightbulb = "",
+			--Lightbulb = "",
 			List = "",
 			SymlinkFolder = "",
 			Lock = "",
