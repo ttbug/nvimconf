@@ -21,11 +21,11 @@ mason.setup({
 mason_lsp.setup({
 	ensure_installed = {
 		"efm",
-		--"sumneko_lua",
-		"lua-language-server",
+		"sumneko_lua",
+		--"lua-language-server",
 		"clangd",
 		"gopls",
-		--"pyright",
+		"pyright",
 	},
 })
 
