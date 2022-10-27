@@ -12,7 +12,7 @@ end
 --	require("aerial").setup({})
 --end
 function config.lspsaga()
-    local icons = {
+	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics", true),
 		kind = require("modules.ui.icons").get("kind", true),
 		type = require("modules.ui.icons").get("type", true),
@@ -57,13 +57,13 @@ function config.lspsaga()
 	require("lspsaga").init_lsp_saga({
 		--diagnostic_header = { " ", " ", "  ", " " },
 		diagnostic_header = {
-			icons.diagnostics.Error_alt .. " ",
-			icons.diagnostics.Warning_alt .. " ",
-			icons.diagnostics.Information_alt .. " ",
-			icons.diagnostics.Hint_alt .. " ",
+			icons.diagnostics.Error_alt,
+			icons.diagnostics.Warning_alt,
+			icons.diagnostics.Information_alt,
+			icons.diagnostics.Hint_alt,
 		},
 		custom_kind = {
-            -- Kind
+			-- Kind
 			Class = { icons.kind.Class, colors.yellow },
 			Constant = { icons.kind.Constant, colors.peach },
 			Constructor = { icons.kind.Constructor, colors.sapphire },
@@ -100,7 +100,7 @@ function config.lspsaga()
 			enable = true,
 			in_custom = false,
 			--separator = "  ",
-            separator = " " .. icons.ui.Separator,
+			separator = " " .. icons.ui.Separator,
 			show_file = false,
 			-- define how to customize filename, eg: %:., %
 			-- if not set, use default value `%:t`
@@ -134,73 +134,73 @@ function config.lspsaga()
 	})
 
 	-- Example:
-	local function get_file_name(include_path)
-		local file_name = require("lspsaga.symbolwinbar").get_file_name()
-		if vim.fn.bufname("%") == "" then
-			return ""
-		end
-		if include_path == false then
-			return file_name
-		end
-		-- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
-		local sep = vim.loop.os_uname().sysname == "Windows" and "\\" or "/"
-		local path_list = vim.split(string.gsub(vim.fn.expand("%:~:.:h"), "%%", ""), sep)
-		local file_path = ""
-		for _, cur in ipairs(path_list) do
-			file_path = (cur == "." or cur == "~") and ""
-				or file_path .. cur .. " " .. "%#LspSagaWinbarSep#>%*" .. " %*"
-		end
-		return file_path .. file_name
-	end
-
-	local function config_winbar_or_statusline()
-		local exclude = {
-			["terminal"] = true,
-			["toggleterm"] = true,
-			["prompt"] = true,
-			["NvimTree"] = true,
-			["help"] = true,
-		} -- Ignore float windows and exclude filetype
-		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-			vim.wo.winbar = ""
-		else
-			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
-			local sym
-			if ok then
-				sym = lspsaga.get_symbol_node()
-			end
-			local win_val = ""
-			win_val = get_file_name(true) -- set to true to include path
-			if sym ~= nil then
-				win_val = win_val .. sym
-			end
-			vim.wo.winbar = win_val
-		end
-	end
-
-	local events = { "BufEnter", "BufWinEnter", "CursorMoved" }
-
-	vim.api.nvim_create_autocmd(events, {
-		pattern = "*",
-		callback = function()
-			config_winbar_or_statusline()
-		end,
-	})
-
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "LspsagaUpdateSymbol",
-		callback = function()
-			config_winbar_or_statusline()
-		end,
-	})
+	--	local function get_file_name(include_path)
+	--		local file_name = require("lspsaga.symbolwinbar").get_file_name()
+	--		if vim.fn.bufname("%") == "" then
+	--			return ""
+	--		end
+	--		if include_path == false then
+	--			return file_name
+	--		end
+	--		-- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
+	--		local sep = vim.loop.os_uname().sysname == "Windows" and "\\" or "/"
+	--		local path_list = vim.split(string.gsub(vim.fn.expand("%:~:.:h"), "%%", ""), sep)
+	--		local file_path = ""
+	--		for _, cur in ipairs(path_list) do
+	--			file_path = (cur == "." or cur == "~") and ""
+	--				or file_path .. cur .. " " .. "%#LspSagaWinbarSep#>%*" .. " %*"
+	--		end
+	--		return file_path .. file_name
+	--	end
+	--
+	--	local function config_winbar_or_statusline()
+	--		local exclude = {
+	--			["terminal"] = true,
+	--			["toggleterm"] = true,
+	--			["prompt"] = true,
+	--			["NvimTree"] = true,
+	--			["help"] = true,
+	--		} -- Ignore float windows and exclude filetype
+	--		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+	--			vim.wo.winbar = ""
+	--		else
+	--			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
+	--			local sym
+	--			if ok then
+	--				sym = lspsaga.get_symbol_node()
+	--			end
+	--			local win_val = ""
+	--			win_val = get_file_name(true) -- set to true to include path
+	--			if sym ~= nil then
+	--				win_val = win_val .. sym
+	--			end
+	--			vim.wo.winbar = win_val
+	--		end
+	--	end
+	--
+	--	local events = { "BufEnter", "BufWinEnter", "CursorMoved" }
+	--
+	--	vim.api.nvim_create_autocmd(events, {
+	--		pattern = "*",
+	--		callback = function()
+	--			config_winbar_or_statusline()
+	--		end,
+	--	})
+	--
+	--	vim.api.nvim_create_autocmd("User", {
+	--		pattern = "LspsagaUpdateSymbol",
+	--		callback = function()
+	--			config_winbar_or_statusline()
+	--		end,
+	--	})
 end
 
 function config.cmp()
-    local icons = {
-        kind = require("modules.ui.icons").get("kind", false),
+	local icons = {
+		kind = require("modules.ui.icons").get("kind", false),
 		type = require("modules.ui.icons").get("type", false),
 		cmp = require("modules.ui.icons").get("cmp", false),
-    }
+	}
 	-- vim.cmd([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -213,7 +213,7 @@ function config.cmp()
 
 	local border = function(hl)
 		return {
-            { "┌", hl },
+			{ "┌", hl },
 			{ "─", hl },
 			{ "┐", hl },
 			{ "│", hl },
@@ -240,7 +240,7 @@ function config.cmp()
 	cmp.setup({
 		window = {
 			completion = {
-                winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
 				col_offset = -3,
 				side_padding = 0,
 			},
@@ -265,7 +265,7 @@ function config.cmp()
 			},
 		},
 		formatting = {
-            fields = { "kind", "abbr", "menu" },
+			fields = { "kind", "abbr", "menu" },
 			format = function(entry, vim_item)
 				local kind = lspkind.cmp_format({
 					mode = "symbol_text",
@@ -379,52 +379,6 @@ function config.autopairs()
 		})
 	)
 end
-
---function config.bqf()
---	vim.cmd([[
---    hi BqfPreviewBorder guifg=#F2CDCD ctermfg=71
---    hi link BqfPreviewRange Search
---]])
---
---	require("bqf").setup({
---		auto_enable = true,
---		auto_resize_height = true, -- highly recommended enable
---		preview = {
---			win_height = 12,
---			win_vheight = 12,
---			delay_syntax = 80,
---			border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
---			should_preview_cb = function(bufnr, qwinid)
---				local ret = true
---				local bufname = vim.api.nvim_buf_get_name(bufnr)
---				local fsize = vim.fn.getfsize(bufname)
---				if fsize > 100 * 1024 then
---					-- skip file size greater than 100k
---					ret = false
---				elseif bufname:match("^fugitive://") then
---					-- skip fugitive buffer
---					ret = false
---				end
---				return ret
---			end,
---		},
---		-- make `drop` and `tab drop` to become preferred
---		func_map = {
---			drop = "q",
---			openc = "O",
---			split = "<C-s>",
---			tabdrop = "<C-t>",
---			tabc = "",
---			ptogglemode = "z,",
---		},
---		filter = {
---			fzf = {
---				action_for = { ["ctrl-s"] = "split", ["ctrl-t"] = "tab drop" },
---				extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
---			},
---		},
---	})
---end
 
 function config.mason_install()
 	require("mason-tool-installer").setup({

@@ -15,7 +15,7 @@ completion["creativenull/efmls-configs-nvim"] = {
 --}
 
 completion["williamboman/mason.nvim"] = {
-    opt = false,
+	opt = false,
 	requires = {
 		{
 			"williamboman/mason-lspconfig.nvim",
@@ -38,8 +38,8 @@ completion["williamboman/mason.nvim"] = {
 --	config = conf.aerial,
 --}
 completion["glepnir/lspsaga.nvim"] = {
-	opt = true,
-    event = "LspAttach",
+	opt = false,
+	event = "LspAttach",
 	--requires = { { "antoinemadec/FixCursorHold.nvim", opt = true } },
 	config = conf.lspsaga,
 }
@@ -49,7 +49,7 @@ completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
 	event = "InsertEnter",
 	requires = {
-        { "onsails/lspkind.nvim" },
+		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
 		{ "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
