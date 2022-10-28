@@ -38,7 +38,7 @@ completion["williamboman/mason.nvim"] = {
 --	config = conf.aerial,
 --}
 completion["glepnir/lspsaga.nvim"] = {
-	opt = false,
+	opt = true,
 	event = "LspAttach",
 	--requires = { { "antoinemadec/FixCursorHold.nvim", opt = true } },
 	config = conf.lspsaga,
