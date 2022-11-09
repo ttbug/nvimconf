@@ -13,11 +13,7 @@ require("lspconfig.ui.windows").default_options.border = "single"
 
 mason.setup({
 	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
+		border = "single",
 	},
 })
 mason_lsp.setup({
@@ -104,10 +100,8 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 					semanticTokens = true,
 					completeUnimported = true,
 					staticcheck = true,
-					experimentalWatchedFileDelay = "100ms",
 					gofumpt = true,
 					experimentalPostfixCompletions = true,
-					experimentalUseInvalidMetadata = true,
 				},
 			},
 		})
