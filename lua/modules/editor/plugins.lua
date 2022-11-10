@@ -140,5 +140,10 @@ editor["luukvbaal/stabilize.nvim"] = {
 --    event = "BufReadPost",
 --    config = conf.fterm,
 --}
+editor["ibhagwan/smartyank.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	config = conf.smartyank,
+}
 
 return editor
