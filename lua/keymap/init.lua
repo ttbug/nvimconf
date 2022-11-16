@@ -37,6 +37,7 @@ local plug_map = {
 	["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait(),
 	["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(),
 	["n|<A-t>"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
+	["n|gk"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
 	["n|g["] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
 	["n|g]"] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
 	["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
@@ -47,7 +48,7 @@ local plug_map = {
 	["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
 	["n|gD"] = map_cmd("<cmd>lua vim.lsp.buf.implementation()<CR>"):with_noremap():with_silent(),
 	["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
-	["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
+	["n|gR"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
 	--["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
 	--["n|gh"] = map_cr("lua vim.lsp.buf.references()"):with_noremap()
 	--    :with_silent(),
@@ -60,7 +61,7 @@ local plug_map = {
 	["n|<Leader>t"] = map_cu("Tigui"):with_noremap():with_silent(),
 	-- Plugin trouble
 	["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
-	["n|gR"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(),
+	["n|gr"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(),
 	["n|<A-e>"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(),
 	["n|<leader>cd"] = map_cr("TroubleToggle document_diagnostics"):with_noremap():with_silent(),
 	["n|<leader>cw"] = map_cr("TroubleToggle workspace_diagnostics"):with_noremap():with_silent(),
