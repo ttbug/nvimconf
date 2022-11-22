@@ -24,6 +24,7 @@ vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
 end, {})
 
+
 local block_list = {}
 vim.api.nvim_create_user_command("FormatterToggle", function(opts)
 	if block_list[opts.args] == nil then
@@ -78,6 +79,15 @@ function M.enable_format_on_save(is_configure)
 			require("modules.completion.formatting").format({ timeout_ms = opts.timeout, filter = M.format_filter })
 		end,
 	})
+    -- Run gofmt + goimport on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*.go",
+      callback = function()
+       require('go.format').goimport()
+      end,
+      group = "format_on_save",
+    })
+
 	if not is_configure then
 		vim.notify(
 			"Successfully enabled format-on-save",
