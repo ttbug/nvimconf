@@ -40,7 +40,7 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	config = conf.indent_blankline,
 }
 ui["akinsho/bufferline.nvim"] = {
-	opt = true,
+	opt = false,
 	tag = "*",
 	event = "BufReadPost",
 	config = conf.nvim_bufferline,

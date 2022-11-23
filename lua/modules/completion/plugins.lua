@@ -47,7 +47,7 @@ completion["glepnir/lspsaga.nvim"] = {
 completion["ray-x/lsp_signature.nvim"] = { opt = true, after = "nvim-lspconfig" }
 completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
-	event = "InsertEnter",
+	--event = "InsertEnter",
 	requires = {
 		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
@@ -81,19 +81,19 @@ completion["windwp/nvim-autopairs"] = {
 --     cmd = "Copilot"
 -- }
 
-completion["zbirenbaum/copilot.lua"] = {
-	event = "VimEnter",
-	config = function()
-		vim.defer_fn(function()
-			require("copilot").setup()
-		end, 100)
-	end,
-}
-completion["zbirenbaum/copilot-cmp"] = {
-	after = "copilot.lua",
-	config = function()
-		require("copilot_cmp").setup()
-	end,
-}
+--completion["zbirenbaum/copilot.lua"] = {
+--	event = "VimEnter",
+--	config = function()
+--		vim.defer_fn(function()
+--			require("copilot").setup()
+--		end, 100)
+--	end,
+--}
+--completion["zbirenbaum/copilot-cmp"] = {
+--	after = "copilot.lua",
+--	config = function()
+--		require("copilot_cmp").setup()
+--	end,
+--}
 
 return completion
