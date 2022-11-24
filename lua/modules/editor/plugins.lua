@@ -70,7 +70,7 @@ editor["akinsho/toggleterm.nvim"] = {
 	config = conf.toggleterm,
 }
 --editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
-editor["norcalli/nvim-colorizer.lua"] = {
+editor["NvChad/nvim-colorizer.lua"] = {
 	opt = true,
 	event = "BufRead",
 	config = conf.nvim_colorizer,
@@ -140,5 +140,10 @@ editor["luukvbaal/stabilize.nvim"] = {
 --    event = "BufReadPost",
 --    config = conf.fterm,
 --}
+editor["ibhagwan/smartyank.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	config = conf.smartyank,
+}
 
 return editor

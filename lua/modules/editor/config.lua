@@ -64,9 +64,9 @@ function config.nvim_treesitter()
 			"zig",
 		},
 		--highlight = { enable = true, disable = { "vim" } },
-        highlight = {
+		highlight = {
 			enable = true,
-			disable = { "vim", "help" },
+			disable = { "vim" },
 			additional_vim_regex_highlighting = false,
 		},
 		textobjects = {
@@ -242,8 +242,13 @@ function config.toggleterm()
 end
 
 function config.dapui()
+    local icons = {
+		ui = require("modules.ui.icons").get("ui"),
+		dap = require("modules.ui.icons").get("dap"),
+	}
 	require("dapui").setup({
-		icons = { expanded = "▾", collapsed = "▸" },
+		--icons = { expanded = "▾", collapsed = "▸" },
+		icons = { expanded = icons.ui.ArrowOpen, collapsed = icons.ui.ArrowClosed, current_frame = icons.ui.Indicator },
 		mappings = {
 			-- Use a table to apply multiple mappings
 			expand = { "<CR>", "<2-LeftMouse>" },
@@ -273,19 +278,19 @@ function config.dapui()
 				position = "bottom",
 			},
 		},
-        controls = {
+		controls = {
 			enabled = true,
 			-- Display controls in this session
 			element = "repl",
 			icons = {
-				pause = "",
-				play = "",
-				step_into = "",
-				step_over = "",
-				step_out = "",
-				step_back = "",
-				run_last = "↻",
-				terminate = "ﱢ",
+				pause = icons.dap.Pause,
+				play = icons.dap.Play,
+				step_into = icons.dap.StepInto,
+				step_over = icons.dap.StepOver,
+				step_out = icons.dap.StepOut,
+				step_back = icons.dap.StepBack,
+				run_last = icons.dap.RunLast,
+				terminate = icons.dap.Terminate,
 			},
 		},
 		floating = {
@@ -298,8 +303,9 @@ function config.dapui()
 end
 
 function config.dap()
+    local icons = { dap = require("modules.ui.icons").get("dap") }
 	--vim.cmd([[packadd nvim-dap-ui]])
-    vim.api.nvim_command([[packadd nvim-dap-ui]])
+	vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
 
@@ -313,7 +319,23 @@ function config.dap()
 		dapui.close()
 	end
 
-	vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+	-- We need to override nvim-dap's default highlight groups, AFTER requiring nvim-dap for catppuccin.
+	vim.api.nvim_set_hl(0, "DapStopped", { fg = "#ABE9B3" })
+
+	vim.fn.sign_define(
+		"DapBreakpoint",
+        { text = icons.dap.Breakpoint, texthl = "DapBreakpoint", linehl = "", numhl = "" }
+	)
+	vim.fn.sign_define(
+		"DapBreakpointCondition",
+        { text = icons.dap.BreakpointCondition, texthl = "DapBreakpoint", linehl = "", numhl = "" }
+	)
+    vim.fn.sign_define("DapStopped", { text = icons.dap.Stopped, texthl = "DapStopped", linehl = "", numhl = "" })
+	vim.fn.sign_define(
+		"DapBreakpointRejected",
+        { text = icons.dap.BreakpointRejected, texthl = "DapBreakpoint", linehl = "", numhl = "" }
+	)
+	vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
 
 	dap.adapters.lldb = {
 		type = "executable",
@@ -363,7 +385,7 @@ function config.dap()
 			stdout:close()
 			handle:close()
 			if code ~= 0 then
-                vim.notify(
+				vim.notify(
 					string.format('"dlv" exited with code: %d, please check your configs for correctness.', code),
 					vim.log.levels.WARN,
 					{ title = "[go] DAP Warning!" }
@@ -406,7 +428,7 @@ function config.dap()
 	dap.adapters.python = {
 		type = "executable",
 		-- command = os.getenv("HOME") .. "/.local/share/nvim/dapinstall/python/bin/python",
-        command = "/usr/bin/python",
+		command = "/usr/bin/python",
 		args = { "-m", "debugpy.adapter" },
 	}
 	dap.configurations.python = {
@@ -572,6 +594,31 @@ function config.accelerated_jk()
 		acceleration_table = { 7, 12, 17, 21, 24, 26, 28, 30 },
 		-- when 'enable_deceleration = true', 'deceleration_table = { {200, 3}, {300, 7}, {450, 11}, {600, 15}, {750, 21}, {900, 9999} }'
 		deceleration_table = { { 150, 9999 } },
+	})
+end
+
+
+function config.smartyank()
+	require("smartyank").setup({
+		highlight = {
+			enabled = false, -- highlight yanked text
+			higroup = "IncSearch", -- highlight group of yanked text
+			timeout = 2000, -- timeout for clearing the highlight
+		},
+		clipboard = {
+			enabled = true,
+		},
+		tmux = {
+			enabled = true,
+			-- remove `-w` to disable copy to host client's clipboard
+			cmd = { "tmux", "set-buffer", "-w" },
+		},
+		osc52 = {
+			enabled = true,
+			ssh_only = true, -- false to OSC52 yank also in local sessions
+			silent = false, -- true to disable the "n chars copied" echo
+			echo_hl = "Directory", -- highlight group of the OSC52 echo message
+		},
 	})
 end
 

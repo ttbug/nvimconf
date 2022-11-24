@@ -1,17 +1,21 @@
 local tools = {}
-local conf = require('modules.tools.config')
+local conf = require("modules.tools.config")
 
 tools["nvim-lua/plenary.nvim"] = { opt = false }
 
 --tools["RishabhRD/popfix"] = {opt = false}
 tools["aspeddro/gitui.nvim"] = {
-    opt = false,
-    config = function() require("gitui").setup {} end
+	opt = false,
+	config = function()
+		require("gitui").setup({})
+	end,
 }
 
 tools["ttbug/tig.nvim"] = {
-    opt = false,
-    config = function() require("tig").setup{} end
+	opt = false,
+	config = function()
+		require("tig").setup({})
+	end,
 }
 
 tools["nvim-telescope/telescope.nvim"] = {
@@ -37,7 +41,7 @@ tools["nvim-telescope/telescope-frecency.nvim"] = {
 	opt = true,
 	after = "telescope-project.nvim",
 	--requires = { { "tami5/sqlite.lua", opt = true } },
-    requires = { { "kkharji/sqlite.lua", opt = true } },
+	requires = { { "kkharji/sqlite.lua", opt = true } },
 }
 
 tools["jvgrootveld/telescope-zoxide"] = { opt = true, after = "telescope-frecency.nvim" }
@@ -49,7 +53,7 @@ tools["michaelb/sniprun"] = {
 tools["folke/which-key.nvim"] = {
 	opt = true,
 	--keys = ",",
-    keys = "<leader>",
+	keys = "<leader>",
 	config = conf.which_key,
 }
 tools["folke/trouble.nvim"] = {
@@ -64,16 +68,32 @@ tools["gelguy/wilder.nvim"] = {
 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
 }
 
-tools['mg979/vim-visual-multi'] = {opt = false}
-tools['folke/todo-comments.nvim'] = {
-    opt = false,
-    requires = {{'nvim-lua/plenary.nvim', opt = false}},
-    config = conf.todo,
+tools["mg979/vim-visual-multi"] = { opt = false }
+tools["folke/todo-comments.nvim"] = {
+	opt = false,
+	requires = { { "nvim-lua/plenary.nvim", opt = false } },
+	config = conf.todo,
 }
 
-tools['antoinemadec/FixCursorHold.nvim'] = {
-    opt = false,
-    config = conf.perf,
+tools["antoinemadec/FixCursorHold.nvim"] = {
+	opt = false,
+	config = conf.perf,
 }
+
+--tools["folke/noice.nvim"] = {
+--	opt = false,
+--	event = "VimEnter",
+--	config = function()
+--		require("noice").setup()
+--	end,
+--	requires = {
+--		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+--		"MunifTanjim/nui.nvim",
+--		-- OPTIONAL:
+--		--   `nvim-notify` is only needed, if you want to use the notification view.
+--		--   If not available, we use `mini` as the fallback
+--		--"rcarriga/nvim-notify",
+--	},
+--}
 
 return tools

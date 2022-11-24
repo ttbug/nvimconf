@@ -119,6 +119,10 @@ end
 --end
 
 function config.notify()
+    local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics"),
+		ui = require("modules.ui.icons").get("ui"),
+	}
 	local notify = require("notify")
 	notify.setup({
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
@@ -139,11 +143,11 @@ function config.notify()
 		level = "TRACE",
 		---@usage Icons for the different levels
 		icons = {
-			ERROR = "",
-			WARN = "",
-			INFO = "",
-			DEBUG = "",
-			TRACE = "✎",
+            ERROR = icons.diagnostics.Error,
+			WARN = icons.diagnostics.Warning,
+			INFO = icons.diagnostics.Information,
+			DEBUG = icons.ui.Bug,
+			TRACE = icons.ui.Pencil,
 		},
 	})
 
@@ -151,10 +155,14 @@ function config.notify()
 end
 
 function config.lualine()
-
+    local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics", true),
+		misc = require("modules.ui.icons").get("misc", true),
+	}
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
-		return ok and m.waiting and "✺ " or ""
+		--return ok and m.waiting and "✺ " or ""
+		return ok and m.waiting and icons.misc.EscapeST or ""
 	end
 
 	local function diff_source()
@@ -169,45 +177,16 @@ function config.lualine()
 	end
 
 	local mini_sections = {
-		lualine_a = {},
+        lualine_a = { "filetype" },
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
-		lualine_z = { "location" },
-	}
-	local simple_sections = {
-		lualine_a = { "mode" },
-		lualine_b = { "filetype" },
-
-		lualine_c = {},
-		lualine_x = {},
-
-		lualine_y = {},
-		lualine_z = { "location" },
+		lualine_z = {},
 	}
 	local outline = {
 		sections = mini_sections,
 		filetypes = { "lspsagaoutline" },
-	}
-	local dapui_scopes = {
-		sections = simple_sections,
-		filetypes = { "dapui_scopes" },
-	}
-
-	local dapui_breakpoints = {
-		sections = simple_sections,
-		filetypes = { "dapui_breakpoints" },
-	}
-
-	local dapui_stacks = {
-		sections = simple_sections,
-		filetypes = { "dapui_stacks" },
-	}
-
-	local dapui_watches = {
-		sections = simple_sections,
-		filetypes = { "dapui_watches" },
 	}
 
 	local function python_venv()
@@ -253,7 +232,12 @@ function config.lualine()
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
-					symbols = { error = " ", warn = " ", info = " " },
+					--symbols = { error = " ", warn = " ", info = " " },
+					symbols = {
+                        error = icons.diagnostics.Error,
+						warn = icons.diagnostics.Warning,
+						info = icons.diagnostics.Information,
+					},
 				},
 			},
 			lualine_y = {
@@ -284,41 +268,21 @@ function config.lualine()
 		extensions = {
 			"quickfix",
 			"nvim-tree",
+            "nvim-dap-ui",
 			"toggleterm",
 			"fugitive",
 			outline,
-			dapui_scopes,
-			dapui_breakpoints,
-			dapui_stacks,
-			dapui_watches,
 		},
-	})
-end
-
-function config.nvim_gps()
-	require("nvim-gps").setup({
-		icons = {
-			["class-name"] = " ", -- Classes and class-like objects
-			["function-name"] = " ", -- Functions
-			["method-name"] = " ", -- Methods (functions inside class-like objects)
-		},
-		languages = {
-			-- You can disable any language individually here
-			["c"] = true,
-			["cpp"] = true,
-			["go"] = true,
-			["java"] = true,
-			["javascript"] = true,
-			["lua"] = true,
-			["python"] = true,
-			["rust"] = true,
-		},
-		separator = " > ",
 	})
 end
 
 function config.nvim_tree()
-
+    local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics"),
+		documents = require("modules.ui.icons").get("documents"),
+		git = require("modules.ui.icons").get("git"),
+		ui = require("modules.ui.icons").get("ui"),
+	}
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
 		respect_buf_cwd = false,
@@ -333,7 +297,8 @@ function config.nvim_tree()
 		open_on_setup_file = false,
 		open_on_tab = false,
 		sort_by = "name",
-		update_cwd = false,
+		--update_cwd = false,
+		sync_root_with_cwd = true,
 		view = {
 			adaptive_size = false,
 			centralize_selection = false,
@@ -387,29 +352,27 @@ function config.nvim_tree()
 				padding = " ",
 				symlink_arrow = "  ",
 				glyphs = {
-					default = "", --
-					symlink = "",
-					bookmark = "",
+					default = icons.documents.Default, --
+					symlink = icons.documents.Symlink, --
+					bookmark = icons.ui.Bookmark,
 					git = {
-						unstaged = "",
-						staged = "", --
-						unmerged = "שׂ",
-						renamed = "", --
-						untracked = "ﲉ",
-						deleted = "",
-						ignored = "", --◌
+						unstaged = icons.git.Mod_alt,
+						staged = icons.git.Add, --
+						unmerged = icons.git.Unmerged,
+						renamed = icons.git.Rename, --
+						untracked = icons.git.Untracked, -- "ﲉ"
+						deleted = icons.git.Remove, --
+						ignored = icons.git.Ignore, --◌
 					},
 					folder = {
-						-- arrow_open = "",
-						-- arrow_closed = "",
 						arrow_open = "",
 						arrow_closed = "",
-						default = "",
-						open = "",
-						empty = "",
-						empty_open = "",
-						symlink = "",
-						symlink_open = "",
+						default = icons.ui.Folder,
+						open = icons.ui.FolderOpen,
+						empty = icons.ui.EmptyFolder,
+						empty_open = icons.ui.EmptyFolderOpen,
+						symlink = icons.ui.SymlinkFolder,
+						symlink_open = icons.ui.FolderOpen,
 					},
 				},
 			},
@@ -420,7 +383,8 @@ function config.nvim_tree()
 		},
 		update_focused_file = {
 			enable = true,
-			update_cwd = false,
+			--update_cwd = false,
+			update_root = false,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},
@@ -456,10 +420,10 @@ function config.nvim_tree()
 			show_on_dirs = false,
 			debounce_delay = 50,
 			icons = {
-				hint = "",
-				info = "",
-				warning = "",
-				error = "",
+				hint = icons.diagnostics.Hint_alt,
+				info = icons.diagnostics.Information_alt,
+				warning = icons.diagnostics.Warning_alt,
+				error = icons.diagnostics.Error_alt,
 			},
 		},
 		filesystem_watchers = {
@@ -498,13 +462,14 @@ function config.nvim_tree()
 end
 
 function config.nvim_bufferline()
+    local icons = { ui = require("modules.ui.icons").get("ui") }
 	local opts = {
 		options = {
 			number = nil,
-			modified_icon = "✥",
-			--buffer_close_icon = "",
-			left_trunc_marker = "",
-			right_trunc_marker = "",
+			modified_icon = icons.ui.Modified,
+			--buffer_close_icon = icon.ui.Close,
+			left_trunc_marker = icons.ui.Left,
+			right_trunc_marker = icons.ui.Right,
 			max_name_length = 14,
 			max_prefix_length = 13,
 			tab_size = 15,
@@ -520,6 +485,13 @@ function config.nvim_bufferline()
 					text = "File Explorer",
 					text_align = "center",
 					padding = 1,
+				},
+				{
+					filetype = "undotree",
+					text = "Undo Tree",
+					text_align = "center",
+					highlight = "Directory",
+					separator = true,
 				},
 			},
 			diagnostics_indicator = function(count)
@@ -540,21 +512,6 @@ function config.nvim_bufferline()
 				styles = { "italic", "bold" },
 				custom = {
 					mocha = {
-						-- Warnings
-					--	warning = { fg = cp.yellow },
-					--	warning_visible = { fg = cp.yellow },
-					--	warning_selected = { fg = cp.yellow },
-					--	warning_diagnostic = { fg = cp.yellow },
-					--	warning_diagnostic_visible = { fg = cp.yellow },
-					--	warning_diagnostic_selected = { fg = cp.yellow },
-					--	-- Infos
-					--	info = { fg = cp.sky },
-					--	info_visible = { fg = cp.sky },
-					--	info_selected = { fg = cp.sky },
-					--	info_diagnostic = { fg = cp.sky },
-					--	info_diagnostic_visible = { fg = cp.sky },
-					--	info_diagnostic_selected = { fg = cp.sky },
-						-- Hint
 						hint = { fg = cp.rosewater },
 						hint_visible = { fg = cp.rosewater },
 						hint_selected = { fg = cp.rosewater },
@@ -701,52 +658,10 @@ function config.fidget()
 	})
 end
 
-
 function config.catppuccin()
-	local function get_modified_palette()
-		-- We need to explicitly declare our new color.
-		-- (Because colors haven't been set yet when we pass them to the setup function.)
-
-		local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
-		cp.none = "NONE" -- Special setting for complete transparent fg/bg.
-
-		if vim.g.catppuccin_flavour == "mocha" then -- We only modify the "mocha" palette.
-			cp.rosewater = "#F5E0DC"
-			cp.flamingo = "#F2CDCD"
-			cp.mauve = "#DDB6F2"
-			cp.pink = "#F5C2E7"
-			cp.red = "#F28FAD"
-			cp.maroon = "#E8A2AF"
-			cp.peach = "#F8BD96"
-			cp.yellow = "#FAE3B0"
-			cp.green = "#ABE9B3"
-			cp.blue = "#96CDFB"
-			cp.sky = "#89DCEB"
-			cp.teal = "#B5E8E0"
-			cp.lavender = "#C9CBFF"
-
-			cp.text = "#D9E0EE"
-			cp.subtext1 = "#BAC2DE"
-			cp.subtext0 = "#A6ADC8"
-			cp.overlay2 = "#C3BAC6"
-			cp.overlay1 = "#988BA2"
-			cp.overlay0 = "#6E6C7E"
-			cp.surface2 = "#6E6C7E"
-			cp.surface1 = "#575268"
-			cp.surface0 = "#302D41"
-
-			cp.base = "#1E1E2E"
-			cp.mantle = "#1A1826"
-			cp.crust = "#161320"
-		end
-
-		return cp
-	end
-
-	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
-	local cp = get_modified_palette()
-
 	require("catppuccin").setup({
+		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
+		background = { light = "latte", dark = "mocha" },
 		dim_inactive = {
 			enabled = false,
 			-- Dim inactive splits/windows/buffers.
@@ -756,7 +671,7 @@ function config.catppuccin()
 		},
 		transparent_background = false,
 		term_colors = true,
-        compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
@@ -804,8 +719,11 @@ function config.catppuccin()
 			markdown = true,
 			lightspeed = false,
 			ts_rainbow = true,
+			mason = true,
+			neotest = false,
+			noice = false,
 			hop = true,
-            illuminate = true,
+			illuminate = true,
 			cmp = true,
 			dap = { enabled = true, enable_ui = true },
 			notify = true,
@@ -854,119 +772,115 @@ function config.catppuccin()
 			},
 		},
 		highlight_overrides = {
-			mocha = {
-				-- For base configs.
-				CursorLineNr = { fg = cp.green },
-				Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
-				IncSearch = { bg = cp.pink, fg = cp.surface1 },
+			mocha = function(cp)
+				return {
+					-- For base configs.
+					CursorLineNr = { fg = cp.green },
+					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
+					IncSearch = { bg = cp.pink, fg = cp.surface1 },
 
-				-- For native lsp configs.
-				DiagnosticVirtualTextError = { bg = cp.none },
-				DiagnosticVirtualTextWarn = { bg = cp.none },
-				DiagnosticVirtualTextInfo = { bg = cp.none },
-				DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
+					-- For native lsp configs.
+					DiagnosticVirtualTextError = { bg = cp.none },
+					DiagnosticVirtualTextWarn = { bg = cp.none },
+					DiagnosticVirtualTextInfo = { bg = cp.none },
+					DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
 
-				DiagnosticHint = { fg = cp.rosewater },
-				LspDiagnosticsDefaultHint = { fg = cp.rosewater },
-				LspDiagnosticsHint = { fg = cp.rosewater },
-				LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
-				LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
+					DiagnosticHint = { fg = cp.rosewater },
+					LspDiagnosticsDefaultHint = { fg = cp.rosewater },
+					LspDiagnosticsHint = { fg = cp.rosewater },
+					LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
+					LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
 
-				-- For Ts-Rainbow
-				--rainbowcol1 = { bg = cp.none },
-				--rainbowcol2 = { bg = cp.none },
-				--rainbowcol3 = { bg = cp.none },
-				--rainbowcol4 = { bg = cp.none },
-				--rainbowcol5 = { bg = cp.none },
-				--rainbowcol6 = { bg = cp.none },
-				--rainbowcol7 = { bg = cp.none },
+					-- For fidget.
+					FidgetTask = { bg = cp.none, fg = cp.surface2 },
+					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
-				-- For fidget.
-				FidgetTask = { bg = cp.none, fg = cp.surface2 },
-				FidgetTitle = { fg = cp.blue, style = { "bold" } },
+					-- For treesitter.
+					["@field"] = { fg = cp.rosewater },
+					["@property"] = { fg = cp.yellow },
 
-                ["@field"] = { fg = cp.rosewater },
-				["@property"] = { fg = cp.yellow },
+					["@include"] = { fg = cp.teal },
+					["@operator"] = { fg = cp.sky },
+					["@keyword.operator"] = { fg = cp.sky },
+					["@punctuation.special"] = { fg = cp.maroon },
 
-				["@include"] = { fg = cp.teal },
-				["@operator"] = { fg = cp.sky },
-				["@keyword.operator"] = { fg = cp.sky },
-				["@punctuation.special"] = { fg = cp.maroon },
+					-- ["@float"] = { fg = cp.peach },
+					-- ["@number"] = { fg = cp.peach },
+					-- ["@boolean"] = { fg = cp.peach },
 
-				-- ["@float"] = { fg = cp.peach },
-				-- ["@number"] = { fg = cp.peach },
-				-- ["@boolean"] = { fg = cp.peach },
+					["@constructor"] = { fg = cp.lavender },
+					-- ["@constant"] = { fg = cp.peach },
+					-- ["@conditional"] = { fg = cp.mauve },
+					-- ["@repeat"] = { fg = cp.mauve },
+					["@exception"] = { fg = cp.peach },
 
-				["@constructor"] = { fg = cp.lavender },
-				-- ["@constant"] = { fg = cp.peach },
-				-- ["@conditional"] = { fg = cp.mauve },
-				-- ["@repeat"] = { fg = cp.mauve },
-				["@exception"] = { fg = cp.peach },
+					["@constant.builtin"] = { fg = cp.lavender },
+					-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
+					-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
+					["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
 
-				["@constant.builtin"] = { fg = cp.lavender },
-				-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
-				-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
-				["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
+					-- ["@function"] = { fg = cp.blue },
+					["@function.macro"] = { fg = cp.red, style = {} },
+					["@parameter"] = { fg = cp.rosewater },
+					["@keyword.function"] = { fg = cp.maroon },
+					["@keyword"] = { fg = cp.red },
+					["@keyword.return"] = { fg = cp.pink, style = {} },
 
-				-- ["@function"] = { fg = cp.blue },
-				["@function.macro"] = { fg = cp.red, style = {} },
-				["@parameter"] = { fg = cp.rosewater },
-				["@keyword.function"] = { fg = cp.maroon },
-				["@keyword"] = { fg = cp.red },
-				["@keyword.return"] = { fg = cp.pink, style = {} },
+					-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
+					-- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
+					-- ["@text.danger"] = { fg = cp.base, bg = cp.red },
+					-- ["@constant.macro"] = { fg = cp.mauve },
 
-				-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
-				-- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
-				-- ["@text.danger"] = { fg = cp.base, bg = cp.red },
-				-- ["@constant.macro"] = { fg = cp.mauve },
+					-- ["@label"] = { fg = cp.blue },
+					["@method"] = { style = { "italic" } },
+					["@namespace"] = { fg = cp.rosewater, style = {} },
 
-				-- ["@label"] = { fg = cp.blue },
-				["@method"] = { style = { "italic" } },
-				["@namespace"] = { fg = cp.rosewater, style = {} },
+					["@punctuation.delimiter"] = { fg = cp.teal },
+					["@punctuation.bracket"] = { fg = cp.overlay2 },
+					-- ["@string"] = { fg = cp.green },
+					-- ["@string.regex"] = { fg = cp.peach },
+					-- ["@type"] = { fg = cp.yellow },
+					["@variable"] = { fg = cp.text },
+					["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
+					["@tag"] = { fg = cp.peach },
+					["@tag.delimiter"] = { fg = cp.maroon },
+					["@text"] = { fg = cp.text },
 
-				["@punctuation.delimiter"] = { fg = cp.teal },
-				["@punctuation.bracket"] = { fg = cp.overlay2 },
-				-- ["@string"] = { fg = cp.green },
-				-- ["@string.regex"] = { fg = cp.peach },
-				-- ["@type"] = { fg = cp.yellow },
-				["@variable"] = { fg = cp.text },
-				["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
-				["@tag"] = { fg = cp.peach },
-				["@tag.delimiter"] = { fg = cp.maroon },
-				["@text"] = { fg = cp.text },
+					-- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
+					-- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
+					-- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
+					-- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
+					-- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
+					-- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
+					-- ["@string.escape"] = { fg = cp.pink },
 
-				-- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
-				-- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
-				-- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
-				-- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
-				-- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
-				-- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
-				-- ["@string.escape"] = { fg = cp.pink },
+					-- ["@property.toml"] = { fg = cp.blue },
+					-- ["@field.yaml"] = { fg = cp.blue },
 
-				-- ["@property.toml"] = { fg = cp.blue },
-				-- ["@field.yaml"] = { fg = cp.blue },
+					-- ["@label.json"] = { fg = cp.blue },
 
-				-- ["@label.json"] = { fg = cp.blue },
+					["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
+					["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
 
-				["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
-				["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
+					["@field.lua"] = { fg = cp.lavender },
+					["@constructor.lua"] = { fg = cp.flamingo },
 
-				["@field.lua"] = { fg = cp.lavender },
-				["@constructor.lua"] = { fg = cp.flamingo },
+					["@constant.java"] = { fg = cp.teal },
 
-				["@constant.java"] = { fg = cp.teal },
+					["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
+					-- ["@constructor.typescript"] = { fg = cp.lavender },
 
-				["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
-				-- ["@constructor.typescript"] = { fg = cp.lavender },
+					-- ["@constructor.tsx"] = { fg = cp.lavender },
+					-- ["@tag.attribute.tsx"] = { fg = cp.mauve },
 
-				-- ["@constructor.tsx"] = { fg = cp.lavender },
-				-- ["@tag.attribute.tsx"] = { fg = cp.mauve },
+					["@type.css"] = { fg = cp.lavender },
+					["@property.css"] = { fg = cp.yellow, style = { "italic" } },
 
-				["@type.css"] = { fg = cp.lavender },
-				["@property.css"] = { fg = cp.yellow, style = { "italic" } },
+					["@property.cpp"] = { fg = cp.text },
 
-				["@property.cpp"] = { fg = cp.text },
-			},
+					-- ["@symbol"] = { fg = cp.flamingo },
+				}
+			end,
 		},
 	})
 end

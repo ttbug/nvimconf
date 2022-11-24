@@ -9,29 +9,26 @@ local nvim_lsp = require("lspconfig")
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
 
+require("lspconfig.ui.windows").default_options.border = "single"
+
 mason.setup({
 	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
+		border = "single",
 	},
 })
 mason_lsp.setup({
 	ensure_installed = {
 		"efm",
-		--"sumneko_lua",
-		"lua-language-server",
+		"sumneko_lua",
+		--"lua-language-server",
 		"clangd",
 		"gopls",
-		--"pyright",
+		"pyright",
 	},
 })
 
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local function custom_attach(client, bufnr)
 	require("lsp_signature").on_attach({
@@ -58,13 +55,13 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
 				error(tostring(err))
 			end
 			if not result then
-                vim.notify("Corresponding file can’t be determined", vim.log.levels.ERROR, { title = "LSP Error!" })
+				vim.notify("Corresponding file can’t be determined", vim.log.levels.ERROR, { title = "LSP Error!" })
 				return
 			end
 			vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
 		end)
 	else
-        vim.notify(
+		vim.notify(
 			"Method textDocument/switchSourceHeader is not supported by any active server on this buffer",
 			vim.log.levels.ERROR,
 			{ title = "LSP Error!" }
@@ -103,10 +100,8 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 					semanticTokens = true,
 					completeUnimported = true,
 					staticcheck = true,
-					experimentalWatchedFileDelay = "100ms",
 					gofumpt = true,
 					experimentalPostfixCompletions = true,
-					experimentalUseInvalidMetadata = true,
 				},
 			},
 		})
@@ -226,7 +221,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 				},
 			},
 		})
-    elseif server ~= "efm" then
+	elseif server ~= "efm" then
 		nvim_lsp[server].setup({
 			capabilities = capabilities,
 			on_attach = custom_attach,
@@ -269,7 +264,7 @@ local flake8 = require("efmls-configs.linters.flake8")
 local shellcheck = require("efmls-configs.linters.shellcheck")
 
 local black = require("efmls-configs.formatters.black")
-local luafmt = require("efmls-configs.formatters.stylua")
+local stylua = require("efmls-configs.formatters.stylua")
 
 --local clangfmt = {
 --	formatCommand = "clang-format -style='{BasedOnStyle: LLVM,IndentWidth: 4}'",
@@ -297,7 +292,7 @@ flake8 = vim.tbl_extend("force", flake8, {
 
 efmls.setup({
 	vim = { formatter = vint },
-	lua = { formatter = luafmt },
+	lua = { formatter = stylua },
 	c = { formatter = clangfmt },
 	cpp = { formatter = clangfmt },
 	python = { formatter = black },

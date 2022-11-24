@@ -33,7 +33,6 @@ ui["lewis6991/gitsigns.nvim"] = {
 	opt = true,
 	event = { "BufReadPost", "BufNewFile" },
 	config = conf.gitsigns,
-	requires = { "nvim-lua/plenary.nvim", opt = true },
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	opt = true,
@@ -41,7 +40,7 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	config = conf.indent_blankline,
 }
 ui["akinsho/bufferline.nvim"] = {
-	opt = true,
+	opt = false,
 	tag = "*",
 	event = "BufReadPost",
 	config = conf.nvim_bufferline,

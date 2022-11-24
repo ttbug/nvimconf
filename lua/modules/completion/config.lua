@@ -1,4 +1,5 @@
 local config = {}
+--local icon = require("modules.ui.icons")
 
 function config.nvim_lsp()
 	require("modules.completion.lsp")
@@ -11,13 +12,19 @@ end
 --	require("aerial").setup({})
 --end
 function config.lspsaga()
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics", true),
+		kind = require("modules.ui.icons").get("kind", true),
+		type = require("modules.ui.icons").get("type", true),
+		ui = require("modules.ui.icons").get("ui", true),
+	}
 	local function set_sidebar_icons()
 		-- Set icons for sidebar.
 		local diagnostic_icons = {
-			Error = " ",
-			Warn = " ",
-			Info = " ",
-			Hint = " ",
+			Error = icons.diagnostics.Error_alt,
+			Warn = icons.diagnostics.Warning_alt,
+			Info = icons.diagnostics.Information_alt,
+			Hint = icons.diagnostics.Hint_alt,
 		}
 		for type, icon in pairs(diagnostic_icons) do
 			local hl = "DiagnosticSign" .. type
@@ -48,44 +55,52 @@ function config.lspsaga()
 	local colors = get_palette()
 
 	require("lspsaga").init_lsp_saga({
-		diagnostic_header = { " ", " ", "  ", " " },
+		--diagnostic_header = { " ", " ", "  ", " " },
+		diagnostic_header = {
+			icons.diagnostics.Error_alt,
+			icons.diagnostics.Warning_alt,
+			icons.diagnostics.Information_alt,
+			icons.diagnostics.Hint_alt,
+		},
 		custom_kind = {
-			File = { " ", colors.rosewater },
-			Module = { " ", colors.blue },
-			Namespace = { " ", colors.blue },
-			Package = { " ", colors.blue },
-			Class = { "ﴯ ", colors.yellow },
-			Method = { " ", colors.blue },
-			Property = { "ﰠ ", colors.teal },
-			Field = { " ", colors.teal },
-			Constructor = { " ", colors.sapphire },
-			Enum = { " ", colors.yellow },
-			Interface = { " ", colors.yellow },
-			Function = { " ", colors.blue },
-			Variable = { " ", colors.peach },
-			Constant = { " ", colors.peach },
-			String = { " ", colors.green },
-			Number = { " ", colors.peach },
-			Boolean = { " ", colors.peach },
-			Array = { " ", colors.peach },
-			Object = { " ", colors.yellow },
-			Key = { " ", colors.red },
-			Null = { "ﳠ ", colors.yellow },
-			EnumMember = { " ", colors.teal },
-			Struct = { " ", colors.yellow },
-			Event = { " ", colors.yellow },
-			Operator = { " ", colors.sky },
-			TypeParameter = { " ", colors.maroon },
-			-- ccls-specific icons.
-			TypeAlias = { " ", colors.green },
-			Parameter = { " ", colors.blue },
-			StaticMethod = { "ﴂ ", colors.peach },
-			Macro = { " ", colors.red },
+			-- Kind
+			Class = { icons.kind.Class, colors.yellow },
+			Constant = { icons.kind.Constant, colors.peach },
+			Constructor = { icons.kind.Constructor, colors.sapphire },
+			Enum = { icons.kind.Enum, colors.yellow },
+			EnumMember = { icons.kind.EnumMember, colors.teal },
+			Event = { icons.kind.Event, colors.yellow },
+			Field = { icons.kind.Field, colors.teal },
+			File = { icons.kind.File, colors.rosewater },
+			Function = { icons.kind.Function, colors.blue },
+			Interface = { icons.kind.Interface, colors.yellow },
+			Key = { icons.kind.Keyword, colors.red },
+			Method = { icons.kind.Method, colors.blue },
+			Module = { icons.kind.Module, colors.blue },
+			Namespace = { icons.kind.Namespace, colors.blue },
+			Number = { icons.kind.Number, colors.peach },
+			Operator = { icons.kind.Operator, colors.sky },
+			Package = { icons.kind.Package, colors.blue },
+			Property = { icons.kind.Property, colors.teal },
+			Struct = { icons.kind.Struct, colors.yellow },
+			TypeParameter = { icons.kind.TypeParameter, colors.maroon },
+			Variable = { icons.kind.Variable, colors.peach },
+			-- Type
+			Array = { icons.type.Array, colors.peach },
+			Boolean = { icons.type.Boolean, colors.peach },
+			Null = { icons.type.Null, colors.yellow },
+			Object = { icons.type.Object, colors.yellow },
+			String = { icons.type.String, colors.green },
+			-- ccls-specific iconss.
+			TypeAlias = { icons.kind.TypeAlias, colors.green },
+			Parameter = { icons.kind.Parameter, colors.blue },
+			StaticMethod = { icons.kind.StaticMethod, colors.peach },
 		},
 		symbol_in_winbar = {
-            enable = true,
+			enable = true,
 			in_custom = false,
-			separator = "  ",
+			--separator = "  ",
+			separator = " " .. icons.ui.Separator,
 			show_file = false,
 			-- define how to customize filename, eg: %:., %
 			-- if not set, use default value `%:t`
@@ -111,7 +126,7 @@ function config.lspsaga()
 					-- middle click to visual select node
 					vim.fn.cursor(st.line + 1, st.character + 1)
 					--vim.cmd("normal v")
-                    vim.api.nvim_command([[normal v]])
+					vim.api.nvim_command([[normal v]])
 					vim.fn.cursor(en.line + 1, en.character + 1)
 				end
 			end,
@@ -119,68 +134,73 @@ function config.lspsaga()
 	})
 
 	-- Example:
-	local function get_file_name(include_path)
-		local file_name = require("lspsaga.symbolwinbar").get_file_name()
-		if vim.fn.bufname("%") == "" then
-			return ""
-		end
-		if include_path == false then
-			return file_name
-		end
-		-- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
-		local sep = vim.loop.os_uname().sysname == "Windows" and "\\" or "/"
-		local path_list = vim.split(string.gsub(vim.fn.expand("%:~:.:h"), "%%", ""), sep)
-		local file_path = ""
-		for _, cur in ipairs(path_list) do
-			file_path = (cur == "." or cur == "~") and ""
-				or file_path .. cur .. " " .. "%#LspSagaWinbarSep#>%*" .. " %*"
-		end
-		return file_path .. file_name
-	end
-
-	local function config_winbar_or_statusline()
-		local exclude = {
-			["terminal"] = true,
-			["toggleterm"] = true,
-			["prompt"] = true,
-			["NvimTree"] = true,
-			["help"] = true,
-		} -- Ignore float windows and exclude filetype
-		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-			vim.wo.winbar = ""
-		else
-			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
-			local sym
-			if ok then
-				sym = lspsaga.get_symbol_node()
-			end
-			local win_val = ""
-			win_val = get_file_name(true) -- set to true to include path
-			if sym ~= nil then
-				win_val = win_val .. sym
-			end
-			vim.wo.winbar = win_val
-		end
-	end
-
-	local events = { "BufEnter", "BufWinEnter", "CursorMoved" }
-
-	vim.api.nvim_create_autocmd(events, {
-		pattern = "*",
-		callback = function()
-			config_winbar_or_statusline()
-		end,
-	})
-
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "LspsagaUpdateSymbol",
-		callback = function()
-			config_winbar_or_statusline()
-		end,
-	})
+	--	local function get_file_name(include_path)
+	--		local file_name = require("lspsaga.symbolwinbar").get_file_name()
+	--		if vim.fn.bufname("%") == "" then
+	--			return ""
+	--		end
+	--		if include_path == false then
+	--			return file_name
+	--		end
+	--		-- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
+	--		local sep = vim.loop.os_uname().sysname == "Windows" and "\\" or "/"
+	--		local path_list = vim.split(string.gsub(vim.fn.expand("%:~:.:h"), "%%", ""), sep)
+	--		local file_path = ""
+	--		for _, cur in ipairs(path_list) do
+	--			file_path = (cur == "." or cur == "~") and ""
+	--				or file_path .. cur .. " " .. "%#LspSagaWinbarSep#>%*" .. " %*"
+	--		end
+	--		return file_path .. file_name
+	--	end
+	--
+	--	local function config_winbar_or_statusline()
+	--		local exclude = {
+	--			["terminal"] = true,
+	--			["toggleterm"] = true,
+	--			["prompt"] = true,
+	--			["NvimTree"] = true,
+	--			["help"] = true,
+	--		} -- Ignore float windows and exclude filetype
+	--		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+	--			vim.wo.winbar = ""
+	--		else
+	--			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
+	--			local sym
+	--			if ok then
+	--				sym = lspsaga.get_symbol_node()
+	--			end
+	--			local win_val = ""
+	--			win_val = get_file_name(true) -- set to true to include path
+	--			if sym ~= nil then
+	--				win_val = win_val .. sym
+	--			end
+	--			vim.wo.winbar = win_val
+	--		end
+	--	end
+	--
+	--	local events = { "BufEnter", "BufWinEnter", "CursorMoved" }
+	--
+	--	vim.api.nvim_create_autocmd(events, {
+	--		pattern = "*",
+	--		callback = function()
+	--			config_winbar_or_statusline()
+	--		end,
+	--	})
+	--
+	--	vim.api.nvim_create_autocmd("User", {
+	--		pattern = "LspsagaUpdateSymbol",
+	--		callback = function()
+	--			config_winbar_or_statusline()
+	--		end,
+	--	})
 end
 
 function config.cmp()
+	local icons = {
+		kind = require("modules.ui.icons").get("kind", false),
+		type = require("modules.ui.icons").get("type", false),
+		cmp = require("modules.ui.icons").get("cmp", false),
+	}
 	-- vim.cmd([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -193,13 +213,13 @@ function config.cmp()
 
 	local border = function(hl)
 		return {
-			{ "╭", hl },
+			{ "┌", hl },
 			{ "─", hl },
-			{ "╮", hl },
+			{ "┐", hl },
 			{ "│", hl },
-			{ "╯", hl },
+			{ "┘", hl },
 			{ "─", hl },
-			{ "╰", hl },
+			{ "└", hl },
 			{ "│", hl },
 		}
 	end
@@ -220,8 +240,9 @@ function config.cmp()
 	cmp.setup({
 		window = {
 			completion = {
-				border = border("CmpBorder"),
-				winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+				col_offset = -3,
+				side_padding = 0,
 			},
 			documentation = {
 				border = border("CmpDocBorder"),
@@ -230,8 +251,8 @@ function config.cmp()
 		sorting = {
 			priority_weight = 2,
 			comparators = {
-				require("copilot_cmp.comparators").prioritize,
-				require("copilot_cmp.comparators").score,
+				--require("copilot_cmp.comparators").prioritize,
+				--require("copilot_cmp.comparators").score,
 				-- require("cmp_tabnine.compare"),
 				compare.offset,
 				compare.exact,
@@ -244,12 +265,18 @@ function config.cmp()
 			},
 		},
 		formatting = {
-			format = lspkind.cmp_format({
-				mode = "symbol_text",
-				maxwidth = 50,
-				ellipsis_char = "...",
-				symbol_map = { Copilot = "" },
-			}),
+			fields = { "kind", "abbr", "menu" },
+			format = function(entry, vim_item)
+				local kind = lspkind.cmp_format({
+					mode = "symbol_text",
+					maxwidth = 50,
+					symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp),
+				})(entry, vim_item)
+				local strings = vim.split(kind.kind, "%s", { trimempty = true })
+				kind.kind = " " .. strings[1] .. " "
+				kind.menu = "    (" .. strings[2] .. ")"
+				return kind
+			end,
 		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
@@ -296,7 +323,7 @@ function config.cmp()
 			{ name = "orgmode" },
 			{ name = "buffer" },
 			{ name = "latex_symbols" },
-			{ name = "copilot" },
+			--{ name = "copilot" },
 			-- { name = "cmp_tabnine" },
 		},
 	})
@@ -304,7 +331,7 @@ end
 
 function config.luasnip()
 	--vim.o.runtimepath = vim.o.runtimepath .. "," .. os.getenv("HOME") .. "/.config/nvim/my-snippets/,"
-    local snippet_path = os.getenv("HOME") .. "/.config/nvim/my-snippets/"
+	local snippet_path = os.getenv("HOME") .. "/.config/nvim/my-snippets/"
 	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
 		vim.opt.rtp:append(snippet_path)
 	end
@@ -352,52 +379,6 @@ function config.autopairs()
 		})
 	)
 end
-
---function config.bqf()
---	vim.cmd([[
---    hi BqfPreviewBorder guifg=#F2CDCD ctermfg=71
---    hi link BqfPreviewRange Search
---]])
---
---	require("bqf").setup({
---		auto_enable = true,
---		auto_resize_height = true, -- highly recommended enable
---		preview = {
---			win_height = 12,
---			win_vheight = 12,
---			delay_syntax = 80,
---			border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
---			should_preview_cb = function(bufnr, qwinid)
---				local ret = true
---				local bufname = vim.api.nvim_buf_get_name(bufnr)
---				local fsize = vim.fn.getfsize(bufname)
---				if fsize > 100 * 1024 then
---					-- skip file size greater than 100k
---					ret = false
---				elseif bufname:match("^fugitive://") then
---					-- skip fugitive buffer
---					ret = false
---				end
---				return ret
---			end,
---		},
---		-- make `drop` and `tab drop` to become preferred
---		func_map = {
---			drop = "q",
---			openc = "O",
---			split = "<C-s>",
---			tabdrop = "<C-t>",
---			tabc = "",
---			ptogglemode = "z,",
---		},
---		filter = {
---			fzf = {
---				action_for = { ["ctrl-s"] = "split", ["ctrl-t"] = "tab drop" },
---				extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
---			},
---		},
---	})
---end
 
 function config.mason_install()
 	require("mason-tool-installer").setup({
