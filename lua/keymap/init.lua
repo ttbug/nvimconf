@@ -104,11 +104,12 @@ local plug_map = {
 	["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
 	["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
 	-- Plugin vim-eft
-	["n|f"] = map_cmd("v:lua.enhance_ft_move('f')"):with_expr(),
-	["n|F"] = map_cmd("v:lua.enhance_ft_move('F')"):with_expr(),
-	["n|t"] = map_cmd("v:lua.enhance_ft_move('t')"):with_expr(),
-	["n|T"] = map_cmd("v:lua.enhance_ft_move('T')"):with_expr(),
+	--["n|f"] = map_cmd("v:lua.enhance_ft_move('f')"):with_expr(),
+	--["n|F"] = map_cmd("v:lua.enhance_ft_move('F')"):with_expr(),
+	--["n|t"] = map_cmd("v:lua.enhance_ft_move('t')"):with_expr(),
+	--["n|T"] = map_cmd("v:lua.enhance_ft_move('T')"):with_expr(),
 	["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
+	["n|."] = map_cmd("v:lua.enhance_ft_move(',')"):with_expr(),
 	-- Plugin Easymotion
 	--["n|<leader>j"] = map_cmd("v:lua.enhance_move('lnj')"):with_expr(),
 	--["n|<leader>k"] = map_cmd("v:lua.enhance_move('lnk')"):with_expr(),

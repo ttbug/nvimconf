@@ -11,19 +11,15 @@ end
 
 _G.enhance_ft_move = function(key)
 	local map = {
-		f = "<Plug>(eft-f)",
-		F = "<Plug>(eft-F)",
-		t = "<Plug>(eft-t)",
-		T = "<Plug>(eft-T)",
-		[";"] = "<Plug>(eft-repeat)",
+		[";"] = "<Plug>(clever-f-repeat-forward)",
+		[","] = "<Plug>(clever-f-repeat-back)",
 	}
 	return t(map[key])
 end
 
 _G.enhance_align = function(key)
 	--vim.cmd([[packadd vim-easy-align]])
-    vim.api.nvim_command([[packadd vim-easy-align]])
+	vim.api.nvim_command([[packadd vim-easy-align]])
 	local map = { ["nga"] = "<Plug>(EasyAlign)", ["xga"] = "<Plug>(EasyAlign)" }
 	return t(map[key])
 end
-

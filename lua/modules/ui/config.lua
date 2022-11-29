@@ -25,6 +25,7 @@ function config.alpha()
 		[[                      (                         ]],
 		[[                      `                         ]],
 	}
+	dashboard.section.header.opts.hl = "Type"
 	local function button(sc, txt, leader_txt, keybind, keybind_opts)
 		local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
 
@@ -119,7 +120,7 @@ end
 --end
 
 function config.notify()
-    local icons = {
+	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics"),
 		ui = require("modules.ui.icons").get("ui"),
 	}
@@ -143,7 +144,7 @@ function config.notify()
 		level = "TRACE",
 		---@usage Icons for the different levels
 		icons = {
-            ERROR = icons.diagnostics.Error,
+			ERROR = icons.diagnostics.Error,
 			WARN = icons.diagnostics.Warning,
 			INFO = icons.diagnostics.Information,
 			DEBUG = icons.ui.Bug,
@@ -155,7 +156,7 @@ function config.notify()
 end
 
 function config.lualine()
-    local icons = {
+	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics", true),
 		misc = require("modules.ui.icons").get("misc", true),
 	}
@@ -177,7 +178,7 @@ function config.lualine()
 	end
 
 	local mini_sections = {
-        lualine_a = { "filetype" },
+		lualine_a = { "filetype" },
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
@@ -234,7 +235,7 @@ function config.lualine()
 					sources = { "nvim_diagnostic" },
 					--symbols = { error = " ", warn = " ", info = " " },
 					symbols = {
-                        error = icons.diagnostics.Error,
+						error = icons.diagnostics.Error,
 						warn = icons.diagnostics.Warning,
 						info = icons.diagnostics.Information,
 					},
@@ -268,7 +269,7 @@ function config.lualine()
 		extensions = {
 			"quickfix",
 			"nvim-tree",
-            "nvim-dap-ui",
+			"nvim-dap-ui",
 			"toggleterm",
 			"fugitive",
 			outline,
@@ -277,7 +278,7 @@ function config.lualine()
 end
 
 function config.nvim_tree()
-    local icons = {
+	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics"),
 		documents = require("modules.ui.icons").get("documents"),
 		git = require("modules.ui.icons").get("git"),
@@ -339,7 +340,7 @@ function config.nvim_tree()
 					none = "  ",
 				},
 			},
-			root_folder_modifier = ":e",
+			root_folder_label = ":.:s?.*?/..?",
 			icons = {
 				webdev_colors = true,
 				git_placement = "before",
@@ -462,7 +463,7 @@ function config.nvim_tree()
 end
 
 function config.nvim_bufferline()
-    local icons = { ui = require("modules.ui.icons").get("ui") }
+	local icons = { ui = require("modules.ui.icons").get("ui") }
 	local opts = {
 		options = {
 			number = nil,
@@ -778,6 +779,9 @@ function config.catppuccin()
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
+					Keyword = { fg = cp.pink },
+					Type = { fg = cp.blue },
+					Typedef = { fg = cp.yellow },
 
 					-- For native lsp configs.
 					DiagnosticVirtualTextError = { bg = cp.none },
@@ -800,7 +804,7 @@ function config.catppuccin()
 					["@property"] = { fg = cp.yellow },
 
 					["@include"] = { fg = cp.teal },
-					["@operator"] = { fg = cp.sky },
+					--["@operator"] = { fg = cp.sky },
 					["@keyword.operator"] = { fg = cp.sky },
 					["@punctuation.special"] = { fg = cp.maroon },
 
@@ -822,8 +826,8 @@ function config.catppuccin()
 					-- ["@function"] = { fg = cp.blue },
 					["@function.macro"] = { fg = cp.red, style = {} },
 					["@parameter"] = { fg = cp.rosewater },
+					["@keyword"] = { fg = cp.red, style = { "italic" } },
 					["@keyword.function"] = { fg = cp.maroon },
-					["@keyword"] = { fg = cp.red },
 					["@keyword.return"] = { fg = cp.pink, style = {} },
 
 					-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
@@ -839,7 +843,7 @@ function config.catppuccin()
 					["@punctuation.bracket"] = { fg = cp.overlay2 },
 					-- ["@string"] = { fg = cp.green },
 					-- ["@string.regex"] = { fg = cp.peach },
-					-- ["@type"] = { fg = cp.yellow },
+					["@type"] = { fg = cp.yellow },
 					["@variable"] = { fg = cp.text },
 					["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
 					["@tag"] = { fg = cp.peach },

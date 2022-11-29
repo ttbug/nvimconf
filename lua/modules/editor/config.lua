@@ -103,7 +103,7 @@ function config.nvim_treesitter()
 		rainbow = {
 			enable = true,
 			extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-			max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+			max_file_lines = 2000, -- Do not enable for files with more than 1000 lines, int
 		},
 		context_commentstring = { enable = true, enable_autocmd = false },
 		matchup = { enable = true },
@@ -242,7 +242,7 @@ function config.toggleterm()
 end
 
 function config.dapui()
-    local icons = {
+	local icons = {
 		ui = require("modules.ui.icons").get("ui"),
 		dap = require("modules.ui.icons").get("dap"),
 	}
@@ -303,7 +303,7 @@ function config.dapui()
 end
 
 function config.dap()
-    local icons = { dap = require("modules.ui.icons").get("dap") }
+	local icons = { dap = require("modules.ui.icons").get("dap") }
 	--vim.cmd([[packadd nvim-dap-ui]])
 	vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
@@ -324,16 +324,16 @@ function config.dap()
 
 	vim.fn.sign_define(
 		"DapBreakpoint",
-        { text = icons.dap.Breakpoint, texthl = "DapBreakpoint", linehl = "", numhl = "" }
+		{ text = icons.dap.Breakpoint, texthl = "DapBreakpoint", linehl = "", numhl = "" }
 	)
 	vim.fn.sign_define(
 		"DapBreakpointCondition",
-        { text = icons.dap.BreakpointCondition, texthl = "DapBreakpoint", linehl = "", numhl = "" }
+		{ text = icons.dap.BreakpointCondition, texthl = "DapBreakpoint", linehl = "", numhl = "" }
 	)
-    vim.fn.sign_define("DapStopped", { text = icons.dap.Stopped, texthl = "DapStopped", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapStopped", { text = icons.dap.Stopped, texthl = "DapStopped", linehl = "", numhl = "" })
 	vim.fn.sign_define(
 		"DapBreakpointRejected",
-        { text = icons.dap.BreakpointRejected, texthl = "DapBreakpoint", linehl = "", numhl = "" }
+		{ text = icons.dap.BreakpointRejected, texthl = "DapBreakpoint", linehl = "", numhl = "" }
 	)
 	vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
 
@@ -520,7 +520,7 @@ end
 function config.better_escape()
 	require("better_escape").setup({
 		mapping = { "jk", "jj" }, -- a table with mappings to use
-		timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+		timeout = 500, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
 		clear_empty_lines = false, -- clear line after escaping if there is only whitespace
 		keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		-- example(recommended)
@@ -597,7 +597,6 @@ function config.accelerated_jk()
 	})
 end
 
-
 function config.smartyank()
 	require("smartyank").setup({
 		highlight = {
@@ -620,6 +619,18 @@ function config.smartyank()
 			echo_hl = "Directory", -- highlight group of the OSC52 echo message
 		},
 	})
+end
+
+function config.clever_f()
+	vim.api.nvim_set_hl(
+		0,
+		"CleverChar",
+		{ underline = true, bold = true, fg = "Orange", bg = "NONE", ctermfg = "Red", ctermbg = "NONE" }
+	)
+	vim.g.clever_f_mark_char_color = "CleverChar"
+	vim.g.clever_f_mark_direct_color = "CleverChar"
+	vim.g.clever_f_mark_direct = true
+	vim.g.clever_f_timeout_ms = 1500
 end
 
 return config
