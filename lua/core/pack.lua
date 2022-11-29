@@ -20,10 +20,10 @@ function Packer:load_plugins()
 		local subtmp = vim.split(fn.globpath(modules_dir, "*/user/plugins.lua"), "\n")
 		for _, v in ipairs(subtmp) do
 			if v ~= "" then
-			    table.insert(tmp, v)
+				table.insert(tmp, v)
 			end
 		end
-        for _, f in ipairs(tmp) do
+		for _, f in ipairs(tmp) do
 			list[#list + 1] = f:sub(#modules_dir - 6, -1)
 		end
 		return list
@@ -51,7 +51,7 @@ function Packer:load_packer()
 			disable_commands = true,
 			display = {
 				open_fn = function()
-                    return require("packer.util").float({ border = "single" })
+					return require("packer.util").float({ border = "rounded" })
 				end,
 			},
 		})
@@ -63,7 +63,7 @@ function Packer:load_packer()
 			max_jobs = 20,
 			display = {
 				open_fn = function()
-                    return require("packer.util").float({ border = "single" })
+					return require("packer.util").float({ border = "rounded" })
 				end,
 			},
 		})

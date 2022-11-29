@@ -38,8 +38,8 @@ local plug_map = {
 	["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(),
 	["n|<A-t>"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
 	["n|gk"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
-	["n|g["] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
-	["n|g]"] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
+	["n|g["] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
+	["n|g]"] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
 	["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 	["n|<C-Up>"] = map_cr("lua require('lspsaga.action').smart_scroll_with_saga(-1)"):with_noremap():with_silent(),
 	["n|<C-Down>"] = map_cr("lua require('lspsaga.action').smart_scroll_with_saga(1)"):with_noremap():with_silent(),
@@ -118,8 +118,8 @@ local plug_map = {
 	--["|<leader>f"] = map_cmd("v:lua.enhance_move('lf')"):with_expr(),
 	--["|<leader>w"] = map_cmd("v:lua.enhance_move('lw')"):with_expr(),
 	-- Plugin EasyAlign
-	["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
-	["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
+	["n|ea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
+	["x|ea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
 	-- Plugin ZenMode
 	["n|<leader><leader>z"] = map_cr("ZenMode"):with_noremap():with_silent(),
 	-- Plugin Twilight
@@ -170,6 +170,8 @@ local plug_map = {
 	["n|<leader>j"] = map_cr("%!python -m json.tool --no-ensure-ascii"):with_noremap():with_silent(),
 	-- todo Telescope
 	["n|td"] = map_cr("TodoTelescope"):with_noremap():with_silent(),
+	["n|<leader>pp"] = map_cu("Legendary"):with_silent():with_noremap(),
+	["n|<leader>pf"] = map_cu("Legendary functions"):with_silent():with_noremap(),
 }
 
 bind.nvim_load_mapping(plug_map)

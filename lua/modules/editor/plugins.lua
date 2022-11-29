@@ -135,7 +135,7 @@ editor["theHamsta/nvim-dap-virtual-text"] = {
 }
 editor["sindrets/diffview.nvim"] = {
 	opt = true,
-	cmd = { "DiffviewOpen" },
+	cmd = { "DiffviewOpen", "DiffViewClose" },
 }
 
 editor["luukvbaal/stabilize.nvim"] = {

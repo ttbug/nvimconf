@@ -26,7 +26,13 @@ ui["goolord/alpha-nvim"] = {
 }
 ui["kyazdani42/nvim-tree.lua"] = {
 	opt = true,
-	cmd = { "NvimTreeToggle" },
+	cmd = {
+		"NvimTreeToggle",
+		"NvimTreeOpen",
+		"NvimTreeFindFile",
+		"NvimTreeFindFileToggle",
+		"NvimTreeRefresh",
+	},
 	config = conf.nvim_tree,
 }
 ui["lewis6991/gitsigns.nvim"] = {
@@ -50,6 +56,11 @@ ui["j-hui/fidget.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
 	config = conf.fidget,
+}
+
+ui["stevearc/dressing.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
 }
 
 return ui

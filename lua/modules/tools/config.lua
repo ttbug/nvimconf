@@ -6,8 +6,9 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-project.nvim]])
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
+	vim.api.nvim_command([[packadd telescope-ui-select.nvim]])
 
-    local icons = { ui = require("modules.ui.icons").get("ui", true) }
+	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
 	local fixfolds = {
 		hidden = true,
@@ -26,17 +27,17 @@ function config.telescope()
 			initial_mode = "insert",
 			--prompt_prefix = "  ",
 			--selection_caret = " ",
-            prompt_prefix = " " .. icons.ui.Telescope .. " ",
+			prompt_prefix = " " .. icons.ui.Telescope .. " ",
 			selection_caret = icons.ui.ChevronRight,
 			entry_prefix = " ",
 			scroll_strategy = "limit",
 			results_title = false,
-            borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+			--borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			layout_strategy = "horizontal",
 			path_display = { "absolute" },
 			file_ignore_patterns = { ".git/", ".cache", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
-				prompt_position = "bottom",
+				--prompt_position = "bottom",
 				horizontal = {
 					preview_width = 0.5,
 				},
@@ -59,6 +60,9 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
+			["ui-select"] = {
+				require("telescope.themes").get_dropdown({}),
+			},
 		},
 		pickers = {
 			buffers = fixfolds,
@@ -70,15 +74,16 @@ function config.telescope()
 		},
 	})
 
-    require("telescope").load_extension("notify")
+	require("telescope").load_extension("notify")
 	require("telescope").load_extension("fzf")
 	require("telescope").load_extension("project")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
+	require("telescope").load_extension("ui-select")
 end
 
 function config.trouble()
-    local icons = {
+	local icons = {
 		ui = require("modules.ui.icons").get("ui"),
 		diagnostics = require("modules.ui.icons").get("diagnostics"),
 	}
@@ -91,7 +96,7 @@ function config.trouble()
 		mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
 		--fold_open = "", -- icon used for open folds
 		--fold_closed = "", -- icon used for closed folds
-        fold_open = icons.ui.ArrowOpen, -- icon used for open folds
+		fold_open = icons.ui.ArrowOpen, -- icon used for open folds
 		fold_closed = icons.ui.ArrowClosed, -- icon used for closed folds
 		action_keys = {
 			-- key mappings for actions in the trouble list
@@ -122,7 +127,7 @@ function config.trouble()
 		auto_fold = false, -- automatically fold a file trouble list at creation
 		signs = {
 			-- icons / text used for a diagnostic
-            error = icons.diagnostics.Error_alt,
+			error = icons.diagnostics.Error_alt,
 			warning = icons.diagnostics.Warning_alt,
 			hint = icons.diagnostics.Hint_alt,
 			information = icons.diagnostics.Information_alt,
@@ -157,7 +162,7 @@ function config.sniprun()
 end
 
 function config.which_key()
-    local icons = {
+	local icons = {
 		ui = require("modules.ui.icons").get("ui"),
 		misc = require("modules.ui.icons").get("misc"),
 	}
@@ -175,7 +180,7 @@ function config.which_key()
 		},
 
 		icons = {
-            breadcrumb = icons.ui.Separator,
+			breadcrumb = icons.ui.Separator,
 			separator = icons.misc.Vbar,
 			group = icons.misc.Add,
 		},
@@ -191,7 +196,7 @@ function config.which_key()
 end
 
 function config.wilder()
-    local icons = { ui = require("modules.ui.icons").get("ui") }
+	local icons = { ui = require("modules.ui.icons").get("ui") }
 	local wilder = require("wilder")
 	wilder.setup({ modes = { ":", "/", "?" } })
 	wilder.set_option("use_python_remote_plugin", 0)
@@ -207,7 +212,7 @@ function config.wilder()
 				wilder.result({
 					draw = {
 						function(_, x)
-                            return icons.ui.Calendar .. " " .. x
+							return icons.ui.Calendar .. " " .. x
 						end,
 					},
 				}),
@@ -224,7 +229,7 @@ function config.wilder()
 			wilder.popupmenu_devicons(),
 			wilder.popupmenu_buffer_flags({
 				flags = " a + ",
-                icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Indicator, h = icons.ui.File },
+				icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Indicator, h = icons.ui.File },
 			}),
 		},
 		right = {
@@ -306,6 +311,132 @@ end
 
 function config.perf()
 	vim.g.cursorhold_updatetime = 100
+end
+
+function config.legendary()
+	require("legendary").setup({
+		which_key = {
+			auto_register = true,
+			do_binding = false,
+		},
+		scratchpad = {
+			view = "float",
+			results_view = "float",
+			keep_contents = true,
+		},
+	})
+
+	require("which-key").register({
+		["<leader>"] = {
+			b = {
+				name = "Bufferline commands",
+				d = "Sort buffer by directory",
+				e = "Sort buffer by extension",
+			},
+
+			d = {
+				name = "Dap commands",
+				b = "Toggle breakpoint",
+				d = "Terminate debug session",
+				r = "Debug continue",
+				l = "Debug repl open",
+				i = "Step in",
+				o = "Step out",
+				v = "Step over",
+			},
+			f = {
+				name = "Telescope commands",
+				p = "Find project",
+				w = "Find word",
+				r = "Find file by frecency",
+				e = "Find file by history",
+				c = "Change color scheme",
+				z = "Change current directory by zoxide",
+				f = "Find file under current work directory",
+				g = "Find file under current git directory",
+				n = "File new",
+			},
+			h = {
+				name = "Gitsigns commands",
+				b = "Blame line",
+				p = "Preview hunk",
+				s = "Stage hunk",
+				u = "Undo stage hunk",
+				r = "Reset hunk",
+				R = "Reset buffer",
+			},
+			l = {
+				name = "LSP commands",
+				i = "Lsp Info",
+				r = "Lsp Restart",
+			},
+			n = {
+				name = "NvimTree commands",
+				f = "NvimTree find file",
+				r = "NvimTree refresh",
+			},
+			p = {
+				name = "Packer commands",
+				s = "PackerSync",
+				i = "PackerInstall",
+				c = "PackerClean",
+				u = "PackerUpdate",
+			},
+			s = {
+				name = "Session commands",
+				s = "Save session",
+				r = "Restore session",
+				d = "Delete session",
+			},
+			t = {
+				name = "Trouble commands",
+				d = "show document diagnostics",
+				w = "show workspace diagnostics",
+				q = "show quickfix list",
+				l = "show loclist",
+			},
+		},
+		["g"] = {
+			c = "Code action",
+			d = "Preview definition",
+			D = "Goto definition",
+			h = "Show reference",
+			r = "Rename",
+			s = "Signature help",
+			t = "Toggle trouble list",
+			b = "Buffer pick",
+			p = {
+				name = "Git commands",
+				s = "Git push",
+				l = "Git pull",
+			},
+		},
+		["<leader>G"] = "Show fugitive",
+		["<leader>g"] = "Show lazygit",
+		["<leader>o"] = "Check spell",
+		["g["] = "Goto prev diagnostic",
+		["g]"] = "Goto next diagnostic",
+		["<leader>w"] = "Goto word",
+		["<leader>j"] = "Goto line",
+		["<leader>k"] = "Goto line",
+		["<leader>c"] = "Goto one char",
+		["<leader>cc"] = "Goto two chars",
+		["<leader>D"] = "Show diff",
+		["<leader><leader>D"] = "Close diff",
+	})
+end
+
+function config.dressing()
+	require("dressing").setup({
+		input = {
+			enabled = true,
+		},
+		select = {
+			enabled = true,
+			backend = "telescope",
+			trim_prompt = true,
+		},
+	})
 end
 
 return config
