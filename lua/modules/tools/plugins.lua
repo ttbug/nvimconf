@@ -53,6 +53,7 @@ tools["michaelb/sniprun"] = {
 	run = "bash ./install.sh",
 	cmd = { "SnipRun", "'<,'>SnipRun" },
 }
+-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 tools["folke/which-key.nvim"] = {
 	opt = false,
 	--keys = ",",
