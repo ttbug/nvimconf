@@ -118,8 +118,8 @@ local plug_map = {
 	--["|<leader>f"] = map_cmd("v:lua.enhance_move('lf')"):with_expr(),
 	--["|<leader>w"] = map_cmd("v:lua.enhance_move('lw')"):with_expr(),
 	-- Plugin EasyAlign
-	["n|ea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
-	["x|ea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
+	["n|gea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
+	["x|gea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
 	-- Plugin ZenMode
 	["n|<leader><leader>z"] = map_cr("ZenMode"):with_noremap():with_silent(),
 	-- Plugin Twilight
