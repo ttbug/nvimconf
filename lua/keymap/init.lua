@@ -47,7 +47,7 @@ local plug_map = {
 	["v|<leader>ca"] = map_cu("Lspsaga code_action"):with_noremap():with_silent(),
 	["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
 	["n|gD"] = map_cmd("<cmd>lua vim.lsp.buf.implementation()<CR>"):with_noremap():with_silent(),
-	["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
+	["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_noremap():with_silent(),
 	["n|gR"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
 	--["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
 	--["n|gh"] = map_cr("lua vim.lsp.buf.references()"):with_noremap()
@@ -86,6 +86,7 @@ local plug_map = {
 	-- Plugin Telescope
 	["n|<Leader>fp"] = map_cu("Telescope project"):with_noremap():with_silent(),
 	["n|<Leader>fr"] = map_cu("Telescope frecency"):with_noremap():with_silent(),
+    ["n|<Leader>fw"] = map_cu("lua require('telescope').extensions.live_grep_args.live_grep_args{}"):with_noremap():with_silent(),
 	--["n|<Leader>fp"] = map_cu(
 	--    "lua require('telescope').extensions.project.project{}"):with_noremap()
 	--    :with_silent(),
@@ -96,7 +97,7 @@ local plug_map = {
 	-- ["n|<Leader>fr"] = map_cu('Telescope frecency'):with_noremap():with_silent(),
 	["n|<Leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent(),
 	["n|<Leader>sc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
-	["n|<Leader>fw"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
+	--["n|<Leader>fw"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
 	["n|<Leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
 	["n|<Leader>fb"] = map_cu("Telescope file_browser"):with_noremap():with_silent(),
 	["n|<Leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),

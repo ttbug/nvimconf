@@ -7,6 +7,7 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
 	vim.api.nvim_command([[packadd telescope-ui-select.nvim]])
+    vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
 
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
@@ -22,6 +23,7 @@ function config.telescope()
 		end,
 	}
 
+    local lga_actions = require("telescope-live-grep-args.actions")
 	require("telescope").setup({
 		defaults = {
 			initial_mode = "insert",
@@ -60,6 +62,16 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
+            live_grep_args = {
+				auto_quoting = true, -- enable/disable auto-quoting
+				-- define mappings, e.g.
+				mappings = { -- extend mappings
+					i = {
+						["<C-k>"] = lga_actions.quote_prompt(),
+						["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+					},
+				},
+			},
 			["ui-select"] = {
 				require("telescope.themes").get_dropdown({}),
 			},
@@ -80,6 +92,7 @@ function config.telescope()
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
 	require("telescope").load_extension("ui-select")
+    require("telescope").load_extension("live_grep_args")
 end
 
 function config.trouble()
@@ -98,6 +111,8 @@ function config.trouble()
 		--fold_closed = "", -- icon used for closed folds
 		fold_open = icons.ui.ArrowOpen, -- icon used for open folds
 		fold_closed = icons.ui.ArrowClosed, -- icon used for closed folds
+        group = true, -- group results by file
+		padding = true,
 		action_keys = {
 			-- key mappings for actions in the trouble list
 			-- map to {} to remove a mapping, for example:
@@ -125,6 +140,7 @@ function config.trouble()
 		auto_close = false, -- automatically close the list when you have no diagnostics
 		auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
 		auto_fold = false, -- automatically fold a file trouble list at creation
+        auto_jump = { "lsp_definitions" },
 		signs = {
 			-- icons / text used for a diagnostic
 			error = icons.diagnostics.Error_alt,
@@ -133,7 +149,7 @@ function config.trouble()
 			information = icons.diagnostics.Information_alt,
 			other = icons.diagnostics.Question_alt,
 		},
-		use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
+        use_diagnostic_signs = false,
 	})
 end
 

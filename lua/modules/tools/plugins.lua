@@ -97,6 +97,11 @@ tools["mrjones2014/legendary.nvim"] = {
 	},
 }
 
+tools["nvim-telescope/telescope-live-grep-args.nvim"] = {
+	opt = true,
+	after = "telescope-zoxide",
+}
+
 --tools["folke/noice.nvim"] = {
 --	opt = false,
 --	event = "VimEnter",
