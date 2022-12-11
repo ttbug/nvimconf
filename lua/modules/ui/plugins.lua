@@ -63,4 +63,10 @@ ui["stevearc/dressing.nvim"] = {
 	event = "BufReadPost",
 }
 
+ui["zbirenbaum/neodim"] = {
+	opt = true,
+	event = "LspAttach",
+	config = conf.neodim,
+}
+
 return ui

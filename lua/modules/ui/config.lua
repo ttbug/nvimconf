@@ -189,7 +189,7 @@ function config.lualine()
 		sections = mini_sections,
 		filetypes = { "lspsagaoutline" },
 	}
-    local diffview = {
+	local diffview = {
 		sections = mini_sections,
 		filetypes = { "DiffviewFiles" },
 	}
@@ -277,7 +277,7 @@ function config.lualine()
 			"toggleterm",
 			"fugitive",
 			outline,
-            diffview,
+			diffview,
 		},
 	})
 end
@@ -787,6 +787,7 @@ function config.catppuccin()
 					Keyword = { fg = cp.pink },
 					Type = { fg = cp.blue },
 					Typedef = { fg = cp.yellow },
+					StorageClass = { fg = cp.red, style = { "italic" } },
 
 					-- For native lsp configs.
 					DiagnosticVirtualTextError = { bg = cp.none },
@@ -826,6 +827,7 @@ function config.catppuccin()
 					["@constant.builtin"] = { fg = cp.lavender },
 					-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
 					-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
+					["@type.qualifier"] = { link = "@keyword" },
 					["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
 
 					-- ["@function"] = { fg = cp.blue },
@@ -890,6 +892,23 @@ function config.catppuccin()
 					-- ["@symbol"] = { fg = cp.flamingo },
 				}
 			end,
+		},
+	})
+end
+
+function config.neodim()
+	require("neodim").setup({
+		alpha = 0.45,
+		blend_color = string.format("#%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
+		-- Blend with background color to make neodim more seamless
+		update_in_insert = {
+			enable = true,
+			delay = 100,
+		},
+		hide = {
+			virtual_text = true,
+			signs = false,
+			underline = false,
 		},
 	})
 end

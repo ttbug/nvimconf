@@ -7,7 +7,7 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
 	vim.api.nvim_command([[packadd telescope-ui-select.nvim]])
-    vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
+	vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
 
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
@@ -23,7 +23,7 @@ function config.telescope()
 		end,
 	}
 
-    local lga_actions = require("telescope-live-grep-args.actions")
+	local lga_actions = require("telescope-live-grep-args.actions")
 	require("telescope").setup({
 		defaults = {
 			initial_mode = "insert",
@@ -62,7 +62,7 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
-            live_grep_args = {
+			live_grep_args = {
 				auto_quoting = true, -- enable/disable auto-quoting
 				-- define mappings, e.g.
 				mappings = { -- extend mappings
@@ -92,7 +92,7 @@ function config.telescope()
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
 	require("telescope").load_extension("ui-select")
-    require("telescope").load_extension("live_grep_args")
+	require("telescope").load_extension("live_grep_args")
 end
 
 function config.trouble()
@@ -111,7 +111,7 @@ function config.trouble()
 		--fold_closed = "", -- icon used for closed folds
 		fold_open = icons.ui.ArrowOpen, -- icon used for open folds
 		fold_closed = icons.ui.ArrowClosed, -- icon used for closed folds
-        group = true, -- group results by file
+		group = true, -- group results by file
 		padding = true,
 		action_keys = {
 			-- key mappings for actions in the trouble list
@@ -140,7 +140,7 @@ function config.trouble()
 		auto_close = false, -- automatically close the list when you have no diagnostics
 		auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
 		auto_fold = false, -- automatically fold a file trouble list at creation
-        auto_jump = { "lsp_definitions" },
+		auto_jump = { "lsp_definitions" },
 		signs = {
 			-- icons / text used for a diagnostic
 			error = icons.diagnostics.Error_alt,
@@ -149,7 +149,7 @@ function config.trouble()
 			information = icons.diagnostics.Information_alt,
 			other = icons.diagnostics.Question_alt,
 		},
-        use_diagnostic_signs = false,
+		use_diagnostic_signs = false,
 	})
 end
 
@@ -346,99 +346,99 @@ function config.legendary()
 		["<leader>"] = {
 			b = {
 				name = "Bufferline commands",
-				d = "Sort buffer by directory",
-				e = "Sort buffer by extension",
+				d = "buffer: Sort by directory",
+				e = "buffer: Sort by extension",
 			},
 
 			d = {
 				name = "Dap commands",
-				b = "Toggle breakpoint",
-				d = "Terminate debug session",
-				r = "Debug continue",
-				l = "Debug repl open",
-				i = "Step in",
-				o = "Step out",
-				v = "Step over",
+				b = "debug: Toggle breakpoint",
+				d = "debug: Terminate debug session",
+				r = "debug: Continue",
+				l = "debug: Open repl",
+				i = "debug: Step in",
+				o = "debug: Step out",
+				v = "debug: Step over",
 			},
 			f = {
 				name = "Telescope commands",
-				p = "Find project",
-				w = "Find word",
-				r = "Find file by frecency",
-				e = "Find file by history",
-				c = "Change color scheme",
-				z = "Change current directory by zoxide",
-				f = "Find file under current work directory",
-				g = "Find file under current git directory",
-				n = "File new",
+				p = "find: Project",
+				w = "find: Word",
+				r = "find: File by frecency",
+				e = "find: File by history",
+				c = "ui: Change color scheme",
+				z = "edit: Change current directory by zoxide",
+				f = "find: File under current work directory",
+				g = "find: File under current git directory",
+				n = "edit: New file",
 			},
 			h = {
 				name = "Gitsigns commands",
-				b = "Blame line",
-				p = "Preview hunk",
-				s = "Stage hunk",
-				u = "Undo stage hunk",
-				r = "Reset hunk",
-				R = "Reset buffer",
+				b = "git: Blame line",
+				p = "git: Preview hunk",
+				s = "git: Stage hunk",
+				u = "git: Undo stage hunk",
+				r = "git: Reset hunk",
+				R = "git: Reset buffer",
 			},
 			l = {
 				name = "LSP commands",
-				i = "Lsp Info",
-				r = "Lsp Restart",
+				i = "lsp: LSP Info",
+				r = "lsp: LSP Restart",
 			},
 			n = {
 				name = "NvimTree commands",
-				f = "NvimTree find file",
-				r = "NvimTree refresh",
+				f = "filetree: NvimTree find file",
+				r = "filetree: NvimTree refresh",
 			},
 			p = {
 				name = "Packer commands",
-				s = "PackerSync",
-				i = "PackerInstall",
-				c = "PackerClean",
-				u = "PackerUpdate",
+				s = "packer: PackerSync",
+				i = "packer: PackerInstall",
+				c = "packer: PackerClean",
+				u = "packer: PackerUpdate",
 			},
 			s = {
 				name = "Session commands",
-				s = "Save session",
-				r = "Restore session",
-				d = "Delete session",
+				s = "sesson: Save session",
+				r = "sesson: Restore session",
+				d = "sesson: Delete session",
 			},
 			t = {
 				name = "Trouble commands",
-				d = "show document diagnostics",
-				w = "show workspace diagnostics",
-				q = "show quickfix list",
-				l = "show loclist",
+				d = "lsp: show document diagnostics",
+				w = "lsp: show workspace diagnostics",
+				q = "lsp: show quickfix list",
+				l = "lsp: show loclist",
 			},
 		},
 		["g"] = {
-			c = "Code action",
-			d = "Preview definition",
-			D = "Goto definition",
-			h = "Show reference",
-			r = "Rename",
-			s = "Signature help",
-			t = "Toggle trouble list",
-			b = "Buffer pick",
+			a = "lsp: Code action",
+			d = "lsp: Preview definition",
+			D = "lsp: Goto definition",
+			h = "lsp: Show reference",
+			r = "lsp: Rename",
+			s = "lsp: Signature help",
+			t = "lsp: Toggle trouble list",
+			b = "buffer: Buffer pick",
 			p = {
-				name = "Git commands",
-				s = "Git push",
-				l = "Git pull",
+				name = "git commands",
+				s = "git: push",
+				l = "git: pull",
 			},
 		},
-		["<leader>G"] = "Show fugitive",
-		["<leader>g"] = "Show lazygit",
-		["<leader>o"] = "Check spell",
-		["g["] = "Goto prev diagnostic",
-		["g]"] = "Goto next diagnostic",
-		["<leader>w"] = "Goto word",
-		["<leader>j"] = "Goto line",
-		["<leader>k"] = "Goto line",
-		["<leader>c"] = "Goto one char",
-		["<leader>cc"] = "Goto two chars",
-		["<leader>D"] = "Show diff",
-		["<leader><leader>D"] = "Close diff",
+		["<leader>G"] = "git: Show fugitive",
+		["<leader>g"] = "git: Show lazygit",
+		["<leader>D"] = "git: Show diff",
+		["<leader><leader>D"] = "git: Close diff",
+		["g["] = "lsp: Goto prev diagnostic",
+		["g]"] = "lsp: Goto next diagnostic",
+		["<leader>w"] = "jump: Goto word",
+		["<leader>j"] = "jump: Goto line",
+		["<leader>k"] = "jump: Goto line",
+		["<leader>c"] = "jump: Goto one char",
+		["<leader>cc"] = "jump: Goto two chars",
+		["<leader>o"] = "edit: Check spell",
 	})
 end
 
