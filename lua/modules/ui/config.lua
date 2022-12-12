@@ -400,7 +400,7 @@ function config.nvim_tree()
 		update_focused_file = {
 			enable = true,
 			--update_cwd = false,
-			update_root = false,
+			update_root = true,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},
