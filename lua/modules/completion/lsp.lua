@@ -121,14 +121,14 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 						preloadFileSize = 10000,
 					},
 					telemetry = { enable = false },
+					-- Do not override treesitter lua highlighting with sumneko lua highlighting
+					semantic = { enable = false },
 				},
 			},
 		})
 	elseif server == "clangd" then
-		local copy_capabilities = capabilities
-		copy_capabilities.offsetEncoding = { "utf-16" }
 		nvim_lsp.clangd.setup({
-			capabilities = copy_capabilities,
+			capabilities = vim.tbl_deep_extend("keep", { offsetEncoding = { "utf-16", "utf-8" } }, capabilities),
 			single_file_support = true,
 			on_attach = custom_attach,
 			cmd = {

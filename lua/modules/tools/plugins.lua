@@ -28,24 +28,20 @@ tools["nvim-telescope/telescope.nvim"] = {
 		{ "nvim-lua/popup.nvim", opt = true },
 	},
 }
+
+tools["ahmedkhalf/project.nvim"] = {
+	opt = true,
+	after = "telescope.nvim",
+	config = conf.project,
+}
 tools["nvim-telescope/telescope-fzf-native.nvim"] = {
 	opt = true,
 	run = "make",
-	after = "telescope.nvim",
-}
-tools["nvim-telescope/telescope-project.nvim"] = {
-	opt = true,
-	after = "telescope-fzf-native.nvim",
-	requires = { {
-		"ahmedkhalf/project.nvim",
-		opt = true,
-		config = conf.project,
-	} },
+	after = "project.nvim",
 }
 tools["nvim-telescope/telescope-frecency.nvim"] = {
 	opt = true,
-	after = "telescope-project.nvim",
-	--requires = { { "tami5/sqlite.lua", opt = true } },
+	after = "telescope-fzf-native.nvim",
 	requires = { { "kkharji/sqlite.lua", opt = true } },
 }
 

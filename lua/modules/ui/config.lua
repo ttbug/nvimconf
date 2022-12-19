@@ -134,6 +134,8 @@ function config.notify()
 		on_close = nil,
 		---@usage timeout for notifications in ms, default 5000
 		timeout = 2000,
+		-- @usage User render fps value
+		fps = 30,
 		-- Render function for notifications. See notify-render()
 		render = "default",
 		---@usage highlight behind the window for stages that change opacity
@@ -159,7 +161,7 @@ function config.lualine()
 	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics", true),
 		misc = require("modules.ui.icons").get("misc", true),
-        ui = require("modules.ui.icons").get("ui", true),
+		ui = require("modules.ui.icons").get("ui", true),
 	}
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
@@ -178,7 +180,7 @@ function config.lualine()
 		end
 	end
 
-    local function get_cwd()
+	local function get_cwd()
 		local cwd = vim.fn.getcwd()
 		local home = os.getenv("HOME")
 		if cwd:find(home, 1, true) == 1 then
@@ -239,7 +241,7 @@ function config.lualine()
 			section_separators = { left = "", right = "" },
 		},
 		sections = {
-			lualine_a = { {"mode"} },
+			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
 			lualine_c = { { get_cwd } },
 			lualine_x = {
@@ -907,7 +909,7 @@ function config.catppuccin()
 end
 
 function config.neodim()
-	vim.api.nvim_command([[packadd nvim-treesitter]])
+	--vim.api.nvim_command([[packadd nvim-treesitter]])
 	local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
 	local blend_color = normal_background ~= nil and string.format("#%06x", normal_background) or "#000000"
 	require("neodim").setup({
