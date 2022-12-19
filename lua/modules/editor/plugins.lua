@@ -80,7 +80,7 @@ editor["akinsho/toggleterm.nvim"] = {
 --editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
 editor["NvChad/nvim-colorizer.lua"] = {
 	opt = true,
-	event = "BufRead",
+	after = "nvim-treesitter",
 	config = conf.nvim_colorizer,
 }
 --editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufRead" }

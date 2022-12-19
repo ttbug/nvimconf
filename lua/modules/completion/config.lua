@@ -96,6 +96,15 @@ function config.lspsaga()
 			Parameter = { icons.kind.Parameter, colors.blue },
 			StaticMethod = { icons.kind.StaticMethod, colors.peach },
 		},
+		code_action_lightbulb = {
+			enable = false,
+			enable_in_insert = true,
+			cache_code_action = true,
+			sign = true,
+			update_time = 150,
+			sign_priority = 20,
+			virtual_text = true,
+		},
 		symbol_in_winbar = {
 			enable = true,
 			in_custom = false,
@@ -212,7 +221,7 @@ function config.cmp()
 	end
 
 	local border = function(hl)
-        return {
+		return {
 			{ "╭", hl },
 			{ "─", hl },
 			{ "╮", hl },
@@ -239,7 +248,7 @@ function config.cmp()
 
 	cmp.setup({
 		window = {
-            completion = {
+			completion = {
 				border = border("Normal"),
 				max_width = 80,
 				max_height = 20,
