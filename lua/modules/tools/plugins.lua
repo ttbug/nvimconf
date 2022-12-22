@@ -26,6 +26,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 	requires = {
 		{ "nvim-lua/plenary.nvim", opt = false },
 		{ "nvim-lua/popup.nvim", opt = true },
+		{ "debugloop/telescope-undo.nvim", opt = true },
 	},
 }
 
