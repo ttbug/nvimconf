@@ -70,8 +70,7 @@ local plug_map = {
 	["n|<leader>cl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent(),
 	-- Plugin nvim-tree
 	--["n|<C-n>"] = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
-	--["n|<F4>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
-	["n|<F4>"] = map_cr("lua toggle_nvimtree()"):with_noremap():with_silent(),
+	["n|<F4>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
 	["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
 	["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
 	-- Plugin floaterm
