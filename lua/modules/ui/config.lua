@@ -713,42 +713,47 @@ function config.catppuccin()
 					information = { "underline" },
 				},
 			},
-			lsp_trouble = true,
-			lsp_saga = true,
+            aerial = false,
+			barbar = false,
+			beacon = false,
+			cmp = true,
+			coc_nvim = false,
+			dap = { enabled = true, enable_ui = true },
+			dashboard = false,
+			fern = false,
+			fidget = true,
 			gitgutter = false,
 			gitsigns = true,
-			telescope = true,
-			nvimtree = true,
-			which_key = true,
-			indent_blankline = { enabled = true, colored_indent_levels = false },
-			dashboard = true,
-			neogit = false,
-			vim_sneak = false,
-			fern = false,
-			barbar = false,
-			markdown = true,
-			lightspeed = false,
-			ts_rainbow = true,
-			mason = true,
-			neotest = false,
-			noice = false,
+            harpoon = false,
 			hop = true,
 			illuminate = true,
-			cmp = true,
-			dap = { enabled = true, enable_ui = true },
-			notify = true,
-			symbols_outline = false,
-			coc_nvim = false,
-			leap = false,
-			neotree = { enabled = false, show_root = true, transparent_panel = false },
-			telekasten = false,
-			mini = false,
-			aerial = false,
-			vimwiki = true,
-			beacon = false,
+			indent_blankline = { enabled = true, colored_indent_levels = false },
+            leap = false,
+			lightspeed = false,
+			--ts_rainbow = true,
+            lsp_saga = true,
+			lsp_trouble = true,
+			markdown = true,
+			mason = true,
+            mini = false,
 			navic = { enabled = false },
+			neogit = false,
+			neotest = false,
+            neotree = { enabled = false, show_root = true, transparent_panel = false },
+			noice = false,
+			notify = true,
+            nvimtree = true,
 			overseer = false,
-			fidget = true,
+			pounce = false,
+			semantic_tokens = false,
+			symbols_outline = false,
+			telekasten = false,
+            telescope = true,
+			treesitter_context = false,
+			ts_rainbow = true,
+			vim_sneak = false,
+			vimwiki = false,
+			which_key = true,
 		},
 		color_overrides = {
 			mocha = {
@@ -902,8 +907,10 @@ end
 
 function config.neodim()
 	--vim.api.nvim_command([[packadd nvim-treesitter]])
-	local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
-	local blend_color = normal_background ~= nil and string.format("#%06x", normal_background) or "#000000"
+	--local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
+	--local blend_color = normal_background ~= nil and string.format("#%06x", normal_background) or "#000000"
+    local util = require("utils")
+	local blend_color = util.hlToRgb("Normal", true)
 	require("neodim").setup({
 		alpha = 0.45,
 		blend_color = blend_color,
@@ -918,6 +925,13 @@ function config.neodim()
 			underline = false,
 		},
 	})
+
+    -- Custom vertual text highlight groups for indent_blankline
+	local util = require("utils")
+	local bg = util.hlToRgb("Normal", true)
+	local indent_hl = "#FFA066" -- only for current scoop
+	local alpha = 0.3
+	vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = indent_hl, bg = util.blend(indent_hl, bg, alpha) })
 end
 
 return config
