@@ -357,7 +357,35 @@ function config.copilot()
 		require("copilot").setup({
 			filetypes = {
 				["dap-repl"] = false,
+                svn = false,
+                help = false,
+                ["."] = false,
 			},
+            panel = {
+                enabled = true,
+                auto_refresh = false,
+                keymap = {
+                    jump_prev = "[[",
+                    jump_next = "]]",
+                    accept = "<CR>",
+                    refresh = "gr",
+                    open = "<M-CR>"
+                },
+            },
+            suggestion = {
+                enabled = true,
+                auto_trigger = true,
+                debounce = 75,
+                keymap = {
+                    accept = "<C-]>",
+                    accept_word = false,
+                    accept_line = false,
+                    next = "<M-]>",
+                    prev = "<M-[>",
+                    dismiss = "<M-l>",
+                },
+            },
+            copilot_node_command = 'node', -- Node.js version must be > 16.x
 		})
 	end, 100)
 end
