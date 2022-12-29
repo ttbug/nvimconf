@@ -62,6 +62,15 @@ function M.enable_format_on_save(is_configured)
 			require("modules.completion.formatting").format({ timeout_ms = opts.timeout, filter = M.format_filter })
 		end,
 	})
+        -- Run gofmt + goimport on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*.go",
+      callback = function()
+       require('go.format').goimport()
+      end,
+      group = "format_on_save",
+    })
+
 	if not is_configured then
 		vim.notify(
 			"Successfully enabled format-on-save",
