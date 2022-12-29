@@ -10,10 +10,6 @@ completion["creativenull/efmls-configs-nvim"] = {
 	opt = false,
 	requires = "neovim/nvim-lspconfig",
 }
---completion["williamboman/nvim-lsp-installer"] = {
---	opt = false,
---}
-
 completion["williamboman/mason.nvim"] = {
 	opt = false,
 	requires = {
@@ -23,31 +19,15 @@ completion["williamboman/mason.nvim"] = {
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim", config = conf.mason_install },
 	},
 }
---completion["kevinhwang91/nvim-bqf"] = {
---	opt = true,
---	ft = "qf",
---	config = conf.bqf,
---}
---completion["tami5/lspsaga.nvim"] = {
---	opt = true,
---	after = "nvim-lspconfig",
---}
---completion["stevearc/aerial.nvim"] = {
---	opt = true,
---	after = "nvim-lspconfig",
---	config = conf.aerial,
---}
 completion["glepnir/lspsaga.nvim"] = {
 	opt = true,
 	event = "LspAttach",
-	--requires = { { "antoinemadec/FixCursorHold.nvim", opt = true } },
 	config = conf.lspsaga,
 }
-
 completion["ray-x/lsp_signature.nvim"] = { opt = true, after = "nvim-lspconfig" }
 completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
-	--event = "InsertEnter",
+	event = "InsertEnter",
 	requires = {
 		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
@@ -60,11 +40,11 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "hrsh7th/cmp-buffer", after = "cmp-spell" },
 		{ "kdheepak/cmp-latex-symbols", after = "cmp-buffer" },
 		-- {
-		--     'tzachar/cmp-tabnine',
-		--     run = './install.sh',
-		--     after = 'cmp-spell',
-		--     config = conf.tabnine
-		-- }
+		-- 	"tzachar/cmp-tabnine",
+		-- 	run = "./install.sh",
+		-- 	after = "cmp-latex-symbols",
+		-- 	config = conf.tabnine,
+		-- },
 	},
 }
 completion["L3MON4D3/LuaSnip"] = {
@@ -76,11 +56,6 @@ completion["windwp/nvim-autopairs"] = {
 	after = "nvim-cmp",
 	config = conf.autopairs,
 }
--- completion['github/copilot.vim'] = {
---     opt = true,
---     cmd = "Copilot"
--- }
-
 completion["zbirenbaum/copilot.lua"] = {
 	event = "VimEnter",
 	config = conf.copilot,

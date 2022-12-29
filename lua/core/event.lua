@@ -34,7 +34,7 @@ function autocmd.load_autocmds()
 			{ "BufWritePre", "*.tmp", "setlocal noundofile" },
 			{ "BufWritePre", "*.bak", "setlocal noundofile" },
 			-- auto change directory
-			--{ "BufEnter", "*", "silent! lcd %:p:h" },
+			-- { "BufEnter", "*", "silent! lcd %:p:h" },
 			-- auto place to last edit
 			{
 				"BufReadPost",
@@ -74,15 +74,11 @@ function autocmd.load_autocmds()
 			{ "FocusGained", "* checktime" },
 			-- Equalize window dimensions when resizing vim window
 			{ "VimResized", "*", [[tabdo wincmd =]] },
-			-- Silent quit, also quicker
-			{ "VimLeavePre", "*", "silent wall" },
 		},
 		ft = {
 			{ "FileType", "alpha", "set showtabline=0" },
 			{ "FileType", "markdown", "set wrap" },
 			{ "FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0" },
-			-- Google tab style
-			--{ "FileType", "c,cpp", "set expandtab tabstop=2 shiftwidth=2" },
 			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
 			{
 				"FileType",

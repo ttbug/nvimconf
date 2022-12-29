@@ -1,5 +1,6 @@
 local config = {}
 local sessions_dir = vim.fn.stdpath("data") .. "/sessions/"
+local use_ssh = require("core.settings").use_ssh
 
 function config.nvim_treesitter()
 	vim.api.nvim_set_option_value("foldmethod", "expr", {})
@@ -63,7 +64,6 @@ function config.nvim_treesitter()
 			"yang",
 			"zig",
 		},
-		--highlight = { enable = true, disable = { "vim" } },
 		highlight = {
 			enable = true,
 			disable = { "vim" },
@@ -103,41 +103,54 @@ function config.nvim_treesitter()
 		rainbow = {
 			enable = true,
 			extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-			max_file_lines = 2000, -- Do not enable for files with more than 1000 lines, int
+			max_file_lines = 2000, -- Do not enable for files with more than 2000 lines, int
 		},
 		context_commentstring = { enable = true, enable_autocmd = false },
 		matchup = { enable = true },
 	})
 	require("nvim-treesitter.install").prefer_git = true
-	local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-	for _, p in pairs(parsers) do
-		p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
+	if use_ssh then
+		local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+		for _, p in pairs(parsers) do
+			p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
+		end
 	end
 end
 
---function config.matchup()
---	vim.cmd([[let g:matchup_matchparen_offscreen = {'method': 'popup'}]])
---end
-
-function config.nvim_gps()
-	require("nvim-gps").setup({
-		icons = {
-			["class-name"] = " ", -- Classes and class-like objects
-			["function-name"] = " ", -- Functions
-			["method-name"] = " ", -- Methods (functions inside class-like objects)
+function config.illuminate()
+	require("illuminate").configure({
+		providers = {
+			"lsp",
+			"treesitter",
+			"regex",
 		},
-		languages = { -- You can disable any language individually here
-			["c"] = true,
-			["cpp"] = true,
-			["go"] = true,
-			["java"] = true,
-			["javascript"] = true,
-			["lua"] = true,
-			["python"] = true,
-			["rust"] = true,
+		delay = 100,
+		filetypes_denylist = {
+			"alpha",
+			"dashboard",
+			"DoomInfo",
+			"fugitive",
+			"help",
+			"norg",
+			"NvimTree",
+			"Outline",
+			"packer",
+			"toggleterm",
 		},
-		separator = " > ",
+		under_cursor = false,
 	})
+end
+
+function config.nvim_comment()
+	require("nvim_comment").setup({
+		hook = function()
+			require("ts_context_commentstring.internal").update_commentstring()
+		end,
+	})
+end
+
+function config.hop()
+	require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 end
 
 function config.autotag()
@@ -155,12 +168,6 @@ end
 
 function config.nvim_colorizer()
 	require("colorizer").setup()
-end
-
-function config.easymotion()
-	vim.g.EasyMotion_do_mapping = 0
-	vim.g.EasyMotion_smartcase = 1
-	vim.g.EasyMotion_use_smartsign_us = 1
 end
 
 function config.neoscroll()
@@ -207,17 +214,18 @@ function config.toggleterm()
 		-- size can be a number or function which is passed the current terminal
 		size = function(term)
 			if term.direction == "horizontal" then
-				return 20
+				return 15
 			elseif term.direction == "vertical" then
 				return vim.o.columns * 0.40
 			end
 		end,
 		on_open = function()
+			-- Prevent infinite calls from freezing neovim.
+			-- Only set these options specific to this terminal buffer.
 			vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local" })
 			vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
 		end,
-		--open_mapping = [[<c-\>]],
-		open_mapping = false,
+		open_mapping = false, -- [[<c-\>]],
 		hide_numbers = true, -- hide the number column in toggleterm buffers
 		shade_filetypes = {},
 		shade_terminals = false,
@@ -246,8 +254,8 @@ function config.dapui()
 		ui = require("modules.ui.icons").get("ui"),
 		dap = require("modules.ui.icons").get("dap"),
 	}
+
 	require("dapui").setup({
-		--icons = { expanded = "▾", collapsed = "▸" },
 		icons = { expanded = icons.ui.ArrowOpen, collapsed = icons.ui.ArrowClosed, current_frame = icons.ui.Indicator },
 		mappings = {
 			-- Use a table to apply multiple mappings
@@ -272,12 +280,9 @@ function config.dapui()
 				size = 40,
 				position = "left",
 			},
-			{
-				elements = { "repl", "console" },
-				size = 10,
-				position = "bottom",
-			},
+			{ elements = { "repl" }, size = 10, position = "bottom" },
 		},
+		-- Requires Nvim version >= 0.8
 		controls = {
 			enabled = true,
 			-- Display controls in this session
@@ -304,7 +309,7 @@ end
 
 function config.dap()
 	local icons = { dap = require("modules.ui.icons").get("dap") }
-	--vim.cmd([[packadd nvim-dap-ui]])
+
 	vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
@@ -427,7 +432,6 @@ function config.dap()
 
 	dap.adapters.python = {
 		type = "executable",
-		-- command = os.getenv("HOME") .. "/.local/share/nvim/dapinstall/python/bin/python",
 		command = "/usr/bin/python",
 		args = { "-m", "debugpy.adapter" },
 	}
@@ -597,6 +601,18 @@ function config.accelerated_jk()
 	})
 end
 
+function config.clever_f()
+	vim.api.nvim_set_hl(
+		0,
+		"CleverChar",
+		{ underline = true, bold = true, fg = "Orange", bg = "NONE", ctermfg = "Red", ctermbg = "NONE" }
+	)
+	vim.g.clever_f_mark_char_color = "CleverChar"
+	vim.g.clever_f_mark_direct_color = "CleverChar"
+	vim.g.clever_f_mark_direct = true
+	vim.g.clever_f_timeout_ms = 1500
+end
+
 function config.smartyank()
 	require("smartyank").setup({
 		highlight = {
@@ -614,23 +630,12 @@ function config.smartyank()
 		},
 		osc52 = {
 			enabled = true,
+			escseq = "tmux", -- use tmux escape sequence, only enable if you're using remote tmux and have issues (see #4)
 			ssh_only = true, -- false to OSC52 yank also in local sessions
 			silent = false, -- true to disable the "n chars copied" echo
 			echo_hl = "Directory", -- highlight group of the OSC52 echo message
 		},
 	})
-end
-
-function config.clever_f()
-	vim.api.nvim_set_hl(
-		0,
-		"CleverChar",
-		{ underline = true, bold = true, fg = "Orange", bg = "NONE", ctermfg = "Red", ctermbg = "NONE" }
-	)
-	vim.g.clever_f_mark_char_color = "CleverChar"
-	vim.g.clever_f_mark_direct_color = "CleverChar"
-	vim.g.clever_f_mark_direct = true
-	vim.g.clever_f_timeout_ms = 1500
 end
 
 return config

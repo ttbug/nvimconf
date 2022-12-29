@@ -24,7 +24,6 @@ editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
 editor["p00f/nvim-ts-rainbow"] = {
 	opt = true,
 	after = "nvim-treesitter",
-	--event = "BufReadPost",
 }
 editor["JoosepAlviste/nvim-ts-context-commentstring"] = {
 	opt = true,
@@ -42,9 +41,7 @@ editor["windwp/nvim-ts-autotag"] = {
 editor["andymass/vim-matchup"] = {
 	opt = true,
 	after = "nvim-treesitter",
-	--config = conf.matchup,
 }
---editor["rhysd/accelerated-jk"] = { opt = true, event = "BufWinEnter" }
 editor["rainbowhxch/accelerated-jk.nvim"] = {
 	opt = true,
 	event = "BufWinEnter",
@@ -69,7 +66,7 @@ editor["phaazon/hop.nvim"] = {
 editor["easymotion/vim-easymotion"] = { opt = true, config = conf.easymotion }
 editor["karb94/neoscroll.nvim"] = {
 	opt = true,
-	event = "WinScrolled",
+	event = "BufReadPost",
 	config = conf.neoscroll,
 }
 editor["akinsho/toggleterm.nvim"] = {
@@ -77,37 +74,41 @@ editor["akinsho/toggleterm.nvim"] = {
 	event = "UIEnter",
 	config = conf.toggleterm,
 }
---editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
 editor["NvChad/nvim-colorizer.lua"] = {
 	opt = true,
 	after = "nvim-treesitter",
 	config = conf.nvim_colorizer,
 }
---editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufRead" }
 editor["rmagatti/auto-session"] = {
 	opt = true,
 	cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
 	config = conf.auto_session,
 }
---editor['jdhao/better-escape.vim'] = {
---    opt = true,
---    event = 'InsertEnter'
---}
-
 editor["max397574/better-escape.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
 	config = conf.better_escape,
 }
-
-editor["rcarriga/nvim-dap-ui"] = {
-	opt = true,
-	config = conf.dapui,
-}
 editor["mfussenegger/nvim-dap"] = {
 	opt = true,
-	cmd = "DapToggleBreakpoint",
+	cmd = {
+		"DapSetLogLevel",
+		"DapShowLog",
+		"DapContinue",
+		"DapToggleBreakpoint",
+		"DapToggleRepl",
+		"DapStepOver",
+		"DapStepInto",
+		"DapStepOut",
+		"DapTerminate",
+	},
+	module = "dap",
 	config = conf.dap,
+}
+editor["rcarriga/nvim-dap-ui"] = {
+	opt = true,
+	after = "nvim-dap", -- Need to call setup after dap has been initialized.
+	config = conf.dapui,
 }
 --editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
 editor["famiu/bufdelete.nvim"] = {
@@ -135,19 +136,12 @@ editor["theHamsta/nvim-dap-virtual-text"] = {
 }
 editor["sindrets/diffview.nvim"] = {
 	opt = true,
-	cmd = { "DiffviewOpen", "DiffViewClose" },
+	cmd = { "DiffviewOpen", "DiffviewClose" },
 }
-
 editor["luukvbaal/stabilize.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
 }
-
---editor["numtostr/FTerm.nvim"] = {
---    opt = true,
---    event = "BufReadPost",
---    config = conf.fterm,
---}
 editor["ibhagwan/smartyank.nvim"] = {
 	opt = true,
 	event = "BufReadPost",

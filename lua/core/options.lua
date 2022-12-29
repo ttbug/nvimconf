@@ -20,6 +20,7 @@ local function load_options()
 		writebackup = false,
 		swapfile = false,
 		undodir = global.cache_dir .. "undo/",
+		-- directory = global.cache_dir .. "swap/",
 		-- backupdir = global.cache_dir .. "backup/",
 		-- viewdir = global.cache_dir .. "view/",
 		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
@@ -30,6 +31,7 @@ local function load_options()
 		shiftround = true,
 		timeout = true,
 		ttimeout = true,
+		-- You will feel delay when you input <Space> at lazygit interface if you set it a positive value like 300(ms).
 		timeoutlen = 0,
 		ttimeoutlen = 0,
 		updatetime = 100,
@@ -70,24 +72,21 @@ local function load_options()
 		helpheight = 12,
 		previewheight = 12,
 		showcmd = false,
-		cmdheight = 1, -- 0,1,2
-		-- cmdwinheight = 3,
-		-- equalalways = false,
+		cmdheight = 1, -- 0, 1, 2
+		cmdwinheight = 5,
+		equalalways = false,
 		laststatus = 2,
 		display = "lastline",
 		showbreak = "↳  ",
 		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
-		--pumblend = 10,
-		--winblend = 10,
+		-- pumblend = 10,
+		-- winblend = 10,
 		autoread = true,
 		autowrite = true,
-		--    }
 
-		--  local bw_local = {
 		undofile = true,
 		synmaxcol = 2500,
 		formatoptions = "1jcroql",
-		--textwidth = 80,
 		expandtab = true,
 		autoindent = true,
 		tabstop = 4,
@@ -103,13 +102,10 @@ local function load_options()
 		conceallevel = 0,
 		concealcursor = "niv",
 	}
-
 	local function isempty(s)
 		return s == nil or s == ""
 	end
 
-	--if not isempty(vim.env.CONDA_PREFIX) then
-	--	vim.g.python3_host_prog = vim.env.CONDA_PREFIX .. "/bin/python"
 	-- custom python provider
 	local conda_prefix = os.getenv("CONDA_PREFIX")
 	if not isempty(conda_prefix) then
@@ -122,6 +118,7 @@ local function load_options()
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/bin/python3"
 	end
+
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end

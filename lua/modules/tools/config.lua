@@ -6,7 +6,6 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-fzf-native.nvim]])
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
-	vim.api.nvim_command([[packadd telescope-ui-select.nvim]])
 	vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
 	vim.api.nvim_command([[packadd telescope-undo.nvim]])
 
@@ -23,24 +22,20 @@ function config.telescope()
 			return true
 		end,
 	}
-
 	local lga_actions = require("telescope-live-grep-args.actions")
+
 	require("telescope").setup({
 		defaults = {
 			initial_mode = "insert",
-			--prompt_prefix = "  ",
-			--selection_caret = " ",
 			prompt_prefix = " " .. icons.ui.Telescope .. " ",
 			selection_caret = icons.ui.ChevronRight,
 			entry_prefix = " ",
 			scroll_strategy = "limit",
 			results_title = false,
-			--borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			layout_strategy = "horizontal",
 			path_display = { "absolute" },
 			file_ignore_patterns = { ".git/", ".cache", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
-				--prompt_position = "bottom",
 				horizontal = {
 					preview_width = 0.5,
 				},
@@ -72,9 +67,6 @@ function config.telescope()
 						["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
 					},
 				},
-			},
-			["ui-select"] = {
-				require("telescope.themes").get_dropdown({}),
 			},
 			undo = {
 				side_by_side = true,
@@ -109,7 +101,6 @@ function config.telescope()
 	require("telescope").load_extension("projects")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
-	require("telescope").load_extension("ui-select")
 	require("telescope").load_extension("live_grep_args")
 	require("telescope").load_extension("undo")
 end
@@ -140,12 +131,10 @@ function config.trouble()
 		width = 50, -- width of the list when position is left or right
 		icons = true, -- use devicons for filenames
 		mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-		--fold_open = "", -- icon used for open folds
-		--fold_closed = "", -- icon used for closed folds
 		fold_open = icons.ui.ArrowOpen, -- icon used for open folds
 		fold_closed = icons.ui.ArrowClosed, -- icon used for closed folds
 		group = true, -- group results by file
-		padding = true,
+		padding = true, -- add an extra new line on top of the list
 		action_keys = {
 			-- key mappings for actions in the trouble list
 			-- map to {} to remove a mapping, for example:
@@ -173,7 +162,7 @@ function config.trouble()
 		auto_close = false, -- automatically close the list when you have no diagnostics
 		auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
 		auto_fold = false, -- automatically fold a file trouble list at creation
-		auto_jump = { "lsp_definitions" },
+		auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
 		signs = {
 			-- icons / text used for a diagnostic
 			error = icons.diagnostics.Error_alt,
@@ -182,7 +171,7 @@ function config.trouble()
 			information = icons.diagnostics.Information_alt,
 			other = icons.diagnostics.Question_alt,
 		},
-		use_diagnostic_signs = false,
+		use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 	})
 end
 
@@ -210,43 +199,10 @@ function config.sniprun()
 	})
 end
 
-function config.which_key()
-	local icons = {
-		ui = require("modules.ui.icons").get("ui"),
-		misc = require("modules.ui.icons").get("misc"),
-	}
-	require("which-key").setup({
-		plugins = {
-			presets = {
-				operators = false,
-				motions = false,
-				text_objects = false,
-				windows = false,
-				nav = false,
-				z = true,
-				g = true,
-			},
-		},
-
-		icons = {
-			breadcrumb = icons.ui.Separator,
-			separator = icons.misc.Vbar,
-			group = icons.misc.Add,
-		},
-
-		window = {
-			border = "none",
-			position = "bottom",
-			margin = { 1, 0, 1, 0 },
-			padding = { 1, 1, 1, 1 },
-			winblend = 0,
-		},
-	})
-end
-
 function config.wilder()
-	local icons = { ui = require("modules.ui.icons").get("ui") }
 	local wilder = require("wilder")
+	local icons = { ui = require("modules.ui.icons").get("ui") }
+
 	wilder.setup({ modes = { ":", "/", "?" } })
 	wilder.set_option("use_python_remote_plugin", 0)
 	wilder.set_option("pipeline", {
@@ -269,10 +225,12 @@ function config.wilder()
 		),
 	})
 
-    local match_hl = require("utils").hlToRgb("String", false)
+	local string_fg = vim.api.nvim_get_hl_by_name("String", true).foreground
+	local match_hl = string_fg ~= nil and string.format("#%06x", string_fg) or "#ABE9B3"
+
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
-        highlights = {
+		highlights = {
 			border = "Title", -- highlight to use for the border
 			accent = wilder.make_hl("WilderAccent", "Pmenu", { { a = 0 }, { a = 0 }, { foreground = match_hl } }),
 		},
@@ -305,66 +263,39 @@ function config.wilder()
 	)
 end
 
-function config.todo()
-	require("todo-comments").setup({
-		signs = true, -- show icons in the signs column
-		sign_priority = 8, -- sign priority
-		-- keywords recognized as todo comments
-		keywords = {
-			FIX = {
-				icon = " ", -- icon used for the sign, and in search results
-				color = "error", -- can be a hex color, or a named color (see below)
-				alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-				-- signs = false, -- configure signs for some keywords individually
+function config.which_key()
+	local icons = {
+		ui = require("modules.ui.icons").get("ui"),
+		misc = require("modules.ui.icons").get("misc"),
+	}
+
+	require("which-key").setup({
+		plugins = {
+			presets = {
+				operators = false,
+				motions = false,
+				text_objects = false,
+				windows = false,
+				nav = false,
+				z = true,
+				g = true,
 			},
-			TODO = { icon = " ", color = "info" },
-			HACK = { icon = " ", color = "warning" },
-			WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-			PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-			NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
 		},
-		merge_keywords = true, -- when true, custom keywords will be merged with the defaults
-		-- highlighting of the line containing the todo comment
-		-- * before: highlights before the keyword (typically comment characters)
-		-- * keyword: highlights of the keyword
-		-- * after: highlights after the keyword (todo text)
-		highlight = {
-			before = "", -- "fg" or "bg" or empty
-			keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-			after = "fg", -- "fg" or "bg" or empty
-			pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
-			comments_only = true, -- uses treesitter to match keywords in comments only
-			max_line_len = 400, -- ignore lines longer than this
-			exclude = {}, -- list of file types to exclude highlighting
+
+		icons = {
+			breadcrumb = icons.ui.Separator,
+			separator = icons.misc.Vbar,
+			group = icons.misc.Add,
 		},
-		-- list of named colors where we try to extract the guifg from the
-		-- list of hilight groups or use the hex color if hl not found as a fallback
-		colors = {
-			error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-			warning = { "DiagnosticWarning", "WarningMsg", "#FBBF24" },
-			info = { "DiagnosticInfo", "#2563EB" },
-			hint = { "DiagnosticHint", "#10B981" },
-			default = { "Identifier", "#7C3AED" },
-		},
-		search = {
-			command = "rg",
-			args = {
-				"--color=never",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-			},
-			-- regex that will be used to match keywords.
-			-- don't replace the (KEYWORDS) placeholder
-			pattern = [[\b(KEYWORDS):]], -- ripgrep regex
-			-- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+
+		window = {
+			border = "none",
+			position = "bottom",
+			margin = { 1, 0, 1, 0 },
+			padding = { 1, 1, 1, 1 },
+			winblend = 0,
 		},
 	})
-end
-
-function config.perf()
-	vim.g.cursorhold_updatetime = 100
 end
 
 function config.legendary()
@@ -426,6 +357,7 @@ function config.legendary()
 				f = "find: File under current work directory",
 				g = "find: File under current git directory",
 				n = "edit: New file",
+				b = "find: Buffer opened",
 			},
 			h = {
 				name = "Gitsigns commands",

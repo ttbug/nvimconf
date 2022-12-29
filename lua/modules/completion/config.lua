@@ -1,16 +1,9 @@
 local config = {}
---local icon = require("modules.ui.icons")
 
 function config.nvim_lsp()
 	require("modules.completion.lsp")
 end
---function config.lightbulb()
---	vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
---end
---
---function config.aerial()
---	require("aerial").setup({})
---end
+
 function config.lspsaga()
 	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics", true),
@@ -18,6 +11,7 @@ function config.lspsaga()
 		type = require("modules.ui.icons").get("type", true),
 		ui = require("modules.ui.icons").get("ui", true),
 	}
+
 	local function set_sidebar_icons()
 		-- Set icons for sidebar.
 		local diagnostic_icons = {
@@ -55,7 +49,6 @@ function config.lspsaga()
 	local colors = get_palette()
 
 	require("lspsaga").init_lsp_saga({
-		--diagnostic_header = { " ", " ", "  ", " " },
 		diagnostic_header = {
 			icons.diagnostics.Error_alt,
 			icons.diagnostics.Warning_alt,
@@ -108,7 +101,6 @@ function config.lspsaga()
 		symbol_in_winbar = {
 			enable = true,
 			in_custom = false,
-			--separator = "  ",
 			separator = " " .. icons.ui.Separator,
 			show_file = false,
 			-- define how to customize filename, eg: %:., %
@@ -134,7 +126,6 @@ function config.lspsaga()
 				elseif button == "m" then
 					-- middle click to visual select node
 					vim.fn.cursor(st.line + 1, st.character + 1)
-					--vim.cmd("normal v")
 					vim.api.nvim_command([[normal v]])
 					vim.fn.cursor(en.line + 1, en.character + 1)
 				end
@@ -149,7 +140,7 @@ function config.cmp()
 		type = require("modules.ui.icons").get("type", false),
 		cmp = require("modules.ui.icons").get("cmp", false),
 	}
-	-- vim.cmd([[packadd cmp-tabnine]])
+	-- vim.api.nvim_command([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
 	end
@@ -199,8 +190,8 @@ function config.cmp()
 		sorting = {
 			priority_weight = 2,
 			comparators = {
-				--require("copilot_cmp.comparators").prioritize,
-				--require("copilot_cmp.comparators").score,
+				require("copilot_cmp.comparators").prioritize,
+				require("copilot_cmp.comparators").score,
 				-- require("cmp_tabnine.compare"),
 				compare.offset,
 				compare.exact,
@@ -278,11 +269,11 @@ function config.cmp()
 end
 
 function config.luasnip()
-	--vim.o.runtimepath = vim.o.runtimepath .. "," .. os.getenv("HOME") .. "/.config/nvim/my-snippets/,"
 	local snippet_path = os.getenv("HOME") .. "/.config/nvim/my-snippets/"
 	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
 		vim.opt.rtp:append(snippet_path)
 	end
+
 	require("luasnip").config.set_config({
 		history = true,
 		updateevents = "TextChanged,TextChangedI",
@@ -294,8 +285,8 @@ function config.luasnip()
 end
 
 -- function config.tabnine()
---     local tabnine = require('cmp_tabnine.config')
---     tabnine:setup({max_line = 1000, max_num_results = 20, sort = true})
+-- 	local tabnine = require("cmp_tabnine.config")
+-- 	tabnine:setup({ max_line = 1000, max_num_results = 20, sort = true })
 -- end
 
 function config.autopairs()
@@ -304,14 +295,12 @@ function config.autopairs()
 	-- If you want insert `(` after select function or method item
 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 	local cmp = require("cmp")
-	--cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
-	--cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 	local handlers = require("nvim-autopairs.completion.handlers")
 	cmp.event:on(
 		"confirm_done",
 		cmp_autopairs.on_confirm_done({
 			filetypes = {
-				-- "*" is a alias to all filetypes
+				-- "*" is an alias to all filetypes
 				["*"] = {
 					["("] = {
 						kind = {
@@ -335,7 +324,7 @@ function config.mason_install()
 		-- start; they should be the names Mason uses for each tool
 		ensure_installed = {
 			-- you can turn off/on auto_update per tool
-			--"editorconfig-checker",
+			-- "editorconfig-checker",
 
 			--"stylua",
 
@@ -344,11 +333,10 @@ function config.mason_install()
 			--"prettier",
 			--"eslint-lsp",
 
-			--"bash-language-server",
 			"shellcheck",
 			"shfmt",
 
-			--"vint",
+			-- "vint",
 		},
 
 		-- if set to true this will check each tool for updates. If updates
@@ -360,7 +348,7 @@ function config.mason_install()
 		-- will happen on startup. You can use `:MasonToolsUpdate` to install
 		-- tools and check for updates.
 		-- Default: true
-		run_on_start = false,
+		run_on_start = true,
 	})
 end
 

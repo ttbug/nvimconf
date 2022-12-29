@@ -5,22 +5,8 @@ vim.api.nvim_command([[packadd lspsaga.nvim]])
 vim.api.nvim_command([[packadd cmp-nvim-lsp]])
 
 local nvim_lsp = require("lspconfig")
-
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
-
--- Custom vertual text highlight groups to make error hint looks cool
-local util = require("utils")
-local bg = util.hlToRgb("Normal", true)
-local error_fg = util.hlToRgb("DiagnosticVirtualTextError", false)
-local warn_fg = util.hlToRgb("DiagnosticVirtualTextWarn", false)
-local info_fg = util.hlToRgb("DiagnosticVirtualTextInfo", false)
-local hint_fg = util.hlToRgb("DiagnosticVirtualTextHint", false)
-local alpha = 0.4
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = error_fg, bg = util.blend(error_fg, bg, alpha) })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = warn_fg, bg = util.blend(warn_fg, bg, alpha) })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = info_fg, bg = util.blend(info_fg, bg, alpha) })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = hint_fg, bg = util.blend(hint_fg, bg, alpha) })
 
 require("lspconfig.ui.windows").default_options.border = "single"
 
@@ -33,7 +19,6 @@ mason_lsp.setup({
 	ensure_installed = {
 		"efm",
 		"sumneko_lua",
-		--"lua-language-server",
 		"clangd",
 		"gopls",
 		"pyright",
@@ -53,9 +38,6 @@ local function custom_attach(client, bufnr)
 		hi_parameter = "Search",
 		handler_opts = { "double" },
 	})
-	--require("aerial").on_attach(client)
-	--require("illuminate").on_attach(client)
-	--require("nvim-navic").attach(client, bufnr)
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
@@ -88,9 +70,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 	if server == "gopls" then
 		nvim_lsp.gopls.setup({
 			on_attach = custom_attach,
-			filetypes = { "go", "gomod" },
-			root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
-			flags = { allow_incremental_sync = true, debounce_text_changes = 150 },
+			flags = { debounce_text_changes = 500 },
 			capabilities = capabilities,
 			cmd = { "gopls", "-remote=auto" },
 			settings = {
@@ -100,21 +80,8 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 						nilness = true,
 						shadow = true,
 						unusedparams = true,
-						unusedwrite = true,
+						unusewrites = true,
 					},
-					codelenses = {
-						gc_details = true, -- Toggle the calculation of gc annotations
-						generate = true, -- Runs go generate for a given directory
-						regenerate_cgo = true, -- Regenerates cgo definitions
-						tidy = true, -- Runs go mod tidy for a module
-						upgrade_dependency = true, -- Upgrades a dependency in the go.mod file for a module
-						vendor = true, -- Runs go mod vendor for a module
-					},
-					semanticTokens = true,
-					completeUnimported = true,
-					staticcheck = true,
-					gofumpt = true,
-					experimentalPostfixCompletions = true,
 				},
 			},
 		})
@@ -148,10 +115,10 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 				"clangd",
 				"--background-index",
 				"--pch-storage=memory",
+				-- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
 				"--query-driver=/usr/bin/clang++,/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
 				"--clang-tidy",
 				"--all-scopes-completion",
-				"--cross-file-rename",
 				"--completion-style=detailed",
 				"--header-insertion-decorators",
 				"--header-insertion=iwyu",
@@ -271,19 +238,12 @@ efmls.init({
 -- Require `efmls-configs-nvim`'s config here
 
 local vint = require("efmls-configs.linters.vint")
---local clangtidy = require("efmls-configs.linters.clang_tidy")
 local eslint = require("efmls-configs.linters.eslint")
 local flake8 = require("efmls-configs.linters.flake8")
 local shellcheck = require("efmls-configs.linters.shellcheck")
 
 local black = require("efmls-configs.formatters.black")
 local stylua = require("efmls-configs.formatters.stylua")
-
---local clangfmt = {
---	formatCommand = "clang-format -style='{BasedOnStyle: LLVM,IndentWidth: 4}'",
---	formatStdin = true,
---}
---local clangfmt = require("efmls-configs.formatters.clang_format")
 local prettier = require("efmls-configs.formatters.prettier")
 local shfmt = require("efmls-configs.formatters.shfmt")
 
@@ -291,6 +251,7 @@ local shfmt = require("efmls-configs.formatters.shfmt")
 
 -- local rustfmt = require("modules.completion.efm.formatters.rustfmt")
 local clangfmt = require("modules.completion.efm.formatters.clangfmt")
+
 -- Override default config here
 
 flake8 = vim.tbl_extend("force", flake8, {

@@ -1,7 +1,7 @@
 local global = require("core.global")
 local vim = vim
 
--- Create cache dir and subs dir
+-- Create cache dir and data dirs
 local createdir = function()
 	local data_dir = {
 		global.cache_dir .. "backup",
@@ -10,8 +10,7 @@ local createdir = function()
 		global.cache_dir .. "tags",
 		global.cache_dir .. "undo",
 	}
-	-- There only check once that If cache_dir exists
-	-- Then I don't want to check subs dir exists
+	-- Only check whether cache_dir exists, this would be enough.
 	if vim.fn.isdirectory(global.cache_dir) == 0 then
 		os.execute("mkdir -p " .. global.cache_dir)
 		for _, v in pairs(data_dir) do
@@ -23,7 +22,7 @@ local createdir = function()
 end
 
 local disable_distribution_plugins = function()
-    -- Do not load menu
+	-- disable menu loading
 	vim.g.did_install_default_menus = 1
 	vim.g.did_install_syntax_menu = 1
 
@@ -71,14 +70,13 @@ local disable_distribution_plugins = function()
 end
 
 local leader_map = function()
-	vim.g.mapleader = ","
+	vim.g.mapleader = " "
 	vim.api.nvim_set_keymap("n", " ", "", { noremap = true })
 	vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
 end
 
 local neovide_config = function()
-	--vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font:h15]])
-    vim.api.nvim_set_option_value("guifont", "JetBrainsMono Nerd Font:h15", {})
+	vim.api.nvim_set_option_value("guifont", "JetBrainsMono Nerd Font:h15", {})
 	vim.g.neovide_refresh_rate = 120
 	vim.g.neovide_cursor_vfx_mode = "railgun"
 	vim.g.neovide_no_idle = true
@@ -92,8 +90,7 @@ local neovide_config = function()
 end
 
 local clipboard_config = function()
-
-    if global.is_mac then
+	if global.is_mac then
 		vim.g.clipboard = {
 			name = "macOS-clipboard",
 			copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
@@ -134,7 +131,8 @@ local load_core = function()
 	require("core.event")
 	pack.load_compile()
 
-    vim.api.nvim_command([[colorscheme catppuccin]])
+	-- vim.api.nvim_command([[set background=light]])
+	vim.api.nvim_command([[colorscheme catppuccin]])
 end
 
 load_core()
