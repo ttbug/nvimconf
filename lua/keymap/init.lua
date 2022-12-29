@@ -102,7 +102,7 @@ local plug_map = {
 	["n|,"] = map_cmd("v:lua.enhance_ft_move(',')"):with_expr(),
 	-- Plugin Hop
 	["n|<leader>w"] = map_cu("HopWord"):with_noremap(),
-	["n|<leader>j"] = map_cu("HopLine"):with_noremap(),
+	["n|<leader>l"] = map_cu("HopLine"):with_noremap(),
 	["n|<leader>k"] = map_cu("HopLine"):with_noremap(),
 	["n|<leader>c"] = map_cu("HopChar1"):with_noremap(),
 	["n|<leader>cc"] = map_cu("HopChar2"):with_noremap(),
