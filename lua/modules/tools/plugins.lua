@@ -1,7 +1,7 @@
 local tools = {}
 local conf = require("modules.tools.config")
 
-tools["nvim-lua/plenary.nvim"] = { opt = false }
+tools["nvim-lua/plenary.nvim"] = { opt = true, module = "plenary" }
 
 --tools["RishabhRD/popfix"] = {opt = false}
 tools["aspeddro/gitui.nvim"] = {
@@ -24,7 +24,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 	cmd = "Telescope",
 	config = conf.telescope,
 	requires = {
-		{ "nvim-lua/plenary.nvim", opt = false },
+        "nvim-lua/plenary.nvim",
 		{ "nvim-lua/popup.nvim", opt = true },
 		{ "debugloop/telescope-undo.nvim", opt = true },
 	},

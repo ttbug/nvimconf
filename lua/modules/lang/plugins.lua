@@ -17,7 +17,7 @@ lang["simrat39/rust-tools.nvim"] = {
 	opt = true,
 	ft = "rust",
 	config = conf.rust_tools,
-	requires = { { "nvim-lua/plenary.nvim", opt = false } },
+    requires = "nvim-lua/plenary.nvim",
 }
 
 lang["chrisbra/csv.vim"] = { opt = true, ft = "csv" }
