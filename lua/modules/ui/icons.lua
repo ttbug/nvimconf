@@ -29,7 +29,8 @@ local data = {
 		TypeParameter = "",
 		Unit = "",
 		Value = "",
-		Variable = "",
+		--Variable = "",
+        Variable = "",
 		-- ccls-specific icons.
 		TypeAlias = "",
 		Parameter = "",
