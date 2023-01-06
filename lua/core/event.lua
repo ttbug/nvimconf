@@ -71,8 +71,7 @@ function autocmd.load_autocmds()
 				[[if ! &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal cursorline | endif]],
 			},
 			{
-				--"WinLeave,BufLeave,InsertEnter",
-				"WinLeave,BufLeave",
+				"WinLeave,BufLeave,InsertEnter",
 				"*",
 				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
 			},
