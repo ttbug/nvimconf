@@ -21,15 +21,15 @@ completion["williamboman/mason.nvim"] = {
 }
 completion["glepnir/lspsaga.nvim"] = {
 	opt = true,
-    after = "nvim-lspconfig",
+	after = "nvim-lspconfig",
 	config = conf.lspsaga,
 }
 completion["ray-x/lsp_signature.nvim"] = { opt = true, after = "nvim-lspconfig" }
 completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
-    event = "InsertEnter",
+	event = "InsertEnter",
 	requires = {
-        { "onsails/lspkind.nvim", module = "lspkind" },
+		{ "onsails/lspkind.nvim", module = "lspkind" },
 		{ "lukas-reineke/cmp-under-comparator", module = "cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip", after = { "LuaSnip" } },
 		{ "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
@@ -57,15 +57,17 @@ completion["windwp/nvim-autopairs"] = {
 	config = conf.autopairs,
 }
 completion["zbirenbaum/copilot.lua"] = {
+	cmd = "Copilot",
 	event = "VimEnter",
 	config = conf.copilot,
 }
 completion["zbirenbaum/copilot-cmp"] = {
 	after = "copilot.lua",
-    module = "copilot_cmp",
+	module = "copilot_cmp",
 	config = function()
 		require("copilot_cmp").setup()
 	end,
 }
 
 return completion
+
