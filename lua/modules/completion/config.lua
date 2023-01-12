@@ -350,6 +350,10 @@ end
 function config.copilot()
 	vim.defer_fn(function()
 		require("copilot").setup({
+            cmp = {
+				enabled = true,
+				method = "getCompletionsCycling",
+			},
 			filetypes = {
 				["dap-repl"] = false,
                 svn = false,
@@ -357,7 +361,7 @@ function config.copilot()
                 ["."] = false,
 			},
             panel = {
-                enabled = true,
+                enabled = false,
                 auto_refresh = false,
                 keymap = {
                     jump_prev = "[[",
@@ -368,7 +372,7 @@ function config.copilot()
                 },
             },
             suggestion = {
-                enabled = true,
+                enabled = false,
                 auto_trigger = true,
                 debounce = 75,
                 keymap = {
@@ -380,7 +384,7 @@ function config.copilot()
                     dismiss = "<M-l>",
                 },
             },
-            copilot_node_command = 'node', -- Node.js version must be > 16.x
+            --copilot_node_command = 'node', -- Node.js version must be > 16.x
 		})
 	end, 100)
 end
