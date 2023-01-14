@@ -227,7 +227,7 @@ function config.wilder()
 
 	--local string_fg = vim.api.nvim_get_hl_by_name("String", true).foreground
 	--local match_hl = string_fg ~= nil and string.format("#%06x", string_fg) or "#ABE9B3"
-    local match_hl = require("modules.utils").hl_to_rgb("String", false, "#ABE9B3")
+	local match_hl = require("modules.utils").hl_to_rgb("String", false, "#ABE9B3")
 
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
@@ -384,7 +384,8 @@ function config.legendary()
 				u = "packer: PackerUpdate",
 			},
 			s = {
-				name = "Session commands",
+				c = "lsp: Show cursor disgnostics",
+				l = "lsp: Show line disgnostics",
 				s = "sesson: Save session",
 				r = "sesson: Restore session",
 				d = "sesson: Delete session",
@@ -427,6 +428,8 @@ function config.legendary()
 		["[g"] = "git: Goto prev hunk",
 		["g["] = "lsp: Goto prev diagnostic",
 		["g]"] = "lsp: Goto next diagnostic",
+		["<leader>ci"] = "lsp: Incoming calls",
+		["<leader>co"] = "lsp: Outcoming calls",
 		["<leader>w"] = "jump: Goto word",
 		["<leader>j"] = "jump: Goto line",
 		["<leader>k"] = "jump: Goto line",
@@ -452,3 +455,4 @@ function config.dressing()
 end
 
 return config
+

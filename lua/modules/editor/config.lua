@@ -18,6 +18,8 @@ function config.nvim_treesitter()
 			"yaml",
 			"latex",
 			"make",
+			"markdown",
+			"markdown_inline",
 			"python",
 			"rust",
 			"html",
@@ -639,3 +641,4 @@ function config.smartyank()
 end
 
 return config
+

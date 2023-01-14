@@ -30,7 +30,7 @@ local data = {
 		Unit = "",
 		Value = "",
 		--Variable = "",
-        Variable = "",
+		Variable = "",
 		-- ccls-specific icons.
 		TypeAlias = "",
 		Parameter = "",
@@ -95,6 +95,7 @@ local data = {
 		FolderOpen = "",
 		Gear = "",
 		History = "",
+		Incoming = "",
 		Indicator = "",
 		Left = "",
 		List = "",
@@ -102,8 +103,10 @@ local data = {
 		Lock = "",
 		Modified = "✥",
 		Modified_alt = "",
+		Newspaper = "",
 		NewFile = "",
 		Note = "",
+		Outcoming = "",
 		Package = "",
 		Pencil = "",
 		Perf = "",
@@ -158,7 +161,7 @@ local data = {
 		nvim_lsp = "",
 		nvim_lua = "",
 		path = "",
-		buffer = " ",
+		buffer = "",
 		spell = "暈",
 		luasnip = "",
 		treesitter = "",
@@ -196,3 +199,4 @@ function icons.get(category, add_space)
 end
 
 return icons
+
