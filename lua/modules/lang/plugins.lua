@@ -2,25 +2,25 @@ local lang = {}
 local conf = require("modules.lang.config")
 
 lang["ray-x/go.nvim"] = {
-    opt = true,
+    lazy = true,
     ft = "go",
-    --after = "mason-lspconfig.nvim",
     event = "BufReadPost",
     config = conf.go,
-    --requires = {{"ray-x/guihua.lua", opt=true}}
 }
 
 lang["ray-x/guihua.lua"] = {
-    opt = true,
+    lazy = true,
     run = 'cd lua/fzy && make'
 }
 --lang["rust-lang/rust.vim"] = { opt = true, ft = "rust" }
 lang["simrat39/rust-tools.nvim"] = {
-	opt = true,
+	lazy = true,
 	ft = "rust",
 	config = conf.rust_tools,
-    requires = "nvim-lua/plenary.nvim",
+    dependencies = {
+		{ "nvim-lua/plenary.nvim" },
+	},
 }
 
-lang["chrisbra/csv.vim"] = { opt = true, ft = "csv" }
+lang["chrisbra/csv.vim"] = { lazy = true, ft = "csv" }
 return lang
