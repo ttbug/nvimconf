@@ -3,7 +3,7 @@ local conf = require("modules.editor.config")
 
 editor["junegunn/vim-easy-align"] = { lazy = true, cmd = "EasyAlign" }
 editor["RRethy/vim-illuminate"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.illuminate,
 }
@@ -100,7 +100,7 @@ editor["tpope/vim-fugitive"] = {
 
 editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
-    event = "BufReadPost",
+	event = "BufReadPost",
 }
 
 editor["edluffy/specs.nvim"] = {
@@ -129,3 +129,4 @@ editor["ibhagwan/smartyank.nvim"] = {
 }
 
 return editor
+
