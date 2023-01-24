@@ -25,7 +25,7 @@ local plug_map = {
 	["n|<A-7>"] = map_cr("BufferLineGoToBuffer 7"):with_noremap():with_silent(),
 	["n|<A-8>"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent(),
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent(),
-		-- Lazy.nvim
+	-- Lazy.nvim
 	["n|<leader>ph"] = map_cr("Lazy"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>ps"] = map_cr("Lazy sync"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>pu"] = map_cr("Lazy update"):with_silent():with_noremap():with_nowait(),
@@ -33,7 +33,7 @@ local plug_map = {
 	["n|<leader>pl"] = map_cr("Lazy log"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>pc"] = map_cr("Lazy check"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>pd"] = map_cr("Lazy debug"):with_silent():with_noremap():with_nowait(),
-	["n|<leader>pp"] = map_cr("Lazy profile"):with_silent():with_noremap():with_nowait(),
+	--["n|<leader>pp"] = map_cr("Lazy profile"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>pr"] = map_cr("Lazy restore"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>px"] = map_cr("Lazy clean"):with_silent():with_noremap():with_nowait(),
 	-- Lsp mapp work when insertenter and lsp start
@@ -73,8 +73,8 @@ local plug_map = {
 	["n|<leader>g"] = map_cr("Gitui"):with_noremap():with_silent(),
 	["t|<leader>g"] = map_cmd("<Esc><Cmd>Gitui<CR>"):with_noremap():with_silent(),
 	--["n|<leader>G"] = map_cu("Git"):with_noremap():with_silent(),
-    -- go.nvim
-    ["n|gt"] = map_cmd("<ESC><Cmd>GoTestFunc -v -F<CR>"):with_noremap():with_silent(),
+	-- go.nvim
+	["n|gt"] = map_cmd("<ESC><Cmd>GoTestFunc -v -F<CR>"):with_noremap():with_silent(),
 	-- Plugin trouble
 	["n|gT"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
 	["n|gR"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(),
@@ -131,12 +131,12 @@ local plug_map = {
 	["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent(),
 	-- Plugin dap
 	["n|<F6>"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
-    ["n|<F7>"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap():with_silent(),
-    ["n|<F8>"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
-    ["n|<F9>"] = map_cr("lua require('dap').step_into()"):with_noremap():with_silent(),
-    ["n|<F10>"] = map_cr("lua require('dap').step_out()"):with_noremap():with_silent(),
-    ["n|<F11>"] = map_cr("lua require('dap').step_over()"):with_noremap():with_silent(),
-    ["n|<leader>db"] = map_cr("lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))")
+	["n|<F7>"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap():with_silent(),
+	["n|<F8>"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
+	["n|<F9>"] = map_cr("lua require('dap').step_into()"):with_noremap():with_silent(),
+	["n|<F10>"] = map_cr("lua require('dap').step_out()"):with_noremap():with_silent(),
+	["n|<F11>"] = map_cr("lua require('dap').step_over()"):with_noremap():with_silent(),
+	["n|<leader>db"] = map_cr("lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))")
 		:with_noremap()
 		:with_silent(),
 	["n|<leader>dc"] = map_cr("lua require('dap').run_to_cursor()"):with_noremap():with_silent(),
@@ -153,6 +153,10 @@ local plug_map = {
 	["n|td"] = map_cr("TodoTelescope"):with_noremap():with_silent(),
 	["n|<leader>pp"] = map_cu("Legendary"):with_silent():with_noremap(),
 	["n|<leader>pf"] = map_cu("Legendary functions"):with_silent():with_noremap(),
+
+	-- Plugin Tabout
+	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap(),
+	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)"):with_silent():with_noremap(),
 }
 
 bind.nvim_load_mapping(plug_map)

@@ -9,7 +9,7 @@ editor["RRethy/vim-illuminate"] = {
 }
 editor["terrortylor/nvim-comment"] = {
 	lazy = false,
-	event = "BufReadPost",
+	event = { "BufNewFile", "BufReadPre" },
 	config = conf.nvim_comment,
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
@@ -25,6 +25,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "andymass/vim-matchup" },
 		{ "windwp/nvim-ts-autotag", config = conf.autotag },
 		{ "NvChad/nvim-colorizer.lua", config = conf.nvim_colorizer },
+		{ "abecodes/tabout.nvim", config = conf.tabout },
 	},
 }
 

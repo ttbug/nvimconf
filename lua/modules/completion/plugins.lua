@@ -3,7 +3,7 @@ local conf = require("modules.completion.config")
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = "BufReadPre",
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = conf.nvim_lsp,
 	dependencies = {
 		{ "creativenull/efmls-configs-nvim" },
@@ -18,11 +18,7 @@ completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
 	event = "InsertEnter",
 	dependencies = {
-		{
-			"L3MON4D3/LuaSnip",
-			config = conf.luasnip,
-			dependencies = { "rafamadriz/friendly-snippets" },
-		},
+		{ "L3MON4D3/LuaSnip", config = conf.luasnip, dependencies = { "rafamadriz/friendly-snippets" } },
 		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip" },
@@ -34,13 +30,6 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
 		{ "windwp/nvim-autopairs", config = conf.autopairs },
-		-- {
-		-- 	"tzachar/cmp-tabnine",
-		-- 	run = "./install.sh",
-		-- 	after = "cmp-latex-symbols",
-		-- 	build = "./install.sh",
-		-- 	config = conf.tabnine,
-		-- },
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
@@ -51,7 +40,7 @@ completion["zbirenbaum/copilot.lua"] = {
 		{
 			"zbirenbaum/copilot-cmp",
 			config = function()
-				require("copilot_cmp").setup()
+				require("copilot_cmp").setup({})
 			end,
 		},
 	},

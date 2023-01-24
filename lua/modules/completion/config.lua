@@ -84,7 +84,7 @@ function config.lspsaga()
 			exec = "<CR>",
 			mark = "x",
 			confirm = "<CR>",
-			whole_project = true,
+			whole_project = false,
 			in_select = true,
 		},
 		outline = {
@@ -274,8 +274,8 @@ function config.cmp()
 					cmp.select_next_item()
 				elseif require("luasnip").expand_or_jumpable() then
 					vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
-				elseif has_words_before() then
-					cmp.complete()
+				--elseif has_words_before() then
+				--	cmp.complete()
 				else
 					fallback()
 				end

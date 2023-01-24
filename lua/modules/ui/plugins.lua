@@ -24,9 +24,9 @@ ui["rcarriga/nvim-notify"] = {
 	event = "VeryLazy",
 	config = conf.notify,
 }
-ui["hoob3rt/lualine.nvim"] = {
-    lazy = true,
-	event = "VeryLazy",
+ui["nvim-lualine/lualine.nvim"] = {
+	lazy = true,
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = conf.lualine,
 }
 ui["goolord/alpha-nvim"] = {
@@ -63,12 +63,12 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	config = conf.indent_blankline,
 }
 ui["akinsho/bufferline.nvim"] = {
-    lazy = true,
-	event = "VeryLazy",
+	lazy = true,
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = conf.nvim_bufferline,
 }
 ui["dstein64/nvim-scrollview"] = {
-    lazy = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.scrollview,
 }
