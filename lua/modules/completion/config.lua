@@ -84,7 +84,7 @@ function config.lspsaga()
 			exec = "<CR>",
 			mark = "x",
 			confirm = "<CR>",
-			whole_project = false,
+			--whole_project = false,
 			in_select = true,
 		},
 		outline = {
