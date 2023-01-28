@@ -14,7 +14,7 @@ local icons = {
 mason.setup({
 	ui = {
 		border = "rounded",
-        icons = {
+		icons = {
 			package_pending = icons.ui.Modified_alt,
 			package_installed = icons.ui.Check,
 			package_uninstalled = icons.misc.Ghost,
@@ -52,7 +52,7 @@ local function custom_attach(client, bufnr)
 		fix_pos = true,
 		hint_enable = true,
 		hi_parameter = "Search",
-        handler_opts = {
+		handler_opts = {
 			border = "rounded",
 		},
 	})
@@ -109,7 +109,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 			on_attach = custom_attach,
 			settings = {
 				Lua = {
-					diagnostics = { globals = { "vim", "packer_plugins" } },
+					diagnostics = { globals = { "vim" } },
 					workspace = {
 						library = {
 							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -303,3 +303,4 @@ efmls.setup({
 })
 
 formatting.configure_format_on_save()
+
