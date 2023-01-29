@@ -454,6 +454,7 @@ function config.lualine()
 		return ok and m.waiting and icons.misc.EscapeST or ""
 	end
 
+    local _cache = { context = "", bufnr = -1 }
 	local function lspsaga_symbols()
 		local exclude = {
 			["terminal"] = true,
@@ -465,14 +466,15 @@ function config.lualine()
 		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
 			return "" -- Excluded filetypes
 		else
+            local currbuf = vim.api.nvim_get_current_buf()
 			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
-			if ok then
-				if lspsaga:get_winbar() ~= nil then
-					return lspsaga:get_winbar()
-				else
-					return "" -- Cannot get node
-				end
+            if ok and lspsaga:get_winbar() ~= nil then
+				_cache.context = lspsaga:get_winbar()
+				_cache.bufnr = currbuf
+			elseif _cache.bufnr ~= currbuf then
+				_cache.context = "" -- Reset [invalid] cache (usually from another buffer)
 			end
+            return _cache.context
 		end
 	end
 
@@ -608,7 +610,8 @@ function config.lualine()
 
 	-- Properly set background color for lspsaga
 	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
-	for _, hlGroup in pairs(require("lspsaga.highlight").get_kind()) do
+    for _, hlGroup in pairs(require("lspsaga.highlight").get_kind()) do
+    --for _, hlGroup in pairs(require("lspsaga.lspkind").get_kind()) do
 		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
 	end
 	require("modules.utils").extend_hl("LspSagaWinbarSep", { bg = winbar_bg })

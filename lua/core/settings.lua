@@ -23,5 +23,8 @@ settings["colorscheme"] = "catppuccin"
 -- Available values are: `dark`, `light`.
 settings["background"] = "dark"
 
+-- Disable features that could affect performance when loading large files
+settings["load_big_files_faster"] = true
+
 return settings
 

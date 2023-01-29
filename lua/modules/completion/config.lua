@@ -405,6 +405,7 @@ function config.copilot()
 			},
 			filetypes = {
 				["dap-repl"] = false,
+                ["big_file_disabled_ft"] = false,
 				svn = false,
 				help = false,
 				["."] = false,

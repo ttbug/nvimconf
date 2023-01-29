@@ -68,7 +68,14 @@ function config.nvim_treesitter()
 		},
 		highlight = {
 			enable = true,
-			disable = { "vim" },
+            disable = function(ft, bufnr)
+				if vim.tbl_contains({ "vim" }, ft) then
+					return true
+				end
+
+				local ok, is_large_file = pcall(vim.api.nvim_buf_get_var, bufnr, "bigfile_disable_treesitter")
+				return ok and is_large_file
+			end,
 			additional_vim_regex_highlighting = { "c", "cpp" },
 		},
 		textobjects = {
@@ -461,13 +468,6 @@ function config.dap()
 	}
 end
 
-function config.dapinstal()
-	require("dap-install").setup({
-		installation_path = dap_dir,
-		verbosely_call_debuggers = false,
-	})
-end
-
 function config.dap_virtual_text()
 	require("nvim-dap-virtual-text").setup({
 		enabled = true,
@@ -512,51 +512,6 @@ function config.better_escape()
 		--   return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
 		-- end,
 	})
-end
-
-function config.illuminate()
-	-- Use background for "Visual" as highlight for words. Change this behavior here!
-	--if vim.api.nvim_get_hl_by_name("Visual", true).background then
-	--	local illuminate_bg = string.format("#%06x", vim.api.nvim_get_hl_by_name("Visual", true).background)
-
-	--	vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = illuminate_bg })
-	--	vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = illuminate_bg })
-	--	vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = illuminate_bg })
-	--end
-
-	require("illuminate").configure({
-		providers = {
-			"lsp",
-			"treesitter",
-			"regex",
-		},
-		delay = 100,
-		filetypes_denylist = {
-			"alpha",
-			"dashboard",
-			"DoomInfo",
-			"fugitive",
-			"help",
-			"norg",
-			"NvimTree",
-			"Outline",
-			"packer",
-			"toggleterm",
-		},
-		under_cursor = false,
-	})
-end
-
-function config.nvim_comment()
-	require("nvim_comment").setup({
-		hook = function()
-			require("ts_context_commentstring.internal").update_commentstring()
-		end,
-	})
-end
-
-function config.hop()
-	require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 end
 
 function config.fterm()
@@ -636,6 +591,39 @@ function config.tabout()
 		},
 		ignore_beginning = true, --if the cursor is at the beginning of a filled element it will rather tab out than shift the content
 		exclude = {}, -- tabout will ignore these filetypes
+	})
+end
+
+function config.bigfile()
+    local ftdetect = {
+		name = "ftdetect",
+		opts = { defer = true },
+		disable = function()
+            vim.api.nvim_set_option_value("filetype", "big_file_disabled_ft", { scope = "local" })
+		end,
+	}
+
+	local cmp = {
+		name = "nvim-cmp",
+		opts = { defer = true },
+		disable = function()
+			require("cmp").setup.buffer({ enabled = false })
+		end,
+	}
+
+	require("bigfile").config({
+		filesize = 1, -- size of the file in MiB
+		pattern = { "*" }, -- autocmd pattern
+		features = { -- features to disable
+			"indent_blankline",
+			"lsp",
+			"illuminate",
+			"treesitter",
+			"syntax",
+			"vimopts",
+            ftdetect,
+			cmp,
+		},
 	})
 end
 
