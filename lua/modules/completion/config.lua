@@ -40,12 +40,14 @@ function config.lspsaga()
 			scroll_up = "<C-k>",
 		},
 		request_timeout = 3000,
-		finder = {
+		keys = {
+			jump_to = "e",
 			edit = { "o", "<CR>" },
 			vsplit = "s",
 			split = "i",
 			tabe = "t",
 			quit = { "q", "<ESC>" },
+			close_in_preview = "<ESC>",
 		},
 		definition = {
 			edit = "<C-c>o",
@@ -71,8 +73,9 @@ function config.lspsaga()
 		},
 		diagnostic = {
 			show_code_action = false,
+			border_follow = true,
 			show_source = true,
-            jump_num_shortcut = true,
+			jump_num_shortcut = true,
 			keys = {
 				exec_action = "<CR>",
 				quit = "q",
@@ -84,7 +87,7 @@ function config.lspsaga()
 			mark = "x",
 			confirm = "<CR>",
 			--whole_project = false,
-            exec = "<CR>",
+			exec = "<CR>",
 			in_select = false,
 		},
 		outline = {
@@ -109,7 +112,7 @@ function config.lspsaga()
 			show_file = false,
 			color_mode = true,
 		},
-        beacon = {
+		beacon = {
 			enable = true,
 			frequency = 12,
 		},
@@ -130,7 +133,7 @@ function config.lspsaga()
 				Constant = { icons.kind.Constant, colors.peach },
 				Constructor = { icons.kind.Constructor, colors.sapphire },
 				Enum = { icons.kind.Enum, colors.yellow },
-                EnumMember = { icons.kind.EnumMember, colors.teal },
+				EnumMember = { icons.kind.EnumMember, colors.teal },
 				Event = { icons.kind.Event, colors.yellow },
 				Field = { icons.kind.Field, colors.teal },
 				File = { icons.kind.File, colors.rosewater },
@@ -201,7 +204,7 @@ function config.cmp()
 	end
 
 	local compare = require("cmp.config.compare")
-    compare.lsp_scores = function(entry1, entry2)
+	compare.lsp_scores = function(entry1, entry2)
 		local diff
 		if entry1.completion_item.score and entry2.completion_item.score then
 			diff = (entry2.completion_item.score * entry2.score) - (entry1.completion_item.score * entry1.score)
@@ -307,7 +310,7 @@ function config.cmp()
 end
 
 function config.luasnip()
-    local snippet_path = vim.fn.stdpath("config") .. "/my-snippets/"
+	local snippet_path = vim.fn.stdpath("config") .. "/my-snippets/"
 	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
 		vim.opt.rtp:append(snippet_path)
 	end
@@ -399,7 +402,7 @@ function config.copilot()
 			},
 			filetypes = {
 				["dap-repl"] = false,
-                ["big_file_disabled_ft"] = false,
+				["big_file_disabled_ft"] = false,
 				svn = false,
 				help = false,
 				["."] = false,

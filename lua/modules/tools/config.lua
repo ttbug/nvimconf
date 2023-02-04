@@ -1,7 +1,6 @@
 local config = {}
 
 function config.telescope()
-
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
 
@@ -10,7 +9,6 @@ function config.telescope()
 			initial_mode = "insert",
 			prompt_prefix = " " .. icons.ui.Telescope .. " ",
 			selection_caret = icons.ui.ChevronRight,
-			entry_prefix = " ",
 			scroll_strategy = "limit",
 			results_title = false,
 			layout_strategy = "horizontal",
@@ -156,7 +154,7 @@ function config.sniprun()
 		interpreter_options = {}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
 		display = {
-            "LongTempFloatingWindowOk", -- display ok results in the long floating window
+			"LongTempFloatingWindowOk", -- display ok results in the long floating window
 			"NvimNotifyErr", -- display err results with the nvim-notify plugin
 			-- "Classic", -- display results in the command line"
 			-- "VirtualText", -- display results in virtual text"
@@ -164,7 +162,7 @@ function config.sniprun()
 			-- "Terminal" -- display results in a vertical split
 			-- "TerminalWithCode" -- display results and code history in a vertical split
 		},
-        display_options = {
+		display_options = {
 			terminal_width = 45,
 			notification_timeout = 5000,
 		},
@@ -317,7 +315,7 @@ function config.legendary()
 
 			d = {
 				name = "Dap commands",
-                b = "debug: Set breakpoint with condition",
+				b = "debug: Set breakpoint with condition",
 				c = "debug: Run to cursor",
 				l = "debug: Run last",
 				o = "debug: Open repl",
@@ -380,7 +378,7 @@ function config.legendary()
 				w = "lsp: Show workspace diagnostics",
 				q = "lsp: Show quickfix list",
 				l = "lsp: Show loclist",
-                r = "lsp: Show lsp references",
+				r = "lsp: Show lsp references",
 			},
 		},
 		["g"] = {
@@ -389,7 +387,7 @@ function config.legendary()
 			D = "lsp: Goto definition",
 			h = "lsp: Show reference",
 			o = "lsp: Toggle outline",
-            r = "lsp: Rename in file range",
+			r = "lsp: Rename in file range",
 			R = "lsp: Rename in project range",
 			s = "lsp: Signature help",
 			t = "lsp: Toggle trouble list",
@@ -400,7 +398,7 @@ function config.legendary()
 				l = "git: Pull",
 			},
 		},
-        ["<F6>"] = "debug: Run/Continue",
+		["<F6>"] = "debug: Run/Continue",
 		["<F7>"] = "debug: Terminate debug session",
 		["<F8>"] = "debug: Toggle breakpoint",
 		["<F9>"] = "debug: Step into",
