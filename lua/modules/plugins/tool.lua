@@ -108,11 +108,17 @@ tool["mfussenegger/nvim-dap"] = {
 }
 
 tool["aspeddro/gitui.nvim"] = {
-        lazy = false,
+	lazy = false,
+	config = function()
+		require("gitui").setup({})
+	end,
 }
 
 tool["ttbug/tig.nvim"] = {
-        lazy = false,
+	lazy = false,
+	config = function()
+		require("tig").setup({})
+	end,
 }
 
 return tool
