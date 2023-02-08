@@ -23,7 +23,7 @@ return function()
 		view = {
 			adaptive_size = false,
 			centralize_selection = false,
-			width = 30,
+			width = 25,
 			side = "left",
 			preserve_window_proportions = false,
 			number = false,
@@ -121,7 +121,7 @@ return function()
 				global = false,
 			},
 			open_file = {
-				quit_on_open = false,
+				quit_on_open = true, -- 打开文件后自动关闭侧边栏
 				resize_window = false,
 				window_picker = {
 					enable = true,
