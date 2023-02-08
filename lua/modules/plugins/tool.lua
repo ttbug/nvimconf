@@ -107,11 +107,11 @@ tool["mfussenegger/nvim-dap"] = {
 	},
 }
 
-tools["aspeddro/gitui.nvim"] = {
+tool["aspeddro/gitui.nvim"] = {
         lazy = false,
 }
 
-tools["ttbug/tig.nvim"] = {
+tool["ttbug/tig.nvim"] = {
         lazy = false,
 }
 

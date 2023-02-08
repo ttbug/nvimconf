@@ -110,8 +110,8 @@ return function()
 		},
 		ignore_ft_on_setup = {},
 		filters = {
-			dotfiles = false,
-			custom = { ".DS_Store" },
+			dotfiles = true,
+			custom = { ".DS_Store", ".git", ".vscode", ".idea" },
 			exclude = {},
 		},
 		actions = {
