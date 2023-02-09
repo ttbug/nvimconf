@@ -1,11 +1,12 @@
 local lang = {}
 
 lang["ray-x/go.nvim"] = {
-        lazy = true,
-        build = ":GoInstallBinaries",
-        ft = "go",
-        -- event = "BufReadPost",
+	lazy = true,
+	build = ":GoInstallBinaries",
+	ft = "go",
+	-- event = "BufReadPost",
 	config = require("lang.vim-go"),
+	dependencies = { "ray-x/guihua.lua" },
 }
 
 lang["simrat39/rust-tools.nvim"] = {
