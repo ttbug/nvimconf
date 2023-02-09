@@ -109,7 +109,7 @@ function pbind.nvim_load_mapping(mapping)
 			local rhs = value.cmd
 			local options = value.options
 			local buf = value.buffer
-			if buf then
+			if buf and type(buf) == "number" then
 				vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
 			else
 				vim.api.nvim_set_keymap(mode, keymap, rhs, options)
@@ -119,3 +119,4 @@ function pbind.nvim_load_mapping(mapping)
 end
 
 return pbind
+

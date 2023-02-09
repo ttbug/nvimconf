@@ -9,6 +9,13 @@ lang["ray-x/go.nvim"] = {
 	dependencies = { "ray-x/guihua.lua" },
 }
 
+lang["Saecki/crates.nvim"] = {
+	lazy = true,
+	event = "BufReadPost Cargo.toml",
+	config = require("lang.crates"),
+	dependencies = { "nvim-lua/plenary.nvim" },
+}
+
 lang["simrat39/rust-tools.nvim"] = {
 	lazy = true,
 	ft = "rust",

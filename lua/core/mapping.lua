@@ -4,7 +4,7 @@ local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 
 -- default map
-local def_map = {
+local core_map = {
 	-- Vim map
 	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("editn: Toggle code fold"),
 	["n|<C-s>"] = map_cu("write"):with_noremap():with_silent():with_desc("editn: Save file"),
@@ -55,4 +55,5 @@ local def_map = {
 	["v|>"] = map_cmd(">gv"):with_desc("editv: Increase indent"),
 }
 
-bind.nvim_load_mapping(def_map)
+bind.nvim_load_mapping(core_map)
+
