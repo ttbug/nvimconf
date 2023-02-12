@@ -39,7 +39,7 @@ return function()
 			"efm",
 			"gopls",
 			"pyright",
-			"sumneko_lua",
+			-- "sumneko_lua",
 		},
 	})
 
@@ -102,7 +102,7 @@ return function()
 		end,
 
 		sumneko_lua = function()
-			local _opts = require("completion.servers.sumneko_lua")
+			local _opts = require("completion.servers.sumnekolua")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 			nvim_lsp.sumneko_lua.setup(final_opts)
 		end,

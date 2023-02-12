@@ -26,7 +26,7 @@ editor["ojroques/nvim-bufdel"] = {
 }
 editor["rhysd/clever-f.vim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("editor.cleverf"),
 }
 editor["numToStr/Comment.nvim"] = {
