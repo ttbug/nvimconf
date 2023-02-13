@@ -27,6 +27,16 @@ return function()
 		-- will happen on startup. You can use `:MasonToolsUpdate` to install
 		-- tools and check for updates.
 		-- Default: true
-		run_on_start = true,
+		run_on_start = false,
+	})
+
+    vim.api.nvim_create_autocmd("User", {
+		pattern = "MasonToolsUpdateCompleted",
+		callback = function()
+			vim.schedule(function()
+				print("mason-tool-installer has finished")
+				vim.notify("mason-tool-installer has finished!", vim.log.levels.INFO, { title = "MasonToolsInstaller" })
+			end)
+		end,
 	})
 end
