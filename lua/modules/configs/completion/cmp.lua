@@ -124,6 +124,7 @@ return function()
 			{ name = "luasnip" },
 			{ name = "path" },
 			{ name = "spell" },
+			{ name = "treesitter" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
 			{ name = "buffer" },
