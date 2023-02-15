@@ -131,6 +131,7 @@ return function()
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
 			-- { name = "cmp_tabnine" },
+			-- { name = "codeium" },
 		},
 	})
 end
