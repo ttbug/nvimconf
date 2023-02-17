@@ -4,9 +4,14 @@ lang["ray-x/go.nvim"] = {
 	lazy = true,
 	build = ":GoInstallBinaries",
 	ft = "go",
+	event = { "CmdwinEnter", "CmdlineEnter" },
 	-- event = "BufReadPost",
 	config = require("lang.vim-go"),
-	dependencies = { "ray-x/guihua.lua" },
+}
+
+lang["ray-x/guihua.lua"] = {
+	lazy = true,
+	build = "cd lua/fzy && make",
 }
 
 lang["Saecki/crates.nvim"] = {

@@ -70,7 +70,7 @@ local plug_map = {
 	["t|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
 
 	-- Plugin: trouble
-	["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
+	--["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
 	["n|<leader>tr"] = map_cr("TroubleToggle lsp_references")
 		:with_noremap()
 		:with_silent()
