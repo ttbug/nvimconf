@@ -89,6 +89,12 @@ return function()
 			nvim_lsp.gopls.setup(final_opts)
 		end,
 
+		html = function()
+			local _opts = require("completion.servers.html")
+			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
+			nvim_lsp.html.setup(final_opts)
+		end,
+
 		jsonls = function()
 			local _opts = require("completion.servers.jsonls")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
