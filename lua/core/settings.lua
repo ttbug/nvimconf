@@ -38,6 +38,7 @@ settings["lsp"] = {
 	"clangd",
 	"gopls",
 	"html",
+	"jsonls",
 	"lua_ls",
 	"pyright",
 }
@@ -58,6 +59,7 @@ settings["null_ls"] = {
 	"shfmt",
 	"stylua",
 	"gofumpt",
+	"goimports",
 
 	-- diagnostics
 	"shellcheck",
