@@ -1,6 +1,7 @@
 return function()
 	require("modules.utils").gen_lspkind_hl()
 	local icons = {
+		cmp = require("modules.utils.icons").get("cmp", true),
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
 		kind = require("modules.utils.icons").get("kind", true),
 		type = require("modules.utils.icons").get("type", true),
@@ -71,6 +72,7 @@ return function()
 			on_insert_follow = false,
 			show_code_action = true,
 			show_source = true,
+			show_virt_line = true,
 			border_follow = true,
 			jump_num_shortcut = true,
 			keys = {
@@ -118,21 +120,22 @@ return function()
 			code_action = icons.ui.CodeAction,
 			incoming = icons.ui.Incoming,
 			outgoing = icons.ui.Outgoing,
+			diagnostic = " " .. icons.cmp.nvim_lsp,
 			kind = {
 				-- Kind
 				Class = { icons.kind.Class, "LspKindClass" },
 				Constant = { icons.kind.Constant, "LspKindConstant" },
-				Constructor = { icons.kind.Constructor, "LspKindConstructor" },
+				--Constructor = { icons.kind.Constructor, "LspKindConstructor" },
 				Enum = { icons.kind.Enum, "LspKindEnum" },
 				EnumMember = { icons.kind.EnumMember, "LspKindEnumMember" },
 				Event = { icons.kind.Event, "LspKindEvent" },
 				Field = { icons.kind.Field, "LspKindField" },
 				File = { icons.kind.File, "LspKindFile" },
 				Function = { icons.kind.Function, "LspKindFunction" },
-				Interface = { icons.kind.Interface, "LspKindInterface" },
+				--Interface = { icons.kind.Interface, "LspKindInterface" },
 				Key = { icons.kind.Keyword, "LspKindKey" },
 				Method = { icons.kind.Method, "LspKindMethod" },
-				Module = { icons.kind.Module, "LspKindModule" },
+				--Module = { icons.kind.Module, "LspKindModule" },
 				Namespace = { icons.kind.Namespace, "LspKindNamespace" },
 				Number = { icons.kind.Number, "LspKindNumber" },
 				Operator = { icons.kind.Operator, "LspKindOperator" },
