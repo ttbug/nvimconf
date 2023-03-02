@@ -135,4 +135,16 @@ tool["ttbug/tig.nvim"] = {
 	end,
 }
 
+tool["mrjones2014/smart-splits.nvim"] = {
+	lazy = false,
+	config = require("tool.smart-splits"),
+}
+
+tool["kwkarlwang/bufresize.nvim"] = {
+	lazy = false,
+	config = function()
+		require("bufresize").setup()
+	end,
+}
+
 return tool

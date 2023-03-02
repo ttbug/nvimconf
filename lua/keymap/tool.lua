@@ -211,6 +211,11 @@ local plug_map = {
 	["n|<leader>j"] = map_cr("%!python -m json.tool --no-ensure-ascii"):with_noremap():with_silent(),
 	["n|<leader>pp"] = map_cu("Legendary"):with_silent():with_noremap(),
 	["n|<leader>pf"] = map_cu("Legendary functions"):with_silent():with_noremap(),
+	-- smart-splits
+	["n|<A-h>"] = map_cu("SmartResizeUp"):with_silent():with_noremap(),
+	["n|<A-j>"] = map_cu("SmartResizeDown"):with_silent():with_noremap(),
+	["n|<A-k>"] = map_cu("SmartResizeLeft"):with_silent():with_noremap(),
+	["n|<A-l>"] = map_cu("SmartResizeRight"):with_silent():with_noremap(),
 }
 
 bind.nvim_load_mapping(plug_map)
