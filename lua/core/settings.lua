@@ -30,10 +30,24 @@ settings["colorscheme"] = "catppuccin-mocha"
 -- Available values are: `dark`, `light`.
 settings["background"] = "dark"
 
+-- Filetypes in this list will skip lsp formatting if rhs is true
+---@type table<string, boolean>
+settings["formatter_block_list"] = {
+	lua = false, -- example
+}
+
+-- Servers in this list will skip setting formatting capabilities if rhs is true
+---@type table<string, boolean>
+settings["server_formatting_block_list"] = {
+	lua_ls = true,
+	tsserver = true,
+	clangd = true,
+}
+
 -- Set the desired LSPs here.
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
-settings["lsp"] = {
+settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
 	"gopls",
@@ -47,23 +61,19 @@ settings["lsp"] = {
 -- check the below link for all supported non-LSP sources
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
-settings["null_ls"] = {
+settings["null_ls_deps"] = {
 	-- formatting
 	"black",
 	"clang_format",
-	"eslint_d",
-	"jq",
-	"markdownlint",
-	"prettierd",
+	"editorconfig_checker",
+	"prettier",
 	"rustfmt",
 	"shfmt",
 	"stylua",
 	"gofumpt",
 	"goimports",
 
-	-- diagnostics
-	"shellcheck",
-	-- "markdownlint",
+	"vint",
 }
 
 return settings
