@@ -141,10 +141,18 @@ tool["mrjones2014/smart-splits.nvim"] = {
 }
 
 tool["kwkarlwang/bufresize.nvim"] = {
-	lazy = false,
+	lazy = true,
 	config = function()
 		require("bufresize").setup()
 	end,
+}
+
+tool["folke/todo-comments.nvim"] = {
+	lazy = false,
+	dependencies = {
+		{ "nvim-lua/plenary.nvim" },
+	},
+	config = require("tool.todo-comments"),
 }
 
 return tool
