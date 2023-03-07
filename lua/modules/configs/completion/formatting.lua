@@ -43,13 +43,13 @@ function M.enable_format_on_save(is_configured)
 		end,
 	})
 	-- Run gofmt + goimport on save
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		pattern = "*.go",
-		callback = function()
-			require("go.format").goimport()
-		end,
-		group = "format_on_save",
-	})
+	--vim.api.nvim_create_autocmd("BufWritePre", {
+	--	pattern = "*.go",
+	--	callback = function()
+	--		require("go.format").goimport()
+	--	end,
+	--	group = "format_on_save",
+	--})
 
 	if not is_configured then
 		vim.notify(

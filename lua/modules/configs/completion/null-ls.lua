@@ -28,6 +28,8 @@ return function()
 				"markdown",
 			},
 		}),
+		btns.formatting.gofumpt,
+		btns.formatting.goimports,
 	}
 
 	null_ls.setup({
