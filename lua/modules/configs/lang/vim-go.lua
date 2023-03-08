@@ -8,7 +8,7 @@ return function()
 		dap_debug_vt = true,
 		dap_debug_gui = true,
 		test_runner = "go", -- richgo, go test, richgo, dlv, ginkgo
-		-- run_in_floaterm = true, -- set to true to run in float window.
+		run_in_floaterm = true, -- set to true to run in float window.
 		lsp_document_formatting = false,
 		luasnip = true,
 		-- lsp_on_attach = require("navigator.lspclient.attach").on_attach,

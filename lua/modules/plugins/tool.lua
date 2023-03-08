@@ -147,12 +147,4 @@ tool["kwkarlwang/bufresize.nvim"] = {
 	end,
 }
 
-tool["folke/todo-comments.nvim"] = {
-	lazy = false,
-	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
-	},
-	config = require("tool.todo-comments"),
-}
-
 return tool
