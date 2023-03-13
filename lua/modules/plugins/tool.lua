@@ -121,6 +121,13 @@ tool["mfussenegger/nvim-dap"] = {
 	},
 }
 
+tool["theHamsta/nvim-dap-virtual-text"] = {
+	lazy = true,
+	config = function()
+		require("nvim-dap-virtual-text").setup()
+	end,
+}
+
 tool["aspeddro/gitui.nvim"] = {
 	lazy = false,
 	config = function()
