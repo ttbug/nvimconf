@@ -2,11 +2,16 @@ local lang = {}
 
 lang["ray-x/go.nvim"] = {
 	lazy = true,
-	build = ":GoInstallBinaries",
-	ft = "go",
-	event = { "CmdwinEnter", "CmdlineEnter" },
+	ft = { "go", "gomod" },
+	event = { "CmdlineEnter" },
 	-- event = "BufReadPost",
 	config = require("lang.vim-go"),
+	dependencies = { -- optional packages
+		"ray-x/guihua.lua",
+		"neovim/nvim-lspconfig",
+		"nvim-treesitter/nvim-treesitter",
+	},
+	build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 }
 
 lang["ray-x/guihua.lua"] = {

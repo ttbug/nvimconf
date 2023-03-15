@@ -123,6 +123,13 @@ tool["theHamsta/nvim-dap-virtual-text"] = {
 	end,
 }
 
+tool["leoluz/nvim-dap-go"] = {
+	lazy = true,
+	config = function()
+		require("dap-go").setup()
+	end,
+}
+
 tool["aspeddro/gitui.nvim"] = {
 	lazy = false,
 	config = function()

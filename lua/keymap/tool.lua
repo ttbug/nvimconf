@@ -170,7 +170,7 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step out"),
-	["n|<F11>"] = map_callback(function()
+	["n|<F3>"] = map_callback(function()
 			require("dap").step_over()
 		end)
 		:with_noremap()
