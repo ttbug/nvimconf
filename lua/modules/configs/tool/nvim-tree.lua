@@ -17,7 +17,7 @@ return function()
 		ignore_buffer_on_setup = false,
 		open_on_setup = false,
 		open_on_setup_file = false,
-		open_on_tab = false,
+		open_on_tab = true,
 		sort_by = "name",
 		sync_root_with_cwd = true,
 		view = {
@@ -124,7 +124,7 @@ return function()
 				quit_on_open = true, -- 打开文件后自动关闭侧边栏
 				resize_window = false,
 				window_picker = {
-					enable = true,
+					enable = false,
 					chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 					exclude = {
 						filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
