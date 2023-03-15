@@ -57,7 +57,6 @@ return function()
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
 	local function mason_handler(lsp_name)
-		---Check whether this server has custom configs
 		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
@@ -84,6 +83,8 @@ return function()
 	end
 
 	mason_lspconfig.setup_handlers({ mason_handler })
+
+	-- Set lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
 	if vim.fn.executable("dart") then
 		local _opts = require("completion.servers.dartls")
 		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)

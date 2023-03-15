@@ -60,6 +60,7 @@ local function load_options()
 		ruler = true,
 		scrolloff = 2,
 		sessionoptions = "curdir,help,tabpages,winsize",
+		shada = "!,'300,<50,@100,s10,h",
 		shiftround = true,
 		shiftwidth = 4,
 		shortmess = "aoOTIcF",
@@ -81,12 +82,13 @@ local function load_options()
 		tabstop = 4,
 		termguicolors = true,
 		timeout = true,
-		ttimeout = true,
 		-- You will feel delay when you input <Space> at lazygit interface if you set it a positive value like 300(ms).
 		timeoutlen = 0,
+		ttimeout = true,
 		ttimeoutlen = 0,
 		undodir = global.cache_dir .. "undo/",
 		undofile = true,
+		-- Please do NOT set `updatetime` to above 500, otherwise most plugins may not work correctly
 		updatetime = 200,
 		viewoptions = "folds,cursor,curdir,slash,unix",
 		virtualedit = "block",

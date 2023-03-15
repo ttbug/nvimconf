@@ -47,7 +47,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
-		--vim.api.nvim_set_keymap("n", "q", "<CMD>close<CR>", { buffer = event.buf, silent = true })
 		vim.api.nvim_buf_set_keymap(event.buf, "n", "q", "<CMD>close<CR>", { silent = true })
 	end,
 })
@@ -146,4 +145,3 @@ function autocmd.load_autocmds()
 end
 
 autocmd.load_autocmds()
-

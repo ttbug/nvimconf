@@ -126,15 +126,15 @@ return function()
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
-			{ name = "spell" },
 			{ name = "treesitter" },
+			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
 			{ name = "buffer" },
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
-			-- { name = "cmp_tabnine" },
 			-- { name = "codeium" },
+			-- { name = "cmp_tabnine" },
 		},
 	})
 end
