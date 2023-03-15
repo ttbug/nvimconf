@@ -63,3 +63,5 @@ dap.configurations.go = {
 		program = "./${relativeFileDirname}",
 	},
 }
+
+dap.continue()
