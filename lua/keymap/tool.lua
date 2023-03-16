@@ -200,6 +200,13 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Open REPL"),
+	-- nvim-dap-go
+	["n|<leader>dt"] = map_callback(function()
+			require("dap-go").debug_test()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: go test current func"),
 	["n|<leader>g"] = map_cr("Gitui"):with_noremap():with_silent(),
 	["t|<leader>g"] = map_cmd("<Esc><Cmd>Gitui<CR>"):with_noremap():with_silent(),
 	["n|<F4>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
