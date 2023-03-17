@@ -94,7 +94,7 @@ function M.format_filter(clients)
 			return client.supports_method("textDocument/formatting")
 		end)
 		if status_ok and formatting_supported and client.name == "null-ls" then
-			return "null-ls"
+			return client.name
 		elseif not server_formatting_block_list[client.name] and status_ok and formatting_supported then
 			return client.name
 		end
