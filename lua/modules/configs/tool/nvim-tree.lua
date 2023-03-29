@@ -106,7 +106,7 @@ return function()
 		update_focused_file = {
 			enable = true,
 			update_root = true,
-			ignore_list = { "toggleterm", "notfile", "quickfix", "terminal", "guihua", "floatterm" },
+			ignore_list = { "toggleterm", "notfile", "quickfix", "terminal", "guihua", "floatterm", "gitui", "tig" },
 		},
 		ignore_ft_on_setup = {},
 		filters = {

@@ -1,9 +1,9 @@
 local tool = {}
 
-tool["tpope/vim-fugitive"] = {
-	lazy = true,
-	cmd = { "Git", "G" },
-}
+--tool["tpope/vim-fugitive"] = {
+--	lazy = true,
+--	cmd = { "Git", "G" },
+--}
 -- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 tool["folke/which-key.nvim"] = {
 	lazy = true,
