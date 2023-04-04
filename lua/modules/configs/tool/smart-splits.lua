@@ -46,8 +46,8 @@ return function()
 			"WinEnter",
 		},
 		-- enable or disable the tmux integration
-		tmux_integration = true,
+		multiplexer_integration = "tmux",
 		-- disable tmux navigation if current tmux pane is zoomed
-		disable_tmux_nav_when_zoomed = true,
+		disable_multiplexer_nav_when_zoomed = true,
 	})
 end
