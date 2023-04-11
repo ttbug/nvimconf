@@ -122,6 +122,7 @@ return function()
 					symbol_map = kind_map,
 				})(entry, vim_item)
 				-- local strings = vim.split(kind.kind, "%s", { trimempty = true })
+				--vim.notify_once(entry.source.name)
 				kind.menu = "  ⟬ " .. kind.kind .. " ⟭"
 				kind.kind = " " .. kind_map[entry.source.name] .. " "
 				return kind
