@@ -113,14 +113,11 @@ local clipboard_config = function()
 end
 
 local load_core = function()
-	--local pack = require("core.pack")
 	createdir()
 	disable_distribution_plugins()
 	leader_map()
 
-	--pack.ensure_plugins()
 	neovide_config()
-	--check_conda()
 	-- 共享系统粘贴板功能
 	--clipboard_config()
 
