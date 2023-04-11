@@ -100,7 +100,7 @@ local data = {
 		Keyboard = "",
 		Left = "",
 		List = "",
-		Square = "",
+		Square = "",
 		SymlinkFolder = "",
 		Lock = "",
 		Modified = "✥",
@@ -115,7 +115,7 @@ local data = {
 		Play = "",
 		Project = "",
 		Right = "",
-		RootFolderOpened = "",
+		RootFolderOpened = "",
 		Search = "",
 		Separator = "",
 		DoubleSeparator = "",
@@ -160,6 +160,8 @@ local data = {
 		Vim = "",
 	},
 	cmp = {
+		Codeium = "",
+		TabNine = "",
 		Copilot = "",
 		Copilot_alt = "",
 		nvim_lsp = "",
@@ -188,7 +190,7 @@ local data = {
 }
 
 ---Get a specific icon set.
----@param category string|"kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"
+---@param category "kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"
 ---@param add_space? boolean @Add trailing space after the icon.
 function icons.get(category, add_space)
 	if add_space then
