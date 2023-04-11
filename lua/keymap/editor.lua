@@ -96,6 +96,9 @@ local plug_map = {
 	["n|<C-l>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
 	["n|<C-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent(),
 	["n|<C-^>"] = map_cr(":bd"):with_noremap():with_silent(),
+
+	-- Plugin suda.vim
+	["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
 }
 
 bind.nvim_load_mapping(plug_map)

@@ -14,9 +14,6 @@ return function()
 		hijack_cursor = true,
 		hijack_netrw = true,
 		hijack_unnamed_buffer_when_opening = true,
-		ignore_buffer_on_setup = false,
-		open_on_setup = false,
-		open_on_setup_file = false,
 		open_on_tab = true,
 		sort_by = "name",
 		sync_root_with_cwd = true,
@@ -108,7 +105,6 @@ return function()
 			update_root = true,
 			ignore_list = { "toggleterm", "notfile", "quickfix", "terminal", "guihua", "floatterm", "gitui", "tig" },
 		},
-		ignore_ft_on_setup = {},
 		filters = {
 			dotfiles = true,
 			custom = { ".DS_Store", ".git", ".vscode", ".idea" },
