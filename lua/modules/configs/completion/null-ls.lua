@@ -32,62 +32,62 @@ return function()
 		btns.formatting.goimports,
 	}
 
-	local warn_TODO = {
-		name = "no-todo",
-		method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-		-- stylua: ignore start
-		filetypes = {
-			"go",
-			"py",
-			"lua",
-			"sh",
-			"java",
-			"js",
-			"ts",
-			"tsx",
-			"jsx",
-			"html",
-			"css",
-			"scss",
-			"json",
-			"yaml",
-			"toml",
-		},
-		generator = {
-			fn = function(params)
-				local diag = {}
-				-- sources have access to a params object
-				-- containing info about the current file and editor state
-				for i, line in ipairs(params.content) do
-					if line then
-						local f = vim.fn.matchstrpos(line, "\\v(todo)|(fixme)|(xxx)|(\\<fix\\>)|(hack)")
-						local col, end_col = f[2], f[3]
-						if col and end_col >= 0 then
-							vim.notify(
-								string.format("found todo in line %d", i),
-								vim.log.levels.INFO,
-								{ title = "TODO Checker!" }
-							)
-							-- lprint("found", col, end_col)
-							-- null-ls fills in undefined positions
-							-- and converts source diagnostics into the required format
-							table.insert(diag, {
-								row = i,
-								col = col,
-								end_col = end_col + 1,
-								source = "no-todo",
-								message = "just do it",
-								severity = vim.diagnostic.severity.INFO,
-							})
-						end
-					end
-				end
-				return diag
-			end,
-		},
-	}
+	--local warn_TODO = {
+	--	name = "no-todo",
+	--	method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+	--	-- stylua: ignore start
+	--	filetypes = {
+	--		"go",
+	--		"py",
+	--		"lua",
+	--		"sh",
+	--		"java",
+	--		"js",
+	--		"ts",
+	--		"tsx",
+	--		"jsx",
+	--		"html",
+	--		"css",
+	--		"scss",
+	--		"json",
+	--		"yaml",
+	--		"toml",
+	--	},
+	--	generator = {
+	--		fn = function(params)
+	--			local diag = {}
+	--			-- sources have access to a params object
+	--			-- containing info about the current file and editor state
+	--			for i, line in ipairs(params.content) do
+	--				if line then
+	--					local f = vim.fn.matchstrpos(line, "\\v(todo)|(fixme)|(xxx)|(\\<fix\\>)|(hack)")
+	--					local col, end_col = f[2], f[3]
+	--					if col and end_col >= 0 then
+	--						vim.notify(
+	--							string.format("found todo in line %d", i),
+	--							vim.log.levels.INFO,
+	--							{ title = "TODO Checker!" }
+	--						)
+	--						-- lprint("found", col, end_col)
+	--						-- null-ls fills in undefined positions
+	--						-- and converts source diagnostics into the required format
+	--						table.insert(diag, {
+	--							row = i,
+	--							col = col,
+	--							end_col = end_col + 1,
+	--							source = "no-todo",
+	--							message = "just do it",
+	--							severity = vim.diagnostic.severity.INFO,
+	--						})
+	--					end
+	--				end
+	--			end
+	--			return diag
+	--		end,
+	--	},
+	--}
 	-- stylua: ignore end
-	table.insert(sources, warn_TODO)
+	-- table.insert(sources, warn_TODO)
 	if vim.o.ft == "go" then
 		table.insert(sources, require("go.null_ls").gotest())
 		table.insert(sources, require("go.null_ls").golangci_lint())

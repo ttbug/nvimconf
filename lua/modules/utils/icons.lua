@@ -29,6 +29,7 @@ local data = {
 		TypeParameter = "",
 		Unit = "",
 		Undefinded = "",
+		undefinded = "",
 		Value = "",
 		Variable = "",
 		-- ccls-specific icons.
@@ -169,6 +170,7 @@ local data = {
 		-- User needs to add a icon according to the source after adding it.
 		-- sources
 		Undefinded = "",
+		undefinded = "",
 		buffer = "",
 		cmp_tabnine = "",
 		codeium = "",

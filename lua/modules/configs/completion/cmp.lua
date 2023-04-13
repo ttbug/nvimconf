@@ -41,22 +41,19 @@ return function()
 		return (diff < 0)
 	end
 
-	local function cmp_kind(opts)
-		if opts == nil then
-			opts = {}
-		end
+	local function cmp_format(opts)
+		opts = opts or {}
 
 		return function(entry, vim_item)
 			if opts.before then
 				vim_item = opts.before(entry, vim_item)
 			end
 
-			local symbol = opts.symbol_map[vim_item.kind]
-			vim_item.kind = string.format("%s %s", symbol, vim_item.kind)
+			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
+			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.undefined
 
-			if opts.menu ~= nil then
-				vim_item.menu = opts.menu[entry.source.name]
-			end
+			vim_item.menu = " " .. source_symbol .. "  |"
+			vim_item.kind = string.format("  ⟬ %s %s ⟭", kind_symbol, vim_item.kind)
 
 			if opts.maxwidth ~= nil then
 				if opts.ellipsis_char == nil then
@@ -103,17 +100,13 @@ return function()
 			},
 		},
 		formatting = {
-			fields = { "kind", "abbr", "menu" },
+			fields = { "menu", "abbr", "kind" },
 			format = function(entry, vim_item)
 				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
-				local kind = cmp_kind({
+				local kind = cmp_format({
 					maxwidth = 50,
 					symbol_map = kind_map,
 				})(entry, vim_item)
-				-- local strings = vim.split(kind.kind, "%s", { trimempty = true })
-				--vim.notify_once(entry.source.name)
-				kind.menu = "  ⟬ " .. kind.kind .. " ⟭"
-				kind.kind = " " .. kind_map[entry.source.name] .. " "
 				return kind
 			end,
 		},
@@ -157,17 +150,13 @@ return function()
 			{ name = "path" },
 			{
 				name = "treesitter",
-				---@diagnostic disable-next-line: unused-local
-				entry_filter = function(entry, _ctx)
-					local banned_kinds = {
+				entry_filter = function(entry)
+					local ignore_list = {
 						"Error",
 						"Comment",
 					}
 					local kind = entry:get_completion_item().cmp.kind_text
-					if vim.tbl_contains(banned_kinds, kind) then
-						return false
-					end
-					return true
+					return not vim.tbl_contains(ignore_list, kind)
 				end,
 			},
 			{ name = "spell" },
