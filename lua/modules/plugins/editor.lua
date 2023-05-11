@@ -7,7 +7,7 @@ editor["rainbowhxch/accelerated-jk.nvim"] = {
 }
 editor["rmagatti/auto-session"] = {
 	lazy = true,
-	cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
+	cmd = { "SessionSave", "SessionRestore", "SessionDelete" },
 	config = require("editor.auto-session"),
 }
 editor["m4xshen/autoclose.nvim"] = {
@@ -86,6 +86,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
+		{ "nvim-treesitter/nvim-treesitter-context" },
 		{ "mrjones2014/nvim-ts-rainbow" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{ "mfussenegger/nvim-treehopper" },

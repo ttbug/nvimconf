@@ -58,6 +58,7 @@ settings["server_formatting_block_list"] = {
 	lua_ls = true,
 	tsserver = true,
 	clangd = true,
+	pylsp = true,
 }
 
 -- Set the language servers that will be installed during bootstrap here
@@ -71,7 +72,7 @@ settings["lsp_deps"] = {
 	"html",
 	"jsonls",
 	"lua_ls",
-	"pyright",
+	"pylsp",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here
