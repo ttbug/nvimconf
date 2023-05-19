@@ -1,4 +1,5 @@
 return function()
+	local transparent_background = require("core.settings").transparent_background
 	require("catppuccin").setup({
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
@@ -9,7 +10,7 @@ return function()
 			shade = "dark",
 			percentage = 0.15,
 		},
-		transparent_background = require("core.settings").transparent_background,
+		transparent_background = transparent_background,
 		show_end_of_buffer = false, -- show the '~' characters after the end of buffers
 		term_colors = true,
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
@@ -147,7 +148,7 @@ return function()
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
 					-- For trouble.nvim
-					TroubleNormal = { bg = cp.base },
+					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
 
 					-- For lsp semantic tokens
 					["@lsp.type.comment"] = { fg = cp.overlay0 },
