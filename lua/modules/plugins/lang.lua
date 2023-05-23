@@ -5,7 +5,7 @@ lang["ray-x/go.nvim"] = {
 	ft = { "go", "gomod" },
 	event = { "CmdlineEnter" },
 	-- event = "BufReadPost",
-	config = require("lang.vim-go"),
+	config = require("lang.go-nvim"),
 	dependencies = { -- optional packages
 		"ray-x/guihua.lua",
 		"neovim/nvim-lspconfig",
