@@ -9,7 +9,7 @@ return function()
 		auto_session_suppress_dirs = nil,
 		session_lens = {
 			-- If `load_on_setup` is set to false, please use `SessionLensToggle` to manually load this add-on.
-			load_on_setup = false,
+			load_on_setup = true,
 			theme_conf = { border = true },
 			previewer = false,
 		},

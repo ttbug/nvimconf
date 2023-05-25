@@ -36,4 +36,9 @@ lang["chrisbra/csv.vim"] = {
 	lazy = true,
 	ft = "csv",
 }
+lang["ellisonleao/glow.nvim"] = {
+	lazy = true,
+	cmd = "Glow",
+	config = require("lang.glow"),
+}
 return lang
