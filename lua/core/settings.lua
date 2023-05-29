@@ -73,7 +73,6 @@ settings["lsp_deps"] = {
 	"html",
 	"jsonls",
 	"lua_ls",
-	"pylsp",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here
@@ -83,7 +82,6 @@ settings["lsp_deps"] = {
 ---@type string[]
 settings["null_ls_deps"] = {
 	-- formatting
-	"black",
 	"clang_format",
 	"editorconfig_checker",
 	"prettier",
