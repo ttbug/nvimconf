@@ -66,11 +66,11 @@ ui["folke/paint.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.paint"),
 }
-ui["dstein64/nvim-scrollview"] = {
-	lazy = true,
-	event = "BufReadPost",
-	config = require("ui.scrollview"),
-}
+--ui["dstein64/nvim-scrollview"] = {
+--	lazy = true,
+--	event = "BufReadPost",
+--	config = require("ui.scrollview"),
+--}
 ui["edluffy/specs.nvim"] = {
 	lazy = true,
 	event = "CursorMoved",
