@@ -96,6 +96,15 @@ settings["null_ls_deps"] = {
 
 -- Set the inline_diagnostic_virtual_text to false if they are annoying for you
 ---@type boolean
-settings["inline_diagnostic_virtual_text"] = true
+-- settings["inline_diagnostic_virtual_text"] = true
+-- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
+settings["diagnostics_virtual_text"] = false
+
+-- Set it to one of the values below if you want to change the visible severity level of lsp diagnostics.
+-- Priority: `Error` > `Warning` > `Information` > `Hint`.
+--  > e.g. if you set this option to `Warning`, only lsp warnings and errors will be shown.
+-- NOTE: This entry only works when `diagnostics_virtual_text` is true.
+---@type "Error"|"Warning"|"Information"|"Hint"
+settings["diagnostics_level"] = "Hint"
 
 return settings
