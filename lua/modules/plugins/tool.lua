@@ -150,7 +150,7 @@ tool["mrjones2014/smart-splits.nvim"] = {
 }
 
 tool["kwkarlwang/bufresize.nvim"] = {
-	lazy = true,
+	lazy = false,
 	config = function()
 		require("bufresize").setup()
 	end,
