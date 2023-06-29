@@ -7,7 +7,7 @@ editor["rainbowhxch/accelerated-jk.nvim"] = {
 }
 editor["olimorris/persisted.nvim"] = {
 	lazy = true,
-    cmd = {
+	cmd = {
 		"SessionToggle",
 		"SessionStart",
 		"SessionStop",
@@ -101,6 +101,10 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },
+		{
+			"nvim-treesitter/nvim-treesitter-context",
+			config = require("editor.ts-context"),
+		},
 		{
 			"windwp/nvim-ts-autotag",
 			config = require("editor.autotag"),
