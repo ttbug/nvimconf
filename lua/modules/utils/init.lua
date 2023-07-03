@@ -205,6 +205,16 @@ function M.gen_lspkind_hl()
 	end
 end
 
+-- Generate highlight groups for alpha. Existing attributes will NOT be overwritten
+function M.gen_alpha_hl()
+	local colors = M.get_palette()
+
+	vim.api.nvim_set_hl(0, "AlphaHeader", { fg = colors.blue, default = true })
+	vim.api.nvim_set_hl(0, "AlphaButtons", { fg = colors.green, default = true })
+	vim.api.nvim_set_hl(0, "AlphaShortcut", { fg = colors.pink, italic = true, default = true })
+	vim.api.nvim_set_hl(0, "AlphaFooter", { fg = colors.yellow, default = true })
+end
+
 -- Generate blend_color for neodim.
 function M.gen_neodim_blend_attr()
 	local trans_bg = require("core.settings").transparent_background
