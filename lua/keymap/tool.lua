@@ -216,7 +216,7 @@ local plug_map = {
 	["n|<A-k>"] = map_cu("SmartResizeLeft"):with_silent():with_noremap(),
 	["n|<A-l>"] = map_cu("SmartResizeRight"):with_silent():with_noremap(),
 	-- todo-comments
-	["n|<leader>tt"] = map_cu("TodoTelescope"):with_silent():with_noremap(),
+	["n|<leader>tt"] = map_cu("TodoTelescope"):with_silent():with_noremap():with_desc("todo list"),
 }
 
 bind.nvim_load_mapping(plug_map)
