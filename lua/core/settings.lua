@@ -28,7 +28,7 @@ settings["palette_overwrite"] = {}
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
 ---@type string
---settings["colorscheme"] = "catppuccin"
+--settings["colorscheme"] = "catppuccin-mocha"
 settings["colorscheme"] = "tokyonight-storm"
 
 -- Set it to true if your terminal has transparent background.
@@ -83,7 +83,6 @@ settings["null_ls_deps"] = {
 	"clang_format",
 	"editorconfig_checker",
 	"prettier",
-	"rustfmt",
 	"shfmt",
 	"stylua",
 	"gofumpt",

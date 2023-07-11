@@ -27,6 +27,7 @@ return function()
 		}),
 		btns.formatting.gofumpt,
 		btns.formatting.goimports,
+		btns.formatting.rustfmt,
 	}
 
 	--local warn_TODO = {
