@@ -108,11 +108,6 @@ return function()
 					DiagnosticVirtualTextInfo = { bg = cp.none },
 
 					-- For lspsaga.nvim
-					OutlineNormal = { bg = transparent_background and cp.none or cp.mantle },
-					OutlineWinSeparator = {
-						bg = transparent_background and cp.none or cp.base,
-						fg = transparent_background and cp.surface1 or cp.base,
-					},
 
 					-- For fidget.
 					DiagnosticVirtualTextHint = { bg = cp.none },
