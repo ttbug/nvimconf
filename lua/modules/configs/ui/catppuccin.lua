@@ -137,6 +137,7 @@ return function()
 					-- For trouble.nvim
 					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
 					-- For telescope.nvim
+					TelescopeMatching = { fg = cp.lavender },
 					TelescopeResultsDiffAdd = { fg = cp.green },
 					TelescopeResultsDiffChange = { fg = cp.yellow },
 					TelescopeResultsDiffDelete = { fg = cp.red },
