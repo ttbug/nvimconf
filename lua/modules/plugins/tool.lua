@@ -180,7 +180,7 @@ tool["smoka7/multicursors.nvim"] = {
 					-- assigning nil to method exits from multi cursor mode
 					method = N.clear_others,
 					-- description to show in hint window
-					desc = "Clear others",
+					opts = { desc = "Clear others" },
 				},
 			},
 			insert_keys = {
@@ -189,7 +189,7 @@ tool["smoka7/multicursors.nvim"] = {
 					-- assigning nil to method exits from multi cursor mode
 					method = I.Cr_method,
 					-- description to show in hint window
-					desc = "new line",
+					opts = { desc = "New line" },
 				},
 			},
 		}
