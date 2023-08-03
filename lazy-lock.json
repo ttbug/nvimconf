@@ -31,6 +31,7 @@
   "fzy-lua-native": { "branch": "master", "commit": "820f745b7c442176bcc243e8f38ef4b985febfaf" },
   "gitsigns.nvim": { "branch": "main", "commit": "5d73da785a3c05fd63ac31769079db05169a6ec7" },
   "gitui.nvim": { "branch": "main", "commit": "6595bef945ad53c3e8410edec2e86f36b3f8971e" },
+  "glance.nvim": { "branch": "master", "commit": "b78ef99ffda23fa42ce85de50e3fc13a5472ecfd" },
   "glow.nvim": { "branch": "main", "commit": "8942dfb05794f436af4fbc90a34393f1fd36f361" },
   "go.nvim": { "branch": "master", "commit": "7e5602dd51a230581f43c42559d7acc2fbca23cf" },
   "guihua.lua": { "branch": "master", "commit": "9a15128d92dfba57ada2857316073d1fa3d97c93" },
