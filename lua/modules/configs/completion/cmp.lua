@@ -32,8 +32,40 @@ return function()
 		return (diff < 0)
 	end
 
-	local cmp = require("cmp")
+	local use_copilot = require("core.settings").use_copilot
+	local comparators = use_copilot == true
+			and {
+				require("copilot_cmp.comparators").prioritize,
+				require("copilot_cmp.comparators").score,
+				-- require("cmp_tabnine.compare"),
+				compare.offset, -- Items closer to cursor will have lower priority
+				compare.exact,
+				compare.lsp_scores,
+				compare.sort_text,
+				compare.score,
+				compare.recently_used,
+				require("cmp-under-comparator").under,
+				compare.kind,
+				compare.length,
+				compare.order,
+			}
+		or {
+			-- require("cmp_tabnine.compare"),
+			compare.offset, -- Items closer to cursor will have lower priority
+			compare.exact,
+			-- compare.scopes,
+			compare.lsp_scores,
+			compare.sort_text,
+			compare.score,
+			compare.recently_used,
+			-- compare.locality, -- Items closer to cursor will have higher priority, conflicts with `offset`
+			require("cmp-under-comparator").under,
+			compare.kind,
+			compare.length,
+			compare.order,
+		}
 
+	local cmp = require("cmp")
 	cmp.setup({
 		preselect = cmp.PreselectMode.Item,
 		window = {
@@ -49,21 +81,7 @@ return function()
 		},
 		sorting = {
 			priority_weight = 2,
-			comparators = {
-				require("copilot_cmp.comparators").prioritize,
-				require("copilot_cmp.comparators").score,
-				-- require("cmp_tabnine.compare"),
-				compare.offset, -- Items closer to cursor will have lower priority
-				compare.exact,
-				compare.lsp_scores,
-				compare.sort_text,
-				compare.score,
-				compare.recently_used,
-				require("cmp-under-comparator").under,
-				compare.kind,
-				compare.length,
-				compare.order,
-			},
+			comparators = comparators,
 		},
 		formatting = {
 			fields = { "abbr", "kind", "menu" },

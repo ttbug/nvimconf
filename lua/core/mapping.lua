@@ -2,6 +2,18 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
+local map_callback = bind.map_callback
+
+local flash_esc = function()
+	local status_ok, state = pcall(function()
+		return require("flash.plugins.char").state
+	end)
+	if status_ok and state then
+		state:hide()
+	else
+		vim.cmd("noh")
+	end
+end
 
 -- default map
 local core_map = {
@@ -17,6 +29,7 @@ local core_map = {
 	["n|n"] = map_cmd("nzzzv"):with_noremap():with_desc("editn: Next search result"),
 	["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("editn: Prev search result"),
 	["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("editn: Join next line"),
+	["n|<Esc>"] = map_callback(flash_esc):with_noremap():with_silent():with_desc("edit: Clear search highlight"),
 	["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap():with_desc("window: Focus left"),
 	["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap():with_desc("window: Focus right"),
 	["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap():with_desc("window: Focus down"),
@@ -56,4 +69,3 @@ local core_map = {
 }
 
 bind.nvim_load_mapping(core_map)
-

@@ -72,7 +72,7 @@ return function()
 			silent = true,
 			nowait = true,
 			callback = function()
-				require("telescope").extensions.frecency.frecency()
+				require("telescope").extensions.frecency.frecency({})
 			end,
 		}),
 		button("space f e", "   File history", leader, nil, {

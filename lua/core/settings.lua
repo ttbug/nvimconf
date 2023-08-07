@@ -14,6 +14,10 @@ settings["format_disabled_dirs"] = {
 	"~/format_disabled_dir",
 }
 
+-- Set it to false if you don't use copilot
+---@type boolean
+settings["use_copilot"] = true
+
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
 settings["load_big_files_faster"] = true

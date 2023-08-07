@@ -38,10 +38,10 @@ editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
 	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
 }
-editor["rhysd/clever-f.vim"] = {
+editor["folke/flash.nvim"] = {
 	lazy = true,
-	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
-	config = require("editor.cleverf"),
+	event = { "VeryLazy" },
+	config = true,
 }
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,
