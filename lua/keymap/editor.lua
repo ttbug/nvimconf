@@ -81,11 +81,17 @@ local plug_map = {
 		:with_desc("edit: Align with delimiter"),
 
 	-- Plugin: hop
-	["n|<leader>w"] = map_cu("HopWord"):with_noremap():with_desc("jump: Goto word"),
-	["n|<leader>j"] = map_cu("HopLine"):with_noremap():with_desc("jump: Goto line"),
-	["n|<leader>k"] = map_cu("HopLine"):with_noremap():with_desc("jump: Goto line"),
-	["n|<leader>c"] = map_cu("HopChar1"):with_noremap():with_desc("jump: Goto one char"),
-	["n|<leader>cc"] = map_cu("HopChar2"):with_noremap():with_desc("jump: Goto two chars"),
+	--["n|<leader>w"] = map_cu("HopWord"):with_noremap():with_desc("jump: Goto word"),
+	--["n|<leader>j"] = map_cu("HopLine"):with_noremap():with_desc("jump: Goto line"),
+	--["n|<leader>k"] = map_cu("HopLine"):with_noremap():with_desc("jump: Goto line"),
+	--["n|<leader>c"] = map_cu("HopChar1"):with_noremap():with_desc("jump: Goto one char"),
+	--["n|<leader>cc"] = map_cu("HopChar2"):with_noremap():with_desc("jump: Goto two chars"),
+
+	["n|<leader>w"] = map_cmd("<Cmd>HopWordMW<CR>"):with_noremap():with_desc("jump: Goto word"),
+	["n|<leader>j"] = map_cmd("<Cmd>HopLineMW<CR>"):with_noremap():with_desc("jump: Goto line"),
+	["n|<leader>k"] = map_cmd("<Cmd>HopLineMW<CR>"):with_noremap():with_desc("jump: Goto line"),
+	["n|<leader>c"] = map_cmd("<Cmd>HopChar1MW<CR>"):with_noremap():with_desc("jump: Goto one char"),
+	["n|<leader>cc"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("jump: Goto two chars"),
 
 	-- Plugin: treehopper
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),

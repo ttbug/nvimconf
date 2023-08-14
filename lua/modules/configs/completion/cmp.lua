@@ -101,6 +101,7 @@ return function()
 					path = "[PATH]",
 					tmux = "[TMUX]",
 					treesitter = "[TS]",
+					latex_symbols = "[LTEX]",
 					luasnip = "[SNIP]",
 					spell = "[SPELL]",
 				}, {
@@ -168,7 +169,7 @@ return function()
 			{ name = "tmux" },
 			{ name = "orgmode" },
 			{ name = "buffer" },
-			{ name = "latex_symbols" },
+			--{ name = "latex_symbols" },
 			{ name = "copilot" },
 			-- { name = "codeium" },
 			-- { name = "cmp_tabnine" },

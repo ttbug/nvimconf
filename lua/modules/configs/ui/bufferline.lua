@@ -20,7 +20,7 @@ return function()
 			enforce_regular_tabs = false,
 			persist_buffer_sort = true,
 			always_show_bufferline = true,
-			separator_style = "thin",
+			separator_style = "slope",
 			get_element_icon = function(buf)
 				return require("nvim-web-devicons").get_icon(
 					buf.name,

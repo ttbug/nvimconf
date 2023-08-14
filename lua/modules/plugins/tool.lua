@@ -65,6 +65,11 @@ tool["gelguy/wilder.nvim"] = {
 	dependencies = { "romgrk/fzy-lua-native" },
 }
 
+--tool["folke/zen-mode.nvim"] = {
+--	lazy = true,
+--	cmd = "ZenMode",
+--}
+
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
 ----------------------------------------------------------------------

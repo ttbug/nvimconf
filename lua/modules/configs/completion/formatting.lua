@@ -34,16 +34,7 @@ vim.api.nvim_create_user_command("FormatterToggleFt", function(opts)
 end, { nargs = 1, complete = "filetype" })
 
 function M.enable_format_on_save(is_configured)
-	local opts = { pattern = "*", timeout = 1000 }
-	vim.api.nvim_create_augroup("format_on_save", { clear = true })
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = "format_on_save",
-		pattern = opts.pattern,
-		callback = function()
-			require("completion.formatting").format({ timeout_ms = opts.timeout, filter = M.format_filter })
-		end,
-	})
-	-- Run gofmt + goimport on save
+	-- Run gofmt on save
 	local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		pattern = "*.go",
@@ -51,6 +42,16 @@ function M.enable_format_on_save(is_configured)
 			require("go.format").goimport()
 		end,
 		group = format_sync_grp,
+	})
+
+	local opts = { pattern = "*", timeout = 5000 }
+	local format_save = vim.api.nvim_create_augroup("format_on_save", { clear = true })
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = format_save,
+		pattern = opts.pattern,
+		callback = function()
+			require("completion.formatting").format({ timeout_ms = opts.timeout, filter = M.format_filter })
+		end,
 	})
 
 	if not is_configured then
