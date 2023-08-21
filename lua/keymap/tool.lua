@@ -198,8 +198,14 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: go test current func"),
-	["n|<leader>g"] = map_cr("Gitui"):with_noremap():with_silent(),
-	["t|<leader>g"] = map_cmd("<Esc><Cmd>Gitui<CR>"):with_noremap():with_silent(),
+	--["n|<leader>g"] = map_cr("Gitui"):with_noremap():with_silent(),
+	--["t|<leader>g"] = map_cmd("<Esc><Cmd>Gitui<CR>"):with_noremap():with_silent(),
+	["n|<leader>g"] = map_callback(function()
+			_toggle_lazygit()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("git: Toggle lazygit"),
 	["n|<F4>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
 	-- Plugin floaterm
 	["n|<F12>"] = map_cr([[execute v:count . "ToggleTerm direction=float"]]):with_noremap():with_silent(),

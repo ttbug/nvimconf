@@ -35,14 +35,14 @@ end, { nargs = 1, complete = "filetype" })
 
 function M.enable_format_on_save(is_configured)
 	-- Run gofmt on save
-	local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		pattern = "*.go",
-		callback = function()
-			require("go.format").goimport()
-		end,
-		group = format_sync_grp,
-	})
+	--local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+	--vim.api.nvim_create_autocmd("BufWritePre", {
+	--	pattern = "*.go",
+	--	callback = function()
+	--		require("go.format").goimport()
+	--	end,
+	--	group = format_sync_grp,
+	--})
 
 	local opts = { pattern = "*", timeout = 5000 }
 	local format_save = vim.api.nvim_create_augroup("format_on_save", { clear = true })

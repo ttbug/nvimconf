@@ -136,13 +136,6 @@ tool["leoluz/nvim-dap-go"] = {
 	end,
 }
 
-tool["aspeddro/gitui.nvim"] = {
-	lazy = false,
-	config = function()
-		require("gitui").setup({})
-	end,
-}
-
 tool["ttbug/tig.nvim"] = {
 	lazy = false,
 	config = function()
