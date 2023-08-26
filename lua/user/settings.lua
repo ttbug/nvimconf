@@ -9,7 +9,9 @@ settings["use_ssh"] = false
 ---@type string
 --settings["colorscheme"] = "catppuccin-mocha"
 settings["colorscheme"] = "tokyonight-storm"
-
+-- Set it to true if your terminal has transparent background.
+---@type boolean
+settings["transparent_background"] = true
 -- Set the plugins to disable here.
 -- Example: "Some-User/A-Repo"
 ---@type string[]
