@@ -1,0 +1,5 @@
+return {
+	sources = {
+		{ name = "codeium" },
+	},
+}
