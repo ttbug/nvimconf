@@ -40,5 +40,8 @@ settings["null_ls_deps"] = {
 
 	"vint",
 }
+-- Set it to false if you don't use copilot
+---@type boolean
+settings["use_copilot"] = false
 
 return settings
