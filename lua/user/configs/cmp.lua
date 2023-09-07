@@ -1,5 +1,1 @@
-return {
-	sources = {
-		{ name = "codeium" },
-	},
-}
+return {}
