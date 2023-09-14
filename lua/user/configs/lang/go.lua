@@ -23,6 +23,7 @@ return function()
 			settings = {
 				gopls = {
 					usePlaceholders = true,
+					gofumpt = true,
 					analyses = {
 						nilness = true,
 						shadow = true,
