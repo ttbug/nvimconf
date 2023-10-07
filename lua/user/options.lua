@@ -4,6 +4,7 @@ local options = {
 	cursorcolumn = false,
 	cursorline = true,
 	mouse = "c",
+	equalalways = true,
 }
 
 return options
