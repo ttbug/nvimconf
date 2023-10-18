@@ -6,4 +6,10 @@ custom["folke/flash.nvim"] = {
 	config = true,
 }
 
+custom["Wansmer/symbol-usage.nvim"] = {
+	lazy = true,
+	event = "BufReadPre",
+	config = require("user.configs.tool.suse"),
+}
+
 return custom
