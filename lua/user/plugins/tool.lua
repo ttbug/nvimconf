@@ -1,10 +1,10 @@
 local custom = {}
 
-custom["folke/flash.nvim"] = {
-	lazy = true,
-	event = { "VeryLazy" },
-	config = true,
-}
+--custom["folke/flash.nvim"] = {
+--	lazy = true,
+--	event = { "VeryLazy" },
+--	config = true,
+--}
 
 --custom["Wansmer/symbol-usage.nvim"] = {
 --	lazy = true,
