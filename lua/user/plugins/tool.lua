@@ -6,10 +6,15 @@ local custom = {}
 --	config = true,
 --}
 
---custom["Wansmer/symbol-usage.nvim"] = {
---	lazy = true,
---	event = "BufReadPre",
---	config = require("user.configs.tool.suse"),
---}
+custom["mg979/vim-visual-multi"] = {
+	lazy = false,
+}
+
+custom["okuuva/auto-save.nvim"] = {
+	lazy = true,
+	cmd = "ASToggle", -- optional for lazy loading on command
+	event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
+	config = true,
+}
 
 return custom
