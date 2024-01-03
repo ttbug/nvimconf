@@ -10,11 +10,11 @@ custom["mg979/vim-visual-multi"] = {
 	lazy = false,
 }
 
-custom["okuuva/auto-save.nvim"] = {
-	lazy = true,
-	cmd = "ASToggle", -- optional for lazy loading on command
-	event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
-	config = true,
-}
+--custom["okuuva/auto-save.nvim"] = {
+--	lazy = true,
+--	cmd = "ASToggle", -- optional for lazy loading on command
+--	event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
+--	config = true,
+--}
 
 return custom
