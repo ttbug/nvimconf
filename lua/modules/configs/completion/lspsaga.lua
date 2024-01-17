@@ -28,7 +28,7 @@ return function()
 	require("modules.utils").load_plugin("lspsaga", {
 		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
-			enable = true,
+			enable = false,
 			separator = " " .. icons.ui.Separator,
 			hide_keyword = false,
 			show_file = false,
