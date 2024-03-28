@@ -10,6 +10,13 @@ custom["mg979/vim-visual-multi"] = {
 	lazy = false,
 }
 
+custom["leoluz/nvim-dap-go"] = {
+	lazy = true,
+	config = function()
+		require("dap-go").setup()
+	end,
+}
+
 --custom["okuuva/auto-save.nvim"] = {
 --	lazy = true,
 --	cmd = "ASToggle", -- optional for lazy loading on command

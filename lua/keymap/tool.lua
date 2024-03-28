@@ -167,7 +167,7 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step out"),
-	["n|<F11>"] = map_callback(function()
+	["n|<F3>"] = map_callback(function()
 			require("dap").step_over()
 		end)
 		:with_noremap()
@@ -197,6 +197,13 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Open REPL"),
+	-- nvim-dap-go
+	["n|<leader>dt"] = map_callback(function()
+			require("dap-go").debug_test()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: go test current func"),
 }
 
 bind.nvim_load_mapping(plug_map)
