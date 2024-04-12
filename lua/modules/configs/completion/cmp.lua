@@ -177,8 +177,8 @@ return function()
 				},
 			},
 			{ name = "latex_symbols" },
-			{ name = "copilot" },
-			-- { name = "codeium" },
+			-- { name = "copilot" },
+			{ name = "codeium" },
 			-- { name = "cmp_tabnine" },
 		},
 		experimental = {

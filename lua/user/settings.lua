@@ -42,6 +42,6 @@ settings["null_ls_deps"] = {
 }
 -- Set it to false if you don't use copilot
 ---@type boolean
-settings["use_copilot"] = true
+settings["use_copilot"] = false
 
 return settings
