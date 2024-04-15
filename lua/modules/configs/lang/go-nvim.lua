@@ -24,6 +24,6 @@ return function()
 			signs = true,
 			update_in_insert = false,
 		},
-		lsp_cfg = require("modules.configs.completion.servers.gopls"),
+		lsp_cfg = true,
 	})
 end
