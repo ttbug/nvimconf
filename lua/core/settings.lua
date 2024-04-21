@@ -101,7 +101,7 @@ settings["server_formatting_block_list"] = {
 ---@type string[]
 settings["lsp_deps"] = {
 	"bashls",
-	"clangd",
+	--"clangd",
 	"html",
 	"jsonls",
 	"lua_ls",

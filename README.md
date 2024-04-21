@@ -51,6 +51,14 @@ Branch info:
 
 </div>
 
+### important
+
+arm arch上，会出现tree-sitter错误，需要手工安装以下依赖
+
+```
+pacman -Sy tree-sitter tree-sitter-cli
+```
+
 > [!IMPORTANT]
 > The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
 
