@@ -15,7 +15,7 @@ return function()
 		lsp_inlay_hints = { enable = false },
 		textobjects = false,
 		luasnip = false,
-		run_in_floaterm = true,
+		run_in_floaterm = false,
 		trouble = true,
 		lsp_codelens = false,
 		gopls_remote_auto = true,
