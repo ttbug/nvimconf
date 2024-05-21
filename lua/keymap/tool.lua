@@ -123,13 +123,14 @@ local plug_map = {
 		:with_silent()
 		:with_desc("find: Git related search"),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
-	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
-	["v|<leader>fs"] = map_callback(function()
-			require("telescope.builtin").grep_string({ search = _buf_vtext() })
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Selection text"),
+	--["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
+	--["v|<leader>fs"] = map_callback(function()
+	--		require("telescope.builtin").grep_string({ search = _buf_vtext() })
+	--	end)
+	--	:with_noremap()
+	--	:with_silent()
+	--	:with_desc("find: Selection text"),
+	["nv|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 	["n|<leader>fd"] = map_callback(function()
 			require("search").open({ collection = "workspace" })
 		end)
