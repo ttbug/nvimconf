@@ -17,8 +17,8 @@ local function load_options()
 		clipboard = "unnamedplus",
 		cmdheight = 1, -- 0, 1, 2
 		cmdwinheight = 5,
-		complete = ".,w,b,k",
-		completeopt = "menuone,noselect",
+		complete = ".,w,b,k,kspell",
+		completeopt = "menuone,noselect,popup",
 		concealcursor = "niv",
 		conceallevel = 0,
 		cursorcolumn = true,
@@ -70,6 +70,7 @@ local function load_options()
 		signcolumn = "yes",
 		smartcase = true,
 		smarttab = true,
+		smoothscroll = true,
 		splitbelow = true,
 		splitkeep = "screen",
 		splitright = true,
@@ -120,7 +121,7 @@ local function load_options()
 	end
 
 	for name, value in pairs(require("modules.utils").extend_config(global_local, "user.options")) do
-		vim.o[name] = value
+		vim.api.nvim_set_option_value(name, value, {})
 	end
 end
 
