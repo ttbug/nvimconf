@@ -88,50 +88,47 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
-	["n|<leader>fu"] = map_callback(function()
-			require("telescope").extensions.undo.undo()
+	["n|<leader>fc"] = map_callback(function()
+			_telescope_collections(require("telescope.themes").get_dropdown())
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("edit: Show undo history"),
-	["n|<leader>fw"] = map_callback(function()
-			require("telescope").extensions.live_grep_args.live_grep_args()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Word in project"),
+		:with_desc("tool: Open Telescope (collections)"),
 	["n|<leader>ff"] = map_callback(function()
 			require("search").open({ collection = "file" })
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("find: File in project"),
-	["n|<leader>fc"] = map_cu("Telescope colorscheme")
+		:with_desc("tool: Find files"),
+	["n|<leader>fp"] = map_callback(function()
+			require("search").open({ collection = "pattern" })
+		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("ui: Change colorscheme for current session"),
-	["n|<leader>bn"] = map_cu(":enew"):with_noremap():with_silent():with_desc("buffer: New"),
+		:with_desc("tool: Find patterns"),
+	["v|<leader>fs"] = map_cu("Telescope grep_string")
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: Find word under cursor"),
 	["n|<leader>fg"] = map_callback(function()
 			require("search").open({ collection = "git" })
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("find: Git related search"),
-	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
-	--["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
-	--["v|<leader>fs"] = map_callback(function()
-	--		require("telescope.builtin").grep_string({ search = _buf_vtext() })
-	--	end)
-	--	:with_noremap()
-	--	:with_silent()
-	--	:with_desc("find: Selection text"),
-	["nv|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
+		:with_desc("tool: Locate Git objects"),
+
 	["n|<leader>fd"] = map_callback(function()
-			require("search").open({ collection = "workspace" })
+			require("search").open({ collection = "dossier" })
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("find: Session, Project and Directory"),
+		:with_desc("tool: Retrieve dossiers"),
+	["n|<leader>fm"] = map_callback(function()
+			require("search").open({ collection = "misc" })
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: Miscellaneous"),
 
 	-- Plugin: dap
 	["n|<F6>"] = map_callback(function()

@@ -21,6 +21,7 @@ settings["disabled_plugins"] = {
 	"rhysd/clever-f.vim",
 	"tpope/vim-fugitive",
 	"dstein64/nvim-scrollview",
+	"Bekaboo/dropbar.nvim",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here

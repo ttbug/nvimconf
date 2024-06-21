@@ -65,6 +65,10 @@ return function()
 			"return_statement",
 			"switch_block",
 		},
+		dot = {
+			"block",
+			"attr_list",
+		},
 		ecma = {
 			"arguments",
 			"array",
@@ -110,6 +114,25 @@ return function()
 			"subroutine",
 			"where_statement",
 		},
+		gleam = {
+			"anonymous_function",
+			"assert",
+			"case",
+			"constant",
+			"external_function",
+			"function",
+			"import",
+
+			"let",
+			"list",
+			"constant",
+
+			"function",
+			"type_definition",
+			"type_alias",
+			"todo",
+			"tuple",
+		},
 		go = {
 			"call_expression",
 
@@ -128,6 +151,7 @@ return function()
 		html = {
 
 			"start_tag",
+			"self_closing_tag",
 		},
 		java = {
 			"annotation_argument_list",
@@ -179,6 +203,11 @@ return function()
 			"tuple_expression",
 			"vector_expression",
 		},
+		just = {
+			"external_command",
+			"recipe",
+			"string",
+		},
 		linkerscript = {
 			"memory_command",
 			"output_section",
@@ -209,6 +238,23 @@ return function()
 			"pool",
 
 			"rule",
+		},
+		ocaml = {
+			"application_expression",
+			"do_clause",
+			"external",
+
+			"field_expression",
+			"if_expression",
+			"list_expression",
+
+			"parenthesized_expression",
+			"record_declaration",
+			"record_expression",
+			"try_expression",
+			"type_binding",
+			"value_specification",
+
 		},
 		pascal = {
 			"arrInitializer",
@@ -332,6 +378,14 @@ return function()
 			"use_list",
 			"where_clause",
 		},
+		scss = {
+			"block",
+			"declaration",
+			"each_statement",
+			"mixin_statement",
+
+			"while_statement",
+		},
 		sql = {
 			"case",
 			"column_definitions",
@@ -396,6 +450,12 @@ return function()
 			"table_constructor",
 			"return_statement",
 			"while_statement",
+		},
+		terraform = {
+			"block",
+			"function_call",
+			"object",
+			"tuple",
 		},
 		textproto = {
 			"message_list",
@@ -478,17 +538,20 @@ return function()
 					cuda = nodes.cpp,
 					d = nodes.d,
 					dart = nodes.dart,
+					dot = nodes.dot,
 					ecma = nodes.ecma,
 					elixir = nodes.elixir,
 					firrtl = nodes.firrtl,
 					fortran = nodes.fortran,
 					glsl = nodes.c,
+					gleam = nodes.gleam,
 					go = nodes.go,
 					hlsl = nodes.cpp,
 					html = nodes.html,
 					java = nodes.java,
 					javascript = nodes.javascript,
 					julia = nodes.julia,
+					just = nodes.just,
 					linkerscript = nodes.linkerscript,
 					lua = nodes.lua,
 					luau = nodes.lua,
@@ -496,6 +559,8 @@ return function()
 					ninja = nodes.ninja,
 
 					objc = nodes.c,
+					ocaml = nodes.ocaml,
+					ocaml_interface = nodes.ocaml,
 					pascal = nodes.pascal,
 					php = nodes.php,
 					python = nodes.python,
@@ -504,12 +569,14 @@ return function()
 					readline = nodes.readline,
 					ruby = nodes.ruby,
 					rust = nodes.rust,
+					scss = nodes.scss,
 					sql = nodes.sql,
 					ssh_config = nodes.ssh_config,
 					swift = nodes.swift,
 					tablegen = nodes.tablegen,
 					tcl = nodes.tcl,
 					teal = nodes.teal,
+					terraform = nodes.terraform,
 					textproto = nodes.textproto,
 					toml = nodes.toml,
 					typescript = nodes.typescript,
