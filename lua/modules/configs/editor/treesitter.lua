@@ -5,32 +5,14 @@ return vim.schedule_wrap(function()
 	vim.api.nvim_set_option_value("foldexpr", "nvim_treesitter#foldexpr()", {})
 
 	require("modules.utils").load_plugin("nvim-treesitter", {
-		ensure_installed = {
-			"bash",
-			"c",
-			"cpp",
-			"css",
-			"go",
-			"gomod",
-			"html",
-			"javascript",
-			"json",
-			"latex",
-			"lua",
-			"make",
-			"markdown",
-			"markdown_inline",
-			"python",
-			"rust",
-			"typescript",
-			"vimdoc",
-			"vue",
-			"yaml",
-		},
+		ensure_installed = require("core.settings").treesitter_deps,
 		highlight = {
 			enable = true,
 			disable = function(ft, bufnr)
-				if vim.tbl_contains({ "vim" }, ft) then
+				if
+					vim.tbl_contains({ "gitcommit" }, ft)
+					or (vim.api.nvim_buf_line_count(bufnr) > 7500 and ft ~= "vimdoc")
+				then
 					return true
 				end
 
@@ -42,6 +24,7 @@ return vim.schedule_wrap(function()
 		textobjects = {
 			select = {
 				enable = true,
+				lookahead = true,
 				keymaps = {
 					["af"] = "@function.outer",
 					["if"] = "@function.inner",
@@ -51,7 +34,7 @@ return vim.schedule_wrap(function()
 			},
 			move = {
 				enable = true,
-				set_jumps = true, -- whether to set jumps in the jumplist
+				set_jumps = true,
 				goto_next_start = {
 					["]["] = "@function.outer",
 					["]m"] = "@class.outer",
@@ -76,8 +59,8 @@ return vim.schedule_wrap(function()
 	require("nvim-treesitter.install").prefer_git = true
 	if use_ssh then
 		local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-		for _, p in pairs(parsers) do
-			p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
+		for _, parser in pairs(parsers) do
+			parser.install_info.url = parser.install_info.url:gsub("https://github.com/", "git@github.com:")
 		end
 	end
 end)
