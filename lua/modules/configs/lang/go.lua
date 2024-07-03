@@ -21,7 +21,7 @@ return function()
 		gopls_remote_auto = true,
 		diagnostic = { -- set diagnostic to false to disable vim.diagnostic setup
 			hdlr = false, -- hook lsp diag handler and send diag to quickfix
-			underline = true,
+			underline = false,
 			-- virtual text setup
 			virtual_text = { spacing = 0, prefix = "■" },
 			signs = true,
