@@ -4,6 +4,7 @@ return function()
 
 	require("modules.utils").load_plugin("search", {
 		collections = {
+			-- Search using filenames
 			file = {
 				initial_tab = 1,
 				tabs = {
@@ -24,10 +25,8 @@ return function()
 							extensions.frecency.frecency()
 						end,
 					},
-
 					{
 						name = "Oldfiles",
-
 						tele_func = function()
 							builtin.oldfiles()
 						end,
@@ -40,12 +39,10 @@ return function()
 					},
 				},
 			},
+			-- Search using patterns
 			pattern = {
-
 				initial_tab = 1,
-
 				tabs = {
-
 					{
 						name = "Word in project",
 						tele_func = function()
@@ -61,12 +58,11 @@ return function()
 					},
 				},
 			},
-
+			-- Search Git objects (branches, commits)
 			git = {
 				initial_tab = 1,
 				tabs = {
 					{
-
 						name = "Branches",
 						tele_func = function()
 							builtin.git_branches()
@@ -79,7 +75,6 @@ return function()
 						end,
 					},
 					{
-
 						name = "Commit content",
 						tele_func = function()
 							extensions.advanced_git_search.search_log_content()
@@ -93,6 +88,7 @@ return function()
 					},
 				},
 			},
+			-- Retrieve dossiers
 			dossier = {
 				initial_tab = 1,
 				tabs = {
@@ -116,6 +112,7 @@ return function()
 					},
 				},
 			},
+			-- Miscellaneous
 			misc = {
 				initial_tab = 1,
 				tabs = {

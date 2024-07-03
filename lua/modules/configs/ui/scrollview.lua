@@ -2,7 +2,7 @@ return function()
 	local icons = { diagnostics = require("modules.utils.icons").get("diagnostics", true) }
 
 	require("modules.utils").load_plugin("scrollview", {
-		scrollview_mode = "virtual",
+		mode = "virtual",
 		winblend = 0,
 		signs_on_startup = { "diagnostics", "folds", "marks", "search", "spell" },
 		diagnostics_error_symbol = icons.diagnostics.Error,

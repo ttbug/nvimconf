@@ -20,8 +20,8 @@ local data = {
 		Folder = "󰉋",
 		Fragment = "",
 		Function = "󰊕",
-		Interface = "",
 		Implementation = "",
+		Interface = "",
 		Keyword = "󰌋",
 		List = "󰅪",
 		Loop = "󰑖",
@@ -62,11 +62,11 @@ local data = {
 		Default = "",
 		File = "",
 		Files = "",
-		FileTree = "󰙅",
 		FileFind = "󰈞",
-		Word = "",
+		FileTree = "󰙅",
 		Import = "",
 		Symlink = "",
+		Word = "",
 	},
 	git = {
 		Add = "",
@@ -200,11 +200,9 @@ local data = {
 		Codeium = "",
 		copilot = "",
 		copilot_alt = "",
-
 		Copilot = "",
 		Copilot_alt = "",
 		TabNine = "",
-
 		cmp_tabnine = "",
 	},
 	dap = {

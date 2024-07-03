@@ -45,8 +45,15 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 		misc = require("modules.utils.icons").get("misc", true),
 	}
+
 	dashboard.section.buttons.val = {
-		button("space f c", icons.misc.Neovim .. "Telescope collections", leader, nil, { noremap = true, silent = true, nowait = true }),
+		button(
+			"space f c",
+			icons.misc.Neovim .. "Telescope collections",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
 		button(
 			"space f f",
 			icons.documents.FileFind .. "Find files",

@@ -26,7 +26,6 @@ return function()
 				filter = {
 					any = {
 						{
-
 							function(item)
 								return item.filename:find(vim.fn.getcwd(), 1, true)
 							end,

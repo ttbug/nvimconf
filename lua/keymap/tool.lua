@@ -22,7 +22,6 @@ local plug_map = {
 
 	-- Plugin: toggleterm
 	["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
-	["t|jk"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
 	["n|<C-\\>"] = map_cr("ToggleTerm direction=horizontal")
 		:with_noremap()
 		:with_silent()
@@ -32,7 +31,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("terminal: Toggle horizontal"),
 	["t|<C-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle horizontal"),
-	["n|<A-\\>"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]])
+	["n|<A-\\>"] = map_cr("ToggleTerm direction=vertical")
 		:with_noremap()
 		:with_silent()
 		:with_desc("terminal: Toggle vertical"),
@@ -41,7 +40,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("terminal: Toggle vertical"),
 	["t|<A-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
-	["n|<F5>"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]])
+	["n|<F5>"] = map_cr("ToggleTerm direction=vertical")
 		:with_noremap()
 		:with_silent()
 		:with_desc("terminal: Toggle vertical"),
@@ -50,10 +49,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("terminal: Toggle vertical"),
 	["t|<F5>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
-	["n|<A-d>"] = map_cr([[execute v:count . "ToggleTerm direction=float"]])
-		:with_noremap()
-		:with_silent()
-		:with_desc("terminal: Toggle float"),
+	["n|<A-d>"] = map_cr("ToggleTerm direction=float"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
 	["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
 		:with_noremap()
 		:with_silent()
@@ -93,7 +89,7 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("tool: Open Telescope (collections)"),
+		:with_desc("tool: Open Telescope collections"),
 	["n|<leader>ff"] = map_callback(function()
 			require("search").open({ collection = "file" })
 		end)
@@ -116,7 +112,6 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Locate Git objects"),
-
 	["n|<leader>fd"] = map_callback(function()
 			require("search").open({ collection = "dossier" })
 		end)

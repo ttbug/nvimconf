@@ -4,7 +4,6 @@ return function()
 		return function()
 			-- Disable on very large files
 			local line_count = vim.api.nvim_buf_line_count(0)
-
 			if line_count > 7500 then
 				return nil
 			end
@@ -49,5 +48,6 @@ return function()
 			"RainbowDelimiterViolet",
 		},
 	}
+
 	require("modules.utils").load_plugin("rainbow_delimiters", nil, true)
 end

@@ -14,7 +14,6 @@ end
 _G._telescope_collections = function(picker_type)
 	local actions = require("telescope.actions")
 	local action_state = require("telescope.actions.state")
-
 	local conf = require("telescope.config").values
 	local finder = require("telescope.finders")
 	local pickers = require("telescope.pickers")
@@ -29,9 +28,7 @@ _G._telescope_collections = function(picker_type)
 			attach_mappings = function(bufnr)
 				actions.select_default:replace(function()
 					actions.close(bufnr)
-
 					local selection = action_state.get_selected_entry()
-
 					require("search").open({ collection = selection[1] })
 				end)
 
@@ -68,16 +65,3 @@ _G._toggle_lazygit = function()
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
 	end
 end
-
--- TODO: Update this function to use `vim.getregion()` when v0.10 is released.
---_G._buf_vtext = function()
---	local a_orig = vim.fn.getreg("a")
---	local mode = vim.fn.mode()
---	if mode ~= "v" and mode ~= "V" then
---		vim.cmd([[normal! gv]])
---	end
---	vim.cmd([[silent! normal! "aygv]])
---	local text = vim.fn.getreg("a")
---	vim.fn.setreg("a", a_orig)
---	return text
---end

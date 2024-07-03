@@ -17,7 +17,7 @@ return function()
 	-- Don't specify any config here if you are using the default one.
 	local sources = {
 		btns.formatting.clang_format.with({
-			filetypes = { "c", "cpp" },
+			filetypes = { "c", "cpp", "objc", "objcpp", "cs", "java", "cuda", "proto" },
 			extra_args = formatter_args("clang_format"),
 		}),
 		btns.formatting.prettier.with({
@@ -42,6 +42,7 @@ return function()
 		log_level = "warn",
 		update_in_insert = false,
 		sources = sources,
+		default_timeout = require("core.settings").format_timeout,
 	})
 
 	require("completion.mason-null-ls").setup()

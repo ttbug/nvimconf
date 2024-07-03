@@ -127,10 +127,8 @@ return function()
 					chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 					exclude = {
 						buftype = {
-
 							"help",
 							"nofile",
-
 							"prompt",
 							"quickfix",
 							"terminal",

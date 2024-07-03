@@ -13,7 +13,6 @@ return function()
 			"alpha",
 			"bigfile",
 			"dap-repl",
-
 			"fugitive",
 			"git",
 			"notify",

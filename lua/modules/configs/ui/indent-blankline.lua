@@ -9,9 +9,7 @@ return function()
 		},
 		c = {
 			"case_statement",
-
 			"compound_literal_expression",
-
 			"enumerator_list",
 			"field_declaration_list",
 			"initializer_list",
@@ -24,7 +22,6 @@ return function()
 			"if_condition",
 			"macro_def",
 			"normal_command",
-
 			"while_loop",
 		},
 		cpp = {
@@ -54,7 +51,6 @@ return function()
 		},
 		dart = {
 			"arguments",
-
 			"class_body",
 			"formal_parameter",
 			"formal_parameter_list",
@@ -84,7 +80,6 @@ return function()
 			"return_statement",
 			"switch_case",
 			"switch_default",
-
 			"switch_statement",
 			"template_substitution",
 			"ternary_expression",
@@ -95,12 +90,9 @@ return function()
 			"do_block",
 			"list",
 			"map",
-
 			"tuple",
 		},
-
 		firrtl = {
-
 			"memory",
 		},
 		fortran = {
@@ -122,11 +114,9 @@ return function()
 			"external_function",
 			"function",
 			"import",
-
 			"let",
 			"list",
 			"constant",
-
 			"function",
 			"type_definition",
 			"type_alias",
@@ -135,7 +125,6 @@ return function()
 		},
 		go = {
 			"call_expression",
-
 			"communication_case",
 			"const_declaration",
 			"default_case",
@@ -149,13 +138,11 @@ return function()
 			"var_declaration",
 		},
 		html = {
-
 			"start_tag",
 			"self_closing_tag",
 		},
 		java = {
 			"annotation_argument_list",
-
 			"annotation_type_body",
 			"argument_list",
 			"array_initializer",
@@ -164,7 +151,6 @@ return function()
 			"element_value_array_initializer",
 			"enum_body",
 			"formal_parameters",
-
 			"interface_body",
 			"method_invocation",
 			"switch_block",
@@ -236,25 +222,21 @@ return function()
 		ninja = {
 			"build",
 			"pool",
-
 			"rule",
 		},
 		ocaml = {
 			"application_expression",
 			"do_clause",
 			"external",
-
 			"field_expression",
 			"if_expression",
 			"list_expression",
-
 			"parenthesized_expression",
 			"record_declaration",
 			"record_expression",
 			"try_expression",
 			"type_binding",
 			"value_specification",
-
 		},
 		pascal = {
 			"arrInitializer",
@@ -262,7 +244,6 @@ return function()
 			"declArgs",
 			"declClass",
 			"declConsts",
-
 			"declProc",
 			"declTypes",
 			"declUses",
@@ -280,7 +261,6 @@ return function()
 			"array_creation_expression",
 			"binary_expression",
 			"case_statement",
-
 			"compound_statement",
 			"declaration_list",
 			"default_statement",
@@ -288,15 +268,11 @@ return function()
 			"formal_parameters",
 			"match_block",
 			"member_call_expression",
-
 			"parenthesized_expression",
 			"return_statement",
-
 			"switch_block",
 		},
-
 		python = {
-
 			"binary_operator",
 			"case_clause",
 			"concatenated_string",
@@ -307,7 +283,6 @@ return function()
 			"lambda",
 			"list_pattern",
 			"match_statement",
-
 			"parenthesized_expression",
 			"try_statement",
 			"tuple_pattern",
@@ -319,7 +294,6 @@ return function()
 			"predicate",
 		},
 		r = {
-
 			"brace_list",
 			"call",
 			"paren_list",
@@ -341,23 +315,18 @@ return function()
 			"if",
 			"module",
 			"parenthesized_statements",
-
 			"singleton_class",
 			"singleton_method",
 			"unless",
-
 			"until",
-
 			"while",
 		},
-
 		rust = {
 			"arguments",
 			"array_expression",
 			"assignment_expression",
 			"call_expression",
 			"enum_variant_list",
-
 			"field_declaration_list",
 			"macro_definition",
 			"match_block",
@@ -365,7 +334,6 @@ return function()
 			"ordered_field_declaration_list",
 			"parameters",
 			"struct_expression",
-
 			"struct_pattern",
 			"token_repetition",
 			"token_tree",
@@ -373,7 +341,6 @@ return function()
 			"tuple_expression",
 			"tuple_pattern",
 			"tuple_struct_pattern",
-
 			"tuple_type",
 			"use_list",
 			"where_clause",
@@ -383,7 +350,6 @@ return function()
 			"declaration",
 			"each_statement",
 			"mixin_statement",
-
 			"while_statement",
 		},
 		sql = {
@@ -405,14 +371,11 @@ return function()
 			"assignment",
 			"call_expression",
 			"class_body",
-
 			"computed_getter",
 			"computed_property",
-
 			"computed_setter",
 			"control_transfer_statement",
 			"deinit_declaration",
-
 			"dictionary_literal",
 			"dictionary_type",
 			"didset_clause",
@@ -423,13 +386,11 @@ return function()
 			"subscript_declaration",
 			"tuple_expression",
 			"tuple_type",
-
 			"type_parameters",
 			"willset_clause",
 			"willset_didset_block",
 		},
 		tablegen = {
-
 			"assert",
 			"value_suffix",
 		},
@@ -494,11 +455,9 @@ return function()
 		xml = {
 			"element",
 		},
-
 		zig = {
 			"Block",
 			"ContainerDecl",
-
 			"InitList",
 			"SwitchExpr",
 		},
@@ -515,7 +474,6 @@ return function()
 		},
 		whitespace = { remove_blankline_trail = true },
 		-- Note: The `scope` field requires treesitter to be set up
-
 		scope = {
 			enabled = true,
 			char = "┃",
@@ -523,10 +481,8 @@ return function()
 			show_end = false,
 			injected_languages = true,
 			priority = 1000,
-
 			include = {
 				node_type = {
-
 					angular = nodes.html,
 					arduino = nodes.cpp,
 					astro = nodes.html,
@@ -557,7 +513,6 @@ return function()
 					luau = nodes.lua,
 					matlab = nodes.matlab,
 					ninja = nodes.ninja,
-
 					objc = nodes.c,
 					ocaml = nodes.ocaml,
 					ocaml_interface = nodes.ocaml,
@@ -586,19 +541,16 @@ return function()
 				},
 			},
 		},
-
 		exclude = {
 			buftypes = {
 				"help",
 				"nofile",
 				"prompt",
-
 				"quickfix",
 				"terminal",
 			},
 			filetypes = {
 				"", -- for all buffers without a file type
-
 				"alpha",
 				"bigfile",
 				"checkhealth",
@@ -608,9 +560,7 @@ return function()
 				"fugitiveblame",
 				"git",
 				"gitcommit",
-
 				"help",
-
 				"log",
 				"markdown",
 				"notify",
@@ -620,7 +570,6 @@ return function()
 				"TelescopePrompt",
 				"text",
 				"toggleterm",
-
 				"undotree",
 				"vimwiki",
 			},

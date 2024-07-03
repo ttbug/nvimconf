@@ -40,7 +40,7 @@ return function()
 				if venv then
 					return is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
 				else
-					return "python3"
+					return is_windows and "pythonw.exe" or "python3"
 				end
 			end,
 		},

@@ -8,9 +8,13 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
--- Set it to false if there are no need to format on save.
+-- Set it to false if there is no need to format on save.
 ---@type boolean
 settings["format_on_save"] = true
+
+-- Set format timeout here (in ms).
+---@type number
+settings["format_timeout"] = 1500
 
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean
@@ -33,6 +37,24 @@ settings["format_disabled_dirs"] = {
 	"~/format_disabled_dir",
 }
 
+-- Filetypes in this list will skip lsp formatting if rhs is true.
+---@type table<string, boolean>
+settings["formatter_block_list"] = {
+	lua = false, -- example
+}
+
+-- Servers in this list will skip setting formatting capabilities if rhs is true.
+---@type table<string, boolean>
+settings["server_formatting_block_list"] = {
+	lua_ls = true,
+	tsserver = true,
+	clangd = true,
+}
+
+-- Set it to false if you want to turn off LSP Inlay Hints
+---@type boolean
+settings["lsp_inlayhints"] = true
+
 -- Set it to false if diagnostics virtual text is annoying.
 -- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
 ---@type boolean
@@ -42,8 +64,8 @@ settings["diagnostics_virtual_text"] = true
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
 --  > e.g. if you set this option to `Warning`, only lsp warnings and errors will be shown.
 -- NOTE: This entry only works when `diagnostics_virtual_text` is true.
----@type "Error"|"Warning"|"Information"|"Hint"
-settings["diagnostics_level"] = "Hint"
+---@type "ERROR"|"WARN"|"INFO"|"HINT"
+settings["diagnostics_level"] = "HINT"
 
 -- Set the plugins to disable here.
 -- Example: "Some-User/A-Repo"
@@ -62,7 +84,7 @@ settings["load_big_files_faster"] = true
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`.
 ---@type string
 settings["colorscheme"] = "catppuccin"
 
@@ -80,20 +102,6 @@ settings["background"] = "dark"
 -- This entry is IGNORED on Windows and macOS, which have their default handlers builtin.
 ---@type string
 settings["external_browser"] = "chrome-cli open"
-
--- Filetypes in this list will skip lsp formatting if rhs is true.
----@type table<string, boolean>
-settings["formatter_block_list"] = {
-	lua = false, -- example
-}
-
--- Servers in this list will skip setting formatting capabilities if rhs is true.
----@type table<string, boolean>
-settings["server_formatting_block_list"] = {
-	lua_ls = true,
-	tsserver = true,
-	clangd = true,
-}
 
 -- Set the language servers that will be installed during bootstrap here.
 -- check the below link for all the supported LSPs:
@@ -148,6 +156,7 @@ settings["treesitter_deps"] = {
 	"html",
 	"javascript",
 	"json",
+	"jsonc",
 	"latex",
 	"lua",
 	"make",

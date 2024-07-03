@@ -31,7 +31,6 @@ return function()
 			comments_only = true,
 			max_line_len = 500,
 			exclude = {
-
 				"alpha",
 				"bigfile",
 				"checkhealth",
@@ -40,11 +39,9 @@ return function()
 				"help",
 				"log",
 				"notify",
-
 				"NvimTree",
 				"Outline",
 				"qf",
-
 				"TelescopePrompt",
 				"toggleterm",
 				"undotree",

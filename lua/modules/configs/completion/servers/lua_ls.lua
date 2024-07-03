@@ -2,6 +2,7 @@
 return {
 	settings = {
 		Lua = {
+			runtime = { version = "LuaJIT" },
 			diagnostics = {
 				globals = { "vim" },
 				disable = { "different-requires", "undefined-field" },
@@ -14,6 +15,7 @@ return {
 				maxPreload = 100000,
 				preloadFileSize = 10000,
 			},
+			hint = { enable = true, setType = true },
 			format = { enable = false },
 			telemetry = { enable = false },
 			-- Do not override treesitter lua highlighting with lua_ls's highlighting

@@ -12,12 +12,9 @@ return function()
 		},
 		priority = 80,
 		disable = {
-
 			"alpha",
-
 			"bigfile",
 			"checkhealth",
-
 			"dap-repl",
 			"diff",
 			"fugitive",
