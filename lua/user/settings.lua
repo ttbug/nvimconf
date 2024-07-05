@@ -33,13 +33,27 @@ settings["null_ls_deps"] = {
 	-- formatting
 	"clang_format",
 	"editorconfig_checker",
-	"prettier",
+	-- "prettier",
 	"shfmt",
 	"stylua",
 	"gofumpt",
 	"goimports",
 
 	"vint",
+}
+
+-- Set the language servers that will be installed during bootstrap here.
+-- check the below link for all the supported LSPs:
+-- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+---@type string[]
+settings["lsp_deps"] = {
+	--"bashls",
+	-- "clangd",
+	-- "html",
+	-- "jsonls",
+	"lua_ls",
+	"pylsp",
+	"gopls",
 }
 -- Set it to false if you don't use copilot
 ---@type boolean

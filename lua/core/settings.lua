@@ -108,12 +108,12 @@ settings["external_browser"] = "chrome-cli open"
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
 settings["lsp_deps"] = {
-	"bashls",
-	"clangd",
-	"html",
-	"jsonls",
-	"lua_ls",
-	"pylsp",
+	--"bashls",
+	--"clangd",
+	--"html",
+	--"jsonls",
+	--"lua_ls",
+	--"pylsp",
 	"gopls",
 }
 
@@ -126,7 +126,7 @@ settings["null_ls_deps"] = {
 	"clang_format",
 	"gofumpt",
 	"goimports",
-	"prettier",
+	-- "prettier",
 	"shfmt",
 	"stylua",
 	"vint",

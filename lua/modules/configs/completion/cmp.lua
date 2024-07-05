@@ -187,6 +187,7 @@ return function()
 			},
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
+			{ name = "cody" }, --sg.nvim
 			-- { name = "codeium" },
 			-- { name = "cmp_tabnine" },
 		},
