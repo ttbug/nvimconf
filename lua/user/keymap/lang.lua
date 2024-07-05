@@ -6,4 +6,5 @@ return {
 	["n|gt"] = map_cmd("<ESC><Cmd>GoTestFunc -v --count=1 -F<CR>"):with_noremap():with_silent(),
 	["n|<A-e>"] = map_cr("Trouble lsp_references"):with_noremap():with_silent(),
 	["n|<A-t>"] = map_cr("GoPkgOutline"):with_noremap():with_silent(),
+	["n|<A-c>"] = map_cr("GoTermClose"):with_noremap():with_silent(),
 }
