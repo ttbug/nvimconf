@@ -47,7 +47,7 @@ settings["formatter_block_list"] = {
 ---@type table<string, boolean>
 settings["server_formatting_block_list"] = {
 	lua_ls = true,
-	tsserver = true,
+	ts_ls = true,
 	clangd = true,
 }
 
