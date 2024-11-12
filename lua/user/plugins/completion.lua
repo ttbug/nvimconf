@@ -26,4 +26,10 @@ custom["dpayne/CodeGPT.nvim"] = {
 	config = require("user.configs.tool.groq"),
 }
 
+--custom["luozhiya/fittencode.nvim"] = {
+--	lazy = false,
+--	event = { "InsertEnter", "CmdlineEnter" },
+--	config = require("user.configs.tool.fittencode"),
+--}
+
 return custom
