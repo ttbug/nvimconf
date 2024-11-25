@@ -16,15 +16,15 @@ local custom = {}
 --	config = require("user.configs.tool.fittencode"),
 --}
 
-custom["dpayne/CodeGPT.nvim"] = {
-	lazy = true,
-	event = { "CmdlineEnter" },
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"MunifTanjim/nui.nvim",
-	},
-	config = require("user.configs.tool.groq"),
-}
+--custom["dpayne/CodeGPT.nvim"] = {
+--	lazy = true,
+--	event = { "CmdlineEnter" },
+--	dependencies = {
+--		"nvim-lua/plenary.nvim",
+--		"MunifTanjim/nui.nvim",
+--	},
+--	config = require("user.configs.tool.groq"),
+--}
 
 --custom["luozhiya/fittencode.nvim"] = {
 --	lazy = false,
