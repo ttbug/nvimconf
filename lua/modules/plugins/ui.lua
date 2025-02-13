@@ -7,7 +7,7 @@ ui["goolord/alpha-nvim"] = {
 }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	event = { "BufReadPre", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
 ui["Jint-lzxy/nvim"] = {
@@ -67,6 +67,10 @@ ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.scrollview"),
+}
+ui["folke/edgy.nvim"] = {
+	event = "VeryLazy",
+	config = require("ui.edgy"),
 }
 
 return ui

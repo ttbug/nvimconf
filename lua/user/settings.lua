@@ -22,6 +22,7 @@ settings["disabled_plugins"] = {
 	"tpope/vim-fugitive",
 	"dstein64/nvim-scrollview",
 	"Bekaboo/dropbar.nvim",
+	"MeanderingProgrammer/render-markdown.nvim",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here
@@ -57,7 +58,7 @@ settings["lsp_deps"] = {
 }
 -- Set it to false if you don't use copilot
 ---@type boolean
-settings["use_copilot"] = false
+settings["use_copilot"] = true
 
 -- Set it to false if you want to turn off LSP Inlay Hints
 ---@type boolean
