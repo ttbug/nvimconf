@@ -43,7 +43,6 @@ return function()
 			gitsigns = true,
 			grug_far = true,
 			hop = true,
-			illuminate = true,
 			indent_blankline = { enabled = true, colored_indent_levels = true },
 			lsp_saga = true,
 			lsp_trouble = true,

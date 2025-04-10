@@ -19,9 +19,8 @@ editor["m4xshen/autoclose.nvim"] = {
 	event = "InsertEnter",
 	config = require("editor.autoclose"),
 }
-editor["LunarVim/bigfile.nvim"] = {
+editor["pteroctopus/faster.nvim"] = {
 	lazy = false,
-	config = require("editor.bigfile"),
 	cond = require("core.settings").load_big_files_faster,
 }
 editor["ojroques/nvim-bufdel"] = {
@@ -61,13 +60,10 @@ editor["smoka7/hop.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.hop"),
 }
-editor["tzachar/local-highlight.nvim"] = {
+editor["echasnovski/mini.cursorword"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("editor.local-highlight"),
-	dependencies = {
-		{ "folke/snacks.nvim" },
-	},
+	config = require("editor.cursorword"),
 }
 editor["brenoprata10/nvim-highlight-colors"] = {
 	lazy = true,
@@ -109,6 +105,10 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "andymass/vim-matchup" },
 		{ "mfussenegger/nvim-treehopper" },
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
+		{
+			"andymass/vim-matchup",
+			init = require("editor.matchup"),
+		},
 		{
 			"windwp/nvim-ts-autotag",
 			config = require("editor.autotag"),
