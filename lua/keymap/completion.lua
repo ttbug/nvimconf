@@ -21,12 +21,14 @@ function M.lsp(buf)
 		-- LSP-related keymaps, ONLY effective in buffers with LSP(s) attached
 		["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
 		["n|<leader>lr"] = map_cr("LspRestart"):with_silent():with_buffer(buf):with_nowait():with_desc("lsp: Restart"),
-		["n|go"] = map_callback(function()
-				require("edgy").toggle("right")
-			end)
+		["n|go"] = map_cr("Trouble symbols toggle win.position=right")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
+		["n|gto"] = map_cr("Telescope lsp_document_symbols")
+			:with_silent()
+			:with_buffer(buf)
+			:with_desc("lsp: Toggle outline in Telescope"),
 		["n|g["] = map_cr("Lspsaga diagnostic_jump_prev")
 			:with_silent()
 			:with_buffer(buf)
@@ -43,10 +45,10 @@ function M.lsp(buf)
 			vim.lsp.buf.signature_help()
 		end):with_desc("lsp: Signature help"),
 		["n|gr"] = map_cr("Lspsaga rename")
- 			:with_silent()
- 			:with_nowait()
- 			:with_buffer(buf)
- 			:with_desc("lsp: Rename in file range"),
+			:with_silent()
+			:with_nowait()
+			:with_buffer(buf)
+			:with_desc("lsp: Rename in file range"),
 		["n|gR"] = map_cr("Lspsaga rename ++project")
 			:with_silent()
 			:with_buffer(buf)
