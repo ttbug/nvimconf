@@ -4,6 +4,10 @@ local settings = {}
 -- Examples
 settings["use_ssh"] = false
 
+-- Set it to false if you don't use AI chat functionality.
+---@type boolean
+settings["use_chat"] = false
+
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
 ---@type string

@@ -3,7 +3,7 @@ local options = {
 	autoindent = true,
 	cursorcolumn = false,
 	cursorline = true,
-	mouse = "c",
+	mouse = "a",
 	equalalways = true,
 }
 

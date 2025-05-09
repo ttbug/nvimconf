@@ -1,13 +1,14 @@
 local completion = {}
 local use_copilot = require("core.settings").use_copilot
+local use_chat = require("core.settings").use_chat
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("completion.lsp"),
 	dependencies = {
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
+		{ "williamboman/mason.nvim", version = "1.11.0" },
+		{ "williamboman/mason-lspconfig.nvim", version = "1.32.0" },
 		{ "folke/neoconf.nvim" },
 		{
 			"Jint-lzxy/lsp_signature.nvim",
@@ -40,11 +41,11 @@ completion["nvimtools/none-ls.nvim"] = {
 	},
 }
 completion["rachartier/tiny-inline-diagnostic.nvim"] = {
- 	lazy = true,
- 	event = "VeryLazy",
- 	priority = 1000, -- needs to be loaded in first
- 	config = require("completion.tiny-inline-diagnostic"),
- }
+	lazy = true,
+	event = "VeryLazy",
+	priority = 1000, -- needs to be loaded in first
+	config = require("completion.tiny-inline-diagnostic"),
+}
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
 	event = "InsertEnter",
@@ -66,15 +67,6 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
 		{ "ray-x/cmp-treesitter", commit = "c8e3a74" },
-		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },
-		-- {
-		-- 	"jcdickinson/codeium.nvim",
-		-- 	dependencies = {
-		-- 		"nvim-lua/plenary.nvim",
-		-- 		"MunifTanjim/nui.nvim",
-		-- 	},
-		-- 	config = require("completion.codeium"),
-		-- },
 	},
 }
 if use_copilot then
@@ -89,6 +81,13 @@ if use_copilot then
 				config = require("completion.copilot-cmp"),
 			},
 		},
+	}
+end
+if use_chat then
+	completion["olimorris/codecompanion.nvim"] = {
+		lazy = true,
+		event = "VeryLazy",
+		config = require("completion.codecompanion"),
 	}
 end
 
