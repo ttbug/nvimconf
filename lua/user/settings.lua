@@ -6,7 +6,7 @@ settings["use_ssh"] = false
 
 -- Set it to false if you don't use AI chat functionality.
 ---@type boolean
-settings["use_chat"] = false
+settings["use_chat"] = true
 
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
@@ -74,5 +74,11 @@ settings["lsp_inlayhints"] = false
 -- NOTE: This entry only works when `diagnostics_virtual_text` is true.
 ---@type "ERROR"|"WARN"|"INFO"|"HINT"
 settings["diagnostics_level"] = "WARN"
+
+-- Set the search backend to use here.
+-- telescope is enough for most cases.
+-- fzf is more powerful for searching in huge repo but needs fzf binary installed.
+---@type "telescope"|"fzf"
+settings["search_backend"] = "telescope"
 
 return settings
