@@ -22,6 +22,7 @@ editor["m4xshen/autoclose.nvim"] = {
 editor["pteroctopus/faster.nvim"] = {
 	lazy = false,
 	cond = require("core.settings").load_big_files_faster,
+	config = require("editor.faster"),
 }
 editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
@@ -115,6 +116,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		},
 		{
 			"hiphish/rainbow-delimiters.nvim",
+			submodules = false,
 			config = require("editor.rainbow_delims"),
 		},
 		{

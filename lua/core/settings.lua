@@ -1,13 +1,12 @@
 local settings = {}
 
--- Set it to false if you want to use https to update plugins and treesitter parsers.
+-- Set to false if you want to use HTTPS to update plugins and Treesitter parsers.
 ---@type boolean
 settings["use_ssh"] = true
 
--- Set it to false if you don't use copilot
+-- Set to false if you don't use copilot
 ---@type boolean
 settings["use_copilot"] = true
-
 
 -- Set it to false if there is no need to format on save.
 ---@type boolean
@@ -29,15 +28,6 @@ settings["format_notify"] = true
 ---@type boolean
 settings["format_modifications_only"] = false
 
--- Set the format disabled directories here, files under these dirs won't be formatted on save.
---- NOTE: Directories may contain regular expressions (grammar: vim). |regexp|
---- NOTE: Directories are automatically normalized. |vim.fs.normalize()|
----@type string[]
-settings["format_disabled_dirs"] = {
-	-- Example
-	"~/format_disabled_dir",
-}
-
 -- Filetypes in this list will skip lsp formatting if rhs is true.
 ---@type table<string, boolean>
 settings["formatter_block_list"] = {
@@ -52,10 +42,17 @@ settings["server_formatting_block_list"] = {
 	clangd = true,
 }
 
--- Set it to false if you want to turn off LSP Inlay Hints
----@type boolean
-settings["lsp_inlayhints"] = true
+-- Directories where formatting on save is disabled.
+-- NOTE: Strings may contain regular expressions (vim regex). |regexp|
+-- NOTE: Directories are automatically normalized using |vim.fs.normalize()|.
+---@type string[]
+settings["format_disabled_dirs"] = {
+	-- Example
+	"~/format_disabled_dir",
+}
 
+-- Set to false to disable diagnostic virtual lines.
+-- If disabled, use trouble.nvim to view diagnostics (press `<leader>ld` to toggle).
 ---@type boolean
 settings["diagnostics_virtual_lines"] = false
 
@@ -131,9 +128,8 @@ settings["null_ls_deps"] = {
 	"vint",
 }
 
--- Set the Debug Adapter Protocol (DAP) clients that will be installed and configured during bootstrap here.
--- Check the below link for all supported DAPs:
--- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
+-- Debug Adapter Protocol (DAP) clients to install and configure during bootstrap.
+-- Supported DAPs: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 ---@type string[]
 settings["dap_deps"] = {
 	"codelldb", -- C-Family
@@ -141,9 +137,8 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
--- Set the Treesitter parsers that will be installed during bootstrap here.
--- Check the below link for all supported languages:
--- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+-- Treesitter parsers to install during bootstrap.
+-- Full list: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 ---@type string[]
 settings["treesitter_deps"] = {
 	"bash",
@@ -177,22 +172,24 @@ settings["gui_config"] = {
 	font_size = 12,
 }
 
--- Set the options specific to `neovide` here.
--- NOTE: You should remove the `neovide_` prefix (with trailing underscore) from all your entries below.
--- Check the below link for all supported entries:
--- https://neovide.dev/configuration.html
+-- Specific settings for `neovide`.
+-- Remove the `neovide_` prefix (with trailing underscore) from all entries below.
+-- Supported entries: https://neovide.dev/configuration.html
 ---@type table<string, boolean|number|string>
 settings["neovide_config"] = {
-	no_idle = true,
-	refresh_rate = 120,
-	cursor_vfx_mode = "railgun",
-	cursor_vfx_opacity = 200.0,
+	no_idle = false,
+	input_ime = true,
+	fullscreen = true,
+	padding_left = 8,
+	confirm_quit = true,
+	cursor_vfx_mode = "torpedo",
+	cursor_trail_size = 0.05,
 	cursor_antialiasing = true,
-	cursor_trail_length = 0.05,
+	hide_mouse_when_typing = true,
+	input_macos_alt_is_meta = false,
 	cursor_animation_length = 0.03,
 	cursor_vfx_particle_speed = 20.0,
 	cursor_vfx_particle_density = 5.0,
-	cursor_vfx_particle_lifetime = 1.2,
 }
 
 -- Set the dashboard startup image here
@@ -225,6 +222,15 @@ settings["dashboard_image"] = {
 ---@type boolean
 settings["use_chat"] = true
 
+-- Set the language to use for AI chat response here.
+--- @type string
+settings["chat_lang"] = "Chinese"
+
+-- Set environment variable here to read API key for AI chat.
+-- or you can set it to a command that reads the API key from your password manager.
+-- e.g. "cmd:op read op://personal/OpenAI/credential --no-new
+--- @type string
+settings["chat_api_key"] = ""
 
 -- Set the chat models here and use the first entry as default model.
 -- We use `openrouter` as the chat model provider by default (No vested interest).
@@ -247,10 +253,14 @@ settings["chat_models"] = {
 	"anthropic/claude-sonnet-4",
 }
 
--- Set the search backend to use here.
--- telescope is enough for most cases.
--- fzf is more powerful for searching in huge repo but needs fzf binary installed.
+-- Set the search backend here.
+-- `telescope` is sufficient for most use cases.
+-- `fzf` is faster for large repositories but requires the fzf binary.
 ---@type "telescope"|"fzf"
 settings["search_backend"] = "telescope"
+
+-- Set to false to disable LSP inlay hints.
+---@type boolean
+settings["lsp_inlayhints"] = false
 
 return require("modules.utils").extend_config(settings, "user.settings")

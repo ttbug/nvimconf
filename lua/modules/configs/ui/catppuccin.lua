@@ -49,7 +49,7 @@ return function()
 			markdown = true,
 			mason = true,
 
-			mini = { enabled = true, indentscope_color = "" },
+			mini = { enabled = true},
 			native_lsp = {
 				enabled = true,
 				virtual_text = {

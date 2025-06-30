@@ -1,7 +1,7 @@
 return function()
 	require("modules.utils").load_plugin("mini.align", {
 		-- Whether to disable showing non-error feedback
-		silent = false,
+		silent = true,
 		-- Module mappings. Use `''` (empty string) to disable one.
 		mappings = {
 			start = "gea",

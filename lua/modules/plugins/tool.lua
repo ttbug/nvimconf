@@ -76,7 +76,7 @@ tool["gelguy/wilder.nvim"] = {
 }
 
 if settings.search_backend == "fzf" then
-	-- require fzf binary installed
+	-- requires the fzf binary to be installed
 	tool["ibhagwan/fzf-lua"] = {
 		lazy = true,
 		event = "VeryLazy",
