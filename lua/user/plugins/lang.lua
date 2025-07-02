@@ -14,7 +14,7 @@ local custom = {}
 --	build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 --}
 custom["OXY2DEV/markview.nvim"] = {
-	lazy = false,
+	lazy = true,
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",

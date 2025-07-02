@@ -13,16 +13,6 @@ return function()
 			-- Only set these options specific to this terminal buffer.
 			vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local" })
 			vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
-
-			-- Prevent horizontal terminal from obscuring `nvim-tree`.
-			local api = require("nvim-tree.api")
-			local tree = require("nvim-tree.view")
-			if tree.is_visible() and term.direction == "horizontal" then
-				tree.View.width = vim.fn.winwidth(tree.get_winnr())
-				api.tree.toggle()
-				api.tree.toggle(false, true)
-			end
-
 		end,
 		highlights = {
 			Normal = {
