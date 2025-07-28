@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	end,
 })
 
-
 return function()
 	local has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()

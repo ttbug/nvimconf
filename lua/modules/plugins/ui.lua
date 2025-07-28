@@ -56,7 +56,7 @@ ui["folke/todo-comments.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.todo"),
-	dependencies = { "nvim-lua/plenary.nvim" },
+	dependencies = "nvim-lua/plenary.nvim",
 }
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
@@ -65,7 +65,7 @@ ui["dstein64/nvim-scrollview"] = {
 }
 --ui["folke/edgy.nvim"] = {
 --	lazy = true,
---	event = { "VeryLazy" },
+--	event = "VeryLazy",
 --	config = require("ui.edgy"),
 --}
 
