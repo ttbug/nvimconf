@@ -51,15 +51,15 @@ settings["format_disabled_dirs"] = {
 	"~/format_disabled_dir",
 }
 
--- Set to false to disable diagnostic virtual lines.
--- If disabled, use trouble.nvim to view diagnostics (press `<leader>ld` to toggle).
+-- Set to false to disable virtual lines for diagnostics.
+-- You can still view diagnostics using trouble.nvim (`<leader>ld`).
 ---@type boolean
-settings["diagnostics_virtual_lines"] = false
+settings["diagnostics_virtual_lines"] = true
 
 -- Set it to one of the values below if you want to change the visible severity level of lsp diagnostics.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
 --  > e.g. if you set this option to `Warning`, only lsp warnings and errors will be shown.
--- NOTE: This entry only works when `diagnostics_virtual_text` is true.
+-- NOTE: This entry only works when `diagnostics_virtual_lines` is true.
 ---@type "ERROR"|"WARN"|"INFO"|"HINT"
 settings["diagnostics_level"] = "HINT"
 
@@ -240,15 +240,15 @@ settings["chat_api_key"] = ""
 --- @type string[]
 settings["chat_models"] = {
 	-- free models
-	"mistralai/devstral-small:free", -- default
-	"qwen/qwen-2.5-coder-32b-instruct:free",
+	"moonshotai/kimi-k2:free", -- default
+	"qwen/qwen3-coder:free",
 	"deepseek/deepseek-chat-v3-0324:free",
 	"deepseek/deepseek-r1:free",
 	"google/gemma-3-27b-it:free",
 	-- paid models
 	"openai/gpt-4.1-mini",
-	"google/gemini-2.0-flash-001",
-	"google/gemini-2.5-flash-preview-05-20",
+	"google/gemini-2.5-flash-lite",
+	"google/gemini-2.5-flash",
 	"anthropic/claude-3.7-sonnet",
 	"anthropic/claude-sonnet-4",
 }

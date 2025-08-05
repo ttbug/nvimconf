@@ -26,6 +26,10 @@ completion["DNLHC/glance.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.glance"),
 }
+completion["rachartier/tiny-inline-diagnostic.nvim"] = {
+	lazy = false,
+	config = require("completion.tiny-inline-diagnostic"),
+}
 completion["joechrisellis/lsp-format-modifications.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
@@ -38,12 +42,6 @@ completion["nvimtools/none-ls.nvim"] = {
 		"nvim-lua/plenary.nvim",
 		"jay-babu/mason-null-ls.nvim",
 	},
-}
-completion["rachartier/tiny-inline-diagnostic.nvim"] = {
-	lazy = true,
-	event = "VeryLazy",
-	priority = 1000, -- needs to be loaded in first
-	config = require("completion.tiny-inline-diagnostic"),
 }
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
@@ -66,19 +64,19 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "kdheepak/cmp-latex-symbols" },
 	},
 }
-if use_copilot then
-	completion["zbirenbaum/copilot.lua"] = {
-		lazy = true,
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = require("completion.copilot"),
-		dependencies = {
-			{
-				"zbirenbaum/copilot-cmp",
-				config = require("completion.copilot-cmp"),
-			},
+
+completion["zbirenbaum/copilot.lua"] = {
+	lazy = true,
+	cond = require("core.settings").use_copilot,
+	cmd = "Copilot",
+	event = "InsertEnter",
+	config = require("completion.copilot"),
+	dependencies = {
+		{
+			"zbirenbaum/copilot-cmp",
+			config = require("completion.copilot-cmp"),
 		},
-	}
-end
+	},
+}
 
 return completion
