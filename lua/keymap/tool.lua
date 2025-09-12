@@ -4,7 +4,7 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
-local hrlpers = require("keymap.helpers")
+local helpers = require("keymap.helpers")
 
 local mappings = {
 	plugins = {
@@ -101,7 +101,7 @@ local mappings = {
 
 		-- Plugin: telescope
 		["n|<C-p>"] = map_callback(function()
-			helpers.picker("keymaps", {
+				helpers.picker("keymaps", {
 					lhs_filter = function(lhs)
 						return not string.find(lhs, "Þ")
 					end,
