@@ -66,7 +66,7 @@ local function load_options()
 		splitkeep = "screen",
 		splitright = true,
 		startofline = false,
-		swapfile = true,
+		swapfile = fasle,
 		switchbuf = "usetab,uselast",
 		termguicolors = true,
 		timeout = true,
