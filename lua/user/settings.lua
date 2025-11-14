@@ -6,7 +6,7 @@ settings["use_ssh"] = false
 
 -- Set it to false if you don't use AI chat functionality.
 ---@type boolean
-settings["use_chat"] = true
+settings["use_chat"] = false
 
 -- Set the chat models here and use the first entry as default model.
 -- We use `openrouter` as the chat model provider by default (No vested interest).
