@@ -66,7 +66,7 @@ local function load_options()
 		splitkeep = "screen",
 		splitright = true,
 		startofline = false,
-		swapfile = fasle,
+		swapfile = false,
 		switchbuf = "usetab,uselast",
 		termguicolors = true,
 		timeout = true,
@@ -89,7 +89,6 @@ local function load_options()
 		wrapscan = true,
 		writebackup = true,
 		-- bw local --
-		autoindent = true,
 		breakindentopt = "shift:2,min:20",
 		concealcursor = "niv",
 		conceallevel = 0,
