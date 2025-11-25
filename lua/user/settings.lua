@@ -78,8 +78,6 @@ settings["lsp_deps"] = {
 	-- "html",
 	-- "jsonls",
 	"lua_ls",
-	"pylsp",
-	"gopls",
 }
 -- Set it to false if you don't use copilot
 ---@type boolean

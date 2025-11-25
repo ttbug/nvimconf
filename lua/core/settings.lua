@@ -39,6 +39,7 @@ settings["formatter_block_list"] = {
 settings["server_formatting_block_list"] = {
 	lua_ls = true,
 	ts_ls = true,
+	ruff = false, -- set to false to enable ruff formatting, see discussion #1485
 	clangd = true,
 }
 
@@ -111,6 +112,8 @@ settings["lsp_deps"] = {
 	--"lua_ls",
 	--"pylsp",
 	"gopls",
+	"ruff",
+	"zuban",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here.
