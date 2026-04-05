@@ -27,7 +27,7 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
 		["n|gto"] = map_callback(function()
-			helpers.picker("lsp_document_symbols")
+				helpers.picker("lsp_document_symbols")
 			end)
 			:with_silent()
 			:with_buffer(buf)

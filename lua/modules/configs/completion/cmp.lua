@@ -29,7 +29,6 @@ return function()
 		return (diff < 0)
 	end
 
-
 	local comparators = vim.list_extend(require("core.settings").use_copilot and {
 		require("copilot_cmp.comparators").prioritize,
 		require("copilot_cmp.comparators").score,
@@ -47,6 +46,7 @@ return function()
 		compare.length,
 		compare.order,
 	})
+
 	local cmp = require("cmp")
 	require("modules.utils").load_plugin("cmp", {
 		preselect = cmp.PreselectMode.None,

@@ -1,6 +1,5 @@
 local tool = {}
 local settings = require("core.settings")
-local use_chat = require("core.settings").use_chat
 
 tool["tpope/vim-fugitive"] = {
 	lazy = true,
@@ -14,7 +13,6 @@ tool["tpope/vim-fugitive"] = {
 -- 	config = require("tool.fcitx5"),
 -- }
 tool["Bekaboo/dropbar.nvim"] = {
-
 	lazy = false,
 	config = require("tool.dropbar"),
 	dependencies = {
@@ -74,17 +72,7 @@ tool["gelguy/wilder.nvim"] = {
 	config = require("tool.wilder"),
 	dependencies = "romgrk/fzy-lua-native",
 }
-
--- Needs `fzf` installed and in $PATH
-tool["ibhagwan/fzf-lua"] = {
-	lazy = true,
-	cond = (settings.search_backend == "fzf"),
-	cmd = "FzfLua",
-	config = require("tool.fzf-lua"),
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-}
-
-if use_chat then
+if settings.use_chat then
 	tool["olimorris/codecompanion.nvim"] = {
 		lazy = true,
 		event = "VeryLazy",
@@ -94,6 +82,14 @@ if use_chat then
 		},
 	}
 end
+-- Needs `fzf` installed and in $PATH
+tool["ibhagwan/fzf-lua"] = {
+	lazy = true,
+	cond = (settings.search_backend == "fzf"),
+	cmd = "FzfLua",
+	config = require("tool.fzf-lua"),
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --

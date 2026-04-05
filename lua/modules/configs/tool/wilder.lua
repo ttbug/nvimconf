@@ -50,6 +50,7 @@ return function()
 			wilder.popupmenu_scrollbar(),
 		},
 	}))
+
 	local wildmenu_renderer = wilder.wildmenu_renderer({
 		apply_incsearch_fix = false,
 		highlighter = wilder.lua_fzy_highlighter(),
@@ -57,6 +58,7 @@ return function()
 		left = { " ", wilder.wildmenu_spinner(), " " },
 		right = { " ", wilder.wildmenu_index() },
 	})
+
 	wilder.set_option(
 		"renderer",
 		wilder.renderer_mux({

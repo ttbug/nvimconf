@@ -11,6 +11,7 @@ return function()
 	end
 
 	require("modules.utils").load_plugin("edgy", {
+		animate = { enabled = false },
 		close_when_all_hidden = true,
 		exit_when_last = true,
 		wo = { winbar = false },
@@ -58,7 +59,7 @@ return function()
 				filter = function(_, win)
 					local cfg = vim.api.nvim_win_get_config(win)
 					local term = require("toggleterm.terminal").get(1)
-					return cfg.relative == "" and term.direction == "horizontal"
+					return cfg.relative == "" and term and term.direction == "horizontal"
 				end,
 			},
 			{

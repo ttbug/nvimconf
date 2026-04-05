@@ -1,3 +1,5 @@
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/clangd.lua
+
 local function switch_source_header_splitcmd(bufnr, splitcmd, client)
 	local method_name = "textDocument/switchSourceHeader"
 	---@diagnostic disable-next-line:param-type-mismatch
@@ -85,12 +87,15 @@ return function(defaults)
 			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeader", function()
 				switch_source_header_splitcmd(bufnr, "edit", client)
 			end, { desc = "Open source/header in a new vsplit" })
+
 			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeaderVsplit", function()
 				switch_source_header_splitcmd(bufnr, "vsplit", client)
 			end, { desc = "Open source/header in a new vsplit" })
+
 			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeaderSplit", function()
 				switch_source_header_splitcmd(bufnr, "split", client)
 			end, { desc = "Open source/header in a new split" })
+
 			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdShowSymbolInfo", function()
 				symbol_info(bufnr, client)
 			end, { desc = "Show symbol info" })

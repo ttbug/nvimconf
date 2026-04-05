@@ -16,7 +16,6 @@ return function()
 		plugins = {
 			marks = true,
 			registers = true,
-
 			spelling = {
 				enabled = true,
 				suggestions = 20,
@@ -37,7 +36,6 @@ return function()
 			wo = { winblend = 0 },
 		},
 		expand = 1,
-
 		icons = {
 			group = "",
 			rules = false,

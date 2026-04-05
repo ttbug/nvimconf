@@ -8,10 +8,8 @@ return function()
 		-- Milliseconds that must pass before updating marks, updates occur
 		-- within the context of the visible window, not the entire buffer
 		debounce = 100,
-
 		-- Vim modes that will show a rendered view of the markdown file
 		-- All other modes will be uneffected by this plugin
-
 		render_modes = { "n", "c", "t" },
 		-- This enables hiding any added text on the line the cursor is on
 		-- This does have a performance penalty as we must listen to the 'CursorMoved' event

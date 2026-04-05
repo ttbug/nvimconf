@@ -1,15 +1,11 @@
 return function()
 	require("modules.utils").load_plugin("grug-far", {
 		engine = "ripgrep",
-
 		engines = {
 			ripgrep = {
 				path = "rg",
-
 				showReplaceDiff = true,
-
 				placeholders = {
-
 					enabled = true,
 				},
 			},
@@ -18,7 +14,6 @@ return function()
 		icons = { enabled = true },
 		disableBufferLineNumbers = true,
 		windowCreationCommand = "bot split",
-
 		keymaps = {
 			replace = { n = ",r" },
 			qflist = { n = ",q" },

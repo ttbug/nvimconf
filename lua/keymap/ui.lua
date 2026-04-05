@@ -97,7 +97,6 @@ function M.gitsigns(bufnr)
 				vim.schedule(function()
 					gitsigns.nav_hunk("next")
 				end)
-
 				return "<Ignore>"
 			end)
 			:with_buffer(bufnr)

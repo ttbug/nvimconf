@@ -1,4 +1,4 @@
--- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/gopls.lua
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/gopls.lua
 return {
 	cmd = { "gopls", "-remote.debug=:0", "-remote=auto" },
 	filetypes = { "go", "gomod", "gosum", "gotmpl", "gohtmltmpl", "gotexttmpl" },
@@ -35,9 +35,7 @@ return {
 			completeUnimported = true,
 			symbolMatcher = "Fuzzy",
 			buildFlags = { "-tags", "integration" },
-			semanticTokenTypes = {
-				string = false,
-			},
+			semanticTokenTypes = { string = false },
 			codelenses = {
 				generate = true,
 				gc_details = true,

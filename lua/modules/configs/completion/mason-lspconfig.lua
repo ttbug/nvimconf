@@ -51,6 +51,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		if not ok then
 			ok, custom_handler = default_ok, default_handler
 		end
+
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			require("modules.utils").register_server(lsp_name, opts)

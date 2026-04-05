@@ -1,5 +1,4 @@
 local completion = {}
-local use_copilot = require("core.settings").use_copilot
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
@@ -59,7 +58,6 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "kdheepak/cmp-latex-symbols" },
 	},
 }
-
 completion["zbirenbaum/copilot.lua"] = {
 	lazy = true,
 	cond = require("core.settings").use_copilot,

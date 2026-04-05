@@ -7,11 +7,10 @@ return function()
 	local builtins = require("telescope.builtin")
 	local prompt_pos = require("telescope.config").values.layout_config.horizontal.prompt_position
 
-
 	local base_opts = use_fzf and { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") } }
 		or {}
 
-		---Returns current directory and whether it's a Git repo root
+	---Returns current directory and whether it's a Git repo root
 	---@return string @Current working directory
 	---@return boolean|nil @true if `.git` folder exists here, false if `.git` exists but isn't folder, nil if `.git` missing
 	local function get_root_info()
@@ -20,7 +19,7 @@ return function()
 		return cwd, stat and stat.type == "directory"
 	end
 
-		---Creates a file search function based on backend and context
+	---Creates a file search function based on backend and context
 	---@param fzf_fn string @Name of the fzf-lua function to call (e.g. "files")
 	---@param tb_fn function @Telescope builtin function to call (e.g. `builtin.find_files`)
 	---@param git_only boolean @Whether to restrict search to git tracked files only
@@ -72,7 +71,6 @@ return function()
 					extensions.frecency.frecency()
 				end,
 			},
-			-- Retrieve dossiers
 			{ "Oldfiles", use_fzf and function()
 				fzf.oldfiles(base_opts)
 			end or builtins.oldfiles },
@@ -96,7 +94,6 @@ return function()
 					extensions.projects.projects()
 				end,
 			},
-			-- Miscellaneous
 			{ "Zoxide", extensions.zoxide.list },
 		},
 		misc = {

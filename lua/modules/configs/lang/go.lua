@@ -1,32 +1,21 @@
 return function()
 	require("modules.utils").load_plugin("go", {
-		fillstruct = "gopls",
-		lsp_keymaps = false,
-		dap_debug_vt = true,
-		dap_debug_gui = true,
-		test_runner = "go", -- richgo, go test, richgo, dlv, ginkgo
-		dap_debug = true,
-		dap_debug_keymap = false,
+		-- By default, we've turned off these options to prevent clashes with our gopls config
 		icons = false,
-		gofmt = "gopls",
-		goimports = "gopls",
-		lsp_gofumpt = true,
+		diagnostic = false,
+		lsp_cfg = false,
+		lsp_gofumpt = false,
+		lsp_keymaps = false,
+		lsp_codelens = false,
 		lsp_document_formatting = false,
 		lsp_inlay_hints = { enable = false },
+		-- DAP-related settings are also turned off here for the same reason
+		dap_debug = false,
+		dap_debug_keymap = false,
 		textobjects = false,
+		-- Miscellaneous options to seamlessly integrate with other plugins
+		trouble = true,
 		luasnip = false,
 		run_in_floaterm = false,
-		trouble = true,
-		lsp_codelens = false,
-		gopls_remote_auto = true,
-		diagnostic = { -- set diagnostic to false to disable vim.diagnostic setup
-			hdlr = false, -- hook lsp diag handler and send diag to quickfix
-			underline = false,
-			-- virtual text setup
-			virtual_text = { spacing = 0, prefix = "■" },
-			signs = true,
-			update_in_insert = false,
-		},
-		lsp_cfg = true,
 	})
 end

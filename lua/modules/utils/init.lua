@@ -66,16 +66,14 @@ local function init_palette()
 				red = "#E95678",
 				maroon = "#B33076",
 				peach = "#FF8700",
-
 				yellow = "#F7BB3B",
 				green = "#AFD700",
-
 				sapphire = "#36D0E0",
 				blue = "#61AFEF",
-
 				sky = "#04A5E5",
 				teal = "#B5E8E0",
 				lavender = "#7287FD",
+
 				text = "#F2F2BF",
 				subtext1 = "#BAC2DE",
 				subtext0 = "#A6ADC8",
@@ -84,7 +82,6 @@ local function init_palette()
 				overlay0 = "#6E6B6B",
 				surface2 = "#6E6C7E",
 				surface1 = "#575268",
-
 				surface0 = "#302D41",
 
 				base = "#1D1536",
@@ -366,8 +363,9 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 			if ok then
 				-- Extend base config if the returned user config is a table
 				if type(user_config) == "table" then
-					  opts = tbl_recursive_merge(opts, user_config)
-					  setup_callback(opts)
+					opts = tbl_recursive_merge(opts, user_config)
+					setup_callback(opts)
+				-- Replace base config if the returned user config is a function
 				elseif type(user_config) == "function" then
 					local user_opts = user_config(opts)
 					if type(user_opts) == "table" then

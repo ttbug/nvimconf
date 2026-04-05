@@ -17,7 +17,6 @@ return function()
 			selection_caret = icons.ui.ChevronRight,
 			scroll_strategy = "limit",
 			results_title = false,
-			-- layout_strategy = "horizontal",
 			layout_strategy = "flex",
 			path_display = { "absolute" },
 			selection_strategy = "reset",

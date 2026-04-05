@@ -33,7 +33,6 @@ M.telescope_collections = function(opts)
 					local selection = state.get_selected_entry()
 					require("search").open({ collection = selection[1] })
 				end)
-
 				return true
 			end,
 		})
@@ -49,7 +48,6 @@ M.toggle_inlayhint = function()
 		{ title = "LSP Inlay Hint" }
 	)
 end
-
 
 M.toggle_virtuallines = function()
 	require("tiny-inline-diagnostic").toggle()
@@ -106,7 +104,6 @@ M.select_chat_model = function()
 		})
 		:find()
 end
-
 
 M.picker = function(method, tele_opts)
 	local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position

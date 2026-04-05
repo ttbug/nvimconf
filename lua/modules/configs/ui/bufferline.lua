@@ -9,7 +9,6 @@ return function()
 			tab_size = 20,
 			separator_style = "thin",
 			show_buffer_icons = true,
-			show_close_icon = true,
 			show_tab_indicators = true,
 			show_buffer_close_icons = true,
 			diagnostics = "nvim_lsp",
@@ -32,7 +31,7 @@ return function()
 				},
 				{
 					filetype = "trouble",
-					text = "Lsp Outline",
+					text = "LSP Outline",
 					text_align = "center",
 					padding = 0,
 				},

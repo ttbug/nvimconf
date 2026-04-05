@@ -5,7 +5,6 @@ return function()
 		misc = require("modules.utils.icons").get("misc", true),
 		ui = require("modules.utils.icons").get("ui", true),
 	}
-
 	local utils = require("dropbar.utils")
 	local sources = require("dropbar.sources")
 	-- Custom source to display only the leaf filename in the dropbar
@@ -59,7 +58,6 @@ return function()
 		icons = {
 			enable = true,
 			kinds = {
-				-- use_devicons = true,
 				symbols = {
 					-- Type
 					Array = icons.type.Array,

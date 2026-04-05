@@ -3,7 +3,6 @@ local global = require("core.global")
 local function load_options()
 	local options = {
 		-- viewdir = global.cache_dir .. "/view/",
-		autoindent = true,
 		autoread = true,
 		autowrite = true,
 		backspace = "indent,eol,start",
@@ -89,6 +88,7 @@ local function load_options()
 		wrapscan = true,
 		writebackup = true,
 		-- bw local --
+		autoindent = true,
 		breakindentopt = "shift:2,min:20",
 		concealcursor = "niv",
 		conceallevel = 0,
