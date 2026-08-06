@@ -81,7 +81,7 @@ settings["lsp_deps"] = {
 }
 -- Set it to false if you don't use copilot
 ---@type boolean
-settings["use_copilot"] = true
+settings["use_copilot"] = false
 
 -- Set it to false if you want to turn off LSP Inlay Hints
 ---@type boolean
