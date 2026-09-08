@@ -30,7 +30,7 @@ return function()
 			properties = {},
 		},
 		integrations = {
-			cmp = true,
+			blink_cmp = true,
 			dap = true,
 			dap_ui = true,
 			diffview = true,
@@ -49,7 +49,7 @@ return function()
 			markdown = true,
 			mason = true,
 
-			mini = { enabled = true},
+			mini = { enabled = true },
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
